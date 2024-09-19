@@ -87,6 +87,12 @@ public class SnapshotPolicy extends com.pulumi.resources.CustomResource {
     public Output<List<String>> repeatWeekdays() {
         return this.repeatWeekdays;
     }
+    @Export(name="resourceGroupId", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> resourceGroupId;
+
+    public Output<Optional<String>> resourceGroupId() {
+        return Codegen.optional(this.resourceGroupId);
+    }
     /**
      * The snapshot retention time, and the unit of measurement is day. Optional values:
      * - -1: The automatic snapshots are retained permanently.

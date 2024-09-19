@@ -1031,6 +1031,13 @@ public final class InstanceArgs extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.systemDiskAutoSnapshotPolicyId);
     }
 
+    @Import(name="systemDiskBurstingEnabled")
+    private @Nullable Output<Boolean> systemDiskBurstingEnabled;
+
+    public Optional<Output<Boolean>> systemDiskBurstingEnabled() {
+        return Optional.ofNullable(this.systemDiskBurstingEnabled);
+    }
+
     /**
      * Valid values are `ephemeral_ssd`, `cloud_efficiency`, `cloud_ssd`, `cloud_essd`, `cloud`, `cloud_auto`, `cloud_essd_entry`. only is used to some none I/O optimized instance. Valid values `cloud_auto` Available since v1.184.0.
      * 
@@ -1318,6 +1325,7 @@ public final class InstanceArgs extends com.pulumi.resources.ResourceArgs {
         this.status = $.status;
         this.stoppedMode = $.stoppedMode;
         this.systemDiskAutoSnapshotPolicyId = $.systemDiskAutoSnapshotPolicyId;
+        this.systemDiskBurstingEnabled = $.systemDiskBurstingEnabled;
         this.systemDiskCategory = $.systemDiskCategory;
         this.systemDiskDescription = $.systemDiskDescription;
         this.systemDiskEncryptAlgorithm = $.systemDiskEncryptAlgorithm;
@@ -2754,6 +2762,15 @@ public final class InstanceArgs extends com.pulumi.resources.ResourceArgs {
          */
         public Builder systemDiskAutoSnapshotPolicyId(String systemDiskAutoSnapshotPolicyId) {
             return systemDiskAutoSnapshotPolicyId(Output.of(systemDiskAutoSnapshotPolicyId));
+        }
+
+        public Builder systemDiskBurstingEnabled(@Nullable Output<Boolean> systemDiskBurstingEnabled) {
+            $.systemDiskBurstingEnabled = systemDiskBurstingEnabled;
+            return this;
+        }
+
+        public Builder systemDiskBurstingEnabled(Boolean systemDiskBurstingEnabled) {
+            return systemDiskBurstingEnabled(Output.of(systemDiskBurstingEnabled));
         }
 
         /**

@@ -327,6 +327,7 @@ type Instance struct {
 	StoppedMode pulumi.StringOutput `pulumi:"stoppedMode"`
 	// The ID of the automatic snapshot policy applied to the system disk.
 	SystemDiskAutoSnapshotPolicyId pulumi.StringPtrOutput `pulumi:"systemDiskAutoSnapshotPolicyId"`
+	SystemDiskBurstingEnabled      pulumi.BoolOutput      `pulumi:"systemDiskBurstingEnabled"`
 	// Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.
 	SystemDiskCategory pulumi.StringOutput `pulumi:"systemDiskCategory"`
 	// The description of the system disk. The description must be 2 to 256 characters in length and cannot start with http:// or https://.
@@ -592,6 +593,7 @@ type instanceState struct {
 	StoppedMode *string `pulumi:"stoppedMode"`
 	// The ID of the automatic snapshot policy applied to the system disk.
 	SystemDiskAutoSnapshotPolicyId *string `pulumi:"systemDiskAutoSnapshotPolicyId"`
+	SystemDiskBurstingEnabled      *bool   `pulumi:"systemDiskBurstingEnabled"`
 	// Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.
 	SystemDiskCategory *string `pulumi:"systemDiskCategory"`
 	// The description of the system disk. The description must be 2 to 256 characters in length and cannot start with http:// or https://.
@@ -821,6 +823,7 @@ type InstanceState struct {
 	StoppedMode pulumi.StringPtrInput
 	// The ID of the automatic snapshot policy applied to the system disk.
 	SystemDiskAutoSnapshotPolicyId pulumi.StringPtrInput
+	SystemDiskBurstingEnabled      pulumi.BoolPtrInput
 	// Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.
 	SystemDiskCategory pulumi.StringPtrInput
 	// The description of the system disk. The description must be 2 to 256 characters in length and cannot start with http:// or https://.
@@ -1038,6 +1041,7 @@ type instanceArgs struct {
 	StoppedMode *string `pulumi:"stoppedMode"`
 	// The ID of the automatic snapshot policy applied to the system disk.
 	SystemDiskAutoSnapshotPolicyId *string `pulumi:"systemDiskAutoSnapshotPolicyId"`
+	SystemDiskBurstingEnabled      *bool   `pulumi:"systemDiskBurstingEnabled"`
 	// Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.
 	SystemDiskCategory *string `pulumi:"systemDiskCategory"`
 	// The description of the system disk. The description must be 2 to 256 characters in length and cannot start with http:// or https://.
@@ -1250,6 +1254,7 @@ type InstanceArgs struct {
 	StoppedMode pulumi.StringPtrInput
 	// The ID of the automatic snapshot policy applied to the system disk.
 	SystemDiskAutoSnapshotPolicyId pulumi.StringPtrInput
+	SystemDiskBurstingEnabled      pulumi.BoolPtrInput
 	// Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.
 	SystemDiskCategory pulumi.StringPtrInput
 	// The description of the system disk. The description must be 2 to 256 characters in length and cannot start with http:// or https://.
@@ -1765,6 +1770,10 @@ func (o InstanceOutput) StoppedMode() pulumi.StringOutput {
 // The ID of the automatic snapshot policy applied to the system disk.
 func (o InstanceOutput) SystemDiskAutoSnapshotPolicyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.SystemDiskAutoSnapshotPolicyId }).(pulumi.StringPtrOutput)
+}
+
+func (o InstanceOutput) SystemDiskBurstingEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.SystemDiskBurstingEnabled }).(pulumi.BoolOutput)
 }
 
 // Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.

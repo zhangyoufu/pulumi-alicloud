@@ -1196,6 +1196,12 @@ public class Instance extends com.pulumi.resources.CustomResource {
     public Output<Optional<String>> systemDiskAutoSnapshotPolicyId() {
         return Codegen.optional(this.systemDiskAutoSnapshotPolicyId);
     }
+    @Export(name="systemDiskBurstingEnabled", refs={Boolean.class}, tree="[0]")
+    private Output<Boolean> systemDiskBurstingEnabled;
+
+    public Output<Boolean> systemDiskBurstingEnabled() {
+        return this.systemDiskBurstingEnabled;
+    }
     /**
      * Valid values are `ephemeral_ssd`, `cloud_efficiency`, `cloud_ssd`, `cloud_essd`, `cloud`, `cloud_auto`, `cloud_essd_entry`. only is used to some none I/O optimized instance. Valid values `cloud_auto` Available since v1.184.0.
      * 

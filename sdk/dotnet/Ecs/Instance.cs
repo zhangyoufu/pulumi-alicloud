@@ -570,6 +570,9 @@ namespace Pulumi.AliCloud.Ecs
         [Output("systemDiskAutoSnapshotPolicyId")]
         public Output<string?> SystemDiskAutoSnapshotPolicyId { get; private set; } = null!;
 
+        [Output("systemDiskBurstingEnabled")]
+        public Output<bool> SystemDiskBurstingEnabled { get; private set; } = null!;
+
         /// <summary>
         /// Valid values are `ephemeral_ssd`, `cloud_efficiency`, `cloud_ssd`, `cloud_essd`, `cloud`, `cloud_auto`, `cloud_essd_entry`. only is used to some none I/O optimized instance. Valid values `cloud_auto` Available since v1.184.0.
         /// </summary>
@@ -1163,6 +1166,9 @@ namespace Pulumi.AliCloud.Ecs
         /// </summary>
         [Input("systemDiskAutoSnapshotPolicyId")]
         public Input<string>? SystemDiskAutoSnapshotPolicyId { get; set; }
+
+        [Input("systemDiskBurstingEnabled")]
+        public Input<bool>? SystemDiskBurstingEnabled { get; set; }
 
         /// <summary>
         /// Valid values are `ephemeral_ssd`, `cloud_efficiency`, `cloud_ssd`, `cloud_essd`, `cloud`, `cloud_auto`, `cloud_essd_entry`. only is used to some none I/O optimized instance. Valid values `cloud_auto` Available since v1.184.0.
@@ -1769,6 +1775,9 @@ namespace Pulumi.AliCloud.Ecs
         /// </summary>
         [Input("systemDiskAutoSnapshotPolicyId")]
         public Input<string>? SystemDiskAutoSnapshotPolicyId { get; set; }
+
+        [Input("systemDiskBurstingEnabled")]
+        public Input<bool>? SystemDiskBurstingEnabled { get; set; }
 
         /// <summary>
         /// Valid values are `ephemeral_ssd`, `cloud_efficiency`, `cloud_ssd`, `cloud_essd`, `cloud`, `cloud_auto`, `cloud_essd_entry`. only is used to some none I/O optimized instance. Valid values `cloud_auto` Available since v1.184.0.

@@ -92,6 +92,7 @@ export class AutoSnapshotPolicy extends pulumi.CustomResource {
      * - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
      */
     public readonly repeatWeekdays!: pulumi.Output<string[]>;
+    public readonly resourceGroupId!: pulumi.Output<string | undefined>;
     /**
      * The snapshot retention time, and the unit of measurement is day. Optional values:
      * - -1: The automatic snapshots are retained permanently.
@@ -135,6 +136,7 @@ export class AutoSnapshotPolicy extends pulumi.CustomResource {
             resourceInputs["enableCrossRegionCopy"] = state ? state.enableCrossRegionCopy : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["repeatWeekdays"] = state ? state.repeatWeekdays : undefined;
+            resourceInputs["resourceGroupId"] = state ? state.resourceGroupId : undefined;
             resourceInputs["retentionDays"] = state ? state.retentionDays : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -155,6 +157,7 @@ export class AutoSnapshotPolicy extends pulumi.CustomResource {
             resourceInputs["enableCrossRegionCopy"] = args ? args.enableCrossRegionCopy : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["repeatWeekdays"] = args ? args.repeatWeekdays : undefined;
+            resourceInputs["resourceGroupId"] = args ? args.resourceGroupId : undefined;
             resourceInputs["retentionDays"] = args ? args.retentionDays : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["targetCopyRegions"] = args ? args.targetCopyRegions : undefined;
@@ -191,6 +194,7 @@ export interface AutoSnapshotPolicyState {
      * - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
      */
     repeatWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
+    resourceGroupId?: pulumi.Input<string>;
     /**
      * The snapshot retention time, and the unit of measurement is day. Optional values:
      * - -1: The automatic snapshots are retained permanently.
@@ -243,6 +247,7 @@ export interface AutoSnapshotPolicyArgs {
      * - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
      */
     repeatWeekdays: pulumi.Input<pulumi.Input<string>[]>;
+    resourceGroupId?: pulumi.Input<string>;
     /**
      * The snapshot retention time, and the unit of measurement is day. Optional values:
      * - -1: The automatic snapshots are retained permanently.

@@ -74,7 +74,8 @@ type SnapshotPolicy struct {
 	// The automatic snapshot repetition dates. The unit of measurement is day and the repeating cycle is a week. Value range: [1, 7], which represents days starting from Monday to Sunday, for example 1  indicates Monday. When you want to schedule multiple automatic snapshot tasks for a disk in a week, you can set the RepeatWeekdays to an array.
 	// - A maximum of seven time points can be selected.
 	// - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
-	RepeatWeekdays pulumi.StringArrayOutput `pulumi:"repeatWeekdays"`
+	RepeatWeekdays  pulumi.StringArrayOutput `pulumi:"repeatWeekdays"`
+	ResourceGroupId pulumi.StringPtrOutput   `pulumi:"resourceGroupId"`
 	// The snapshot retention time, and the unit of measurement is day. Optional values:
 	// - -1: The automatic snapshots are retained permanently.
 	// - [1, 65536]: The number of days retained.
@@ -136,7 +137,8 @@ type snapshotPolicyState struct {
 	// The automatic snapshot repetition dates. The unit of measurement is day and the repeating cycle is a week. Value range: [1, 7], which represents days starting from Monday to Sunday, for example 1  indicates Monday. When you want to schedule multiple automatic snapshot tasks for a disk in a week, you can set the RepeatWeekdays to an array.
 	// - A maximum of seven time points can be selected.
 	// - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
-	RepeatWeekdays []string `pulumi:"repeatWeekdays"`
+	RepeatWeekdays  []string `pulumi:"repeatWeekdays"`
+	ResourceGroupId *string  `pulumi:"resourceGroupId"`
 	// The snapshot retention time, and the unit of measurement is day. Optional values:
 	// - -1: The automatic snapshots are retained permanently.
 	// - [1, 65536]: The number of days retained.
@@ -160,7 +162,8 @@ type SnapshotPolicyState struct {
 	// The automatic snapshot repetition dates. The unit of measurement is day and the repeating cycle is a week. Value range: [1, 7], which represents days starting from Monday to Sunday, for example 1  indicates Monday. When you want to schedule multiple automatic snapshot tasks for a disk in a week, you can set the RepeatWeekdays to an array.
 	// - A maximum of seven time points can be selected.
 	// - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
-	RepeatWeekdays pulumi.StringArrayInput
+	RepeatWeekdays  pulumi.StringArrayInput
+	ResourceGroupId pulumi.StringPtrInput
 	// The snapshot retention time, and the unit of measurement is day. Optional values:
 	// - -1: The automatic snapshots are retained permanently.
 	// - [1, 65536]: The number of days retained.
@@ -188,7 +191,8 @@ type snapshotPolicyArgs struct {
 	// The automatic snapshot repetition dates. The unit of measurement is day and the repeating cycle is a week. Value range: [1, 7], which represents days starting from Monday to Sunday, for example 1  indicates Monday. When you want to schedule multiple automatic snapshot tasks for a disk in a week, you can set the RepeatWeekdays to an array.
 	// - A maximum of seven time points can be selected.
 	// - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
-	RepeatWeekdays []string `pulumi:"repeatWeekdays"`
+	RepeatWeekdays  []string `pulumi:"repeatWeekdays"`
+	ResourceGroupId *string  `pulumi:"resourceGroupId"`
 	// The snapshot retention time, and the unit of measurement is day. Optional values:
 	// - -1: The automatic snapshots are retained permanently.
 	// - [1, 65536]: The number of days retained.
@@ -212,7 +216,8 @@ type SnapshotPolicyArgs struct {
 	// The automatic snapshot repetition dates. The unit of measurement is day and the repeating cycle is a week. Value range: [1, 7], which represents days starting from Monday to Sunday, for example 1  indicates Monday. When you want to schedule multiple automatic snapshot tasks for a disk in a week, you can set the RepeatWeekdays to an array.
 	// - A maximum of seven time points can be selected.
 	// - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
-	RepeatWeekdays pulumi.StringArrayInput
+	RepeatWeekdays  pulumi.StringArrayInput
+	ResourceGroupId pulumi.StringPtrInput
 	// The snapshot retention time, and the unit of measurement is day. Optional values:
 	// - -1: The automatic snapshots are retained permanently.
 	// - [1, 65536]: The number of days retained.
@@ -332,6 +337,10 @@ func (o SnapshotPolicyOutput) Name() pulumi.StringOutput {
 // - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
 func (o SnapshotPolicyOutput) RepeatWeekdays() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *SnapshotPolicy) pulumi.StringArrayOutput { return v.RepeatWeekdays }).(pulumi.StringArrayOutput)
+}
+
+func (o SnapshotPolicyOutput) ResourceGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SnapshotPolicy) pulumi.StringPtrOutput { return v.ResourceGroupId }).(pulumi.StringPtrOutput)
 }
 
 // The snapshot retention time, and the unit of measurement is day. Optional values:

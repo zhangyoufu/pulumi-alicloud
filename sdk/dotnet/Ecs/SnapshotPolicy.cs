@@ -80,6 +80,9 @@ namespace Pulumi.AliCloud.Ecs
         [Output("repeatWeekdays")]
         public Output<ImmutableArray<string>> RepeatWeekdays { get; private set; } = null!;
 
+        [Output("resourceGroupId")]
+        public Output<string?> ResourceGroupId { get; private set; } = null!;
+
         /// <summary>
         /// The snapshot retention time, and the unit of measurement is day. Optional values:
         /// - -1: The automatic snapshots are retained permanently.
@@ -179,6 +182,9 @@ namespace Pulumi.AliCloud.Ecs
             set => _repeatWeekdays = value;
         }
 
+        [Input("resourceGroupId")]
+        public Input<string>? ResourceGroupId { get; set; }
+
         /// <summary>
         /// The snapshot retention time, and the unit of measurement is day. Optional values:
         /// - -1: The automatic snapshots are retained permanently.
@@ -252,6 +258,9 @@ namespace Pulumi.AliCloud.Ecs
             get => _repeatWeekdays ?? (_repeatWeekdays = new InputList<string>());
             set => _repeatWeekdays = value;
         }
+
+        [Input("resourceGroupId")]
+        public Input<string>? ResourceGroupId { get; set; }
 
         /// <summary>
         /// The snapshot retention time, and the unit of measurement is day. Optional values:

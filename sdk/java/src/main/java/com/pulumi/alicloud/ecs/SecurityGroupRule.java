@@ -31,49 +31,6 @@ import javax.annotation.Nullable;
  * Basic Usage
  * 
  * &lt;!--Start PulumiCodeChooser --&gt;
- * <pre>
- * {@code
- * package generated_program;
- * 
- * import com.pulumi.Context;
- * import com.pulumi.Pulumi;
- * import com.pulumi.core.Output;
- * import com.pulumi.alicloud.ecs.SecurityGroup;
- * import com.pulumi.alicloud.ecs.SecurityGroupArgs;
- * import com.pulumi.alicloud.ecs.SecurityGroupRule;
- * import com.pulumi.alicloud.ecs.SecurityGroupRuleArgs;
- * import java.util.List;
- * import java.util.ArrayList;
- * import java.util.Map;
- * import java.io.File;
- * import java.nio.file.Files;
- * import java.nio.file.Paths;
- * 
- * public class App {
- *     public static void main(String[] args) {
- *         Pulumi.run(App::stack);
- *     }
- * 
- *     public static void stack(Context ctx) {
- *         var default_ = new SecurityGroup("default", SecurityGroupArgs.builder()
- *             .name("default")
- *             .build());
- * 
- *         var allowAllTcp = new SecurityGroupRule("allowAllTcp", SecurityGroupRuleArgs.builder()
- *             .type("ingress")
- *             .ipProtocol("tcp")
- *             .nicType("internet")
- *             .policy("accept")
- *             .portRange("1/65535")
- *             .priority(1)
- *             .securityGroupId(default_.id())
- *             .cidrIp("0.0.0.0/0")
- *             .build());
- * 
- *     }
- * }
- * }
- * </pre>
  * &lt;!--End PulumiCodeChooser --&gt;
  * 
  * ## Module Support
@@ -93,20 +50,6 @@ import javax.annotation.Nullable;
 @ResourceType(type="alicloud:ecs/securityGroupRule:SecurityGroupRule")
 public class SecurityGroupRule extends com.pulumi.resources.CustomResource {
     /**
-     * The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-     * 
-     */
-    @Export(name="cidrIp", refs={String.class}, tree="[0]")
-    private Output</* @Nullable */ String> cidrIp;
-
-    /**
-     * @return The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-     * 
-     */
-    public Output<Optional<String>> cidrIp() {
-        return Codegen.optional(this.cidrIp);
-    }
-    /**
      * The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
      * 
      * &gt; **NOTE:**  You must specify one of the following field: `cidr_ip`,`source_security_group_id`,`prefix_list_id`,`ipv6_cidr_ip`.
@@ -124,6 +67,30 @@ public class SecurityGroupRule extends com.pulumi.resources.CustomResource {
     public Output<Optional<String>> description() {
         return Codegen.optional(this.description);
     }
+    @Export(name="destCidrIp", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> destCidrIp;
+
+    public Output<Optional<String>> destCidrIp() {
+        return Codegen.optional(this.destCidrIp);
+    }
+    @Export(name="destGroupId", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> destGroupId;
+
+    public Output<Optional<String>> destGroupId() {
+        return Codegen.optional(this.destGroupId);
+    }
+    @Export(name="destGroupOwnerAccount", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> destGroupOwnerAccount;
+
+    public Output<Optional<String>> destGroupOwnerAccount() {
+        return Codegen.optional(this.destGroupOwnerAccount);
+    }
+    @Export(name="destPrefixListId", refs={String.class}, tree="[0]")
+    private Output<String> destPrefixListId;
+
+    public Output<String> destPrefixListId() {
+        return this.destPrefixListId;
+    }
     /**
      * The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
      * 
@@ -138,19 +105,17 @@ public class SecurityGroupRule extends com.pulumi.resources.CustomResource {
     public Output<String> ipProtocol() {
         return this.ipProtocol;
     }
-    /**
-     * Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-     * 
-     */
-    @Export(name="ipv6CidrIp", refs={String.class}, tree="[0]")
-    private Output</* @Nullable */ String> ipv6CidrIp;
+    @Export(name="ipv6DestCidrIp", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> ipv6DestCidrIp;
 
-    /**
-     * @return Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-     * 
-     */
-    public Output<Optional<String>> ipv6CidrIp() {
-        return Codegen.optional(this.ipv6CidrIp);
+    public Output<Optional<String>> ipv6DestCidrIp() {
+        return Codegen.optional(this.ipv6DestCidrIp);
+    }
+    @Export(name="ipv6SourceCidrIp", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> ipv6SourceCidrIp;
+
+    public Output<Optional<String>> ipv6SourceCidrIp() {
+        return Codegen.optional(this.ipv6SourceCidrIp);
     }
     /**
      * Network type, can be either `internet` or `intranet`, the default value is `internet`.
@@ -197,20 +162,6 @@ public class SecurityGroupRule extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.portRange);
     }
     /**
-     * The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-     * 
-     */
-    @Export(name="prefixListId", refs={String.class}, tree="[0]")
-    private Output<String> prefixListId;
-
-    /**
-     * @return The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-     * 
-     */
-    public Output<String> prefixListId() {
-        return this.prefixListId;
-    }
-    /**
      * The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
      * 
      */
@@ -238,6 +189,18 @@ public class SecurityGroupRule extends com.pulumi.resources.CustomResource {
     public Output<String> securityGroupId() {
         return this.securityGroupId;
     }
+    @Export(name="sourceCidrIp", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> sourceCidrIp;
+
+    public Output<Optional<String>> sourceCidrIp() {
+        return Codegen.optional(this.sourceCidrIp);
+    }
+    @Export(name="sourceGroupId", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> sourceGroupId;
+
+    public Output<Optional<String>> sourceGroupId() {
+        return Codegen.optional(this.sourceGroupId);
+    }
     /**
      * The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidr_ip` has already been set.
      * 
@@ -252,19 +215,17 @@ public class SecurityGroupRule extends com.pulumi.resources.CustomResource {
     public Output<Optional<String>> sourceGroupOwnerAccount() {
         return Codegen.optional(this.sourceGroupOwnerAccount);
     }
-    /**
-     * The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-     * 
-     */
-    @Export(name="sourceSecurityGroupId", refs={String.class}, tree="[0]")
-    private Output</* @Nullable */ String> sourceSecurityGroupId;
+    @Export(name="sourcePortRange", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> sourcePortRange;
 
-    /**
-     * @return The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-     * 
-     */
-    public Output<Optional<String>> sourceSecurityGroupId() {
-        return Codegen.optional(this.sourceSecurityGroupId);
+    public Output<Optional<String>> sourcePortRange() {
+        return Codegen.optional(this.sourcePortRange);
+    }
+    @Export(name="sourcePrefixListId", refs={String.class}, tree="[0]")
+    private Output<String> sourcePrefixListId;
+
+    public Output<String> sourcePrefixListId() {
+        return this.sourcePrefixListId;
     }
     /**
      * The type of the Security Group Rule. Valid values:

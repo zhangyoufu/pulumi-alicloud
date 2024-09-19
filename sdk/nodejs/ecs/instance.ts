@@ -436,6 +436,7 @@ export class Instance extends pulumi.CustomResource {
      * The ID of the automatic snapshot policy applied to the system disk.
      */
     public readonly systemDiskAutoSnapshotPolicyId!: pulumi.Output<string | undefined>;
+    public readonly systemDiskBurstingEnabled!: pulumi.Output<boolean>;
     /**
      * Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.
      */
@@ -585,6 +586,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["stoppedMode"] = state ? state.stoppedMode : undefined;
             resourceInputs["systemDiskAutoSnapshotPolicyId"] = state ? state.systemDiskAutoSnapshotPolicyId : undefined;
+            resourceInputs["systemDiskBurstingEnabled"] = state ? state.systemDiskBurstingEnabled : undefined;
             resourceInputs["systemDiskCategory"] = state ? state.systemDiskCategory : undefined;
             resourceInputs["systemDiskDescription"] = state ? state.systemDiskDescription : undefined;
             resourceInputs["systemDiskEncryptAlgorithm"] = state ? state.systemDiskEncryptAlgorithm : undefined;
@@ -662,6 +664,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["status"] = args ? args.status : undefined;
             resourceInputs["stoppedMode"] = args ? args.stoppedMode : undefined;
             resourceInputs["systemDiskAutoSnapshotPolicyId"] = args ? args.systemDiskAutoSnapshotPolicyId : undefined;
+            resourceInputs["systemDiskBurstingEnabled"] = args ? args.systemDiskBurstingEnabled : undefined;
             resourceInputs["systemDiskCategory"] = args ? args.systemDiskCategory : undefined;
             resourceInputs["systemDiskDescription"] = args ? args.systemDiskDescription : undefined;
             resourceInputs["systemDiskEncryptAlgorithm"] = args ? args.systemDiskEncryptAlgorithm : undefined;
@@ -1020,6 +1023,7 @@ export interface InstanceState {
      * The ID of the automatic snapshot policy applied to the system disk.
      */
     systemDiskAutoSnapshotPolicyId?: pulumi.Input<string>;
+    systemDiskBurstingEnabled?: pulumi.Input<boolean>;
     /**
      * Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.
      */
@@ -1384,6 +1388,7 @@ export interface InstanceArgs {
      * The ID of the automatic snapshot policy applied to the system disk.
      */
     systemDiskAutoSnapshotPolicyId?: pulumi.Input<string>;
+    systemDiskBurstingEnabled?: pulumi.Input<boolean>;
     /**
      * Valid values are `ephemeralSsd`, `cloudEfficiency`, `cloudSsd`, `cloudEssd`, `cloud`, `cloudAuto`, `cloudEssdEntry`. only is used to some none I/O optimized instance. Valid values `cloudAuto` Available since v1.184.0.
      */

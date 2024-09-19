@@ -76,6 +76,7 @@ class InstanceArgs:
                  status: Optional[pulumi.Input[str]] = None,
                  stopped_mode: Optional[pulumi.Input[str]] = None,
                  system_disk_auto_snapshot_policy_id: Optional[pulumi.Input[str]] = None,
+                 system_disk_bursting_enabled: Optional[pulumi.Input[bool]] = None,
                  system_disk_category: Optional[pulumi.Input[str]] = None,
                  system_disk_description: Optional[pulumi.Input[str]] = None,
                  system_disk_encrypt_algorithm: Optional[pulumi.Input[str]] = None,
@@ -349,6 +350,8 @@ class InstanceArgs:
             pulumi.set(__self__, "stopped_mode", stopped_mode)
         if system_disk_auto_snapshot_policy_id is not None:
             pulumi.set(__self__, "system_disk_auto_snapshot_policy_id", system_disk_auto_snapshot_policy_id)
+        if system_disk_bursting_enabled is not None:
+            pulumi.set(__self__, "system_disk_bursting_enabled", system_disk_bursting_enabled)
         if system_disk_category is not None:
             pulumi.set(__self__, "system_disk_category", system_disk_category)
         if system_disk_description is not None:
@@ -1148,6 +1151,15 @@ class InstanceArgs:
         pulumi.set(self, "system_disk_auto_snapshot_policy_id", value)
 
     @property
+    @pulumi.getter(name="systemDiskBurstingEnabled")
+    def system_disk_bursting_enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "system_disk_bursting_enabled")
+
+    @system_disk_bursting_enabled.setter
+    def system_disk_bursting_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "system_disk_bursting_enabled", value)
+
+    @property
     @pulumi.getter(name="systemDiskCategory")
     def system_disk_category(self) -> Optional[pulumi.Input[str]]:
         """
@@ -1394,6 +1406,7 @@ class _InstanceState:
                  status: Optional[pulumi.Input[str]] = None,
                  stopped_mode: Optional[pulumi.Input[str]] = None,
                  system_disk_auto_snapshot_policy_id: Optional[pulumi.Input[str]] = None,
+                 system_disk_bursting_enabled: Optional[pulumi.Input[bool]] = None,
                  system_disk_category: Optional[pulumi.Input[str]] = None,
                  system_disk_description: Optional[pulumi.Input[str]] = None,
                  system_disk_encrypt_algorithm: Optional[pulumi.Input[str]] = None,
@@ -1693,6 +1706,8 @@ class _InstanceState:
             pulumi.set(__self__, "stopped_mode", stopped_mode)
         if system_disk_auto_snapshot_policy_id is not None:
             pulumi.set(__self__, "system_disk_auto_snapshot_policy_id", system_disk_auto_snapshot_policy_id)
+        if system_disk_bursting_enabled is not None:
+            pulumi.set(__self__, "system_disk_bursting_enabled", system_disk_bursting_enabled)
         if system_disk_category is not None:
             pulumi.set(__self__, "system_disk_category", system_disk_category)
         if system_disk_description is not None:
@@ -2590,6 +2605,15 @@ class _InstanceState:
         pulumi.set(self, "system_disk_auto_snapshot_policy_id", value)
 
     @property
+    @pulumi.getter(name="systemDiskBurstingEnabled")
+    def system_disk_bursting_enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "system_disk_bursting_enabled")
+
+    @system_disk_bursting_enabled.setter
+    def system_disk_bursting_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "system_disk_bursting_enabled", value)
+
+    @property
     @pulumi.getter(name="systemDiskCategory")
     def system_disk_category(self) -> Optional[pulumi.Input[str]]:
         """
@@ -2842,6 +2866,7 @@ class Instance(pulumi.CustomResource):
                  status: Optional[pulumi.Input[str]] = None,
                  stopped_mode: Optional[pulumi.Input[str]] = None,
                  system_disk_auto_snapshot_policy_id: Optional[pulumi.Input[str]] = None,
+                 system_disk_bursting_enabled: Optional[pulumi.Input[bool]] = None,
                  system_disk_category: Optional[pulumi.Input[str]] = None,
                  system_disk_description: Optional[pulumi.Input[str]] = None,
                  system_disk_encrypt_algorithm: Optional[pulumi.Input[str]] = None,
@@ -3227,6 +3252,7 @@ class Instance(pulumi.CustomResource):
                  status: Optional[pulumi.Input[str]] = None,
                  stopped_mode: Optional[pulumi.Input[str]] = None,
                  system_disk_auto_snapshot_policy_id: Optional[pulumi.Input[str]] = None,
+                 system_disk_bursting_enabled: Optional[pulumi.Input[bool]] = None,
                  system_disk_category: Optional[pulumi.Input[str]] = None,
                  system_disk_description: Optional[pulumi.Input[str]] = None,
                  system_disk_encrypt_algorithm: Optional[pulumi.Input[str]] = None,
@@ -3310,6 +3336,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["status"] = status
             __props__.__dict__["stopped_mode"] = stopped_mode
             __props__.__dict__["system_disk_auto_snapshot_policy_id"] = system_disk_auto_snapshot_policy_id
+            __props__.__dict__["system_disk_bursting_enabled"] = system_disk_bursting_enabled
             __props__.__dict__["system_disk_category"] = system_disk_category
             __props__.__dict__["system_disk_description"] = system_disk_description
             __props__.__dict__["system_disk_encrypt_algorithm"] = system_disk_encrypt_algorithm
@@ -3413,6 +3440,7 @@ class Instance(pulumi.CustomResource):
             status: Optional[pulumi.Input[str]] = None,
             stopped_mode: Optional[pulumi.Input[str]] = None,
             system_disk_auto_snapshot_policy_id: Optional[pulumi.Input[str]] = None,
+            system_disk_bursting_enabled: Optional[pulumi.Input[bool]] = None,
             system_disk_category: Optional[pulumi.Input[str]] = None,
             system_disk_description: Optional[pulumi.Input[str]] = None,
             system_disk_encrypt_algorithm: Optional[pulumi.Input[str]] = None,
@@ -3647,6 +3675,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["status"] = status
         __props__.__dict__["stopped_mode"] = stopped_mode
         __props__.__dict__["system_disk_auto_snapshot_policy_id"] = system_disk_auto_snapshot_policy_id
+        __props__.__dict__["system_disk_bursting_enabled"] = system_disk_bursting_enabled
         __props__.__dict__["system_disk_category"] = system_disk_category
         __props__.__dict__["system_disk_description"] = system_disk_description
         __props__.__dict__["system_disk_encrypt_algorithm"] = system_disk_encrypt_algorithm
@@ -4256,6 +4285,11 @@ class Instance(pulumi.CustomResource):
         The ID of the automatic snapshot policy applied to the system disk.
         """
         return pulumi.get(self, "system_disk_auto_snapshot_policy_id")
+
+    @property
+    @pulumi.getter(name="systemDiskBurstingEnabled")
+    def system_disk_bursting_enabled(self) -> pulumi.Output[bool]:
+        return pulumi.get(self, "system_disk_bursting_enabled")
 
     @property
     @pulumi.getter(name="systemDiskCategory")

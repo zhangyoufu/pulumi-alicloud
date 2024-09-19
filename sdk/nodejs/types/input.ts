@@ -12843,19 +12843,19 @@ export namespace rocketmq {
 
     export interface RocketMQInstanceNetworkInfoInternetInfo {
         /**
-         * Public network bandwidth specification. Unit: Mb/s.This field should only be filled when the public network billing type is set to payByBandwidth.The value range is [1 - 1000].
+         * Public network bandwidth specification. Unit: Mb/s.  This field should only be filled when the public network billing type is set to payByBandwidth.  The value range is [1 - 1000].
          */
         flowOutBandwidth?: pulumi.Input<number>;
         /**
-         * Public network billing type. The parameter values are as follows:
-         * - payByBandwidth: Fixed bandwidth billing. Set this value when enabling public network access.
-         * - uninvolved: Not involved. Set this value when disabling public network access.
+         * Public network billing type.  Parameter values are as follows:
+         * - payByBandwidth: Fixed bandwidth billing. This parameter must be set to the value when public network access is enabled.
+         * - uninvolved: Not involved. This parameter must be set to the value when public network access is disabled.
          */
         flowOutType: pulumi.Input<string>;
         /**
-         * Whether to enable public network access. Instances by default support VPC access. If public network access is enabled, Alibaba Cloud Message Queue RocketMQ version will incur charges for public network outbound bandwidth. For specific billing information, please refer to [Public Network Access Fees](https://help.aliyun.com/zh/apsaramq-for-rocketmq/cloud-message-queue-rocketmq-5-x-series/product-overview/internet-access-fee). The parameter values are as follows:
+         * Whether to enable public network access.  The parameter values are as follows:
          * - enable: Enable public network access
-         * - disable: Disable public network access
+         * - disable: Disable public network access   Instances by default support VPC access. If public network access is enabled, Alibaba Cloud Message Queue RocketMQ version will incur charges for public network outbound bandwidth. For specific billing information, please refer to [Public Network Access Fees](https://help.aliyun.com/zh/apsaramq-for-rocketmq/cloud-message-queue-rocketmq-5-x-series/product-overview/internet-access-fee).
          */
         internetSpec: pulumi.Input<string>;
         /**
@@ -12866,13 +12866,28 @@ export namespace rocketmq {
 
     export interface RocketMQInstanceNetworkInfoVpcInfo {
         /**
+         * Security group id.
+         */
+        securityGroupIds?: pulumi.Input<string>;
+        /**
          * Proprietary Network.
          */
         vpcId: pulumi.Input<string>;
         /**
-         * VPC network switch.
+         * VPC switch id.
          */
-        vswitchId: pulumi.Input<string>;
+        vswitchId?: pulumi.Input<string>;
+        /**
+         * Multiple VSwitches. At least two VSwitches are required for a serverless instance. See `vswitches` below.
+         */
+        vswitches?: pulumi.Input<pulumi.Input<inputs.rocketmq.RocketMQInstanceNetworkInfoVpcInfoVswitch>[]>;
+    }
+
+    export interface RocketMQInstanceNetworkInfoVpcInfoVswitch {
+        /**
+         * VPC switch id.
+         */
+        vswitchId?: pulumi.Input<string>;
     }
 
     export interface RocketMQInstanceProductInfo {
@@ -12881,7 +12896,7 @@ export namespace rocketmq {
          */
         autoScaling?: pulumi.Input<boolean>;
         /**
-         * Duration of message retention. Unit: hours.For the range of values, please refer to [Usage Limits](https://help.aliyun.com/zh/apsaramq-for-rocketmq/cloud-message-queue-rocketmq-5-x-series/product-overview/usage-limits)>Resource Quotas>Limitations on Message Retention.The message storage in AlibabaCloud RocketMQ is fully implemented in a serverless and elastic manner, with charges based on the actual storage space. You can control the storage capacity of messages by adjusting the duration of message retention. For more information, please see [Storage Fees](https://help.aliyun.com/zh/apsaramq-for-rocketmq/cloud-message-queue-rocketmq-5-x-series/product-overview/storage-fees).
+         * Duration of message retention. Unit: hours.  For the range of values, please refer to [Usage Limits](https://help.aliyun.com/zh/apsaramq-for-rocketmq/cloud-message-queue-rocketmq-5-x-series/product-overview/usage-limits)>Resource Quotas>Limitations on Message Retention.  The message storage in AlibabaCloud RocketMQ is fully implemented in a serverless and elastic manner, with charges based on the actual storage space. You can control the storage capacity of messages by adjusting the duration of message retention. For more information, please see [Storage Fees](https://help.aliyun.com/zh/apsaramq-for-rocketmq/cloud-message-queue-rocketmq-5-x-series/product-overview/storage-fees).
          */
         messageRetentionTime?: pulumi.Input<number>;
         /**
@@ -12889,7 +12904,7 @@ export namespace rocketmq {
          */
         msgProcessSpec: pulumi.Input<string>;
         /**
-         * message send receive ratio.Value range: [0.2, 0.5].
+         * message send receive ratio.  Value range: [0.2, 0.5].
          */
         sendReceiveRatio?: pulumi.Input<number>;
         /**

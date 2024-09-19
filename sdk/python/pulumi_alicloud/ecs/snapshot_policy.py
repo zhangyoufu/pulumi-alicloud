@@ -20,6 +20,7 @@ class SnapshotPolicyArgs:
                  copied_snapshots_retention_days: Optional[pulumi.Input[int]] = None,
                  enable_cross_region_copy: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 resource_group_id: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  target_copy_regions: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
@@ -46,6 +47,8 @@ class SnapshotPolicyArgs:
             pulumi.set(__self__, "enable_cross_region_copy", enable_cross_region_copy)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if resource_group_id is not None:
+            pulumi.set(__self__, "resource_group_id", resource_group_id)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if target_copy_regions is not None:
@@ -126,6 +129,15 @@ class SnapshotPolicyArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="resourceGroupId")
+    def resource_group_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "resource_group_id")
+
+    @resource_group_id.setter
+    def resource_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_group_id", value)
+
+    @property
     @pulumi.getter
     def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         return pulumi.get(self, "tags")
@@ -151,6 +163,7 @@ class _SnapshotPolicyState:
                  enable_cross_region_copy: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  repeat_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 resource_group_id: Optional[pulumi.Input[str]] = None,
                  retention_days: Optional[pulumi.Input[int]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
@@ -179,6 +192,8 @@ class _SnapshotPolicyState:
             pulumi.set(__self__, "name", name)
         if repeat_weekdays is not None:
             pulumi.set(__self__, "repeat_weekdays", repeat_weekdays)
+        if resource_group_id is not None:
+            pulumi.set(__self__, "resource_group_id", resource_group_id)
         if retention_days is not None:
             pulumi.set(__self__, "retention_days", retention_days)
         if status is not None:
@@ -233,6 +248,15 @@ class _SnapshotPolicyState:
     @repeat_weekdays.setter
     def repeat_weekdays(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "repeat_weekdays", value)
+
+    @property
+    @pulumi.getter(name="resourceGroupId")
+    def resource_group_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "resource_group_id")
+
+    @resource_group_id.setter
+    def resource_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_group_id", value)
 
     @property
     @pulumi.getter(name="retentionDays")
@@ -301,6 +325,7 @@ class SnapshotPolicy(pulumi.CustomResource):
                  enable_cross_region_copy: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  repeat_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 resource_group_id: Optional[pulumi.Input[str]] = None,
                  retention_days: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  target_copy_regions: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -422,6 +447,7 @@ class SnapshotPolicy(pulumi.CustomResource):
                  enable_cross_region_copy: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  repeat_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 resource_group_id: Optional[pulumi.Input[str]] = None,
                  retention_days: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  target_copy_regions: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -441,6 +467,7 @@ class SnapshotPolicy(pulumi.CustomResource):
             if repeat_weekdays is None and not opts.urn:
                 raise TypeError("Missing required property 'repeat_weekdays'")
             __props__.__dict__["repeat_weekdays"] = repeat_weekdays
+            __props__.__dict__["resource_group_id"] = resource_group_id
             if retention_days is None and not opts.urn:
                 raise TypeError("Missing required property 'retention_days'")
             __props__.__dict__["retention_days"] = retention_days
@@ -464,6 +491,7 @@ class SnapshotPolicy(pulumi.CustomResource):
             enable_cross_region_copy: Optional[pulumi.Input[bool]] = None,
             name: Optional[pulumi.Input[str]] = None,
             repeat_weekdays: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            resource_group_id: Optional[pulumi.Input[str]] = None,
             retention_days: Optional[pulumi.Input[int]] = None,
             status: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
@@ -497,6 +525,7 @@ class SnapshotPolicy(pulumi.CustomResource):
         __props__.__dict__["enable_cross_region_copy"] = enable_cross_region_copy
         __props__.__dict__["name"] = name
         __props__.__dict__["repeat_weekdays"] = repeat_weekdays
+        __props__.__dict__["resource_group_id"] = resource_group_id
         __props__.__dict__["retention_days"] = retention_days
         __props__.__dict__["status"] = status
         __props__.__dict__["tags"] = tags
@@ -531,6 +560,11 @@ class SnapshotPolicy(pulumi.CustomResource):
         - The format is  an JSON array of ["1", "2", … "7"]  and the time points are separated by commas (,).
         """
         return pulumi.get(self, "repeat_weekdays")
+
+    @property
+    @pulumi.getter(name="resourceGroupId")
+    def resource_group_id(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "resource_group_id")
 
     @property
     @pulumi.getter(name="retentionDays")

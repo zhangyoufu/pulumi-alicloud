@@ -90,6 +90,13 @@ public final class AutoSnapshotPolicyArgs extends com.pulumi.resources.ResourceA
         return this.repeatWeekdays;
     }
 
+    @Import(name="resourceGroupId")
+    private @Nullable Output<String> resourceGroupId;
+
+    public Optional<Output<String>> resourceGroupId() {
+        return Optional.ofNullable(this.resourceGroupId);
+    }
+
     /**
      * The snapshot retention time, and the unit of measurement is day. Optional values:
      * - -1: The automatic snapshots are retained permanently.
@@ -167,6 +174,7 @@ public final class AutoSnapshotPolicyArgs extends com.pulumi.resources.ResourceA
         this.enableCrossRegionCopy = $.enableCrossRegionCopy;
         this.name = $.name;
         this.repeatWeekdays = $.repeatWeekdays;
+        this.resourceGroupId = $.resourceGroupId;
         this.retentionDays = $.retentionDays;
         this.tags = $.tags;
         this.targetCopyRegions = $.targetCopyRegions;
@@ -295,6 +303,15 @@ public final class AutoSnapshotPolicyArgs extends com.pulumi.resources.ResourceA
          */
         public Builder repeatWeekdays(String... repeatWeekdays) {
             return repeatWeekdays(List.of(repeatWeekdays));
+        }
+
+        public Builder resourceGroupId(@Nullable Output<String> resourceGroupId) {
+            $.resourceGroupId = resourceGroupId;
+            return this;
+        }
+
+        public Builder resourceGroupId(String resourceGroupId) {
+            return resourceGroupId(Output.of(resourceGroupId));
         }
 
         /**

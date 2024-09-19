@@ -17,58 +17,72 @@ class SecurityGroupRuleArgs:
                  ip_protocol: pulumi.Input[str],
                  security_group_id: pulumi.Input[str],
                  type: pulumi.Input[str],
-                 cidr_ip: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
-                 ipv6_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 dest_group_id: Optional[pulumi.Input[str]] = None,
+                 dest_group_owner_account: Optional[pulumi.Input[str]] = None,
+                 dest_prefix_list_id: Optional[pulumi.Input[str]] = None,
+                 ipv6_dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 ipv6_source_cidr_ip: Optional[pulumi.Input[str]] = None,
                  nic_type: Optional[pulumi.Input[str]] = None,
                  policy: Optional[pulumi.Input[str]] = None,
                  port_range: Optional[pulumi.Input[str]] = None,
-                 prefix_list_id: Optional[pulumi.Input[str]] = None,
                  priority: Optional[pulumi.Input[int]] = None,
+                 source_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 source_group_id: Optional[pulumi.Input[str]] = None,
                  source_group_owner_account: Optional[pulumi.Input[str]] = None,
-                 source_security_group_id: Optional[pulumi.Input[str]] = None):
+                 source_port_range: Optional[pulumi.Input[str]] = None,
+                 source_prefix_list_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a SecurityGroupRule resource.
         :param pulumi.Input[str] ip_protocol: The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
         :param pulumi.Input[str] security_group_id: The ID of the Security Group.
         :param pulumi.Input[str] type: The type of the Security Group Rule. Valid values:
-        :param pulumi.Input[str] cidr_ip: The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
         :param pulumi.Input[str] description: The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
                
                > **NOTE:**  You must specify one of the following field: `cidr_ip`,`source_security_group_id`,`prefix_list_id`,`ipv6_cidr_ip`.
-        :param pulumi.Input[str] ipv6_cidr_ip: Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
         :param pulumi.Input[str] nic_type: Network type, can be either `internet` or `intranet`, the default value is `internet`.
         :param pulumi.Input[str] policy: The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
         :param pulumi.Input[str] port_range: The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
                For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
-        :param pulumi.Input[str] prefix_list_id: The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
         :param pulumi.Input[int] priority: The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
         :param pulumi.Input[str] source_group_owner_account: The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidr_ip` has already been set.
-        :param pulumi.Input[str] source_security_group_id: The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
         """
         pulumi.set(__self__, "ip_protocol", ip_protocol)
         pulumi.set(__self__, "security_group_id", security_group_id)
         pulumi.set(__self__, "type", type)
-        if cidr_ip is not None:
-            pulumi.set(__self__, "cidr_ip", cidr_ip)
         if description is not None:
             pulumi.set(__self__, "description", description)
-        if ipv6_cidr_ip is not None:
-            pulumi.set(__self__, "ipv6_cidr_ip", ipv6_cidr_ip)
+        if dest_cidr_ip is not None:
+            pulumi.set(__self__, "dest_cidr_ip", dest_cidr_ip)
+        if dest_group_id is not None:
+            pulumi.set(__self__, "dest_group_id", dest_group_id)
+        if dest_group_owner_account is not None:
+            pulumi.set(__self__, "dest_group_owner_account", dest_group_owner_account)
+        if dest_prefix_list_id is not None:
+            pulumi.set(__self__, "dest_prefix_list_id", dest_prefix_list_id)
+        if ipv6_dest_cidr_ip is not None:
+            pulumi.set(__self__, "ipv6_dest_cidr_ip", ipv6_dest_cidr_ip)
+        if ipv6_source_cidr_ip is not None:
+            pulumi.set(__self__, "ipv6_source_cidr_ip", ipv6_source_cidr_ip)
         if nic_type is not None:
             pulumi.set(__self__, "nic_type", nic_type)
         if policy is not None:
             pulumi.set(__self__, "policy", policy)
         if port_range is not None:
             pulumi.set(__self__, "port_range", port_range)
-        if prefix_list_id is not None:
-            pulumi.set(__self__, "prefix_list_id", prefix_list_id)
         if priority is not None:
             pulumi.set(__self__, "priority", priority)
+        if source_cidr_ip is not None:
+            pulumi.set(__self__, "source_cidr_ip", source_cidr_ip)
+        if source_group_id is not None:
+            pulumi.set(__self__, "source_group_id", source_group_id)
         if source_group_owner_account is not None:
             pulumi.set(__self__, "source_group_owner_account", source_group_owner_account)
-        if source_security_group_id is not None:
-            pulumi.set(__self__, "source_security_group_id", source_security_group_id)
+        if source_port_range is not None:
+            pulumi.set(__self__, "source_port_range", source_port_range)
+        if source_prefix_list_id is not None:
+            pulumi.set(__self__, "source_prefix_list_id", source_prefix_list_id)
 
     @property
     @pulumi.getter(name="ipProtocol")
@@ -107,18 +121,6 @@ class SecurityGroupRuleArgs:
         pulumi.set(self, "type", value)
 
     @property
-    @pulumi.getter(name="cidrIp")
-    def cidr_ip(self) -> Optional[pulumi.Input[str]]:
-        """
-        The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-        """
-        return pulumi.get(self, "cidr_ip")
-
-    @cidr_ip.setter
-    def cidr_ip(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "cidr_ip", value)
-
-    @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
@@ -133,16 +135,58 @@ class SecurityGroupRuleArgs:
         pulumi.set(self, "description", value)
 
     @property
-    @pulumi.getter(name="ipv6CidrIp")
-    def ipv6_cidr_ip(self) -> Optional[pulumi.Input[str]]:
-        """
-        Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-        """
-        return pulumi.get(self, "ipv6_cidr_ip")
+    @pulumi.getter(name="destCidrIp")
+    def dest_cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dest_cidr_ip")
 
-    @ipv6_cidr_ip.setter
-    def ipv6_cidr_ip(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "ipv6_cidr_ip", value)
+    @dest_cidr_ip.setter
+    def dest_cidr_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dest_cidr_ip", value)
+
+    @property
+    @pulumi.getter(name="destGroupId")
+    def dest_group_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dest_group_id")
+
+    @dest_group_id.setter
+    def dest_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dest_group_id", value)
+
+    @property
+    @pulumi.getter(name="destGroupOwnerAccount")
+    def dest_group_owner_account(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dest_group_owner_account")
+
+    @dest_group_owner_account.setter
+    def dest_group_owner_account(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dest_group_owner_account", value)
+
+    @property
+    @pulumi.getter(name="destPrefixListId")
+    def dest_prefix_list_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dest_prefix_list_id")
+
+    @dest_prefix_list_id.setter
+    def dest_prefix_list_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dest_prefix_list_id", value)
+
+    @property
+    @pulumi.getter(name="ipv6DestCidrIp")
+    def ipv6_dest_cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "ipv6_dest_cidr_ip")
+
+    @ipv6_dest_cidr_ip.setter
+    def ipv6_dest_cidr_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ipv6_dest_cidr_ip", value)
+
+    @property
+    @pulumi.getter(name="ipv6SourceCidrIp")
+    def ipv6_source_cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "ipv6_source_cidr_ip")
+
+    @ipv6_source_cidr_ip.setter
+    def ipv6_source_cidr_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ipv6_source_cidr_ip", value)
 
     @property
     @pulumi.getter(name="nicType")
@@ -180,18 +224,6 @@ class SecurityGroupRuleArgs:
     @port_range.setter
     def port_range(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "port_range", value)
-
-    @property
-    @pulumi.getter(name="prefixListId")
-    def prefix_list_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-        """
-        return pulumi.get(self, "prefix_list_id")
-
-    @prefix_list_id.setter
-    def prefix_list_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "prefix_list_id", value)
 
     @property
     @pulumi.getter
@@ -206,6 +238,24 @@ class SecurityGroupRuleArgs:
         pulumi.set(self, "priority", value)
 
     @property
+    @pulumi.getter(name="sourceCidrIp")
+    def source_cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "source_cidr_ip")
+
+    @source_cidr_ip.setter
+    def source_cidr_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_cidr_ip", value)
+
+    @property
+    @pulumi.getter(name="sourceGroupId")
+    def source_group_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "source_group_id")
+
+    @source_group_id.setter
+    def source_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_group_id", value)
+
+    @property
     @pulumi.getter(name="sourceGroupOwnerAccount")
     def source_group_owner_account(self) -> Optional[pulumi.Input[str]]:
         """
@@ -218,91 +268,99 @@ class SecurityGroupRuleArgs:
         pulumi.set(self, "source_group_owner_account", value)
 
     @property
-    @pulumi.getter(name="sourceSecurityGroupId")
-    def source_security_group_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-        """
-        return pulumi.get(self, "source_security_group_id")
+    @pulumi.getter(name="sourcePortRange")
+    def source_port_range(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "source_port_range")
 
-    @source_security_group_id.setter
-    def source_security_group_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "source_security_group_id", value)
+    @source_port_range.setter
+    def source_port_range(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_port_range", value)
+
+    @property
+    @pulumi.getter(name="sourcePrefixListId")
+    def source_prefix_list_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "source_prefix_list_id")
+
+    @source_prefix_list_id.setter
+    def source_prefix_list_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_prefix_list_id", value)
 
 
 @pulumi.input_type
 class _SecurityGroupRuleState:
     def __init__(__self__, *,
-                 cidr_ip: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 dest_group_id: Optional[pulumi.Input[str]] = None,
+                 dest_group_owner_account: Optional[pulumi.Input[str]] = None,
+                 dest_prefix_list_id: Optional[pulumi.Input[str]] = None,
                  ip_protocol: Optional[pulumi.Input[str]] = None,
-                 ipv6_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 ipv6_dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 ipv6_source_cidr_ip: Optional[pulumi.Input[str]] = None,
                  nic_type: Optional[pulumi.Input[str]] = None,
                  policy: Optional[pulumi.Input[str]] = None,
                  port_range: Optional[pulumi.Input[str]] = None,
-                 prefix_list_id: Optional[pulumi.Input[str]] = None,
                  priority: Optional[pulumi.Input[int]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
+                 source_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 source_group_id: Optional[pulumi.Input[str]] = None,
                  source_group_owner_account: Optional[pulumi.Input[str]] = None,
-                 source_security_group_id: Optional[pulumi.Input[str]] = None,
+                 source_port_range: Optional[pulumi.Input[str]] = None,
+                 source_prefix_list_id: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering SecurityGroupRule resources.
-        :param pulumi.Input[str] cidr_ip: The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
         :param pulumi.Input[str] description: The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
                
                > **NOTE:**  You must specify one of the following field: `cidr_ip`,`source_security_group_id`,`prefix_list_id`,`ipv6_cidr_ip`.
         :param pulumi.Input[str] ip_protocol: The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
-        :param pulumi.Input[str] ipv6_cidr_ip: Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
         :param pulumi.Input[str] nic_type: Network type, can be either `internet` or `intranet`, the default value is `internet`.
         :param pulumi.Input[str] policy: The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
         :param pulumi.Input[str] port_range: The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
                For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
-        :param pulumi.Input[str] prefix_list_id: The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
         :param pulumi.Input[int] priority: The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
         :param pulumi.Input[str] security_group_id: The ID of the Security Group.
         :param pulumi.Input[str] source_group_owner_account: The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidr_ip` has already been set.
-        :param pulumi.Input[str] source_security_group_id: The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
         :param pulumi.Input[str] type: The type of the Security Group Rule. Valid values:
         """
-        if cidr_ip is not None:
-            pulumi.set(__self__, "cidr_ip", cidr_ip)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if dest_cidr_ip is not None:
+            pulumi.set(__self__, "dest_cidr_ip", dest_cidr_ip)
+        if dest_group_id is not None:
+            pulumi.set(__self__, "dest_group_id", dest_group_id)
+        if dest_group_owner_account is not None:
+            pulumi.set(__self__, "dest_group_owner_account", dest_group_owner_account)
+        if dest_prefix_list_id is not None:
+            pulumi.set(__self__, "dest_prefix_list_id", dest_prefix_list_id)
         if ip_protocol is not None:
             pulumi.set(__self__, "ip_protocol", ip_protocol)
-        if ipv6_cidr_ip is not None:
-            pulumi.set(__self__, "ipv6_cidr_ip", ipv6_cidr_ip)
+        if ipv6_dest_cidr_ip is not None:
+            pulumi.set(__self__, "ipv6_dest_cidr_ip", ipv6_dest_cidr_ip)
+        if ipv6_source_cidr_ip is not None:
+            pulumi.set(__self__, "ipv6_source_cidr_ip", ipv6_source_cidr_ip)
         if nic_type is not None:
             pulumi.set(__self__, "nic_type", nic_type)
         if policy is not None:
             pulumi.set(__self__, "policy", policy)
         if port_range is not None:
             pulumi.set(__self__, "port_range", port_range)
-        if prefix_list_id is not None:
-            pulumi.set(__self__, "prefix_list_id", prefix_list_id)
         if priority is not None:
             pulumi.set(__self__, "priority", priority)
         if security_group_id is not None:
             pulumi.set(__self__, "security_group_id", security_group_id)
+        if source_cidr_ip is not None:
+            pulumi.set(__self__, "source_cidr_ip", source_cidr_ip)
+        if source_group_id is not None:
+            pulumi.set(__self__, "source_group_id", source_group_id)
         if source_group_owner_account is not None:
             pulumi.set(__self__, "source_group_owner_account", source_group_owner_account)
-        if source_security_group_id is not None:
-            pulumi.set(__self__, "source_security_group_id", source_security_group_id)
+        if source_port_range is not None:
+            pulumi.set(__self__, "source_port_range", source_port_range)
+        if source_prefix_list_id is not None:
+            pulumi.set(__self__, "source_prefix_list_id", source_prefix_list_id)
         if type is not None:
             pulumi.set(__self__, "type", type)
-
-    @property
-    @pulumi.getter(name="cidrIp")
-    def cidr_ip(self) -> Optional[pulumi.Input[str]]:
-        """
-        The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-        """
-        return pulumi.get(self, "cidr_ip")
-
-    @cidr_ip.setter
-    def cidr_ip(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "cidr_ip", value)
 
     @property
     @pulumi.getter
@@ -319,6 +377,42 @@ class _SecurityGroupRuleState:
         pulumi.set(self, "description", value)
 
     @property
+    @pulumi.getter(name="destCidrIp")
+    def dest_cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dest_cidr_ip")
+
+    @dest_cidr_ip.setter
+    def dest_cidr_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dest_cidr_ip", value)
+
+    @property
+    @pulumi.getter(name="destGroupId")
+    def dest_group_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dest_group_id")
+
+    @dest_group_id.setter
+    def dest_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dest_group_id", value)
+
+    @property
+    @pulumi.getter(name="destGroupOwnerAccount")
+    def dest_group_owner_account(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dest_group_owner_account")
+
+    @dest_group_owner_account.setter
+    def dest_group_owner_account(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dest_group_owner_account", value)
+
+    @property
+    @pulumi.getter(name="destPrefixListId")
+    def dest_prefix_list_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "dest_prefix_list_id")
+
+    @dest_prefix_list_id.setter
+    def dest_prefix_list_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dest_prefix_list_id", value)
+
+    @property
     @pulumi.getter(name="ipProtocol")
     def ip_protocol(self) -> Optional[pulumi.Input[str]]:
         """
@@ -331,16 +425,22 @@ class _SecurityGroupRuleState:
         pulumi.set(self, "ip_protocol", value)
 
     @property
-    @pulumi.getter(name="ipv6CidrIp")
-    def ipv6_cidr_ip(self) -> Optional[pulumi.Input[str]]:
-        """
-        Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-        """
-        return pulumi.get(self, "ipv6_cidr_ip")
+    @pulumi.getter(name="ipv6DestCidrIp")
+    def ipv6_dest_cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "ipv6_dest_cidr_ip")
 
-    @ipv6_cidr_ip.setter
-    def ipv6_cidr_ip(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "ipv6_cidr_ip", value)
+    @ipv6_dest_cidr_ip.setter
+    def ipv6_dest_cidr_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ipv6_dest_cidr_ip", value)
+
+    @property
+    @pulumi.getter(name="ipv6SourceCidrIp")
+    def ipv6_source_cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "ipv6_source_cidr_ip")
+
+    @ipv6_source_cidr_ip.setter
+    def ipv6_source_cidr_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ipv6_source_cidr_ip", value)
 
     @property
     @pulumi.getter(name="nicType")
@@ -378,18 +478,6 @@ class _SecurityGroupRuleState:
     @port_range.setter
     def port_range(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "port_range", value)
-
-    @property
-    @pulumi.getter(name="prefixListId")
-    def prefix_list_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-        """
-        return pulumi.get(self, "prefix_list_id")
-
-    @prefix_list_id.setter
-    def prefix_list_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "prefix_list_id", value)
 
     @property
     @pulumi.getter
@@ -416,6 +504,24 @@ class _SecurityGroupRuleState:
         pulumi.set(self, "security_group_id", value)
 
     @property
+    @pulumi.getter(name="sourceCidrIp")
+    def source_cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "source_cidr_ip")
+
+    @source_cidr_ip.setter
+    def source_cidr_ip(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_cidr_ip", value)
+
+    @property
+    @pulumi.getter(name="sourceGroupId")
+    def source_group_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "source_group_id")
+
+    @source_group_id.setter
+    def source_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_group_id", value)
+
+    @property
     @pulumi.getter(name="sourceGroupOwnerAccount")
     def source_group_owner_account(self) -> Optional[pulumi.Input[str]]:
         """
@@ -428,16 +534,22 @@ class _SecurityGroupRuleState:
         pulumi.set(self, "source_group_owner_account", value)
 
     @property
-    @pulumi.getter(name="sourceSecurityGroupId")
-    def source_security_group_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-        """
-        return pulumi.get(self, "source_security_group_id")
+    @pulumi.getter(name="sourcePortRange")
+    def source_port_range(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "source_port_range")
 
-    @source_security_group_id.setter
-    def source_security_group_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "source_security_group_id", value)
+    @source_port_range.setter
+    def source_port_range(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_port_range", value)
+
+    @property
+    @pulumi.getter(name="sourcePrefixListId")
+    def source_prefix_list_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "source_prefix_list_id")
+
+    @source_prefix_list_id.setter
+    def source_prefix_list_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_prefix_list_id", value)
 
     @property
     @pulumi.getter
@@ -457,18 +569,24 @@ class SecurityGroupRule(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 cidr_ip: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 dest_group_id: Optional[pulumi.Input[str]] = None,
+                 dest_group_owner_account: Optional[pulumi.Input[str]] = None,
+                 dest_prefix_list_id: Optional[pulumi.Input[str]] = None,
                  ip_protocol: Optional[pulumi.Input[str]] = None,
-                 ipv6_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 ipv6_dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 ipv6_source_cidr_ip: Optional[pulumi.Input[str]] = None,
                  nic_type: Optional[pulumi.Input[str]] = None,
                  policy: Optional[pulumi.Input[str]] = None,
                  port_range: Optional[pulumi.Input[str]] = None,
-                 prefix_list_id: Optional[pulumi.Input[str]] = None,
                  priority: Optional[pulumi.Input[int]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
+                 source_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 source_group_id: Optional[pulumi.Input[str]] = None,
                  source_group_owner_account: Optional[pulumi.Input[str]] = None,
-                 source_security_group_id: Optional[pulumi.Input[str]] = None,
+                 source_port_range: Optional[pulumi.Input[str]] = None,
+                 source_prefix_list_id: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -482,31 +600,6 @@ class SecurityGroupRule(pulumi.CustomResource):
 
         > **NOTE:**  `nic_type` should set to `intranet` when security group type is `vpc` or specifying the `source_security_group_id`. In this situation it does not distinguish between intranet and internet, the rule is effective on them both.
 
-        ## Example Usage
-
-        Basic Usage
-
-        ```python
-        import pulumi
-        import pulumi_alicloud as alicloud
-
-        default = alicloud.ecs.SecurityGroup("default", name="default")
-        allow_all_tcp = alicloud.ecs.SecurityGroupRule("allow_all_tcp",
-            type="ingress",
-            ip_protocol="tcp",
-            nic_type="internet",
-            policy="accept",
-            port_range="1/65535",
-            priority=1,
-            security_group_id=default.id,
-            cidr_ip="0.0.0.0/0")
-        ```
-
-        ## Module Support
-
-        You can use the existing security-group module
-        to create a security group and add several rules one-click.
-
         ## Import
 
         Security Group Rule can be imported using the id, e.g.
@@ -517,21 +610,17 @@ class SecurityGroupRule(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cidr_ip: The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
         :param pulumi.Input[str] description: The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
                
                > **NOTE:**  You must specify one of the following field: `cidr_ip`,`source_security_group_id`,`prefix_list_id`,`ipv6_cidr_ip`.
         :param pulumi.Input[str] ip_protocol: The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
-        :param pulumi.Input[str] ipv6_cidr_ip: Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
         :param pulumi.Input[str] nic_type: Network type, can be either `internet` or `intranet`, the default value is `internet`.
         :param pulumi.Input[str] policy: The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
         :param pulumi.Input[str] port_range: The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
                For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
-        :param pulumi.Input[str] prefix_list_id: The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
         :param pulumi.Input[int] priority: The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
         :param pulumi.Input[str] security_group_id: The ID of the Security Group.
         :param pulumi.Input[str] source_group_owner_account: The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidr_ip` has already been set.
-        :param pulumi.Input[str] source_security_group_id: The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
         :param pulumi.Input[str] type: The type of the Security Group Rule. Valid values:
         """
         ...
@@ -550,31 +639,6 @@ class SecurityGroupRule(pulumi.CustomResource):
         Represents a single `ingress` or `egress` group rule, which can be added to external Security Groups.
 
         > **NOTE:**  `nic_type` should set to `intranet` when security group type is `vpc` or specifying the `source_security_group_id`. In this situation it does not distinguish between intranet and internet, the rule is effective on them both.
-
-        ## Example Usage
-
-        Basic Usage
-
-        ```python
-        import pulumi
-        import pulumi_alicloud as alicloud
-
-        default = alicloud.ecs.SecurityGroup("default", name="default")
-        allow_all_tcp = alicloud.ecs.SecurityGroupRule("allow_all_tcp",
-            type="ingress",
-            ip_protocol="tcp",
-            nic_type="internet",
-            policy="accept",
-            port_range="1/65535",
-            priority=1,
-            security_group_id=default.id,
-            cidr_ip="0.0.0.0/0")
-        ```
-
-        ## Module Support
-
-        You can use the existing security-group module
-        to create a security group and add several rules one-click.
 
         ## Import
 
@@ -599,18 +663,24 @@ class SecurityGroupRule(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 cidr_ip: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 dest_group_id: Optional[pulumi.Input[str]] = None,
+                 dest_group_owner_account: Optional[pulumi.Input[str]] = None,
+                 dest_prefix_list_id: Optional[pulumi.Input[str]] = None,
                  ip_protocol: Optional[pulumi.Input[str]] = None,
-                 ipv6_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 ipv6_dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 ipv6_source_cidr_ip: Optional[pulumi.Input[str]] = None,
                  nic_type: Optional[pulumi.Input[str]] = None,
                  policy: Optional[pulumi.Input[str]] = None,
                  port_range: Optional[pulumi.Input[str]] = None,
-                 prefix_list_id: Optional[pulumi.Input[str]] = None,
                  priority: Optional[pulumi.Input[int]] = None,
                  security_group_id: Optional[pulumi.Input[str]] = None,
+                 source_cidr_ip: Optional[pulumi.Input[str]] = None,
+                 source_group_id: Optional[pulumi.Input[str]] = None,
                  source_group_owner_account: Optional[pulumi.Input[str]] = None,
-                 source_security_group_id: Optional[pulumi.Input[str]] = None,
+                 source_port_range: Optional[pulumi.Input[str]] = None,
+                 source_prefix_list_id: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -621,22 +691,28 @@ class SecurityGroupRule(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = SecurityGroupRuleArgs.__new__(SecurityGroupRuleArgs)
 
-            __props__.__dict__["cidr_ip"] = cidr_ip
             __props__.__dict__["description"] = description
+            __props__.__dict__["dest_cidr_ip"] = dest_cidr_ip
+            __props__.__dict__["dest_group_id"] = dest_group_id
+            __props__.__dict__["dest_group_owner_account"] = dest_group_owner_account
+            __props__.__dict__["dest_prefix_list_id"] = dest_prefix_list_id
             if ip_protocol is None and not opts.urn:
                 raise TypeError("Missing required property 'ip_protocol'")
             __props__.__dict__["ip_protocol"] = ip_protocol
-            __props__.__dict__["ipv6_cidr_ip"] = ipv6_cidr_ip
+            __props__.__dict__["ipv6_dest_cidr_ip"] = ipv6_dest_cidr_ip
+            __props__.__dict__["ipv6_source_cidr_ip"] = ipv6_source_cidr_ip
             __props__.__dict__["nic_type"] = nic_type
             __props__.__dict__["policy"] = policy
             __props__.__dict__["port_range"] = port_range
-            __props__.__dict__["prefix_list_id"] = prefix_list_id
             __props__.__dict__["priority"] = priority
             if security_group_id is None and not opts.urn:
                 raise TypeError("Missing required property 'security_group_id'")
             __props__.__dict__["security_group_id"] = security_group_id
+            __props__.__dict__["source_cidr_ip"] = source_cidr_ip
+            __props__.__dict__["source_group_id"] = source_group_id
             __props__.__dict__["source_group_owner_account"] = source_group_owner_account
-            __props__.__dict__["source_security_group_id"] = source_security_group_id
+            __props__.__dict__["source_port_range"] = source_port_range
+            __props__.__dict__["source_prefix_list_id"] = source_prefix_list_id
             if type is None and not opts.urn:
                 raise TypeError("Missing required property 'type'")
             __props__.__dict__["type"] = type
@@ -650,18 +726,24 @@ class SecurityGroupRule(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            cidr_ip: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
+            dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+            dest_group_id: Optional[pulumi.Input[str]] = None,
+            dest_group_owner_account: Optional[pulumi.Input[str]] = None,
+            dest_prefix_list_id: Optional[pulumi.Input[str]] = None,
             ip_protocol: Optional[pulumi.Input[str]] = None,
-            ipv6_cidr_ip: Optional[pulumi.Input[str]] = None,
+            ipv6_dest_cidr_ip: Optional[pulumi.Input[str]] = None,
+            ipv6_source_cidr_ip: Optional[pulumi.Input[str]] = None,
             nic_type: Optional[pulumi.Input[str]] = None,
             policy: Optional[pulumi.Input[str]] = None,
             port_range: Optional[pulumi.Input[str]] = None,
-            prefix_list_id: Optional[pulumi.Input[str]] = None,
             priority: Optional[pulumi.Input[int]] = None,
             security_group_id: Optional[pulumi.Input[str]] = None,
+            source_cidr_ip: Optional[pulumi.Input[str]] = None,
+            source_group_id: Optional[pulumi.Input[str]] = None,
             source_group_owner_account: Optional[pulumi.Input[str]] = None,
-            source_security_group_id: Optional[pulumi.Input[str]] = None,
+            source_port_range: Optional[pulumi.Input[str]] = None,
+            source_prefix_list_id: Optional[pulumi.Input[str]] = None,
             type: Optional[pulumi.Input[str]] = None) -> 'SecurityGroupRule':
         """
         Get an existing SecurityGroupRule resource's state with the given name, id, and optional extra
@@ -670,49 +752,43 @@ class SecurityGroupRule(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cidr_ip: The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
         :param pulumi.Input[str] description: The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
                
                > **NOTE:**  You must specify one of the following field: `cidr_ip`,`source_security_group_id`,`prefix_list_id`,`ipv6_cidr_ip`.
         :param pulumi.Input[str] ip_protocol: The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
-        :param pulumi.Input[str] ipv6_cidr_ip: Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
         :param pulumi.Input[str] nic_type: Network type, can be either `internet` or `intranet`, the default value is `internet`.
         :param pulumi.Input[str] policy: The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
         :param pulumi.Input[str] port_range: The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
                For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
-        :param pulumi.Input[str] prefix_list_id: The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
         :param pulumi.Input[int] priority: The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
         :param pulumi.Input[str] security_group_id: The ID of the Security Group.
         :param pulumi.Input[str] source_group_owner_account: The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidr_ip` has already been set.
-        :param pulumi.Input[str] source_security_group_id: The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
         :param pulumi.Input[str] type: The type of the Security Group Rule. Valid values:
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _SecurityGroupRuleState.__new__(_SecurityGroupRuleState)
 
-        __props__.__dict__["cidr_ip"] = cidr_ip
         __props__.__dict__["description"] = description
+        __props__.__dict__["dest_cidr_ip"] = dest_cidr_ip
+        __props__.__dict__["dest_group_id"] = dest_group_id
+        __props__.__dict__["dest_group_owner_account"] = dest_group_owner_account
+        __props__.__dict__["dest_prefix_list_id"] = dest_prefix_list_id
         __props__.__dict__["ip_protocol"] = ip_protocol
-        __props__.__dict__["ipv6_cidr_ip"] = ipv6_cidr_ip
+        __props__.__dict__["ipv6_dest_cidr_ip"] = ipv6_dest_cidr_ip
+        __props__.__dict__["ipv6_source_cidr_ip"] = ipv6_source_cidr_ip
         __props__.__dict__["nic_type"] = nic_type
         __props__.__dict__["policy"] = policy
         __props__.__dict__["port_range"] = port_range
-        __props__.__dict__["prefix_list_id"] = prefix_list_id
         __props__.__dict__["priority"] = priority
         __props__.__dict__["security_group_id"] = security_group_id
+        __props__.__dict__["source_cidr_ip"] = source_cidr_ip
+        __props__.__dict__["source_group_id"] = source_group_id
         __props__.__dict__["source_group_owner_account"] = source_group_owner_account
-        __props__.__dict__["source_security_group_id"] = source_security_group_id
+        __props__.__dict__["source_port_range"] = source_port_range
+        __props__.__dict__["source_prefix_list_id"] = source_prefix_list_id
         __props__.__dict__["type"] = type
         return SecurityGroupRule(resource_name, opts=opts, __props__=__props__)
-
-    @property
-    @pulumi.getter(name="cidrIp")
-    def cidr_ip(self) -> pulumi.Output[Optional[str]]:
-        """
-        The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-        """
-        return pulumi.get(self, "cidr_ip")
 
     @property
     @pulumi.getter
@@ -725,6 +801,26 @@ class SecurityGroupRule(pulumi.CustomResource):
         return pulumi.get(self, "description")
 
     @property
+    @pulumi.getter(name="destCidrIp")
+    def dest_cidr_ip(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "dest_cidr_ip")
+
+    @property
+    @pulumi.getter(name="destGroupId")
+    def dest_group_id(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "dest_group_id")
+
+    @property
+    @pulumi.getter(name="destGroupOwnerAccount")
+    def dest_group_owner_account(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "dest_group_owner_account")
+
+    @property
+    @pulumi.getter(name="destPrefixListId")
+    def dest_prefix_list_id(self) -> pulumi.Output[str]:
+        return pulumi.get(self, "dest_prefix_list_id")
+
+    @property
     @pulumi.getter(name="ipProtocol")
     def ip_protocol(self) -> pulumi.Output[str]:
         """
@@ -733,12 +829,14 @@ class SecurityGroupRule(pulumi.CustomResource):
         return pulumi.get(self, "ip_protocol")
 
     @property
-    @pulumi.getter(name="ipv6CidrIp")
-    def ipv6_cidr_ip(self) -> pulumi.Output[Optional[str]]:
-        """
-        Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-        """
-        return pulumi.get(self, "ipv6_cidr_ip")
+    @pulumi.getter(name="ipv6DestCidrIp")
+    def ipv6_dest_cidr_ip(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "ipv6_dest_cidr_ip")
+
+    @property
+    @pulumi.getter(name="ipv6SourceCidrIp")
+    def ipv6_source_cidr_ip(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "ipv6_source_cidr_ip")
 
     @property
     @pulumi.getter(name="nicType")
@@ -766,14 +864,6 @@ class SecurityGroupRule(pulumi.CustomResource):
         return pulumi.get(self, "port_range")
 
     @property
-    @pulumi.getter(name="prefixListId")
-    def prefix_list_id(self) -> pulumi.Output[str]:
-        """
-        The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-        """
-        return pulumi.get(self, "prefix_list_id")
-
-    @property
     @pulumi.getter
     def priority(self) -> pulumi.Output[Optional[int]]:
         """
@@ -790,6 +880,16 @@ class SecurityGroupRule(pulumi.CustomResource):
         return pulumi.get(self, "security_group_id")
 
     @property
+    @pulumi.getter(name="sourceCidrIp")
+    def source_cidr_ip(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "source_cidr_ip")
+
+    @property
+    @pulumi.getter(name="sourceGroupId")
+    def source_group_id(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "source_group_id")
+
+    @property
     @pulumi.getter(name="sourceGroupOwnerAccount")
     def source_group_owner_account(self) -> pulumi.Output[Optional[str]]:
         """
@@ -798,12 +898,14 @@ class SecurityGroupRule(pulumi.CustomResource):
         return pulumi.get(self, "source_group_owner_account")
 
     @property
-    @pulumi.getter(name="sourceSecurityGroupId")
-    def source_security_group_id(self) -> pulumi.Output[Optional[str]]:
-        """
-        The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-        """
-        return pulumi.get(self, "source_security_group_id")
+    @pulumi.getter(name="sourcePortRange")
+    def source_port_range(self) -> pulumi.Output[Optional[str]]:
+        return pulumi.get(self, "source_port_range")
+
+    @property
+    @pulumi.getter(name="sourcePrefixListId")
+    def source_prefix_list_id(self) -> pulumi.Output[str]:
+        return pulumi.get(self, "source_prefix_list_id")
 
     @property
     @pulumi.getter

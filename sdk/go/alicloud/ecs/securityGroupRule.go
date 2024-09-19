@@ -22,52 +22,6 @@ import (
 //
 // > **NOTE:**  `nicType` should set to `intranet` when security group type is `vpc` or specifying the `sourceSecurityGroupId`. In this situation it does not distinguish between intranet and internet, the rule is effective on them both.
 //
-// ## Example Usage
-//
-// # Basic Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi-alicloud/sdk/v3/go/alicloud/ecs"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := ecs.NewSecurityGroup(ctx, "default", &ecs.SecurityGroupArgs{
-//				Name: pulumi.String("default"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = ecs.NewSecurityGroupRule(ctx, "allow_all_tcp", &ecs.SecurityGroupRuleArgs{
-//				Type:            pulumi.String("ingress"),
-//				IpProtocol:      pulumi.String("tcp"),
-//				NicType:         pulumi.String("internet"),
-//				Policy:          pulumi.String("accept"),
-//				PortRange:       pulumi.String("1/65535"),
-//				Priority:        pulumi.Int(1),
-//				SecurityGroupId: _default.ID(),
-//				CidrIp:          pulumi.String("0.0.0.0/0"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Module Support
-//
-// You can use the existing security-group module
-// to create a security group and add several rules one-click.
-//
 // ## Import
 //
 // Security Group Rule can be imported using the id, e.g.
@@ -78,16 +32,18 @@ import (
 type SecurityGroupRule struct {
 	pulumi.CustomResourceState
 
-	// The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-	CidrIp pulumi.StringPtrOutput `pulumi:"cidrIp"`
 	// The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
 	//
 	// > **NOTE:**  You must specify one of the following field: `cidrIp`,`sourceSecurityGroupId`,`prefixListId`,`ipv6CidrIp`.
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	Description           pulumi.StringPtrOutput `pulumi:"description"`
+	DestCidrIp            pulumi.StringPtrOutput `pulumi:"destCidrIp"`
+	DestGroupId           pulumi.StringPtrOutput `pulumi:"destGroupId"`
+	DestGroupOwnerAccount pulumi.StringPtrOutput `pulumi:"destGroupOwnerAccount"`
+	DestPrefixListId      pulumi.StringOutput    `pulumi:"destPrefixListId"`
 	// The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
-	IpProtocol pulumi.StringOutput `pulumi:"ipProtocol"`
-	// Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidrIp` parameter.
-	Ipv6CidrIp pulumi.StringPtrOutput `pulumi:"ipv6CidrIp"`
+	IpProtocol       pulumi.StringOutput    `pulumi:"ipProtocol"`
+	Ipv6DestCidrIp   pulumi.StringPtrOutput `pulumi:"ipv6DestCidrIp"`
+	Ipv6SourceCidrIp pulumi.StringPtrOutput `pulumi:"ipv6SourceCidrIp"`
 	// Network type, can be either `internet` or `intranet`, the default value is `internet`.
 	NicType pulumi.StringOutput `pulumi:"nicType"`
 	// The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
@@ -95,16 +51,16 @@ type SecurityGroupRule struct {
 	// The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
 	// For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
 	PortRange pulumi.StringPtrOutput `pulumi:"portRange"`
-	// The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidrIp`,`sourceSecurityGroupId`,`ipv6CidrIp` parameter, this parameter is ignored.
-	PrefixListId pulumi.StringOutput `pulumi:"prefixListId"`
 	// The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
 	Priority pulumi.IntPtrOutput `pulumi:"priority"`
 	// The ID of the Security Group.
-	SecurityGroupId pulumi.StringOutput `pulumi:"securityGroupId"`
+	SecurityGroupId pulumi.StringOutput    `pulumi:"securityGroupId"`
+	SourceCidrIp    pulumi.StringPtrOutput `pulumi:"sourceCidrIp"`
+	SourceGroupId   pulumi.StringPtrOutput `pulumi:"sourceGroupId"`
 	// The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidrIp` has already been set.
 	SourceGroupOwnerAccount pulumi.StringPtrOutput `pulumi:"sourceGroupOwnerAccount"`
-	// The target security group ID within the same region. If this field is specified, the `nicType` can only select `intranet`.
-	SourceSecurityGroupId pulumi.StringPtrOutput `pulumi:"sourceSecurityGroupId"`
+	SourcePortRange         pulumi.StringPtrOutput `pulumi:"sourcePortRange"`
+	SourcePrefixListId      pulumi.StringOutput    `pulumi:"sourcePrefixListId"`
 	// The type of the Security Group Rule. Valid values:
 	Type pulumi.StringOutput `pulumi:"type"`
 }
@@ -148,16 +104,18 @@ func GetSecurityGroupRule(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SecurityGroupRule resources.
 type securityGroupRuleState struct {
-	// The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-	CidrIp *string `pulumi:"cidrIp"`
 	// The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
 	//
 	// > **NOTE:**  You must specify one of the following field: `cidrIp`,`sourceSecurityGroupId`,`prefixListId`,`ipv6CidrIp`.
-	Description *string `pulumi:"description"`
+	Description           *string `pulumi:"description"`
+	DestCidrIp            *string `pulumi:"destCidrIp"`
+	DestGroupId           *string `pulumi:"destGroupId"`
+	DestGroupOwnerAccount *string `pulumi:"destGroupOwnerAccount"`
+	DestPrefixListId      *string `pulumi:"destPrefixListId"`
 	// The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
-	IpProtocol *string `pulumi:"ipProtocol"`
-	// Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidrIp` parameter.
-	Ipv6CidrIp *string `pulumi:"ipv6CidrIp"`
+	IpProtocol       *string `pulumi:"ipProtocol"`
+	Ipv6DestCidrIp   *string `pulumi:"ipv6DestCidrIp"`
+	Ipv6SourceCidrIp *string `pulumi:"ipv6SourceCidrIp"`
 	// Network type, can be either `internet` or `intranet`, the default value is `internet`.
 	NicType *string `pulumi:"nicType"`
 	// The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
@@ -165,31 +123,33 @@ type securityGroupRuleState struct {
 	// The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
 	// For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
 	PortRange *string `pulumi:"portRange"`
-	// The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidrIp`,`sourceSecurityGroupId`,`ipv6CidrIp` parameter, this parameter is ignored.
-	PrefixListId *string `pulumi:"prefixListId"`
 	// The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
 	Priority *int `pulumi:"priority"`
 	// The ID of the Security Group.
 	SecurityGroupId *string `pulumi:"securityGroupId"`
+	SourceCidrIp    *string `pulumi:"sourceCidrIp"`
+	SourceGroupId   *string `pulumi:"sourceGroupId"`
 	// The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidrIp` has already been set.
 	SourceGroupOwnerAccount *string `pulumi:"sourceGroupOwnerAccount"`
-	// The target security group ID within the same region. If this field is specified, the `nicType` can only select `intranet`.
-	SourceSecurityGroupId *string `pulumi:"sourceSecurityGroupId"`
+	SourcePortRange         *string `pulumi:"sourcePortRange"`
+	SourcePrefixListId      *string `pulumi:"sourcePrefixListId"`
 	// The type of the Security Group Rule. Valid values:
 	Type *string `pulumi:"type"`
 }
 
 type SecurityGroupRuleState struct {
-	// The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-	CidrIp pulumi.StringPtrInput
 	// The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
 	//
 	// > **NOTE:**  You must specify one of the following field: `cidrIp`,`sourceSecurityGroupId`,`prefixListId`,`ipv6CidrIp`.
-	Description pulumi.StringPtrInput
+	Description           pulumi.StringPtrInput
+	DestCidrIp            pulumi.StringPtrInput
+	DestGroupId           pulumi.StringPtrInput
+	DestGroupOwnerAccount pulumi.StringPtrInput
+	DestPrefixListId      pulumi.StringPtrInput
 	// The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
-	IpProtocol pulumi.StringPtrInput
-	// Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidrIp` parameter.
-	Ipv6CidrIp pulumi.StringPtrInput
+	IpProtocol       pulumi.StringPtrInput
+	Ipv6DestCidrIp   pulumi.StringPtrInput
+	Ipv6SourceCidrIp pulumi.StringPtrInput
 	// Network type, can be either `internet` or `intranet`, the default value is `internet`.
 	NicType pulumi.StringPtrInput
 	// The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
@@ -197,16 +157,16 @@ type SecurityGroupRuleState struct {
 	// The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
 	// For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
 	PortRange pulumi.StringPtrInput
-	// The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidrIp`,`sourceSecurityGroupId`,`ipv6CidrIp` parameter, this parameter is ignored.
-	PrefixListId pulumi.StringPtrInput
 	// The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
 	Priority pulumi.IntPtrInput
 	// The ID of the Security Group.
 	SecurityGroupId pulumi.StringPtrInput
+	SourceCidrIp    pulumi.StringPtrInput
+	SourceGroupId   pulumi.StringPtrInput
 	// The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidrIp` has already been set.
 	SourceGroupOwnerAccount pulumi.StringPtrInput
-	// The target security group ID within the same region. If this field is specified, the `nicType` can only select `intranet`.
-	SourceSecurityGroupId pulumi.StringPtrInput
+	SourcePortRange         pulumi.StringPtrInput
+	SourcePrefixListId      pulumi.StringPtrInput
 	// The type of the Security Group Rule. Valid values:
 	Type pulumi.StringPtrInput
 }
@@ -216,16 +176,18 @@ func (SecurityGroupRuleState) ElementType() reflect.Type {
 }
 
 type securityGroupRuleArgs struct {
-	// The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-	CidrIp *string `pulumi:"cidrIp"`
 	// The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
 	//
 	// > **NOTE:**  You must specify one of the following field: `cidrIp`,`sourceSecurityGroupId`,`prefixListId`,`ipv6CidrIp`.
-	Description *string `pulumi:"description"`
+	Description           *string `pulumi:"description"`
+	DestCidrIp            *string `pulumi:"destCidrIp"`
+	DestGroupId           *string `pulumi:"destGroupId"`
+	DestGroupOwnerAccount *string `pulumi:"destGroupOwnerAccount"`
+	DestPrefixListId      *string `pulumi:"destPrefixListId"`
 	// The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
-	IpProtocol string `pulumi:"ipProtocol"`
-	// Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidrIp` parameter.
-	Ipv6CidrIp *string `pulumi:"ipv6CidrIp"`
+	IpProtocol       string  `pulumi:"ipProtocol"`
+	Ipv6DestCidrIp   *string `pulumi:"ipv6DestCidrIp"`
+	Ipv6SourceCidrIp *string `pulumi:"ipv6SourceCidrIp"`
 	// Network type, can be either `internet` or `intranet`, the default value is `internet`.
 	NicType *string `pulumi:"nicType"`
 	// The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
@@ -233,32 +195,34 @@ type securityGroupRuleArgs struct {
 	// The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
 	// For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
 	PortRange *string `pulumi:"portRange"`
-	// The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidrIp`,`sourceSecurityGroupId`,`ipv6CidrIp` parameter, this parameter is ignored.
-	PrefixListId *string `pulumi:"prefixListId"`
 	// The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
 	Priority *int `pulumi:"priority"`
 	// The ID of the Security Group.
-	SecurityGroupId string `pulumi:"securityGroupId"`
+	SecurityGroupId string  `pulumi:"securityGroupId"`
+	SourceCidrIp    *string `pulumi:"sourceCidrIp"`
+	SourceGroupId   *string `pulumi:"sourceGroupId"`
 	// The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidrIp` has already been set.
 	SourceGroupOwnerAccount *string `pulumi:"sourceGroupOwnerAccount"`
-	// The target security group ID within the same region. If this field is specified, the `nicType` can only select `intranet`.
-	SourceSecurityGroupId *string `pulumi:"sourceSecurityGroupId"`
+	SourcePortRange         *string `pulumi:"sourcePortRange"`
+	SourcePrefixListId      *string `pulumi:"sourcePrefixListId"`
 	// The type of the Security Group Rule. Valid values:
 	Type string `pulumi:"type"`
 }
 
 // The set of arguments for constructing a SecurityGroupRule resource.
 type SecurityGroupRuleArgs struct {
-	// The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-	CidrIp pulumi.StringPtrInput
 	// The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
 	//
 	// > **NOTE:**  You must specify one of the following field: `cidrIp`,`sourceSecurityGroupId`,`prefixListId`,`ipv6CidrIp`.
-	Description pulumi.StringPtrInput
+	Description           pulumi.StringPtrInput
+	DestCidrIp            pulumi.StringPtrInput
+	DestGroupId           pulumi.StringPtrInput
+	DestGroupOwnerAccount pulumi.StringPtrInput
+	DestPrefixListId      pulumi.StringPtrInput
 	// The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
-	IpProtocol pulumi.StringInput
-	// Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidrIp` parameter.
-	Ipv6CidrIp pulumi.StringPtrInput
+	IpProtocol       pulumi.StringInput
+	Ipv6DestCidrIp   pulumi.StringPtrInput
+	Ipv6SourceCidrIp pulumi.StringPtrInput
 	// Network type, can be either `internet` or `intranet`, the default value is `internet`.
 	NicType pulumi.StringPtrInput
 	// The action of the Security Group Rule that determines whether to allow inbound access. Default value: `accept`. Valid values: `accept`, `drop`.
@@ -266,16 +230,16 @@ type SecurityGroupRuleArgs struct {
 	// The range of port numbers relevant to the IP protocol. Default to "-1/-1". When the protocol is tcp or udp, each side port number range from 1 to 65535 and '-1/-1' will be invalid.
 	// For example, `1/200` means that the range of the port numbers is 1-200. Other protocols' 'port_range' can only be "-1/-1", and other values will be invalid.
 	PortRange pulumi.StringPtrInput
-	// The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidrIp`,`sourceSecurityGroupId`,`ipv6CidrIp` parameter, this parameter is ignored.
-	PrefixListId pulumi.StringPtrInput
 	// The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
 	Priority pulumi.IntPtrInput
 	// The ID of the Security Group.
 	SecurityGroupId pulumi.StringInput
+	SourceCidrIp    pulumi.StringPtrInput
+	SourceGroupId   pulumi.StringPtrInput
 	// The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidrIp` has already been set.
 	SourceGroupOwnerAccount pulumi.StringPtrInput
-	// The target security group ID within the same region. If this field is specified, the `nicType` can only select `intranet`.
-	SourceSecurityGroupId pulumi.StringPtrInput
+	SourcePortRange         pulumi.StringPtrInput
+	SourcePrefixListId      pulumi.StringPtrInput
 	// The type of the Security Group Rule. Valid values:
 	Type pulumi.StringInput
 }
@@ -367,11 +331,6 @@ func (o SecurityGroupRuleOutput) ToSecurityGroupRuleOutputWithContext(ctx contex
 	return o
 }
 
-// The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-func (o SecurityGroupRuleOutput) CidrIp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.CidrIp }).(pulumi.StringPtrOutput)
-}
-
 // The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
 //
 // > **NOTE:**  You must specify one of the following field: `cidrIp`,`sourceSecurityGroupId`,`prefixListId`,`ipv6CidrIp`.
@@ -379,14 +338,33 @@ func (o SecurityGroupRuleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+func (o SecurityGroupRuleOutput) DestCidrIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.DestCidrIp }).(pulumi.StringPtrOutput)
+}
+
+func (o SecurityGroupRuleOutput) DestGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.DestGroupId }).(pulumi.StringPtrOutput)
+}
+
+func (o SecurityGroupRuleOutput) DestGroupOwnerAccount() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.DestGroupOwnerAccount }).(pulumi.StringPtrOutput)
+}
+
+func (o SecurityGroupRuleOutput) DestPrefixListId() pulumi.StringOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringOutput { return v.DestPrefixListId }).(pulumi.StringOutput)
+}
+
 // The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
 func (o SecurityGroupRuleOutput) IpProtocol() pulumi.StringOutput {
 	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringOutput { return v.IpProtocol }).(pulumi.StringOutput)
 }
 
-// Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidrIp` parameter.
-func (o SecurityGroupRuleOutput) Ipv6CidrIp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.Ipv6CidrIp }).(pulumi.StringPtrOutput)
+func (o SecurityGroupRuleOutput) Ipv6DestCidrIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.Ipv6DestCidrIp }).(pulumi.StringPtrOutput)
+}
+
+func (o SecurityGroupRuleOutput) Ipv6SourceCidrIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.Ipv6SourceCidrIp }).(pulumi.StringPtrOutput)
 }
 
 // Network type, can be either `internet` or `intranet`, the default value is `internet`.
@@ -405,11 +383,6 @@ func (o SecurityGroupRuleOutput) PortRange() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.PortRange }).(pulumi.StringPtrOutput)
 }
 
-// The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidrIp`,`sourceSecurityGroupId`,`ipv6CidrIp` parameter, this parameter is ignored.
-func (o SecurityGroupRuleOutput) PrefixListId() pulumi.StringOutput {
-	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringOutput { return v.PrefixListId }).(pulumi.StringOutput)
-}
-
 // The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
 func (o SecurityGroupRuleOutput) Priority() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *SecurityGroupRule) pulumi.IntPtrOutput { return v.Priority }).(pulumi.IntPtrOutput)
@@ -420,14 +393,25 @@ func (o SecurityGroupRuleOutput) SecurityGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringOutput { return v.SecurityGroupId }).(pulumi.StringOutput)
 }
 
+func (o SecurityGroupRuleOutput) SourceCidrIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.SourceCidrIp }).(pulumi.StringPtrOutput)
+}
+
+func (o SecurityGroupRuleOutput) SourceGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.SourceGroupId }).(pulumi.StringPtrOutput)
+}
+
 // The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidrIp` has already been set.
 func (o SecurityGroupRuleOutput) SourceGroupOwnerAccount() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.SourceGroupOwnerAccount }).(pulumi.StringPtrOutput)
 }
 
-// The target security group ID within the same region. If this field is specified, the `nicType` can only select `intranet`.
-func (o SecurityGroupRuleOutput) SourceSecurityGroupId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.SourceSecurityGroupId }).(pulumi.StringPtrOutput)
+func (o SecurityGroupRuleOutput) SourcePortRange() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringPtrOutput { return v.SourcePortRange }).(pulumi.StringPtrOutput)
+}
+
+func (o SecurityGroupRuleOutput) SourcePrefixListId() pulumi.StringOutput {
+	return o.ApplyT(func(v *SecurityGroupRule) pulumi.StringOutput { return v.SourcePrefixListId }).(pulumi.StringOutput)
 }
 
 // The type of the Security Group Rule. Valid values:
