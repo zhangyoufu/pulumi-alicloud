@@ -17,21 +17,6 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
     public static final SecurityGroupRuleState Empty = new SecurityGroupRuleState();
 
     /**
-     * The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-     * 
-     */
-    @Import(name="cidrIp")
-    private @Nullable Output<String> cidrIp;
-
-    /**
-     * @return The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-     * 
-     */
-    public Optional<Output<String>> cidrIp() {
-        return Optional.ofNullable(this.cidrIp);
-    }
-
-    /**
      * The description of the security group rule. The description can be up to 1 to 512 characters in length. Defaults to null.
      * 
      * &gt; **NOTE:**  You must specify one of the following field: `cidr_ip`,`source_security_group_id`,`prefix_list_id`,`ipv6_cidr_ip`.
@@ -50,6 +35,34 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
         return Optional.ofNullable(this.description);
     }
 
+    @Import(name="destCidrIp")
+    private @Nullable Output<String> destCidrIp;
+
+    public Optional<Output<String>> destCidrIp() {
+        return Optional.ofNullable(this.destCidrIp);
+    }
+
+    @Import(name="destGroupId")
+    private @Nullable Output<String> destGroupId;
+
+    public Optional<Output<String>> destGroupId() {
+        return Optional.ofNullable(this.destGroupId);
+    }
+
+    @Import(name="destGroupOwnerAccount")
+    private @Nullable Output<String> destGroupOwnerAccount;
+
+    public Optional<Output<String>> destGroupOwnerAccount() {
+        return Optional.ofNullable(this.destGroupOwnerAccount);
+    }
+
+    @Import(name="destPrefixListId")
+    private @Nullable Output<String> destPrefixListId;
+
+    public Optional<Output<String>> destPrefixListId() {
+        return Optional.ofNullable(this.destPrefixListId);
+    }
+
     /**
      * The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
      * 
@@ -65,19 +78,18 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
         return Optional.ofNullable(this.ipProtocol);
     }
 
-    /**
-     * Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-     * 
-     */
-    @Import(name="ipv6CidrIp")
-    private @Nullable Output<String> ipv6CidrIp;
+    @Import(name="ipv6DestCidrIp")
+    private @Nullable Output<String> ipv6DestCidrIp;
 
-    /**
-     * @return Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-     * 
-     */
-    public Optional<Output<String>> ipv6CidrIp() {
-        return Optional.ofNullable(this.ipv6CidrIp);
+    public Optional<Output<String>> ipv6DestCidrIp() {
+        return Optional.ofNullable(this.ipv6DestCidrIp);
+    }
+
+    @Import(name="ipv6SourceCidrIp")
+    private @Nullable Output<String> ipv6SourceCidrIp;
+
+    public Optional<Output<String>> ipv6SourceCidrIp() {
+        return Optional.ofNullable(this.ipv6SourceCidrIp);
     }
 
     /**
@@ -128,21 +140,6 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
     }
 
     /**
-     * The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-     * 
-     */
-    @Import(name="prefixListId")
-    private @Nullable Output<String> prefixListId;
-
-    /**
-     * @return The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-     * 
-     */
-    public Optional<Output<String>> prefixListId() {
-        return Optional.ofNullable(this.prefixListId);
-    }
-
-    /**
      * The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
      * 
      */
@@ -172,6 +169,20 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
         return Optional.ofNullable(this.securityGroupId);
     }
 
+    @Import(name="sourceCidrIp")
+    private @Nullable Output<String> sourceCidrIp;
+
+    public Optional<Output<String>> sourceCidrIp() {
+        return Optional.ofNullable(this.sourceCidrIp);
+    }
+
+    @Import(name="sourceGroupId")
+    private @Nullable Output<String> sourceGroupId;
+
+    public Optional<Output<String>> sourceGroupId() {
+        return Optional.ofNullable(this.sourceGroupId);
+    }
+
     /**
      * The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidr_ip` has already been set.
      * 
@@ -187,19 +198,18 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
         return Optional.ofNullable(this.sourceGroupOwnerAccount);
     }
 
-    /**
-     * The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-     * 
-     */
-    @Import(name="sourceSecurityGroupId")
-    private @Nullable Output<String> sourceSecurityGroupId;
+    @Import(name="sourcePortRange")
+    private @Nullable Output<String> sourcePortRange;
 
-    /**
-     * @return The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-     * 
-     */
-    public Optional<Output<String>> sourceSecurityGroupId() {
-        return Optional.ofNullable(this.sourceSecurityGroupId);
+    public Optional<Output<String>> sourcePortRange() {
+        return Optional.ofNullable(this.sourcePortRange);
+    }
+
+    @Import(name="sourcePrefixListId")
+    private @Nullable Output<String> sourcePrefixListId;
+
+    public Optional<Output<String>> sourcePrefixListId() {
+        return Optional.ofNullable(this.sourcePrefixListId);
     }
 
     /**
@@ -220,18 +230,24 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
     private SecurityGroupRuleState() {}
 
     private SecurityGroupRuleState(SecurityGroupRuleState $) {
-        this.cidrIp = $.cidrIp;
         this.description = $.description;
+        this.destCidrIp = $.destCidrIp;
+        this.destGroupId = $.destGroupId;
+        this.destGroupOwnerAccount = $.destGroupOwnerAccount;
+        this.destPrefixListId = $.destPrefixListId;
         this.ipProtocol = $.ipProtocol;
-        this.ipv6CidrIp = $.ipv6CidrIp;
+        this.ipv6DestCidrIp = $.ipv6DestCidrIp;
+        this.ipv6SourceCidrIp = $.ipv6SourceCidrIp;
         this.nicType = $.nicType;
         this.policy = $.policy;
         this.portRange = $.portRange;
-        this.prefixListId = $.prefixListId;
         this.priority = $.priority;
         this.securityGroupId = $.securityGroupId;
+        this.sourceCidrIp = $.sourceCidrIp;
+        this.sourceGroupId = $.sourceGroupId;
         this.sourceGroupOwnerAccount = $.sourceGroupOwnerAccount;
-        this.sourceSecurityGroupId = $.sourceSecurityGroupId;
+        this.sourcePortRange = $.sourcePortRange;
+        this.sourcePrefixListId = $.sourcePrefixListId;
         this.type = $.type;
     }
 
@@ -251,27 +267,6 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
 
         public Builder(SecurityGroupRuleState defaults) {
             $ = new SecurityGroupRuleState(Objects.requireNonNull(defaults));
-        }
-
-        /**
-         * @param cidrIp The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder cidrIp(@Nullable Output<String> cidrIp) {
-            $.cidrIp = cidrIp;
-            return this;
-        }
-
-        /**
-         * @param cidrIp The target IP address range. The default value is 0.0.0.0/0 (which means no restriction will be applied). Other supported formats include 10.159.6.18/12. Only IPv4 is supported.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder cidrIp(String cidrIp) {
-            return cidrIp(Output.of(cidrIp));
         }
 
         /**
@@ -299,6 +294,42 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
             return description(Output.of(description));
         }
 
+        public Builder destCidrIp(@Nullable Output<String> destCidrIp) {
+            $.destCidrIp = destCidrIp;
+            return this;
+        }
+
+        public Builder destCidrIp(String destCidrIp) {
+            return destCidrIp(Output.of(destCidrIp));
+        }
+
+        public Builder destGroupId(@Nullable Output<String> destGroupId) {
+            $.destGroupId = destGroupId;
+            return this;
+        }
+
+        public Builder destGroupId(String destGroupId) {
+            return destGroupId(Output.of(destGroupId));
+        }
+
+        public Builder destGroupOwnerAccount(@Nullable Output<String> destGroupOwnerAccount) {
+            $.destGroupOwnerAccount = destGroupOwnerAccount;
+            return this;
+        }
+
+        public Builder destGroupOwnerAccount(String destGroupOwnerAccount) {
+            return destGroupOwnerAccount(Output.of(destGroupOwnerAccount));
+        }
+
+        public Builder destPrefixListId(@Nullable Output<String> destPrefixListId) {
+            $.destPrefixListId = destPrefixListId;
+            return this;
+        }
+
+        public Builder destPrefixListId(String destPrefixListId) {
+            return destPrefixListId(Output.of(destPrefixListId));
+        }
+
         /**
          * @param ipProtocol The transport layer protocol of the Security Group Rule. Valid values: `tcp`, `udp`, `icmp`, `gre`, `all`.
          * 
@@ -320,25 +351,22 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
             return ipProtocol(Output.of(ipProtocol));
         }
 
-        /**
-         * @param ipv6CidrIp Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder ipv6CidrIp(@Nullable Output<String> ipv6CidrIp) {
-            $.ipv6CidrIp = ipv6CidrIp;
+        public Builder ipv6DestCidrIp(@Nullable Output<String> ipv6DestCidrIp) {
+            $.ipv6DestCidrIp = ipv6DestCidrIp;
             return this;
         }
 
-        /**
-         * @param ipv6CidrIp Source IPv6 CIDR address block that requires access. Supports IP address ranges in CIDR format and IPv6 format. **NOTE:** This parameter cannot be set at the same time as the `cidr_ip` parameter.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder ipv6CidrIp(String ipv6CidrIp) {
-            return ipv6CidrIp(Output.of(ipv6CidrIp));
+        public Builder ipv6DestCidrIp(String ipv6DestCidrIp) {
+            return ipv6DestCidrIp(Output.of(ipv6DestCidrIp));
+        }
+
+        public Builder ipv6SourceCidrIp(@Nullable Output<String> ipv6SourceCidrIp) {
+            $.ipv6SourceCidrIp = ipv6SourceCidrIp;
+            return this;
+        }
+
+        public Builder ipv6SourceCidrIp(String ipv6SourceCidrIp) {
+            return ipv6SourceCidrIp(Output.of(ipv6SourceCidrIp));
         }
 
         /**
@@ -407,27 +435,6 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param prefixListId The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder prefixListId(@Nullable Output<String> prefixListId) {
-            $.prefixListId = prefixListId;
-            return this;
-        }
-
-        /**
-         * @param prefixListId The ID of the source/destination prefix list to which you want to control access. **NOTE:** If you specify `cidr_ip`,`source_security_group_id`,`ipv6_cidr_ip` parameter, this parameter is ignored.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder prefixListId(String prefixListId) {
-            return prefixListId(Output.of(prefixListId));
-        }
-
-        /**
          * @param priority The priority of the Security Group Rule. Default value: `1`. Valid values: `1` to `100`.
          * 
          * @return builder
@@ -469,6 +476,24 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
             return securityGroupId(Output.of(securityGroupId));
         }
 
+        public Builder sourceCidrIp(@Nullable Output<String> sourceCidrIp) {
+            $.sourceCidrIp = sourceCidrIp;
+            return this;
+        }
+
+        public Builder sourceCidrIp(String sourceCidrIp) {
+            return sourceCidrIp(Output.of(sourceCidrIp));
+        }
+
+        public Builder sourceGroupId(@Nullable Output<String> sourceGroupId) {
+            $.sourceGroupId = sourceGroupId;
+            return this;
+        }
+
+        public Builder sourceGroupId(String sourceGroupId) {
+            return sourceGroupId(Output.of(sourceGroupId));
+        }
+
         /**
          * @param sourceGroupOwnerAccount The Alibaba Cloud user account Id of the target security group when security groups are authorized across accounts.  This parameter is invalid if `cidr_ip` has already been set.
          * 
@@ -490,25 +515,22 @@ public final class SecurityGroupRuleState extends com.pulumi.resources.ResourceA
             return sourceGroupOwnerAccount(Output.of(sourceGroupOwnerAccount));
         }
 
-        /**
-         * @param sourceSecurityGroupId The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder sourceSecurityGroupId(@Nullable Output<String> sourceSecurityGroupId) {
-            $.sourceSecurityGroupId = sourceSecurityGroupId;
+        public Builder sourcePortRange(@Nullable Output<String> sourcePortRange) {
+            $.sourcePortRange = sourcePortRange;
             return this;
         }
 
-        /**
-         * @param sourceSecurityGroupId The target security group ID within the same region. If this field is specified, the `nic_type` can only select `intranet`.
-         * 
-         * @return builder
-         * 
-         */
-        public Builder sourceSecurityGroupId(String sourceSecurityGroupId) {
-            return sourceSecurityGroupId(Output.of(sourceSecurityGroupId));
+        public Builder sourcePortRange(String sourcePortRange) {
+            return sourcePortRange(Output.of(sourcePortRange));
+        }
+
+        public Builder sourcePrefixListId(@Nullable Output<String> sourcePrefixListId) {
+            $.sourcePrefixListId = sourcePrefixListId;
+            return this;
+        }
+
+        public Builder sourcePrefixListId(String sourcePrefixListId) {
+            return sourcePrefixListId(Output.of(sourcePrefixListId));
         }
 
         /**

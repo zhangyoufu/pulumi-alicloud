@@ -541,6 +541,7 @@ if not MYPY:
         """
         Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to custom eflo endpoints.
         """
+        eflo_cnp: NotRequired[pulumi.Input[str]]
         eflo_controller: NotRequired[pulumi.Input[str]]
         """
         Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to custom efloctrl endpoints.
@@ -955,6 +956,7 @@ class ProviderEndpointArgs:
                  eds_user: Optional[pulumi.Input[str]] = None,
                  edsuser: Optional[pulumi.Input[str]] = None,
                  eflo: Optional[pulumi.Input[str]] = None,
+                 eflo_cnp: Optional[pulumi.Input[str]] = None,
                  eflo_controller: Optional[pulumi.Input[str]] = None,
                  ehpc: Optional[pulumi.Input[str]] = None,
                  ehs: Optional[pulumi.Input[str]] = None,
@@ -1337,6 +1339,8 @@ class ProviderEndpointArgs:
             pulumi.set(__self__, "edsuser", edsuser)
         if eflo is not None:
             pulumi.set(__self__, "eflo", eflo)
+        if eflo_cnp is not None:
+            pulumi.set(__self__, "eflo_cnp", eflo_cnp)
         if eflo_controller is not None:
             pulumi.set(__self__, "eflo_controller", eflo_controller)
         if ehpc is not None:
@@ -2353,6 +2357,15 @@ class ProviderEndpointArgs:
     @eflo.setter
     def eflo(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "eflo", value)
+
+    @property
+    @pulumi.getter(name="efloCnp")
+    def eflo_cnp(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "eflo_cnp")
+
+    @eflo_cnp.setter
+    def eflo_cnp(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "eflo_cnp", value)
 
     @property
     @pulumi.getter(name="efloController")

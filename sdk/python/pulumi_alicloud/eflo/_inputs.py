@@ -45,6 +45,10 @@ __all__ = [
     'ClusterNodeGroupArgsDict',
     'ClusterNodeGroupNodeArgs',
     'ClusterNodeGroupNodeArgsDict',
+    'ExperimentPlanTemplateTemplatePipelineArgs',
+    'ExperimentPlanTemplateTemplatePipelineArgsDict',
+    'ExperimentPlanTemplateTemplatePipelineEnvParamsArgs',
+    'ExperimentPlanTemplateTemplatePipelineEnvParamsArgsDict',
     'NodeGroupIpAllocationPolicyArgs',
     'NodeGroupIpAllocationPolicyArgsDict',
     'NodeGroupIpAllocationPolicyBondPolicyArgs',
@@ -1224,6 +1228,323 @@ class ClusterNodeGroupNodeArgs:
     @vswitch_id.setter
     def vswitch_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vswitch_id", value)
+
+
+if not MYPY:
+    class ExperimentPlanTemplateTemplatePipelineArgsDict(TypedDict):
+        env_params: pulumi.Input['ExperimentPlanTemplateTemplatePipelineEnvParamsArgsDict']
+        """
+        Contains a series of parameters related to the environment. See `env_params` below.
+        """
+        pipeline_order: pulumi.Input[int]
+        """
+        Indicates the sequence number of the pipeline node.
+        """
+        scene: pulumi.Input[str]
+        """
+        The use of the template scenario. It can have the following optional parameters:
+        - baseline: benchmark evaluation
+        """
+        workload_id: pulumi.Input[int]
+        """
+        Used to uniquely identify a specific payload.
+        """
+        workload_name: pulumi.Input[str]
+        """
+        The name used to represent a specific payload.
+        """
+        setting_params: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+        """
+        Represents additional parameters for the run.
+        """
+elif False:
+    ExperimentPlanTemplateTemplatePipelineArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ExperimentPlanTemplateTemplatePipelineArgs:
+    def __init__(__self__, *,
+                 env_params: pulumi.Input['ExperimentPlanTemplateTemplatePipelineEnvParamsArgs'],
+                 pipeline_order: pulumi.Input[int],
+                 scene: pulumi.Input[str],
+                 workload_id: pulumi.Input[int],
+                 workload_name: pulumi.Input[str],
+                 setting_params: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input['ExperimentPlanTemplateTemplatePipelineEnvParamsArgs'] env_params: Contains a series of parameters related to the environment. See `env_params` below.
+        :param pulumi.Input[int] pipeline_order: Indicates the sequence number of the pipeline node.
+        :param pulumi.Input[str] scene: The use of the template scenario. It can have the following optional parameters:
+               - baseline: benchmark evaluation
+        :param pulumi.Input[int] workload_id: Used to uniquely identify a specific payload.
+        :param pulumi.Input[str] workload_name: The name used to represent a specific payload.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] setting_params: Represents additional parameters for the run.
+        """
+        pulumi.set(__self__, "env_params", env_params)
+        pulumi.set(__self__, "pipeline_order", pipeline_order)
+        pulumi.set(__self__, "scene", scene)
+        pulumi.set(__self__, "workload_id", workload_id)
+        pulumi.set(__self__, "workload_name", workload_name)
+        if setting_params is not None:
+            pulumi.set(__self__, "setting_params", setting_params)
+
+    @property
+    @pulumi.getter(name="envParams")
+    def env_params(self) -> pulumi.Input['ExperimentPlanTemplateTemplatePipelineEnvParamsArgs']:
+        """
+        Contains a series of parameters related to the environment. See `env_params` below.
+        """
+        return pulumi.get(self, "env_params")
+
+    @env_params.setter
+    def env_params(self, value: pulumi.Input['ExperimentPlanTemplateTemplatePipelineEnvParamsArgs']):
+        pulumi.set(self, "env_params", value)
+
+    @property
+    @pulumi.getter(name="pipelineOrder")
+    def pipeline_order(self) -> pulumi.Input[int]:
+        """
+        Indicates the sequence number of the pipeline node.
+        """
+        return pulumi.get(self, "pipeline_order")
+
+    @pipeline_order.setter
+    def pipeline_order(self, value: pulumi.Input[int]):
+        pulumi.set(self, "pipeline_order", value)
+
+    @property
+    @pulumi.getter
+    def scene(self) -> pulumi.Input[str]:
+        """
+        The use of the template scenario. It can have the following optional parameters:
+        - baseline: benchmark evaluation
+        """
+        return pulumi.get(self, "scene")
+
+    @scene.setter
+    def scene(self, value: pulumi.Input[str]):
+        pulumi.set(self, "scene", value)
+
+    @property
+    @pulumi.getter(name="workloadId")
+    def workload_id(self) -> pulumi.Input[int]:
+        """
+        Used to uniquely identify a specific payload.
+        """
+        return pulumi.get(self, "workload_id")
+
+    @workload_id.setter
+    def workload_id(self, value: pulumi.Input[int]):
+        pulumi.set(self, "workload_id", value)
+
+    @property
+    @pulumi.getter(name="workloadName")
+    def workload_name(self) -> pulumi.Input[str]:
+        """
+        The name used to represent a specific payload.
+        """
+        return pulumi.get(self, "workload_name")
+
+    @workload_name.setter
+    def workload_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "workload_name", value)
+
+    @property
+    @pulumi.getter(name="settingParams")
+    def setting_params(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        Represents additional parameters for the run.
+        """
+        return pulumi.get(self, "setting_params")
+
+    @setting_params.setter
+    def setting_params(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "setting_params", value)
+
+
+if not MYPY:
+    class ExperimentPlanTemplateTemplatePipelineEnvParamsArgsDict(TypedDict):
+        cpu_per_worker: pulumi.Input[int]
+        """
+        Number of central processing units (CPUs) allocated. This parameter affects the processing power of the computation, especially in tasks that require a large amount of parallel processing.
+        """
+        gpu_per_worker: pulumi.Input[int]
+        """
+        Number of graphics processing units (GPUs). GPUs are a key component in deep learning and large-scale data processing, so this parameter is very important for tasks that require graphics-accelerated computing.
+        """
+        memory_per_worker: pulumi.Input[int]
+        """
+        The amount of memory available. Memory size has an important impact on the performance and stability of the program, especially when dealing with large data sets or high-dimensional data.
+        """
+        share_memory: pulumi.Input[int]
+        """
+        Shared memory GB allocation
+        """
+        worker_num: pulumi.Input[int]
+        """
+        The total number of nodes. This parameter directly affects the parallelism and computing speed of the task, and a higher number of working nodes usually accelerates the completion of the task.
+        """
+        cuda_version: NotRequired[pulumi.Input[str]]
+        """
+        The version of CUDA(Compute Unified Device Architecture) used. CUDA is a parallel computing platform and programming model provided by NVIDIA. A specific version may affect the available GPU functions and performance optimization.
+        """
+        gpu_driver_version: NotRequired[pulumi.Input[str]]
+        """
+        The version of the GPU driver used. Driver version may affect GPU performance and compatibility, so it is important to ensure that the correct version is used
+        """
+        nccl_version: NotRequired[pulumi.Input[str]]
+        """
+        The NVIDIA Collective Communications Library(NCCL) version used. NCCL is a library for multi-GPU and multi-node communication. This parameter is particularly important for optimizing data transmission in distributed computing.
+        """
+        py_torch_version: NotRequired[pulumi.Input[str]]
+        """
+        The version of the PyTorch framework used. PyTorch is a widely used deep learning library, and differences between versions may affect the performance and functional support of model training and inference.
+        """
+elif False:
+    ExperimentPlanTemplateTemplatePipelineEnvParamsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ExperimentPlanTemplateTemplatePipelineEnvParamsArgs:
+    def __init__(__self__, *,
+                 cpu_per_worker: pulumi.Input[int],
+                 gpu_per_worker: pulumi.Input[int],
+                 memory_per_worker: pulumi.Input[int],
+                 share_memory: pulumi.Input[int],
+                 worker_num: pulumi.Input[int],
+                 cuda_version: Optional[pulumi.Input[str]] = None,
+                 gpu_driver_version: Optional[pulumi.Input[str]] = None,
+                 nccl_version: Optional[pulumi.Input[str]] = None,
+                 py_torch_version: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] cpu_per_worker: Number of central processing units (CPUs) allocated. This parameter affects the processing power of the computation, especially in tasks that require a large amount of parallel processing.
+        :param pulumi.Input[int] gpu_per_worker: Number of graphics processing units (GPUs). GPUs are a key component in deep learning and large-scale data processing, so this parameter is very important for tasks that require graphics-accelerated computing.
+        :param pulumi.Input[int] memory_per_worker: The amount of memory available. Memory size has an important impact on the performance and stability of the program, especially when dealing with large data sets or high-dimensional data.
+        :param pulumi.Input[int] share_memory: Shared memory GB allocation
+        :param pulumi.Input[int] worker_num: The total number of nodes. This parameter directly affects the parallelism and computing speed of the task, and a higher number of working nodes usually accelerates the completion of the task.
+        :param pulumi.Input[str] cuda_version: The version of CUDA(Compute Unified Device Architecture) used. CUDA is a parallel computing platform and programming model provided by NVIDIA. A specific version may affect the available GPU functions and performance optimization.
+        :param pulumi.Input[str] gpu_driver_version: The version of the GPU driver used. Driver version may affect GPU performance and compatibility, so it is important to ensure that the correct version is used
+        :param pulumi.Input[str] nccl_version: The NVIDIA Collective Communications Library(NCCL) version used. NCCL is a library for multi-GPU and multi-node communication. This parameter is particularly important for optimizing data transmission in distributed computing.
+        :param pulumi.Input[str] py_torch_version: The version of the PyTorch framework used. PyTorch is a widely used deep learning library, and differences between versions may affect the performance and functional support of model training and inference.
+        """
+        pulumi.set(__self__, "cpu_per_worker", cpu_per_worker)
+        pulumi.set(__self__, "gpu_per_worker", gpu_per_worker)
+        pulumi.set(__self__, "memory_per_worker", memory_per_worker)
+        pulumi.set(__self__, "share_memory", share_memory)
+        pulumi.set(__self__, "worker_num", worker_num)
+        if cuda_version is not None:
+            pulumi.set(__self__, "cuda_version", cuda_version)
+        if gpu_driver_version is not None:
+            pulumi.set(__self__, "gpu_driver_version", gpu_driver_version)
+        if nccl_version is not None:
+            pulumi.set(__self__, "nccl_version", nccl_version)
+        if py_torch_version is not None:
+            pulumi.set(__self__, "py_torch_version", py_torch_version)
+
+    @property
+    @pulumi.getter(name="cpuPerWorker")
+    def cpu_per_worker(self) -> pulumi.Input[int]:
+        """
+        Number of central processing units (CPUs) allocated. This parameter affects the processing power of the computation, especially in tasks that require a large amount of parallel processing.
+        """
+        return pulumi.get(self, "cpu_per_worker")
+
+    @cpu_per_worker.setter
+    def cpu_per_worker(self, value: pulumi.Input[int]):
+        pulumi.set(self, "cpu_per_worker", value)
+
+    @property
+    @pulumi.getter(name="gpuPerWorker")
+    def gpu_per_worker(self) -> pulumi.Input[int]:
+        """
+        Number of graphics processing units (GPUs). GPUs are a key component in deep learning and large-scale data processing, so this parameter is very important for tasks that require graphics-accelerated computing.
+        """
+        return pulumi.get(self, "gpu_per_worker")
+
+    @gpu_per_worker.setter
+    def gpu_per_worker(self, value: pulumi.Input[int]):
+        pulumi.set(self, "gpu_per_worker", value)
+
+    @property
+    @pulumi.getter(name="memoryPerWorker")
+    def memory_per_worker(self) -> pulumi.Input[int]:
+        """
+        The amount of memory available. Memory size has an important impact on the performance and stability of the program, especially when dealing with large data sets or high-dimensional data.
+        """
+        return pulumi.get(self, "memory_per_worker")
+
+    @memory_per_worker.setter
+    def memory_per_worker(self, value: pulumi.Input[int]):
+        pulumi.set(self, "memory_per_worker", value)
+
+    @property
+    @pulumi.getter(name="shareMemory")
+    def share_memory(self) -> pulumi.Input[int]:
+        """
+        Shared memory GB allocation
+        """
+        return pulumi.get(self, "share_memory")
+
+    @share_memory.setter
+    def share_memory(self, value: pulumi.Input[int]):
+        pulumi.set(self, "share_memory", value)
+
+    @property
+    @pulumi.getter(name="workerNum")
+    def worker_num(self) -> pulumi.Input[int]:
+        """
+        The total number of nodes. This parameter directly affects the parallelism and computing speed of the task, and a higher number of working nodes usually accelerates the completion of the task.
+        """
+        return pulumi.get(self, "worker_num")
+
+    @worker_num.setter
+    def worker_num(self, value: pulumi.Input[int]):
+        pulumi.set(self, "worker_num", value)
+
+    @property
+    @pulumi.getter(name="cudaVersion")
+    def cuda_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        The version of CUDA(Compute Unified Device Architecture) used. CUDA is a parallel computing platform and programming model provided by NVIDIA. A specific version may affect the available GPU functions and performance optimization.
+        """
+        return pulumi.get(self, "cuda_version")
+
+    @cuda_version.setter
+    def cuda_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cuda_version", value)
+
+    @property
+    @pulumi.getter(name="gpuDriverVersion")
+    def gpu_driver_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        The version of the GPU driver used. Driver version may affect GPU performance and compatibility, so it is important to ensure that the correct version is used
+        """
+        return pulumi.get(self, "gpu_driver_version")
+
+    @gpu_driver_version.setter
+    def gpu_driver_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "gpu_driver_version", value)
+
+    @property
+    @pulumi.getter(name="ncclVersion")
+    def nccl_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        The NVIDIA Collective Communications Library(NCCL) version used. NCCL is a library for multi-GPU and multi-node communication. This parameter is particularly important for optimizing data transmission in distributed computing.
+        """
+        return pulumi.get(self, "nccl_version")
+
+    @nccl_version.setter
+    def nccl_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "nccl_version", value)
+
+    @property
+    @pulumi.getter(name="pyTorchVersion")
+    def py_torch_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        The version of the PyTorch framework used. PyTorch is a widely used deep learning library, and differences between versions may affect the performance and functional support of model training and inference.
+        """
+        return pulumi.get(self, "py_torch_version")
+
+    @py_torch_version.setter
+    def py_torch_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "py_torch_version", value)
 
 
 if not MYPY:

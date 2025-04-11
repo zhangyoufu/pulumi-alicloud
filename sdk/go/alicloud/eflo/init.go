@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "alicloud:eflo/cluster:Cluster":
 		r = &Cluster{}
+	case "alicloud:eflo/experimentPlanTemplate:ExperimentPlanTemplate":
+		r = &ExperimentPlanTemplate{}
 	case "alicloud:eflo/invocation:Invocation":
 		r = &Invocation{}
 	case "alicloud:eflo/node:Node":
@@ -49,6 +51,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"alicloud",
 		"eflo/cluster",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"alicloud",
+		"eflo/experimentPlanTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

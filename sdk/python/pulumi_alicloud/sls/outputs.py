@@ -35,6 +35,8 @@ __all__ = [
     'CollectionPolicyDataConfig',
     'CollectionPolicyPolicyConfig',
     'CollectionPolicyResourceDirectory',
+    'EtlConfiguration',
+    'EtlConfigurationSink',
     'OssExportSinkConfiguration',
     'OssExportSinkConfigurationSink',
     'ScheduledSqlSchedule',
@@ -1444,6 +1446,213 @@ class CollectionPolicyResourceDirectory(dict):
         When the resource directory is configured in the custom mode, the corresponding member account list
         """
         return pulumi.get(self, "members")
+
+
+@pulumi.output_type
+class EtlConfiguration(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "fromTime":
+            suggest = "from_time"
+        elif key == "roleArn":
+            suggest = "role_arn"
+        elif key == "toTime":
+            suggest = "to_time"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in EtlConfiguration. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        EtlConfiguration.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        EtlConfiguration.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 from_time: int,
+                 lang: str,
+                 logstore: str,
+                 role_arn: str,
+                 script: str,
+                 sinks: Sequence['outputs.EtlConfigurationSink'],
+                 to_time: int,
+                 parameters: Optional[Mapping[str, str]] = None):
+        """
+        :param int from_time: The beginning of the time range for transformation.
+        :param str lang: Data processing syntax type.
+        :param str logstore: Destination Logstore Name.
+        :param str role_arn: The ARN role that authorizes writing to the target Logstore.
+        :param str script: Processing script.
+        :param Sequence['EtlConfigurationSinkArgs'] sinks: Processing result output target list See `sink` below.
+        :param int to_time: The end of the time range for transformation.
+        :param Mapping[str, str] parameters: Advanced parameter configuration.
+        """
+        pulumi.set(__self__, "from_time", from_time)
+        pulumi.set(__self__, "lang", lang)
+        pulumi.set(__self__, "logstore", logstore)
+        pulumi.set(__self__, "role_arn", role_arn)
+        pulumi.set(__self__, "script", script)
+        pulumi.set(__self__, "sinks", sinks)
+        pulumi.set(__self__, "to_time", to_time)
+        if parameters is not None:
+            pulumi.set(__self__, "parameters", parameters)
+
+    @property
+    @pulumi.getter(name="fromTime")
+    def from_time(self) -> int:
+        """
+        The beginning of the time range for transformation.
+        """
+        return pulumi.get(self, "from_time")
+
+    @property
+    @pulumi.getter
+    def lang(self) -> str:
+        """
+        Data processing syntax type.
+        """
+        return pulumi.get(self, "lang")
+
+    @property
+    @pulumi.getter
+    def logstore(self) -> str:
+        """
+        Destination Logstore Name.
+        """
+        return pulumi.get(self, "logstore")
+
+    @property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> str:
+        """
+        The ARN role that authorizes writing to the target Logstore.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @property
+    @pulumi.getter
+    def script(self) -> str:
+        """
+        Processing script.
+        """
+        return pulumi.get(self, "script")
+
+    @property
+    @pulumi.getter
+    def sinks(self) -> Sequence['outputs.EtlConfigurationSink']:
+        """
+        Processing result output target list See `sink` below.
+        """
+        return pulumi.get(self, "sinks")
+
+    @property
+    @pulumi.getter(name="toTime")
+    def to_time(self) -> int:
+        """
+        The end of the time range for transformation.
+        """
+        return pulumi.get(self, "to_time")
+
+    @property
+    @pulumi.getter
+    def parameters(self) -> Optional[Mapping[str, str]]:
+        """
+        Advanced parameter configuration.
+        """
+        return pulumi.get(self, "parameters")
+
+
+@pulumi.output_type
+class EtlConfigurationSink(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "roleArn":
+            suggest = "role_arn"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in EtlConfigurationSink. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        EtlConfigurationSink.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        EtlConfigurationSink.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 datasets: Sequence[str],
+                 endpoint: str,
+                 logstore: str,
+                 name: str,
+                 project: str,
+                 role_arn: str):
+        """
+        :param Sequence[str] datasets: Write Result Set.
+        :param str endpoint: The endpoint of the region where the target Project is located.
+        :param str logstore: Destination Logstore Name.
+        :param str name: Output Destination Name.
+        :param str project: Project Name.
+        :param str role_arn: The ARN role that authorizes writing to the target Logstore.
+        """
+        pulumi.set(__self__, "datasets", datasets)
+        pulumi.set(__self__, "endpoint", endpoint)
+        pulumi.set(__self__, "logstore", logstore)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "project", project)
+        pulumi.set(__self__, "role_arn", role_arn)
+
+    @property
+    @pulumi.getter
+    def datasets(self) -> Sequence[str]:
+        """
+        Write Result Set.
+        """
+        return pulumi.get(self, "datasets")
+
+    @property
+    @pulumi.getter
+    def endpoint(self) -> str:
+        """
+        The endpoint of the region where the target Project is located.
+        """
+        return pulumi.get(self, "endpoint")
+
+    @property
+    @pulumi.getter
+    def logstore(self) -> str:
+        """
+        Destination Logstore Name.
+        """
+        return pulumi.get(self, "logstore")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Output Destination Name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def project(self) -> str:
+        """
+        Project Name.
+        """
+        return pulumi.get(self, "project")
+
+    @property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> str:
+        """
+        The ARN role that authorizes writing to the target Logstore.
+        """
+        return pulumi.get(self, "role_arn")
 
 
 @pulumi.output_type

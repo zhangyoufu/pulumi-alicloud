@@ -3834,6 +3834,14 @@ _utilities.register(
  },
  {
   "pkg": "alicloud",
+  "mod": "eflo/experimentPlanTemplate",
+  "fqn": "pulumi_alicloud.eflo",
+  "classes": {
+   "alicloud:eflo/experimentPlanTemplate:ExperimentPlanTemplate": "ExperimentPlanTemplate"
+  }
+ },
+ {
+  "pkg": "alicloud",
   "mod": "eflo/invocation",
   "fqn": "pulumi_alicloud.eflo",
   "classes": {
@@ -4222,6 +4230,22 @@ _utilities.register(
   "fqn": "pulumi_alicloud.esa",
   "classes": {
    "alicloud:esa/rewriteUrlRule:RewriteUrlRule": "RewriteUrlRule"
+  }
+ },
+ {
+  "pkg": "alicloud",
+  "mod": "esa/scheduledPreloadExecution",
+  "fqn": "pulumi_alicloud.esa",
+  "classes": {
+   "alicloud:esa/scheduledPreloadExecution:ScheduledPreloadExecution": "ScheduledPreloadExecution"
+  }
+ },
+ {
+  "pkg": "alicloud",
+  "mod": "esa/scheduledPreloadJob",
+  "fqn": "pulumi_alicloud.esa",
+  "classes": {
+   "alicloud:esa/scheduledPreloadJob:ScheduledPreloadJob": "ScheduledPreloadJob"
   }
  },
  {
@@ -7750,6 +7774,14 @@ _utilities.register(
   "fqn": "pulumi_alicloud.sls",
   "classes": {
    "alicloud:sls/collectionPolicy:CollectionPolicy": "CollectionPolicy"
+  }
+ },
+ {
+  "pkg": "alicloud",
+  "mod": "sls/etl",
+  "fqn": "pulumi_alicloud.sls",
+  "classes": {
+   "alicloud:sls/etl:Etl": "Etl"
   }
  },
  {

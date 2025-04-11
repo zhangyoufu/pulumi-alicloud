@@ -27,6 +27,7 @@ class NetworkArgs:
                  dns_hostname_status: Optional[pulumi.Input[str]] = None,
                  dry_run: Optional[pulumi.Input[bool]] = None,
                  enable_ipv6: Optional[pulumi.Input[bool]] = None,
+                 force_delete: Optional[pulumi.Input[bool]] = None,
                  ipv4_cidr_mask: Optional[pulumi.Input[int]] = None,
                  ipv4_ipam_pool_id: Optional[pulumi.Input[str]] = None,
                  ipv6_cidr_block: Optional[pulumi.Input[str]] = None,
@@ -38,21 +39,23 @@ class NetworkArgs:
                  secondary_cidr_mask: Optional[pulumi.Input[int]] = None,
                  system_route_table_description: Optional[pulumi.Input[str]] = None,
                  system_route_table_name: Optional[pulumi.Input[str]] = None,
+                 system_route_table_route_propagation_enable: Optional[pulumi.Input[bool]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  user_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Network resource.
         :param pulumi.Input[str] cidr_block: The CIDR block of the VPC.
+               
                - You can specify one of the following CIDR blocks or their subsets as the primary IPv4 CIDR block of the VPC: 192.168.0.0/16, 172.16.0.0/12, and 10.0.0.0/8. These CIDR blocks are standard private CIDR blocks as defined by Request for Comments (RFC) documents. The subnet mask must be 8 to 28 bits in length.
                - You can also use a custom CIDR block other than 100.64.0.0/10, 224.0.0.0/4, 127.0.0.0/8, 169.254.0.0/16, and their subnets as the primary IPv4 CIDR block of the VPC.
         :param pulumi.Input[bool] classic_link_enabled: The status of ClassicLink function.
         :param pulumi.Input[str] description: The new description of the VPC.
-               
                The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
-        :param pulumi.Input[str] dns_hostname_status: The status of VPC DNS Hostname. Valid values: `ENABLED`, `DISABLED`.
-        :param pulumi.Input[bool] dry_run: Specifies whether to perform a dry run. Valid values:
-        :param pulumi.Input[bool] enable_ipv6: Specifies whether to enable IPv6. Valid values:
+        :param pulumi.Input[str] dns_hostname_status: The status of VPC DNS Hostname
+        :param pulumi.Input[bool] dry_run: Whether to PreCheck only this request. Value:
+        :param pulumi.Input[bool] enable_ipv6: Whether to enable the IPv6 network segment. Value:
+        :param pulumi.Input[bool] force_delete: Force delete vpc or not.
         :param pulumi.Input[int] ipv4_cidr_mask: Allocate VPC from The IPAM address pool by entering a mask.
                
                > **NOTE:**  when you specify the IPAM address pool to create a VPC, enter at least one of the CidrBlock or Ipv4CidrMask parameters.
@@ -73,19 +76,15 @@ class NetworkArgs:
                
                > **NOTE:**   You can use resource groups to facilitate resource grouping and permission management for an Alibaba Cloud. For more information, see [What is resource management?](https://www.alibabacloud.com/help/en/doc-detail/94475.html)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] secondary_cidr_blocks: Field 'secondary_cidr_blocks' has been deprecated from provider version 1.185.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_blocks` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.
-        :param pulumi.Input[int] secondary_cidr_mask: Add an additional CIDR block from the IPAM address pool to the VPC by entering a mask.
-               
-               > **NOTE:**  Specify the IPAM address pool to add an additional CIDR block to the VPC. Enter at least one of the SecondaryCidrBlock or SecondaryCidrMask parameters.
+        :param pulumi.Input[int] secondary_cidr_mask: Field 'router_table_id' has been deprecated from provider version 1.248.0. New resource 'alicloud_vpc_ipv4_cidr_block' instead.
         :param pulumi.Input[str] system_route_table_description: The description of the route table.
-               
                The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         :param pulumi.Input[str] system_route_table_name: The name of the route table.
-               
                The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
+        :param pulumi.Input[bool] system_route_table_route_propagation_enable: Whether the system route table receives propagation routes.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: The tags of Vpc.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_cidrs: A list of user CIDRs.
         :param pulumi.Input[str] vpc_name: The new name of the VPC.
-               
                The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
                
                The following arguments will be discarded. Please use new fields as soon as possible:
@@ -102,6 +101,8 @@ class NetworkArgs:
             pulumi.set(__self__, "dry_run", dry_run)
         if enable_ipv6 is not None:
             pulumi.set(__self__, "enable_ipv6", enable_ipv6)
+        if force_delete is not None:
+            pulumi.set(__self__, "force_delete", force_delete)
         if ipv4_cidr_mask is not None:
             pulumi.set(__self__, "ipv4_cidr_mask", ipv4_cidr_mask)
         if ipv4_ipam_pool_id is not None:
@@ -125,11 +126,16 @@ class NetworkArgs:
         if secondary_cidr_blocks is not None:
             pulumi.set(__self__, "secondary_cidr_blocks", secondary_cidr_blocks)
         if secondary_cidr_mask is not None:
+            warnings.warn("""Field 'secondary_cidr_mask' has been deprecated from provider version 1.248.0. Field 'secondary_cidr_blocks' has been deprecated from provider version 1.248.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_mask` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.""", DeprecationWarning)
+            pulumi.log.warn("""secondary_cidr_mask is deprecated: Field 'secondary_cidr_mask' has been deprecated from provider version 1.248.0. Field 'secondary_cidr_blocks' has been deprecated from provider version 1.248.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_mask` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.""")
+        if secondary_cidr_mask is not None:
             pulumi.set(__self__, "secondary_cidr_mask", secondary_cidr_mask)
         if system_route_table_description is not None:
             pulumi.set(__self__, "system_route_table_description", system_route_table_description)
         if system_route_table_name is not None:
             pulumi.set(__self__, "system_route_table_name", system_route_table_name)
+        if system_route_table_route_propagation_enable is not None:
+            pulumi.set(__self__, "system_route_table_route_propagation_enable", system_route_table_route_propagation_enable)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if user_cidrs is not None:
@@ -142,6 +148,7 @@ class NetworkArgs:
     def cidr_block(self) -> Optional[pulumi.Input[str]]:
         """
         The CIDR block of the VPC.
+
         - You can specify one of the following CIDR blocks or their subsets as the primary IPv4 CIDR block of the VPC: 192.168.0.0/16, 172.16.0.0/12, and 10.0.0.0/8. These CIDR blocks are standard private CIDR blocks as defined by Request for Comments (RFC) documents. The subnet mask must be 8 to 28 bits in length.
         - You can also use a custom CIDR block other than 100.64.0.0/10, 224.0.0.0/4, 127.0.0.0/8, 169.254.0.0/16, and their subnets as the primary IPv4 CIDR block of the VPC.
         """
@@ -168,7 +175,6 @@ class NetworkArgs:
     def description(self) -> Optional[pulumi.Input[str]]:
         """
         The new description of the VPC.
-
         The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "description")
@@ -181,7 +187,7 @@ class NetworkArgs:
     @pulumi.getter(name="dnsHostnameStatus")
     def dns_hostname_status(self) -> Optional[pulumi.Input[str]]:
         """
-        The status of VPC DNS Hostname. Valid values: `ENABLED`, `DISABLED`.
+        The status of VPC DNS Hostname
         """
         return pulumi.get(self, "dns_hostname_status")
 
@@ -193,7 +199,7 @@ class NetworkArgs:
     @pulumi.getter(name="dryRun")
     def dry_run(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specifies whether to perform a dry run. Valid values:
+        Whether to PreCheck only this request. Value:
         """
         return pulumi.get(self, "dry_run")
 
@@ -205,13 +211,25 @@ class NetworkArgs:
     @pulumi.getter(name="enableIpv6")
     def enable_ipv6(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specifies whether to enable IPv6. Valid values:
+        Whether to enable the IPv6 network segment. Value:
         """
         return pulumi.get(self, "enable_ipv6")
 
     @enable_ipv6.setter
     def enable_ipv6(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enable_ipv6", value)
+
+    @property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Force delete vpc or not.
+        """
+        return pulumi.get(self, "force_delete")
+
+    @force_delete.setter
+    def force_delete(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "force_delete", value)
 
     @property
     @pulumi.getter(name="ipv4CidrMask")
@@ -325,11 +343,10 @@ class NetworkArgs:
 
     @property
     @pulumi.getter(name="secondaryCidrMask")
+    @_utilities.deprecated("""Field 'secondary_cidr_mask' has been deprecated from provider version 1.248.0. Field 'secondary_cidr_blocks' has been deprecated from provider version 1.248.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_mask` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.""")
     def secondary_cidr_mask(self) -> Optional[pulumi.Input[int]]:
         """
-        Add an additional CIDR block from the IPAM address pool to the VPC by entering a mask.
-
-        > **NOTE:**  Specify the IPAM address pool to add an additional CIDR block to the VPC. Enter at least one of the SecondaryCidrBlock or SecondaryCidrMask parameters.
+        Field 'router_table_id' has been deprecated from provider version 1.248.0. New resource 'alicloud_vpc_ipv4_cidr_block' instead.
         """
         return pulumi.get(self, "secondary_cidr_mask")
 
@@ -342,7 +359,6 @@ class NetworkArgs:
     def system_route_table_description(self) -> Optional[pulumi.Input[str]]:
         """
         The description of the route table.
-
         The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "system_route_table_description")
@@ -356,7 +372,6 @@ class NetworkArgs:
     def system_route_table_name(self) -> Optional[pulumi.Input[str]]:
         """
         The name of the route table.
-
         The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "system_route_table_name")
@@ -364,6 +379,18 @@ class NetworkArgs:
     @system_route_table_name.setter
     def system_route_table_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "system_route_table_name", value)
+
+    @property
+    @pulumi.getter(name="systemRouteTableRoutePropagationEnable")
+    def system_route_table_route_propagation_enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the system route table receives propagation routes.
+        """
+        return pulumi.get(self, "system_route_table_route_propagation_enable")
+
+    @system_route_table_route_propagation_enable.setter
+    def system_route_table_route_propagation_enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "system_route_table_route_propagation_enable", value)
 
     @property
     @pulumi.getter
@@ -394,7 +421,6 @@ class NetworkArgs:
     def vpc_name(self) -> Optional[pulumi.Input[str]]:
         """
         The new name of the VPC.
-
         The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
 
         The following arguments will be discarded. Please use new fields as soon as possible:
@@ -416,6 +442,7 @@ class _NetworkState:
                  dns_hostname_status: Optional[pulumi.Input[str]] = None,
                  dry_run: Optional[pulumi.Input[bool]] = None,
                  enable_ipv6: Optional[pulumi.Input[bool]] = None,
+                 force_delete: Optional[pulumi.Input[bool]] = None,
                  ipv4_cidr_mask: Optional[pulumi.Input[int]] = None,
                  ipv4_ipam_pool_id: Optional[pulumi.Input[str]] = None,
                  ipv6_cidr_block: Optional[pulumi.Input[str]] = None,
@@ -433,22 +460,24 @@ class _NetworkState:
                  status: Optional[pulumi.Input[str]] = None,
                  system_route_table_description: Optional[pulumi.Input[str]] = None,
                  system_route_table_name: Optional[pulumi.Input[str]] = None,
+                 system_route_table_route_propagation_enable: Optional[pulumi.Input[bool]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  user_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Network resources.
         :param pulumi.Input[str] cidr_block: The CIDR block of the VPC.
+               
                - You can specify one of the following CIDR blocks or their subsets as the primary IPv4 CIDR block of the VPC: 192.168.0.0/16, 172.16.0.0/12, and 10.0.0.0/8. These CIDR blocks are standard private CIDR blocks as defined by Request for Comments (RFC) documents. The subnet mask must be 8 to 28 bits in length.
                - You can also use a custom CIDR block other than 100.64.0.0/10, 224.0.0.0/4, 127.0.0.0/8, 169.254.0.0/16, and their subnets as the primary IPv4 CIDR block of the VPC.
         :param pulumi.Input[bool] classic_link_enabled: The status of ClassicLink function.
         :param pulumi.Input[str] create_time: The creation time of the VPC.
         :param pulumi.Input[str] description: The new description of the VPC.
-               
                The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
-        :param pulumi.Input[str] dns_hostname_status: The status of VPC DNS Hostname. Valid values: `ENABLED`, `DISABLED`.
-        :param pulumi.Input[bool] dry_run: Specifies whether to perform a dry run. Valid values:
-        :param pulumi.Input[bool] enable_ipv6: Specifies whether to enable IPv6. Valid values:
+        :param pulumi.Input[str] dns_hostname_status: The status of VPC DNS Hostname
+        :param pulumi.Input[bool] dry_run: Whether to PreCheck only this request. Value:
+        :param pulumi.Input[bool] enable_ipv6: Whether to enable the IPv6 network segment. Value:
+        :param pulumi.Input[bool] force_delete: Force delete vpc or not.
         :param pulumi.Input[int] ipv4_cidr_mask: Allocate VPC from The IPAM address pool by entering a mask.
                
                > **NOTE:**  when you specify the IPAM address pool to create a VPC, enter at least one of the CidrBlock or Ipv4CidrMask parameters.
@@ -466,28 +495,24 @@ class _NetworkState:
                > **NOTE:**  If a single-line bandwidth whitelist is enabled, this field can be set to `ChinaTelecom` (China Telecom), `ChinaUnicom` (China Unicom), or `ChinaMobile` (China Mobile).
         :param pulumi.Input[bool] is_default: Specifies whether to create the default VPC in the specified region. Valid values:
         :param pulumi.Input[str] name: . Field 'name' has been deprecated from provider version 1.119.0. New field 'vpc_name' instead.
-        :param pulumi.Input[str] region_id: (Available since v1.240.0) The region ID of the VPC to which the route table belongs.
+        :param pulumi.Input[str] region_id: The ID of the region where the VPC is located.
         :param pulumi.Input[str] resource_group_id: The ID of the resource group to which you want to move the resource.
                
                > **NOTE:**   You can use resource groups to facilitate resource grouping and permission management for an Alibaba Cloud. For more information, see [What is resource management?](https://www.alibabacloud.com/help/en/doc-detail/94475.html)
-        :param pulumi.Input[str] route_table_id: The ID of the route table that you want to query.
-        :param pulumi.Input[str] router_id: The router ID of the VPC.
+        :param pulumi.Input[str] route_table_id: The ID of the system route table.
+        :param pulumi.Input[str] router_id: The region ID of the VPC to which the route table belongs.
         :param pulumi.Input[str] router_table_id: . Field 'router_table_id' has been deprecated from provider version 1.227.1. New field 'route_table_id' instead.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] secondary_cidr_blocks: Field 'secondary_cidr_blocks' has been deprecated from provider version 1.185.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_blocks` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.
-        :param pulumi.Input[int] secondary_cidr_mask: Add an additional CIDR block from the IPAM address pool to the VPC by entering a mask.
-               
-               > **NOTE:**  Specify the IPAM address pool to add an additional CIDR block to the VPC. Enter at least one of the SecondaryCidrBlock or SecondaryCidrMask parameters.
-        :param pulumi.Input[str] status: The status of the VPC.
+        :param pulumi.Input[int] secondary_cidr_mask: Field 'router_table_id' has been deprecated from provider version 1.248.0. New resource 'alicloud_vpc_ipv4_cidr_block' instead.
+        :param pulumi.Input[str] status: The status of the VPC.   `Pending`: The VPC is being configured. `Available`: The VPC is available.
         :param pulumi.Input[str] system_route_table_description: The description of the route table.
-               
                The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         :param pulumi.Input[str] system_route_table_name: The name of the route table.
-               
                The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
+        :param pulumi.Input[bool] system_route_table_route_propagation_enable: Whether the system route table receives propagation routes.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: The tags of Vpc.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_cidrs: A list of user CIDRs.
         :param pulumi.Input[str] vpc_name: The new name of the VPC.
-               
                The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
                
                The following arguments will be discarded. Please use new fields as soon as possible:
@@ -506,6 +531,8 @@ class _NetworkState:
             pulumi.set(__self__, "dry_run", dry_run)
         if enable_ipv6 is not None:
             pulumi.set(__self__, "enable_ipv6", enable_ipv6)
+        if force_delete is not None:
+            pulumi.set(__self__, "force_delete", force_delete)
         if ipv4_cidr_mask is not None:
             pulumi.set(__self__, "ipv4_cidr_mask", ipv4_cidr_mask)
         if ipv4_ipam_pool_id is not None:
@@ -542,6 +569,9 @@ class _NetworkState:
         if secondary_cidr_blocks is not None:
             pulumi.set(__self__, "secondary_cidr_blocks", secondary_cidr_blocks)
         if secondary_cidr_mask is not None:
+            warnings.warn("""Field 'secondary_cidr_mask' has been deprecated from provider version 1.248.0. Field 'secondary_cidr_blocks' has been deprecated from provider version 1.248.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_mask` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.""", DeprecationWarning)
+            pulumi.log.warn("""secondary_cidr_mask is deprecated: Field 'secondary_cidr_mask' has been deprecated from provider version 1.248.0. Field 'secondary_cidr_blocks' has been deprecated from provider version 1.248.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_mask` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.""")
+        if secondary_cidr_mask is not None:
             pulumi.set(__self__, "secondary_cidr_mask", secondary_cidr_mask)
         if status is not None:
             pulumi.set(__self__, "status", status)
@@ -549,6 +579,8 @@ class _NetworkState:
             pulumi.set(__self__, "system_route_table_description", system_route_table_description)
         if system_route_table_name is not None:
             pulumi.set(__self__, "system_route_table_name", system_route_table_name)
+        if system_route_table_route_propagation_enable is not None:
+            pulumi.set(__self__, "system_route_table_route_propagation_enable", system_route_table_route_propagation_enable)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if user_cidrs is not None:
@@ -561,6 +593,7 @@ class _NetworkState:
     def cidr_block(self) -> Optional[pulumi.Input[str]]:
         """
         The CIDR block of the VPC.
+
         - You can specify one of the following CIDR blocks or their subsets as the primary IPv4 CIDR block of the VPC: 192.168.0.0/16, 172.16.0.0/12, and 10.0.0.0/8. These CIDR blocks are standard private CIDR blocks as defined by Request for Comments (RFC) documents. The subnet mask must be 8 to 28 bits in length.
         - You can also use a custom CIDR block other than 100.64.0.0/10, 224.0.0.0/4, 127.0.0.0/8, 169.254.0.0/16, and their subnets as the primary IPv4 CIDR block of the VPC.
         """
@@ -599,7 +632,6 @@ class _NetworkState:
     def description(self) -> Optional[pulumi.Input[str]]:
         """
         The new description of the VPC.
-
         The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "description")
@@ -612,7 +644,7 @@ class _NetworkState:
     @pulumi.getter(name="dnsHostnameStatus")
     def dns_hostname_status(self) -> Optional[pulumi.Input[str]]:
         """
-        The status of VPC DNS Hostname. Valid values: `ENABLED`, `DISABLED`.
+        The status of VPC DNS Hostname
         """
         return pulumi.get(self, "dns_hostname_status")
 
@@ -624,7 +656,7 @@ class _NetworkState:
     @pulumi.getter(name="dryRun")
     def dry_run(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specifies whether to perform a dry run. Valid values:
+        Whether to PreCheck only this request. Value:
         """
         return pulumi.get(self, "dry_run")
 
@@ -636,13 +668,25 @@ class _NetworkState:
     @pulumi.getter(name="enableIpv6")
     def enable_ipv6(self) -> Optional[pulumi.Input[bool]]:
         """
-        Specifies whether to enable IPv6. Valid values:
+        Whether to enable the IPv6 network segment. Value:
         """
         return pulumi.get(self, "enable_ipv6")
 
     @enable_ipv6.setter
     def enable_ipv6(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enable_ipv6", value)
+
+    @property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Force delete vpc or not.
+        """
+        return pulumi.get(self, "force_delete")
+
+    @force_delete.setter
+    def force_delete(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "force_delete", value)
 
     @property
     @pulumi.getter(name="ipv4CidrMask")
@@ -743,7 +787,7 @@ class _NetworkState:
     @pulumi.getter(name="regionId")
     def region_id(self) -> Optional[pulumi.Input[str]]:
         """
-        (Available since v1.240.0) The region ID of the VPC to which the route table belongs.
+        The ID of the region where the VPC is located.
         """
         return pulumi.get(self, "region_id")
 
@@ -769,7 +813,7 @@ class _NetworkState:
     @pulumi.getter(name="routeTableId")
     def route_table_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of the route table that you want to query.
+        The ID of the system route table.
         """
         return pulumi.get(self, "route_table_id")
 
@@ -781,7 +825,7 @@ class _NetworkState:
     @pulumi.getter(name="routerId")
     def router_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The router ID of the VPC.
+        The region ID of the VPC to which the route table belongs.
         """
         return pulumi.get(self, "router_id")
 
@@ -817,11 +861,10 @@ class _NetworkState:
 
     @property
     @pulumi.getter(name="secondaryCidrMask")
+    @_utilities.deprecated("""Field 'secondary_cidr_mask' has been deprecated from provider version 1.248.0. Field 'secondary_cidr_blocks' has been deprecated from provider version 1.248.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_mask` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.""")
     def secondary_cidr_mask(self) -> Optional[pulumi.Input[int]]:
         """
-        Add an additional CIDR block from the IPAM address pool to the VPC by entering a mask.
-
-        > **NOTE:**  Specify the IPAM address pool to add an additional CIDR block to the VPC. Enter at least one of the SecondaryCidrBlock or SecondaryCidrMask parameters.
+        Field 'router_table_id' has been deprecated from provider version 1.248.0. New resource 'alicloud_vpc_ipv4_cidr_block' instead.
         """
         return pulumi.get(self, "secondary_cidr_mask")
 
@@ -833,7 +876,7 @@ class _NetworkState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        The status of the VPC.
+        The status of the VPC.   `Pending`: The VPC is being configured. `Available`: The VPC is available.
         """
         return pulumi.get(self, "status")
 
@@ -846,7 +889,6 @@ class _NetworkState:
     def system_route_table_description(self) -> Optional[pulumi.Input[str]]:
         """
         The description of the route table.
-
         The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "system_route_table_description")
@@ -860,7 +902,6 @@ class _NetworkState:
     def system_route_table_name(self) -> Optional[pulumi.Input[str]]:
         """
         The name of the route table.
-
         The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "system_route_table_name")
@@ -868,6 +909,18 @@ class _NetworkState:
     @system_route_table_name.setter
     def system_route_table_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "system_route_table_name", value)
+
+    @property
+    @pulumi.getter(name="systemRouteTableRoutePropagationEnable")
+    def system_route_table_route_propagation_enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether the system route table receives propagation routes.
+        """
+        return pulumi.get(self, "system_route_table_route_propagation_enable")
+
+    @system_route_table_route_propagation_enable.setter
+    def system_route_table_route_propagation_enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "system_route_table_route_propagation_enable", value)
 
     @property
     @pulumi.getter
@@ -898,7 +951,6 @@ class _NetworkState:
     def vpc_name(self) -> Optional[pulumi.Input[str]]:
         """
         The new name of the VPC.
-
         The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
 
         The following arguments will be discarded. Please use new fields as soon as possible:
@@ -921,6 +973,7 @@ class Network(pulumi.CustomResource):
                  dns_hostname_status: Optional[pulumi.Input[str]] = None,
                  dry_run: Optional[pulumi.Input[bool]] = None,
                  enable_ipv6: Optional[pulumi.Input[bool]] = None,
+                 force_delete: Optional[pulumi.Input[bool]] = None,
                  ipv4_cidr_mask: Optional[pulumi.Input[int]] = None,
                  ipv4_ipam_pool_id: Optional[pulumi.Input[str]] = None,
                  ipv6_cidr_block: Optional[pulumi.Input[str]] = None,
@@ -932,6 +985,7 @@ class Network(pulumi.CustomResource):
                  secondary_cidr_mask: Optional[pulumi.Input[int]] = None,
                  system_route_table_description: Optional[pulumi.Input[str]] = None,
                  system_route_table_name: Optional[pulumi.Input[str]] = None,
+                 system_route_table_route_propagation_enable: Optional[pulumi.Input[bool]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  user_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_name: Optional[pulumi.Input[str]] = None,
@@ -950,7 +1004,7 @@ class Network(pulumi.CustomResource):
         You can use the existing vpc module
         to create a VPC and several VSwitches one-click.
 
-        For information about VPC Vpc and how to use it, see [What is Vpc](https://www.alibabacloud.com/help/en/virtual-private-cloud/latest/what-is-a-vpc).
+        For information about VPC VPC and how to use it, see [What is VPC](https://www.alibabacloud.com/help/en/virtual-private-cloud/latest/what-is-a-vpc).
 
         ## Example Usage
 
@@ -983,15 +1037,16 @@ class Network(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cidr_block: The CIDR block of the VPC.
+               
                - You can specify one of the following CIDR blocks or their subsets as the primary IPv4 CIDR block of the VPC: 192.168.0.0/16, 172.16.0.0/12, and 10.0.0.0/8. These CIDR blocks are standard private CIDR blocks as defined by Request for Comments (RFC) documents. The subnet mask must be 8 to 28 bits in length.
                - You can also use a custom CIDR block other than 100.64.0.0/10, 224.0.0.0/4, 127.0.0.0/8, 169.254.0.0/16, and their subnets as the primary IPv4 CIDR block of the VPC.
         :param pulumi.Input[bool] classic_link_enabled: The status of ClassicLink function.
         :param pulumi.Input[str] description: The new description of the VPC.
-               
                The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
-        :param pulumi.Input[str] dns_hostname_status: The status of VPC DNS Hostname. Valid values: `ENABLED`, `DISABLED`.
-        :param pulumi.Input[bool] dry_run: Specifies whether to perform a dry run. Valid values:
-        :param pulumi.Input[bool] enable_ipv6: Specifies whether to enable IPv6. Valid values:
+        :param pulumi.Input[str] dns_hostname_status: The status of VPC DNS Hostname
+        :param pulumi.Input[bool] dry_run: Whether to PreCheck only this request. Value:
+        :param pulumi.Input[bool] enable_ipv6: Whether to enable the IPv6 network segment. Value:
+        :param pulumi.Input[bool] force_delete: Force delete vpc or not.
         :param pulumi.Input[int] ipv4_cidr_mask: Allocate VPC from The IPAM address pool by entering a mask.
                
                > **NOTE:**  when you specify the IPAM address pool to create a VPC, enter at least one of the CidrBlock or Ipv4CidrMask parameters.
@@ -1012,19 +1067,15 @@ class Network(pulumi.CustomResource):
                
                > **NOTE:**   You can use resource groups to facilitate resource grouping and permission management for an Alibaba Cloud. For more information, see [What is resource management?](https://www.alibabacloud.com/help/en/doc-detail/94475.html)
         :param pulumi.Input[Sequence[pulumi.Input[str]]] secondary_cidr_blocks: Field 'secondary_cidr_blocks' has been deprecated from provider version 1.185.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_blocks` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.
-        :param pulumi.Input[int] secondary_cidr_mask: Add an additional CIDR block from the IPAM address pool to the VPC by entering a mask.
-               
-               > **NOTE:**  Specify the IPAM address pool to add an additional CIDR block to the VPC. Enter at least one of the SecondaryCidrBlock or SecondaryCidrMask parameters.
+        :param pulumi.Input[int] secondary_cidr_mask: Field 'router_table_id' has been deprecated from provider version 1.248.0. New resource 'alicloud_vpc_ipv4_cidr_block' instead.
         :param pulumi.Input[str] system_route_table_description: The description of the route table.
-               
                The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         :param pulumi.Input[str] system_route_table_name: The name of the route table.
-               
                The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
+        :param pulumi.Input[bool] system_route_table_route_propagation_enable: Whether the system route table receives propagation routes.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: The tags of Vpc.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_cidrs: A list of user CIDRs.
         :param pulumi.Input[str] vpc_name: The new name of the VPC.
-               
                The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
                
                The following arguments will be discarded. Please use new fields as soon as possible:
@@ -1049,7 +1100,7 @@ class Network(pulumi.CustomResource):
         You can use the existing vpc module
         to create a VPC and several VSwitches one-click.
 
-        For information about VPC Vpc and how to use it, see [What is Vpc](https://www.alibabacloud.com/help/en/virtual-private-cloud/latest/what-is-a-vpc).
+        For information about VPC VPC and how to use it, see [What is VPC](https://www.alibabacloud.com/help/en/virtual-private-cloud/latest/what-is-a-vpc).
 
         ## Example Usage
 
@@ -1100,6 +1151,7 @@ class Network(pulumi.CustomResource):
                  dns_hostname_status: Optional[pulumi.Input[str]] = None,
                  dry_run: Optional[pulumi.Input[bool]] = None,
                  enable_ipv6: Optional[pulumi.Input[bool]] = None,
+                 force_delete: Optional[pulumi.Input[bool]] = None,
                  ipv4_cidr_mask: Optional[pulumi.Input[int]] = None,
                  ipv4_ipam_pool_id: Optional[pulumi.Input[str]] = None,
                  ipv6_cidr_block: Optional[pulumi.Input[str]] = None,
@@ -1111,6 +1163,7 @@ class Network(pulumi.CustomResource):
                  secondary_cidr_mask: Optional[pulumi.Input[int]] = None,
                  system_route_table_description: Optional[pulumi.Input[str]] = None,
                  system_route_table_name: Optional[pulumi.Input[str]] = None,
+                 system_route_table_route_propagation_enable: Optional[pulumi.Input[bool]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  user_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  vpc_name: Optional[pulumi.Input[str]] = None,
@@ -1129,6 +1182,7 @@ class Network(pulumi.CustomResource):
             __props__.__dict__["dns_hostname_status"] = dns_hostname_status
             __props__.__dict__["dry_run"] = dry_run
             __props__.__dict__["enable_ipv6"] = enable_ipv6
+            __props__.__dict__["force_delete"] = force_delete
             __props__.__dict__["ipv4_cidr_mask"] = ipv4_cidr_mask
             __props__.__dict__["ipv4_ipam_pool_id"] = ipv4_ipam_pool_id
             __props__.__dict__["ipv6_cidr_block"] = ipv6_cidr_block
@@ -1140,6 +1194,7 @@ class Network(pulumi.CustomResource):
             __props__.__dict__["secondary_cidr_mask"] = secondary_cidr_mask
             __props__.__dict__["system_route_table_description"] = system_route_table_description
             __props__.__dict__["system_route_table_name"] = system_route_table_name
+            __props__.__dict__["system_route_table_route_propagation_enable"] = system_route_table_route_propagation_enable
             __props__.__dict__["tags"] = tags
             __props__.__dict__["user_cidrs"] = user_cidrs
             __props__.__dict__["vpc_name"] = vpc_name
@@ -1167,6 +1222,7 @@ class Network(pulumi.CustomResource):
             dns_hostname_status: Optional[pulumi.Input[str]] = None,
             dry_run: Optional[pulumi.Input[bool]] = None,
             enable_ipv6: Optional[pulumi.Input[bool]] = None,
+            force_delete: Optional[pulumi.Input[bool]] = None,
             ipv4_cidr_mask: Optional[pulumi.Input[int]] = None,
             ipv4_ipam_pool_id: Optional[pulumi.Input[str]] = None,
             ipv6_cidr_block: Optional[pulumi.Input[str]] = None,
@@ -1184,6 +1240,7 @@ class Network(pulumi.CustomResource):
             status: Optional[pulumi.Input[str]] = None,
             system_route_table_description: Optional[pulumi.Input[str]] = None,
             system_route_table_name: Optional[pulumi.Input[str]] = None,
+            system_route_table_route_propagation_enable: Optional[pulumi.Input[bool]] = None,
             tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
             user_cidrs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             vpc_name: Optional[pulumi.Input[str]] = None) -> 'Network':
@@ -1195,16 +1252,17 @@ class Network(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cidr_block: The CIDR block of the VPC.
+               
                - You can specify one of the following CIDR blocks or their subsets as the primary IPv4 CIDR block of the VPC: 192.168.0.0/16, 172.16.0.0/12, and 10.0.0.0/8. These CIDR blocks are standard private CIDR blocks as defined by Request for Comments (RFC) documents. The subnet mask must be 8 to 28 bits in length.
                - You can also use a custom CIDR block other than 100.64.0.0/10, 224.0.0.0/4, 127.0.0.0/8, 169.254.0.0/16, and their subnets as the primary IPv4 CIDR block of the VPC.
         :param pulumi.Input[bool] classic_link_enabled: The status of ClassicLink function.
         :param pulumi.Input[str] create_time: The creation time of the VPC.
         :param pulumi.Input[str] description: The new description of the VPC.
-               
                The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
-        :param pulumi.Input[str] dns_hostname_status: The status of VPC DNS Hostname. Valid values: `ENABLED`, `DISABLED`.
-        :param pulumi.Input[bool] dry_run: Specifies whether to perform a dry run. Valid values:
-        :param pulumi.Input[bool] enable_ipv6: Specifies whether to enable IPv6. Valid values:
+        :param pulumi.Input[str] dns_hostname_status: The status of VPC DNS Hostname
+        :param pulumi.Input[bool] dry_run: Whether to PreCheck only this request. Value:
+        :param pulumi.Input[bool] enable_ipv6: Whether to enable the IPv6 network segment. Value:
+        :param pulumi.Input[bool] force_delete: Force delete vpc or not.
         :param pulumi.Input[int] ipv4_cidr_mask: Allocate VPC from The IPAM address pool by entering a mask.
                
                > **NOTE:**  when you specify the IPAM address pool to create a VPC, enter at least one of the CidrBlock or Ipv4CidrMask parameters.
@@ -1222,28 +1280,24 @@ class Network(pulumi.CustomResource):
                > **NOTE:**  If a single-line bandwidth whitelist is enabled, this field can be set to `ChinaTelecom` (China Telecom), `ChinaUnicom` (China Unicom), or `ChinaMobile` (China Mobile).
         :param pulumi.Input[bool] is_default: Specifies whether to create the default VPC in the specified region. Valid values:
         :param pulumi.Input[str] name: . Field 'name' has been deprecated from provider version 1.119.0. New field 'vpc_name' instead.
-        :param pulumi.Input[str] region_id: (Available since v1.240.0) The region ID of the VPC to which the route table belongs.
+        :param pulumi.Input[str] region_id: The ID of the region where the VPC is located.
         :param pulumi.Input[str] resource_group_id: The ID of the resource group to which you want to move the resource.
                
                > **NOTE:**   You can use resource groups to facilitate resource grouping and permission management for an Alibaba Cloud. For more information, see [What is resource management?](https://www.alibabacloud.com/help/en/doc-detail/94475.html)
-        :param pulumi.Input[str] route_table_id: The ID of the route table that you want to query.
-        :param pulumi.Input[str] router_id: The router ID of the VPC.
+        :param pulumi.Input[str] route_table_id: The ID of the system route table.
+        :param pulumi.Input[str] router_id: The region ID of the VPC to which the route table belongs.
         :param pulumi.Input[str] router_table_id: . Field 'router_table_id' has been deprecated from provider version 1.227.1. New field 'route_table_id' instead.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] secondary_cidr_blocks: Field 'secondary_cidr_blocks' has been deprecated from provider version 1.185.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_blocks` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.
-        :param pulumi.Input[int] secondary_cidr_mask: Add an additional CIDR block from the IPAM address pool to the VPC by entering a mask.
-               
-               > **NOTE:**  Specify the IPAM address pool to add an additional CIDR block to the VPC. Enter at least one of the SecondaryCidrBlock or SecondaryCidrMask parameters.
-        :param pulumi.Input[str] status: The status of the VPC.
+        :param pulumi.Input[int] secondary_cidr_mask: Field 'router_table_id' has been deprecated from provider version 1.248.0. New resource 'alicloud_vpc_ipv4_cidr_block' instead.
+        :param pulumi.Input[str] status: The status of the VPC.   `Pending`: The VPC is being configured. `Available`: The VPC is available.
         :param pulumi.Input[str] system_route_table_description: The description of the route table.
-               
                The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         :param pulumi.Input[str] system_route_table_name: The name of the route table.
-               
                The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
+        :param pulumi.Input[bool] system_route_table_route_propagation_enable: Whether the system route table receives propagation routes.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: The tags of Vpc.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] user_cidrs: A list of user CIDRs.
         :param pulumi.Input[str] vpc_name: The new name of the VPC.
-               
                The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
                
                The following arguments will be discarded. Please use new fields as soon as possible:
@@ -1259,6 +1313,7 @@ class Network(pulumi.CustomResource):
         __props__.__dict__["dns_hostname_status"] = dns_hostname_status
         __props__.__dict__["dry_run"] = dry_run
         __props__.__dict__["enable_ipv6"] = enable_ipv6
+        __props__.__dict__["force_delete"] = force_delete
         __props__.__dict__["ipv4_cidr_mask"] = ipv4_cidr_mask
         __props__.__dict__["ipv4_ipam_pool_id"] = ipv4_ipam_pool_id
         __props__.__dict__["ipv6_cidr_block"] = ipv6_cidr_block
@@ -1276,6 +1331,7 @@ class Network(pulumi.CustomResource):
         __props__.__dict__["status"] = status
         __props__.__dict__["system_route_table_description"] = system_route_table_description
         __props__.__dict__["system_route_table_name"] = system_route_table_name
+        __props__.__dict__["system_route_table_route_propagation_enable"] = system_route_table_route_propagation_enable
         __props__.__dict__["tags"] = tags
         __props__.__dict__["user_cidrs"] = user_cidrs
         __props__.__dict__["vpc_name"] = vpc_name
@@ -1286,6 +1342,7 @@ class Network(pulumi.CustomResource):
     def cidr_block(self) -> pulumi.Output[str]:
         """
         The CIDR block of the VPC.
+
         - You can specify one of the following CIDR blocks or their subsets as the primary IPv4 CIDR block of the VPC: 192.168.0.0/16, 172.16.0.0/12, and 10.0.0.0/8. These CIDR blocks are standard private CIDR blocks as defined by Request for Comments (RFC) documents. The subnet mask must be 8 to 28 bits in length.
         - You can also use a custom CIDR block other than 100.64.0.0/10, 224.0.0.0/4, 127.0.0.0/8, 169.254.0.0/16, and their subnets as the primary IPv4 CIDR block of the VPC.
         """
@@ -1312,7 +1369,6 @@ class Network(pulumi.CustomResource):
     def description(self) -> pulumi.Output[Optional[str]]:
         """
         The new description of the VPC.
-
         The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "description")
@@ -1321,7 +1377,7 @@ class Network(pulumi.CustomResource):
     @pulumi.getter(name="dnsHostnameStatus")
     def dns_hostname_status(self) -> pulumi.Output[str]:
         """
-        The status of VPC DNS Hostname. Valid values: `ENABLED`, `DISABLED`.
+        The status of VPC DNS Hostname
         """
         return pulumi.get(self, "dns_hostname_status")
 
@@ -1329,7 +1385,7 @@ class Network(pulumi.CustomResource):
     @pulumi.getter(name="dryRun")
     def dry_run(self) -> pulumi.Output[Optional[bool]]:
         """
-        Specifies whether to perform a dry run. Valid values:
+        Whether to PreCheck only this request. Value:
         """
         return pulumi.get(self, "dry_run")
 
@@ -1337,9 +1393,17 @@ class Network(pulumi.CustomResource):
     @pulumi.getter(name="enableIpv6")
     def enable_ipv6(self) -> pulumi.Output[Optional[bool]]:
         """
-        Specifies whether to enable IPv6. Valid values:
+        Whether to enable the IPv6 network segment. Value:
         """
         return pulumi.get(self, "enable_ipv6")
+
+    @property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Force delete vpc or not.
+        """
+        return pulumi.get(self, "force_delete")
 
     @property
     @pulumi.getter(name="ipv4CidrMask")
@@ -1412,7 +1476,7 @@ class Network(pulumi.CustomResource):
     @pulumi.getter(name="regionId")
     def region_id(self) -> pulumi.Output[str]:
         """
-        (Available since v1.240.0) The region ID of the VPC to which the route table belongs.
+        The ID of the region where the VPC is located.
         """
         return pulumi.get(self, "region_id")
 
@@ -1430,7 +1494,7 @@ class Network(pulumi.CustomResource):
     @pulumi.getter(name="routeTableId")
     def route_table_id(self) -> pulumi.Output[str]:
         """
-        The ID of the route table that you want to query.
+        The ID of the system route table.
         """
         return pulumi.get(self, "route_table_id")
 
@@ -1438,7 +1502,7 @@ class Network(pulumi.CustomResource):
     @pulumi.getter(name="routerId")
     def router_id(self) -> pulumi.Output[str]:
         """
-        The router ID of the VPC.
+        The region ID of the VPC to which the route table belongs.
         """
         return pulumi.get(self, "router_id")
 
@@ -1462,11 +1526,10 @@ class Network(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="secondaryCidrMask")
+    @_utilities.deprecated("""Field 'secondary_cidr_mask' has been deprecated from provider version 1.248.0. Field 'secondary_cidr_blocks' has been deprecated from provider version 1.248.0 and it will be removed in the future version. Please use the new resource 'alicloud_vpc_ipv4_cidr_block'. `secondary_cidr_mask` attributes and `vpc.Ipv4CidrBlock` resource cannot be used at the same time.""")
     def secondary_cidr_mask(self) -> pulumi.Output[Optional[int]]:
         """
-        Add an additional CIDR block from the IPAM address pool to the VPC by entering a mask.
-
-        > **NOTE:**  Specify the IPAM address pool to add an additional CIDR block to the VPC. Enter at least one of the SecondaryCidrBlock or SecondaryCidrMask parameters.
+        Field 'router_table_id' has been deprecated from provider version 1.248.0. New resource 'alicloud_vpc_ipv4_cidr_block' instead.
         """
         return pulumi.get(self, "secondary_cidr_mask")
 
@@ -1474,7 +1537,7 @@ class Network(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        The status of the VPC.
+        The status of the VPC.   `Pending`: The VPC is being configured. `Available`: The VPC is available.
         """
         return pulumi.get(self, "status")
 
@@ -1483,7 +1546,6 @@ class Network(pulumi.CustomResource):
     def system_route_table_description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the route table.
-
         The description must be 1 to 256 characters in length, and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "system_route_table_description")
@@ -1493,10 +1555,17 @@ class Network(pulumi.CustomResource):
     def system_route_table_name(self) -> pulumi.Output[Optional[str]]:
         """
         The name of the route table.
-
         The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
         """
         return pulumi.get(self, "system_route_table_name")
+
+    @property
+    @pulumi.getter(name="systemRouteTableRoutePropagationEnable")
+    def system_route_table_route_propagation_enable(self) -> pulumi.Output[bool]:
+        """
+        Whether the system route table receives propagation routes.
+        """
+        return pulumi.get(self, "system_route_table_route_propagation_enable")
 
     @property
     @pulumi.getter
@@ -1519,7 +1588,6 @@ class Network(pulumi.CustomResource):
     def vpc_name(self) -> pulumi.Output[str]:
         """
         The new name of the VPC.
-
         The name must be 1 to 128 characters in length and cannot start with `http://` or `https://`.
 
         The following arguments will be discarded. Please use new fields as soon as possible:

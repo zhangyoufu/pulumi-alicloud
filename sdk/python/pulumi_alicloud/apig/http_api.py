@@ -237,7 +237,7 @@ class HttpApi(pulumi.CustomResource):
         """
         Provides a APIG Http Api resource.
 
-        For information about APIG Http Api and how to use it, see [What is Http Api](https://www.alibabacloud.com/help/en/).
+        For information about APIG Http Api and how to use it, see [What is Http Api](https://next.api.aliyun.com/api/APIG/2024-03-27/CreateHttpApi).
 
         > **NOTE:** Available since v1.240.0.
 
@@ -294,7 +294,7 @@ class HttpApi(pulumi.CustomResource):
         """
         Provides a APIG Http Api resource.
 
-        For information about APIG Http Api and how to use it, see [What is Http Api](https://www.alibabacloud.com/help/en/).
+        For information about APIG Http Api and how to use it, see [What is Http Api](https://next.api.aliyun.com/api/APIG/2024-03-27/CreateHttpApi).
 
         > **NOTE:** Available since v1.240.0.
 

@@ -4145,6 +4145,21 @@
                     }
                 }
             },
+            "alicloud_eflo_experiment_plan_template": {
+                "current": "alicloud:eflo/experimentPlanTemplate:ExperimentPlanTemplate",
+                "fields": {
+                    "template_pipeline": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "env_params": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "alicloud_eflo_invocation": {
                 "current": "alicloud:eflo/invocation:Invocation",
                 "fields": {
@@ -4620,6 +4635,12 @@
             },
             "alicloud_esa_rewrite_url_rule": {
                 "current": "alicloud:esa/rewriteUrlRule:RewriteUrlRule"
+            },
+            "alicloud_esa_scheduled_preload_execution": {
+                "current": "alicloud:esa/scheduledPreloadExecution:ScheduledPreloadExecution"
+            },
+            "alicloud_esa_scheduled_preload_job": {
+                "current": "alicloud:esa/scheduledPreloadJob:ScheduledPreloadJob"
             },
             "alicloud_esa_site": {
                 "current": "alicloud:esa/site:Site"
@@ -8807,6 +8828,28 @@
                             "fields": {
                                 "members": {
                                     "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "alicloud_sls_etl": {
+                "current": "alicloud:sls/etl:Etl",
+                "fields": {
+                    "configuration": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "sink": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "datasets": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

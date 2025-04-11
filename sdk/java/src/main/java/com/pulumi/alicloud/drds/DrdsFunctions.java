@@ -11,7 +11,6 @@ import com.pulumi.core.Output;
 import com.pulumi.core.TypeShape;
 import com.pulumi.deployment.Deployment;
 import com.pulumi.deployment.InvokeOptions;
-import com.pulumi.deployment.InvokeOutputOptions;
 import java.util.concurrent.CompletableFuture;
 
 public final class DrdsFunctions {
@@ -248,53 +247,6 @@ public final class DrdsFunctions {
      * 
      */
     public static Output<GetInstancesResult> getInstances(GetInstancesArgs args, InvokeOptions options) {
-        return Deployment.getInstance().invoke("alicloud:drds/getInstances:getInstances", TypeShape.of(GetInstancesResult.class), args, Utilities.withVersion(options));
-    }
-    /**
-     * The `alicloud.drds.Instance` data source provides a collection of DRDS instances available in Alibaba Cloud account.
-     * Filters support regular expression for the instance name, searches by tags, and other filters which are listed below.
-     * 
-     * &gt; **NOTE:** Available in 1.35.0+.
-     * 
-     * ## Example Usage
-     * 
-     *  &lt;!--Start PulumiCodeChooser --&gt;
-     * <pre>
-     * {@code
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.alicloud.drds.DrdsFunctions;
-     * import com.pulumi.alicloud.drds.inputs.GetInstancesArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *         final var drdsInstancesDs = DrdsFunctions.getInstances(GetInstancesArgs.builder()
-     *             .nameRegex("drds-\\d+")
-     *             .ids("drdsabc123456")
-     *             .build());
-     * 
-     *         ctx.export("firstDbInstanceId", drdsInstancesDs.applyValue(getInstancesResult -> getInstancesResult.instances()[0].id()));
-     *     }
-     * }
-     * }
-     * </pre>
-     * &lt;!--End PulumiCodeChooser --&gt;
-     * 
-     */
-    public static Output<GetInstancesResult> getInstances(GetInstancesArgs args, InvokeOutputOptions options) {
         return Deployment.getInstance().invoke("alicloud:drds/getInstances:getInstances", TypeShape.of(GetInstancesResult.class), args, Utilities.withVersion(options));
     }
     /**

@@ -17,7 +17,6 @@ import com.pulumi.core.Output;
 import com.pulumi.core.TypeShape;
 import com.pulumi.deployment.Deployment;
 import com.pulumi.deployment.InvokeOptions;
-import com.pulumi.deployment.InvokeOutputOptions;
 import java.util.concurrent.CompletableFuture;
 
 public final class WafFunctions {
@@ -214,55 +213,6 @@ public final class WafFunctions {
      * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
-    public static Output<GetCertificatesResult> getCertificates(GetCertificatesArgs args, InvokeOutputOptions options) {
-        return Deployment.getInstance().invoke("alicloud:waf/getCertificates:getCertificates", TypeShape.of(GetCertificatesResult.class), args, Utilities.withVersion(options));
-    }
-    /**
-     * This data source provides the Waf Certificates of the current Alibaba Cloud user.
-     * 
-     * &gt; **NOTE:** Available since v1.135.0.
-     * 
-     * ## Example Usage
-     * 
-     * Basic Usage
-     * 
-     * &lt;!--Start PulumiCodeChooser --&gt;
-     * <pre>
-     * {@code
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.alicloud.waf.WafFunctions;
-     * import com.pulumi.alicloud.waf.inputs.GetCertificatesArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *         final var default = WafFunctions.getCertificates(GetCertificatesArgs.builder()
-     *             .ids("your_certificate_id")
-     *             .instanceId("your_instance_id")
-     *             .domain("your_domain_name")
-     *             .build());
-     * 
-     *         ctx.export("wafCertificate", default_.certificates()[0]);
-     *     }
-     * }
-     * }
-     * </pre>
-     * &lt;!--End PulumiCodeChooser --&gt;
-     * 
-     */
     public static CompletableFuture<GetCertificatesResult> getCertificatesPlain(GetCertificatesPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("alicloud:waf/getCertificates:getCertificates", TypeShape.of(GetCertificatesResult.class), args, Utilities.withVersion(options));
     }
@@ -411,55 +361,6 @@ public final class WafFunctions {
      * 
      */
     public static Output<GetDomainsResult> getDomains(GetDomainsArgs args, InvokeOptions options) {
-        return Deployment.getInstance().invoke("alicloud:waf/getDomains:getDomains", TypeShape.of(GetDomainsResult.class), args, Utilities.withVersion(options));
-    }
-    /**
-     * Provides a WAF datasource to retrieve domains.
-     * 
-     * For information about WAF and how to use it, see [What is Alibaba Cloud WAF](https://www.alibabacloud.com/help/doc-detail/28517.htm).
-     * 
-     * &gt; **NOTE:** Available since v1.86.0.
-     * 
-     * ## Example Usage
-     * 
-     * &lt;!--Start PulumiCodeChooser --&gt;
-     * <pre>
-     * {@code
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.alicloud.waf.WafFunctions;
-     * import com.pulumi.alicloud.waf.inputs.GetInstancesArgs;
-     * import com.pulumi.alicloud.waf.inputs.GetDomainsArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *         final var default = WafFunctions.getInstances();
-     * 
-     *         final var defaultGetDomains = WafFunctions.getDomains(GetDomainsArgs.builder()
-     *             .instanceId(default_.ids()[0])
-     *             .build());
-     * 
-     *     }
-     * }
-     * }
-     * </pre>
-     * &lt;!--End PulumiCodeChooser --&gt;
-     * 
-     */
-    public static Output<GetDomainsResult> getDomains(GetDomainsArgs args, InvokeOutputOptions options) {
         return Deployment.getInstance().invoke("alicloud:waf/getDomains:getDomains", TypeShape.of(GetDomainsResult.class), args, Utilities.withVersion(options));
     }
     /**
@@ -759,56 +660,6 @@ public final class WafFunctions {
      * 
      */
     public static Output<GetInstancesResult> getInstances(GetInstancesArgs args, InvokeOptions options) {
-        return Deployment.getInstance().invoke("alicloud:waf/getInstances:getInstances", TypeShape.of(GetInstancesResult.class), args, Utilities.withVersion(options));
-    }
-    /**
-     * Provides a WAF datasource to retrieve instances.
-     * 
-     * For information about WAF and how to use it, see [What is Alibaba Cloud WAF](https://www.alibabacloud.com/help/doc-detail/28517.htm).
-     * 
-     * &gt; **NOTE:** Available since v1.90.0.
-     * 
-     * ## Example Usage
-     * 
-     * &lt;!--Start PulumiCodeChooser --&gt;
-     * <pre>
-     * {@code
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.alicloud.waf.WafFunctions;
-     * import com.pulumi.alicloud.waf.inputs.GetInstancesArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *         final var default = WafFunctions.getInstances(GetInstancesArgs.builder()
-     *             .ids("waf-cn-09k********")
-     *             .status("1")
-     *             .resourceGroupId("rg-acfmwvv********")
-     *             .instanceSource("waf-cloud")
-     *             .build());
-     * 
-     *         ctx.export("theFirstWafInstanceId", default_.instances()[0].id());
-     *     }
-     * }
-     * }
-     * </pre>
-     * &lt;!--End PulumiCodeChooser --&gt;
-     * 
-     */
-    public static Output<GetInstancesResult> getInstances(GetInstancesArgs args, InvokeOutputOptions options) {
         return Deployment.getInstance().invoke("alicloud:waf/getInstances:getInstances", TypeShape.of(GetInstancesResult.class), args, Utilities.withVersion(options));
     }
     /**

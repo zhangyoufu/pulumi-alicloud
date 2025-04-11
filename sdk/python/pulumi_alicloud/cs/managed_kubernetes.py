@@ -53,6 +53,7 @@ class ManagedKubernetesArgs:
                  security_group_id: Optional[pulumi.Input[str]] = None,
                  service_account_issuer: Optional[pulumi.Input[str]] = None,
                  service_cidr: Optional[pulumi.Input[str]] = None,
+                 skip_set_certificate_authority: Optional[pulumi.Input[bool]] = None,
                  slb_internet_enabled: Optional[pulumi.Input[bool]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  timezone: Optional[pulumi.Input[str]] = None,
@@ -64,12 +65,10 @@ class ManagedKubernetesArgs:
         """
         The set of arguments for constructing a ManagedKubernetes resource.
         :param pulumi.Input[Sequence[pulumi.Input['ManagedKubernetesAddonArgs']]] addons: The addon you want to install in cluster. See `addons` below. Only works for **Create** Operation, use resource cs_kubernetes_addon to manage addons if cluster is created.
-               
-               *Network params*
         :param pulumi.Input[Sequence[pulumi.Input[str]]] api_audiences: A list of API audiences for [Service Account Token Volume Projection](https://www.alibabacloud.com/help/doc-detail/160384.htm). Set this to `["https://kubernetes.default.svc"]` if you want to enable the Token Volume Projection feature (requires specifying `service_account_issuer` as well. From cluster version 1.22, Service Account Token Volume Projection will be enabled by default.
-        :param pulumi.Input[str] client_cert: The path of client certificate, like `~/.kube/client-cert.pem`.
-        :param pulumi.Input[str] client_key: The path of client key, like `~/.kube/client-key.pem`.
-        :param pulumi.Input[str] cluster_ca_cert: The path of cluster ca certificate, like `~/.kube/cluster-ca-cert.pem`
+        :param pulumi.Input[str] client_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
+        :param pulumi.Input[str] client_key: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
+        :param pulumi.Input[str] cluster_ca_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.cluster_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.
                
                *Removed params*
         :param pulumi.Input[str] cluster_domain: Cluster local domain name, Default to `cluster.local`. A domain name consists of one or more sections separated by a decimal point (.), each of which is up to 63 characters long, and can be lowercase, numerals, and underscores (-), and must be lowercase or numerals at the beginning and end.
@@ -104,6 +103,9 @@ class ManagedKubernetesArgs:
                * After updating the control plane security group, the Elastic Network Interfaces (ENIs) used by the control plane and managed components will automatically join the new security group.
         :param pulumi.Input[str] service_account_issuer: The issuer of the Service Account token for [Service Account Token Volume Projection](https://www.alibabacloud.com/help/doc-detail/160384.htm), corresponds to the `iss` field in the token payload. Set this to `"https://kubernetes.default.svc"` to enable the Token Volume Projection feature (requires specifying `api_audiences` as well). From cluster version 1.22, Service Account Token Volume Projection will be enabled by default.
         :param pulumi.Input[str] service_cidr: The CIDR block for the service network. It cannot be duplicated with the VPC CIDR and CIDR used by Kubernetes cluster in VPC, cannot be modified after creation.
+        :param pulumi.Input[bool] skip_set_certificate_authority: Configure whether to save certificate authority data for your cluster to attribute `certificate_authority`. For cluster security, recommended configuration as `true`. Will be removed with attribute certificate_authority removed.
+               
+               *Network params*
         :param pulumi.Input[bool] slb_internet_enabled: Whether to create internet load balancer for API Server. Default to true. Only works for **Create** Operation.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: Default nil, A map of tags assigned to the kubernetes cluster and work nodes. See `tags` below.
         :param pulumi.Input[str] timezone: Cluster timezone, works for control plane and Worker nodes.
@@ -127,9 +129,18 @@ class ManagedKubernetesArgs:
         if api_audiences is not None:
             pulumi.set(__self__, "api_audiences", api_audiences)
         if client_cert is not None:
+            warnings.warn("""Field 'client_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-cert.pem) for replace it.""", DeprecationWarning)
+            pulumi.log.warn("""client_cert is deprecated: Field 'client_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-cert.pem) for replace it.""")
+        if client_cert is not None:
             pulumi.set(__self__, "client_cert", client_cert)
         if client_key is not None:
+            warnings.warn("""Field 'client_key' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_key' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-key.pem) for replace it.""", DeprecationWarning)
+            pulumi.log.warn("""client_key is deprecated: Field 'client_key' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_key' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-key.pem) for replace it.""")
+        if client_key is not None:
             pulumi.set(__self__, "client_key", client_key)
+        if cluster_ca_cert is not None:
+            warnings.warn("""Field 'cluster_ca_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.cluster_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.""", DeprecationWarning)
+            pulumi.log.warn("""cluster_ca_cert is deprecated: Field 'cluster_ca_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.cluster_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.""")
         if cluster_ca_cert is not None:
             pulumi.set(__self__, "cluster_ca_cert", cluster_ca_cert)
         if cluster_domain is not None:
@@ -189,6 +200,8 @@ class ManagedKubernetesArgs:
             pulumi.set(__self__, "service_account_issuer", service_account_issuer)
         if service_cidr is not None:
             pulumi.set(__self__, "service_cidr", service_cidr)
+        if skip_set_certificate_authority is not None:
+            pulumi.set(__self__, "skip_set_certificate_authority", skip_set_certificate_authority)
         if slb_internet_enabled is not None:
             pulumi.set(__self__, "slb_internet_enabled", slb_internet_enabled)
         if tags is not None:
@@ -214,8 +227,6 @@ class ManagedKubernetesArgs:
     def addons(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ManagedKubernetesAddonArgs']]]]:
         """
         The addon you want to install in cluster. See `addons` below. Only works for **Create** Operation, use resource cs_kubernetes_addon to manage addons if cluster is created.
-
-        *Network params*
         """
         return pulumi.get(self, "addons")
 
@@ -237,9 +248,10 @@ class ManagedKubernetesArgs:
 
     @property
     @pulumi.getter(name="clientCert")
+    @_utilities.deprecated("""Field 'client_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-cert.pem) for replace it.""")
     def client_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        The path of client certificate, like `~/.kube/client-cert.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
         """
         return pulumi.get(self, "client_cert")
 
@@ -249,9 +261,10 @@ class ManagedKubernetesArgs:
 
     @property
     @pulumi.getter(name="clientKey")
+    @_utilities.deprecated("""Field 'client_key' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_key' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-key.pem) for replace it.""")
     def client_key(self) -> Optional[pulumi.Input[str]]:
         """
-        The path of client key, like `~/.kube/client-key.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         """
         return pulumi.get(self, "client_key")
 
@@ -261,9 +274,10 @@ class ManagedKubernetesArgs:
 
     @property
     @pulumi.getter(name="clusterCaCert")
+    @_utilities.deprecated("""Field 'cluster_ca_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.cluster_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.""")
     def cluster_ca_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        The path of cluster ca certificate, like `~/.kube/cluster-ca-cert.pem`
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.cluster_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.
 
         *Removed params*
         """
@@ -600,6 +614,20 @@ class ManagedKubernetesArgs:
         pulumi.set(self, "service_cidr", value)
 
     @property
+    @pulumi.getter(name="skipSetCertificateAuthority")
+    def skip_set_certificate_authority(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Configure whether to save certificate authority data for your cluster to attribute `certificate_authority`. For cluster security, recommended configuration as `true`. Will be removed with attribute certificate_authority removed.
+
+        *Network params*
+        """
+        return pulumi.get(self, "skip_set_certificate_authority")
+
+    @skip_set_certificate_authority.setter
+    def skip_set_certificate_authority(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "skip_set_certificate_authority", value)
+
+    @property
     @pulumi.getter(name="slbInternetEnabled")
     def slb_internet_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -745,6 +773,7 @@ class _ManagedKubernetesState:
                  security_group_id: Optional[pulumi.Input[str]] = None,
                  service_account_issuer: Optional[pulumi.Input[str]] = None,
                  service_cidr: Optional[pulumi.Input[str]] = None,
+                 skip_set_certificate_authority: Optional[pulumi.Input[bool]] = None,
                  slb_id: Optional[pulumi.Input[str]] = None,
                  slb_internet: Optional[pulumi.Input[str]] = None,
                  slb_internet_enabled: Optional[pulumi.Input[bool]] = None,
@@ -761,13 +790,11 @@ class _ManagedKubernetesState:
         """
         Input properties used for looking up and filtering ManagedKubernetes resources.
         :param pulumi.Input[Sequence[pulumi.Input['ManagedKubernetesAddonArgs']]] addons: The addon you want to install in cluster. See `addons` below. Only works for **Create** Operation, use resource cs_kubernetes_addon to manage addons if cluster is created.
-               
-               *Network params*
         :param pulumi.Input[Sequence[pulumi.Input[str]]] api_audiences: A list of API audiences for [Service Account Token Volume Projection](https://www.alibabacloud.com/help/doc-detail/160384.htm). Set this to `["https://kubernetes.default.svc"]` if you want to enable the Token Volume Projection feature (requires specifying `service_account_issuer` as well. From cluster version 1.22, Service Account Token Volume Projection will be enabled by default.
-        :param pulumi.Input['ManagedKubernetesCertificateAuthorityArgs'] certificate_authority: (Available since v1.105.0) Nested attribute containing certificate authority data for your cluster.
-        :param pulumi.Input[str] client_cert: The path of client certificate, like `~/.kube/client-cert.pem`.
-        :param pulumi.Input[str] client_key: The path of client key, like `~/.kube/client-key.pem`.
-        :param pulumi.Input[str] cluster_ca_cert: The path of cluster ca certificate, like `~/.kube/cluster-ca-cert.pem`
+        :param pulumi.Input['ManagedKubernetesCertificateAuthorityArgs'] certificate_authority: (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificate_authority of new DataSource `cs_get_cluster_credential` to replace it.
+        :param pulumi.Input[str] client_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
+        :param pulumi.Input[str] client_key: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
+        :param pulumi.Input[str] cluster_ca_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.cluster_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.
                
                *Removed params*
         :param pulumi.Input[str] cluster_domain: Cluster local domain name, Default to `cluster.local`. A domain name consists of one or more sections separated by a decimal point (.), each of which is up to 63 characters long, and can be lowercase, numerals, and underscores (-), and must be lowercase or numerals at the beginning and end.
@@ -805,6 +832,9 @@ class _ManagedKubernetesState:
                * After updating the control plane security group, the Elastic Network Interfaces (ENIs) used by the control plane and managed components will automatically join the new security group.
         :param pulumi.Input[str] service_account_issuer: The issuer of the Service Account token for [Service Account Token Volume Projection](https://www.alibabacloud.com/help/doc-detail/160384.htm), corresponds to the `iss` field in the token payload. Set this to `"https://kubernetes.default.svc"` to enable the Token Volume Projection feature (requires specifying `api_audiences` as well). From cluster version 1.22, Service Account Token Volume Projection will be enabled by default.
         :param pulumi.Input[str] service_cidr: The CIDR block for the service network. It cannot be duplicated with the VPC CIDR and CIDR used by Kubernetes cluster in VPC, cannot be modified after creation.
+        :param pulumi.Input[bool] skip_set_certificate_authority: Configure whether to save certificate authority data for your cluster to attribute `certificate_authority`. For cluster security, recommended configuration as `true`. Will be removed with attribute certificate_authority removed.
+               
+               *Network params*
         :param pulumi.Input[str] slb_id: The ID of APIServer load balancer.
         :param pulumi.Input[str] slb_internet: The public ip of load balancer.
         :param pulumi.Input[bool] slb_internet_enabled: Whether to create internet load balancer for API Server. Default to true. Only works for **Create** Operation.
@@ -833,11 +863,23 @@ class _ManagedKubernetesState:
         if api_audiences is not None:
             pulumi.set(__self__, "api_audiences", api_audiences)
         if certificate_authority is not None:
+            warnings.warn("""Field 'certificate_authority' has been deprecated from provider version 1.248.0. Please use the attribute 'certificate_authority' of new DataSource 'alicloud_cs_cluster_credential' to replace it.""", DeprecationWarning)
+            pulumi.log.warn("""certificate_authority is deprecated: Field 'certificate_authority' has been deprecated from provider version 1.248.0. Please use the attribute 'certificate_authority' of new DataSource 'alicloud_cs_cluster_credential' to replace it.""")
+        if certificate_authority is not None:
             pulumi.set(__self__, "certificate_authority", certificate_authority)
+        if client_cert is not None:
+            warnings.warn("""Field 'client_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-cert.pem) for replace it.""", DeprecationWarning)
+            pulumi.log.warn("""client_cert is deprecated: Field 'client_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-cert.pem) for replace it.""")
         if client_cert is not None:
             pulumi.set(__self__, "client_cert", client_cert)
         if client_key is not None:
+            warnings.warn("""Field 'client_key' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_key' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-key.pem) for replace it.""", DeprecationWarning)
+            pulumi.log.warn("""client_key is deprecated: Field 'client_key' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_key' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-key.pem) for replace it.""")
+        if client_key is not None:
             pulumi.set(__self__, "client_key", client_key)
+        if cluster_ca_cert is not None:
+            warnings.warn("""Field 'cluster_ca_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.cluster_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.""", DeprecationWarning)
+            pulumi.log.warn("""cluster_ca_cert is deprecated: Field 'cluster_ca_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.cluster_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.""")
         if cluster_ca_cert is not None:
             pulumi.set(__self__, "cluster_ca_cert", cluster_ca_cert)
         if cluster_domain is not None:
@@ -903,6 +945,8 @@ class _ManagedKubernetesState:
             pulumi.set(__self__, "service_account_issuer", service_account_issuer)
         if service_cidr is not None:
             pulumi.set(__self__, "service_cidr", service_cidr)
+        if skip_set_certificate_authority is not None:
+            pulumi.set(__self__, "skip_set_certificate_authority", skip_set_certificate_authority)
         if slb_id is not None:
             pulumi.set(__self__, "slb_id", slb_id)
         if slb_internet is not None:
@@ -938,8 +982,6 @@ class _ManagedKubernetesState:
     def addons(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ManagedKubernetesAddonArgs']]]]:
         """
         The addon you want to install in cluster. See `addons` below. Only works for **Create** Operation, use resource cs_kubernetes_addon to manage addons if cluster is created.
-
-        *Network params*
         """
         return pulumi.get(self, "addons")
 
@@ -961,9 +1003,10 @@ class _ManagedKubernetesState:
 
     @property
     @pulumi.getter(name="certificateAuthority")
+    @_utilities.deprecated("""Field 'certificate_authority' has been deprecated from provider version 1.248.0. Please use the attribute 'certificate_authority' of new DataSource 'alicloud_cs_cluster_credential' to replace it.""")
     def certificate_authority(self) -> Optional[pulumi.Input['ManagedKubernetesCertificateAuthorityArgs']]:
         """
-        (Available since v1.105.0) Nested attribute containing certificate authority data for your cluster.
+        (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificate_authority of new DataSource `cs_get_cluster_credential` to replace it.
         """
         return pulumi.get(self, "certificate_authority")
 
@@ -973,9 +1016,10 @@ class _ManagedKubernetesState:
 
     @property
     @pulumi.getter(name="clientCert")
+    @_utilities.deprecated("""Field 'client_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-cert.pem) for replace it.""")
     def client_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        The path of client certificate, like `~/.kube/client-cert.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
         """
         return pulumi.get(self, "client_cert")
 
@@ -985,9 +1029,10 @@ class _ManagedKubernetesState:
 
     @property
     @pulumi.getter(name="clientKey")
+    @_utilities.deprecated("""Field 'client_key' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_key' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-key.pem) for replace it.""")
     def client_key(self) -> Optional[pulumi.Input[str]]:
         """
-        The path of client key, like `~/.kube/client-key.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         """
         return pulumi.get(self, "client_key")
 
@@ -997,9 +1042,10 @@ class _ManagedKubernetesState:
 
     @property
     @pulumi.getter(name="clusterCaCert")
+    @_utilities.deprecated("""Field 'cluster_ca_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.cluster_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.""")
     def cluster_ca_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        The path of cluster ca certificate, like `~/.kube/cluster-ca-cert.pem`
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.cluster_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.
 
         *Removed params*
         """
@@ -1372,6 +1418,20 @@ class _ManagedKubernetesState:
         pulumi.set(self, "service_cidr", value)
 
     @property
+    @pulumi.getter(name="skipSetCertificateAuthority")
+    def skip_set_certificate_authority(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Configure whether to save certificate authority data for your cluster to attribute `certificate_authority`. For cluster security, recommended configuration as `true`. Will be removed with attribute certificate_authority removed.
+
+        *Network params*
+        """
+        return pulumi.get(self, "skip_set_certificate_authority")
+
+    @skip_set_certificate_authority.setter
+    def skip_set_certificate_authority(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "skip_set_certificate_authority", value)
+
+    @property
     @pulumi.getter(name="slbId")
     def slb_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -1575,6 +1635,7 @@ class ManagedKubernetes(pulumi.CustomResource):
                  security_group_id: Optional[pulumi.Input[str]] = None,
                  service_account_issuer: Optional[pulumi.Input[str]] = None,
                  service_cidr: Optional[pulumi.Input[str]] = None,
+                 skip_set_certificate_authority: Optional[pulumi.Input[bool]] = None,
                  slb_internet_enabled: Optional[pulumi.Input[bool]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  timezone: Optional[pulumi.Input[str]] = None,
@@ -1628,12 +1689,10 @@ class ManagedKubernetes(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ManagedKubernetesAddonArgs', 'ManagedKubernetesAddonArgsDict']]]] addons: The addon you want to install in cluster. See `addons` below. Only works for **Create** Operation, use resource cs_kubernetes_addon to manage addons if cluster is created.
-               
-               *Network params*
         :param pulumi.Input[Sequence[pulumi.Input[str]]] api_audiences: A list of API audiences for [Service Account Token Volume Projection](https://www.alibabacloud.com/help/doc-detail/160384.htm). Set this to `["https://kubernetes.default.svc"]` if you want to enable the Token Volume Projection feature (requires specifying `service_account_issuer` as well. From cluster version 1.22, Service Account Token Volume Projection will be enabled by default.
-        :param pulumi.Input[str] client_cert: The path of client certificate, like `~/.kube/client-cert.pem`.
-        :param pulumi.Input[str] client_key: The path of client key, like `~/.kube/client-key.pem`.
-        :param pulumi.Input[str] cluster_ca_cert: The path of cluster ca certificate, like `~/.kube/cluster-ca-cert.pem`
+        :param pulumi.Input[str] client_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
+        :param pulumi.Input[str] client_key: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
+        :param pulumi.Input[str] cluster_ca_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.cluster_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.
                
                *Removed params*
         :param pulumi.Input[str] cluster_domain: Cluster local domain name, Default to `cluster.local`. A domain name consists of one or more sections separated by a decimal point (.), each of which is up to 63 characters long, and can be lowercase, numerals, and underscores (-), and must be lowercase or numerals at the beginning and end.
@@ -1668,6 +1727,9 @@ class ManagedKubernetes(pulumi.CustomResource):
                * After updating the control plane security group, the Elastic Network Interfaces (ENIs) used by the control plane and managed components will automatically join the new security group.
         :param pulumi.Input[str] service_account_issuer: The issuer of the Service Account token for [Service Account Token Volume Projection](https://www.alibabacloud.com/help/doc-detail/160384.htm), corresponds to the `iss` field in the token payload. Set this to `"https://kubernetes.default.svc"` to enable the Token Volume Projection feature (requires specifying `api_audiences` as well). From cluster version 1.22, Service Account Token Volume Projection will be enabled by default.
         :param pulumi.Input[str] service_cidr: The CIDR block for the service network. It cannot be duplicated with the VPC CIDR and CIDR used by Kubernetes cluster in VPC, cannot be modified after creation.
+        :param pulumi.Input[bool] skip_set_certificate_authority: Configure whether to save certificate authority data for your cluster to attribute `certificate_authority`. For cluster security, recommended configuration as `true`. Will be removed with attribute certificate_authority removed.
+               
+               *Network params*
         :param pulumi.Input[bool] slb_internet_enabled: Whether to create internet load balancer for API Server. Default to true. Only works for **Create** Operation.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: Default nil, A map of tags assigned to the kubernetes cluster and work nodes. See `tags` below.
         :param pulumi.Input[str] timezone: Cluster timezone, works for control plane and Worker nodes.
@@ -1780,6 +1842,7 @@ class ManagedKubernetes(pulumi.CustomResource):
                  security_group_id: Optional[pulumi.Input[str]] = None,
                  service_account_issuer: Optional[pulumi.Input[str]] = None,
                  service_cidr: Optional[pulumi.Input[str]] = None,
+                 skip_set_certificate_authority: Optional[pulumi.Input[bool]] = None,
                  slb_internet_enabled: Optional[pulumi.Input[bool]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  timezone: Optional[pulumi.Input[str]] = None,
@@ -1829,6 +1892,7 @@ class ManagedKubernetes(pulumi.CustomResource):
             __props__.__dict__["security_group_id"] = security_group_id
             __props__.__dict__["service_account_issuer"] = service_account_issuer
             __props__.__dict__["service_cidr"] = service_cidr
+            __props__.__dict__["skip_set_certificate_authority"] = skip_set_certificate_authority
             __props__.__dict__["slb_internet_enabled"] = slb_internet_enabled
             __props__.__dict__["tags"] = tags
             __props__.__dict__["timezone"] = timezone
@@ -1892,6 +1956,7 @@ class ManagedKubernetes(pulumi.CustomResource):
             security_group_id: Optional[pulumi.Input[str]] = None,
             service_account_issuer: Optional[pulumi.Input[str]] = None,
             service_cidr: Optional[pulumi.Input[str]] = None,
+            skip_set_certificate_authority: Optional[pulumi.Input[bool]] = None,
             slb_id: Optional[pulumi.Input[str]] = None,
             slb_internet: Optional[pulumi.Input[str]] = None,
             slb_internet_enabled: Optional[pulumi.Input[bool]] = None,
@@ -1913,13 +1978,11 @@ class ManagedKubernetes(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ManagedKubernetesAddonArgs', 'ManagedKubernetesAddonArgsDict']]]] addons: The addon you want to install in cluster. See `addons` below. Only works for **Create** Operation, use resource cs_kubernetes_addon to manage addons if cluster is created.
-               
-               *Network params*
         :param pulumi.Input[Sequence[pulumi.Input[str]]] api_audiences: A list of API audiences for [Service Account Token Volume Projection](https://www.alibabacloud.com/help/doc-detail/160384.htm). Set this to `["https://kubernetes.default.svc"]` if you want to enable the Token Volume Projection feature (requires specifying `service_account_issuer` as well. From cluster version 1.22, Service Account Token Volume Projection will be enabled by default.
-        :param pulumi.Input[Union['ManagedKubernetesCertificateAuthorityArgs', 'ManagedKubernetesCertificateAuthorityArgsDict']] certificate_authority: (Available since v1.105.0) Nested attribute containing certificate authority data for your cluster.
-        :param pulumi.Input[str] client_cert: The path of client certificate, like `~/.kube/client-cert.pem`.
-        :param pulumi.Input[str] client_key: The path of client key, like `~/.kube/client-key.pem`.
-        :param pulumi.Input[str] cluster_ca_cert: The path of cluster ca certificate, like `~/.kube/cluster-ca-cert.pem`
+        :param pulumi.Input[Union['ManagedKubernetesCertificateAuthorityArgs', 'ManagedKubernetesCertificateAuthorityArgsDict']] certificate_authority: (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificate_authority of new DataSource `cs_get_cluster_credential` to replace it.
+        :param pulumi.Input[str] client_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
+        :param pulumi.Input[str] client_key: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
+        :param pulumi.Input[str] cluster_ca_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.cluster_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.
                
                *Removed params*
         :param pulumi.Input[str] cluster_domain: Cluster local domain name, Default to `cluster.local`. A domain name consists of one or more sections separated by a decimal point (.), each of which is up to 63 characters long, and can be lowercase, numerals, and underscores (-), and must be lowercase or numerals at the beginning and end.
@@ -1957,6 +2020,9 @@ class ManagedKubernetes(pulumi.CustomResource):
                * After updating the control plane security group, the Elastic Network Interfaces (ENIs) used by the control plane and managed components will automatically join the new security group.
         :param pulumi.Input[str] service_account_issuer: The issuer of the Service Account token for [Service Account Token Volume Projection](https://www.alibabacloud.com/help/doc-detail/160384.htm), corresponds to the `iss` field in the token payload. Set this to `"https://kubernetes.default.svc"` to enable the Token Volume Projection feature (requires specifying `api_audiences` as well). From cluster version 1.22, Service Account Token Volume Projection will be enabled by default.
         :param pulumi.Input[str] service_cidr: The CIDR block for the service network. It cannot be duplicated with the VPC CIDR and CIDR used by Kubernetes cluster in VPC, cannot be modified after creation.
+        :param pulumi.Input[bool] skip_set_certificate_authority: Configure whether to save certificate authority data for your cluster to attribute `certificate_authority`. For cluster security, recommended configuration as `true`. Will be removed with attribute certificate_authority removed.
+               
+               *Network params*
         :param pulumi.Input[str] slb_id: The ID of APIServer load balancer.
         :param pulumi.Input[str] slb_internet: The public ip of load balancer.
         :param pulumi.Input[bool] slb_internet_enabled: Whether to create internet load balancer for API Server. Default to true. Only works for **Create** Operation.
@@ -2020,6 +2086,7 @@ class ManagedKubernetes(pulumi.CustomResource):
         __props__.__dict__["security_group_id"] = security_group_id
         __props__.__dict__["service_account_issuer"] = service_account_issuer
         __props__.__dict__["service_cidr"] = service_cidr
+        __props__.__dict__["skip_set_certificate_authority"] = skip_set_certificate_authority
         __props__.__dict__["slb_id"] = slb_id
         __props__.__dict__["slb_internet"] = slb_internet
         __props__.__dict__["slb_internet_enabled"] = slb_internet_enabled
@@ -2040,8 +2107,6 @@ class ManagedKubernetes(pulumi.CustomResource):
     def addons(self) -> pulumi.Output[Optional[Sequence['outputs.ManagedKubernetesAddon']]]:
         """
         The addon you want to install in cluster. See `addons` below. Only works for **Create** Operation, use resource cs_kubernetes_addon to manage addons if cluster is created.
-
-        *Network params*
         """
         return pulumi.get(self, "addons")
 
@@ -2055,33 +2120,37 @@ class ManagedKubernetes(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="certificateAuthority")
+    @_utilities.deprecated("""Field 'certificate_authority' has been deprecated from provider version 1.248.0. Please use the attribute 'certificate_authority' of new DataSource 'alicloud_cs_cluster_credential' to replace it.""")
     def certificate_authority(self) -> pulumi.Output['outputs.ManagedKubernetesCertificateAuthority']:
         """
-        (Available since v1.105.0) Nested attribute containing certificate authority data for your cluster.
+        (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificate_authority of new DataSource `cs_get_cluster_credential` to replace it.
         """
         return pulumi.get(self, "certificate_authority")
 
     @property
     @pulumi.getter(name="clientCert")
+    @_utilities.deprecated("""Field 'client_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-cert.pem) for replace it.""")
     def client_cert(self) -> pulumi.Output[Optional[str]]:
         """
-        The path of client certificate, like `~/.kube/client-cert.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
         """
         return pulumi.get(self, "client_cert")
 
     @property
     @pulumi.getter(name="clientKey")
+    @_utilities.deprecated("""Field 'client_key' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_key' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-key.pem) for replace it.""")
     def client_key(self) -> pulumi.Output[Optional[str]]:
         """
-        The path of client key, like `~/.kube/client-key.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         """
         return pulumi.get(self, "client_key")
 
     @property
     @pulumi.getter(name="clusterCaCert")
+    @_utilities.deprecated("""Field 'cluster_ca_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.cluster_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.""")
     def cluster_ca_cert(self) -> pulumi.Output[Optional[str]]:
         """
-        The path of cluster ca certificate, like `~/.kube/cluster-ca-cert.pem`
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.cluster_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/cluster-ca-cert.pem) for replace it.
 
         *Removed params*
         """
@@ -2328,6 +2397,16 @@ class ManagedKubernetes(pulumi.CustomResource):
         The CIDR block for the service network. It cannot be duplicated with the VPC CIDR and CIDR used by Kubernetes cluster in VPC, cannot be modified after creation.
         """
         return pulumi.get(self, "service_cidr")
+
+    @property
+    @pulumi.getter(name="skipSetCertificateAuthority")
+    def skip_set_certificate_authority(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Configure whether to save certificate authority data for your cluster to attribute `certificate_authority`. For cluster security, recommended configuration as `true`. Will be removed with attribute certificate_authority removed.
+
+        *Network params*
+        """
+        return pulumi.get(self, "skip_set_certificate_authority")
 
     @property
     @pulumi.getter(name="slbId")

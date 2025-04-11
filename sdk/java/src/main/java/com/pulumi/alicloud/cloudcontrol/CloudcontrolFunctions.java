@@ -17,7 +17,6 @@ import com.pulumi.core.Output;
 import com.pulumi.core.TypeShape;
 import com.pulumi.deployment.Deployment;
 import com.pulumi.deployment.InvokeOptions;
-import com.pulumi.deployment.InvokeOutputOptions;
 import java.util.concurrent.CompletableFuture;
 
 public final class CloudcontrolFunctions {
@@ -175,58 +174,6 @@ public final class CloudcontrolFunctions {
      * 
      */
     public static Output<GetPricesResult> getPrices(GetPricesArgs args, InvokeOptions options) {
-        return Deployment.getInstance().invoke("alicloud:cloudcontrol/getPrices:getPrices", TypeShape.of(GetPricesResult.class), args, Utilities.withVersion(options));
-    }
-    /**
-     * This data source provides Cloud Control Price available to the user.[What is Price](https://next.api.aliyun.com/document/cloudcontrol/2022-08-30/GetPrice)
-     * 
-     * &gt; **NOTE:** Available since v1.241.0.
-     * 
-     * ## Example Usage
-     * 
-     * &lt;!--Start PulumiCodeChooser --&gt;
-     * <pre>
-     * {@code
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.alicloud.cloudcontrol.CloudcontrolFunctions;
-     * import com.pulumi.alicloud.cloudcontrol.inputs.GetPricesArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *         final var config = ctx.config();
-     *         final var name = config.get("name").orElse("terraform-example");
-     *         final var default = CloudcontrolFunctions.getPrices(GetPricesArgs.builder()
-     *             .desireAttributes(Map.ofEntries(
-     *                 Map.entry("AddressType", "internet"),
-     *                 Map.entry("PaymentType", "PayAsYouGo")
-     *             ))
-     *             .product("SLB")
-     *             .resourceCode("LoadBalancer")
-     *             .build());
-     * 
-     *         ctx.export("alicloudCloudControlPriceExampleId", default_.prices()[0].discountPrice());
-     *     }
-     * }
-     * }
-     * </pre>
-     * &lt;!--End PulumiCodeChooser --&gt;
-     * 
-     */
-    public static Output<GetPricesResult> getPrices(GetPricesArgs args, InvokeOutputOptions options) {
         return Deployment.getInstance().invoke("alicloud:cloudcontrol/getPrices:getPrices", TypeShape.of(GetPricesResult.class), args, Utilities.withVersion(options));
     }
     /**
@@ -554,52 +501,6 @@ public final class CloudcontrolFunctions {
      * &lt;!--End PulumiCodeChooser --&gt;
      * 
      */
-    public static Output<GetProductsResult> getProducts(GetProductsArgs args, InvokeOutputOptions options) {
-        return Deployment.getInstance().invoke("alicloud:cloudcontrol/getProducts:getProducts", TypeShape.of(GetProductsResult.class), args, Utilities.withVersion(options));
-    }
-    /**
-     * This data source provides Cloud Control Product available to the user.[What is Product](https://next.api.aliyun.com/document/cloudcontrol/2022-08-30/ListProducts)
-     * 
-     * &gt; **NOTE:** Available since v1.241.0.
-     * 
-     * ## Example Usage
-     * 
-     * &lt;!--Start PulumiCodeChooser --&gt;
-     * <pre>
-     * {@code
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.alicloud.cloudcontrol.CloudcontrolFunctions;
-     * import com.pulumi.alicloud.cloudcontrol.inputs.GetProductsArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *         final var config = ctx.config();
-     *         final var name = config.get("name").orElse("terraform-example");
-     *         final var default = CloudcontrolFunctions.getProducts(GetProductsArgs.builder()
-     *             .ids("VPC")
-     *             .build());
-     * 
-     *     }
-     * }
-     * }
-     * </pre>
-     * &lt;!--End PulumiCodeChooser --&gt;
-     * 
-     */
     public static CompletableFuture<GetProductsResult> getProductsPlain(GetProductsPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("alicloud:cloudcontrol/getProducts:getProducts", TypeShape.of(GetProductsResult.class), args, Utilities.withVersion(options));
     }
@@ -742,53 +643,6 @@ public final class CloudcontrolFunctions {
      * 
      */
     public static Output<GetResourceTypesResult> getResourceTypes(GetResourceTypesArgs args, InvokeOptions options) {
-        return Deployment.getInstance().invoke("alicloud:cloudcontrol/getResourceTypes:getResourceTypes", TypeShape.of(GetResourceTypesResult.class), args, Utilities.withVersion(options));
-    }
-    /**
-     * This data source provides Cloud Control Resource Type available to the user.[What is Resource Type](https://next.api.aliyun.com/document/cloudcontrol/2022-08-30/GetResourceType)
-     * 
-     * &gt; **NOTE:** Available since v1.241.0.
-     * 
-     * ## Example Usage
-     * 
-     * &lt;!--Start PulumiCodeChooser --&gt;
-     * <pre>
-     * {@code
-     * package generated_program;
-     * 
-     * import com.pulumi.Context;
-     * import com.pulumi.Pulumi;
-     * import com.pulumi.core.Output;
-     * import com.pulumi.alicloud.cloudcontrol.CloudcontrolFunctions;
-     * import com.pulumi.alicloud.cloudcontrol.inputs.GetResourceTypesArgs;
-     * import java.util.List;
-     * import java.util.ArrayList;
-     * import java.util.Map;
-     * import java.io.File;
-     * import java.nio.file.Files;
-     * import java.nio.file.Paths;
-     * 
-     * public class App {
-     *     public static void main(String[] args) {
-     *         Pulumi.run(App::stack);
-     *     }
-     * 
-     *     public static void stack(Context ctx) {
-     *         final var config = ctx.config();
-     *         final var name = config.get("name").orElse("terraform-example");
-     *         final var default = CloudcontrolFunctions.getResourceTypes(GetResourceTypesArgs.builder()
-     *             .product("VPC")
-     *             .ids("VSwitch")
-     *             .build());
-     * 
-     *     }
-     * }
-     * }
-     * </pre>
-     * &lt;!--End PulumiCodeChooser --&gt;
-     * 
-     */
-    public static Output<GetResourceTypesResult> getResourceTypes(GetResourceTypesArgs args, InvokeOutputOptions options) {
         return Deployment.getInstance().invoke("alicloud:cloudcontrol/getResourceTypes:getResourceTypes", TypeShape.of(GetResourceTypesResult.class), args, Utilities.withVersion(options));
     }
     /**

@@ -2150,6 +2150,277 @@ func (o ClusterNodeGroupNodeArrayOutput) Index(i pulumi.IntInput) ClusterNodeGro
 	}).(ClusterNodeGroupNodeOutput)
 }
 
+type ExperimentPlanTemplateTemplatePipeline struct {
+	// Contains a series of parameters related to the environment. See `envParams` below.
+	EnvParams ExperimentPlanTemplateTemplatePipelineEnvParams `pulumi:"envParams"`
+	// Indicates the sequence number of the pipeline node.
+	PipelineOrder int `pulumi:"pipelineOrder"`
+	// The use of the template scenario. It can have the following optional parameters:
+	// - baseline: benchmark evaluation
+	Scene string `pulumi:"scene"`
+	// Represents additional parameters for the run.
+	SettingParams map[string]string `pulumi:"settingParams"`
+	// Used to uniquely identify a specific payload.
+	WorkloadId int `pulumi:"workloadId"`
+	// The name used to represent a specific payload.
+	WorkloadName string `pulumi:"workloadName"`
+}
+
+// ExperimentPlanTemplateTemplatePipelineInput is an input type that accepts ExperimentPlanTemplateTemplatePipelineArgs and ExperimentPlanTemplateTemplatePipelineOutput values.
+// You can construct a concrete instance of `ExperimentPlanTemplateTemplatePipelineInput` via:
+//
+//	ExperimentPlanTemplateTemplatePipelineArgs{...}
+type ExperimentPlanTemplateTemplatePipelineInput interface {
+	pulumi.Input
+
+	ToExperimentPlanTemplateTemplatePipelineOutput() ExperimentPlanTemplateTemplatePipelineOutput
+	ToExperimentPlanTemplateTemplatePipelineOutputWithContext(context.Context) ExperimentPlanTemplateTemplatePipelineOutput
+}
+
+type ExperimentPlanTemplateTemplatePipelineArgs struct {
+	// Contains a series of parameters related to the environment. See `envParams` below.
+	EnvParams ExperimentPlanTemplateTemplatePipelineEnvParamsInput `pulumi:"envParams"`
+	// Indicates the sequence number of the pipeline node.
+	PipelineOrder pulumi.IntInput `pulumi:"pipelineOrder"`
+	// The use of the template scenario. It can have the following optional parameters:
+	// - baseline: benchmark evaluation
+	Scene pulumi.StringInput `pulumi:"scene"`
+	// Represents additional parameters for the run.
+	SettingParams pulumi.StringMapInput `pulumi:"settingParams"`
+	// Used to uniquely identify a specific payload.
+	WorkloadId pulumi.IntInput `pulumi:"workloadId"`
+	// The name used to represent a specific payload.
+	WorkloadName pulumi.StringInput `pulumi:"workloadName"`
+}
+
+func (ExperimentPlanTemplateTemplatePipelineArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ExperimentPlanTemplateTemplatePipeline)(nil)).Elem()
+}
+
+func (i ExperimentPlanTemplateTemplatePipelineArgs) ToExperimentPlanTemplateTemplatePipelineOutput() ExperimentPlanTemplateTemplatePipelineOutput {
+	return i.ToExperimentPlanTemplateTemplatePipelineOutputWithContext(context.Background())
+}
+
+func (i ExperimentPlanTemplateTemplatePipelineArgs) ToExperimentPlanTemplateTemplatePipelineOutputWithContext(ctx context.Context) ExperimentPlanTemplateTemplatePipelineOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ExperimentPlanTemplateTemplatePipelineOutput)
+}
+
+// ExperimentPlanTemplateTemplatePipelineArrayInput is an input type that accepts ExperimentPlanTemplateTemplatePipelineArray and ExperimentPlanTemplateTemplatePipelineArrayOutput values.
+// You can construct a concrete instance of `ExperimentPlanTemplateTemplatePipelineArrayInput` via:
+//
+//	ExperimentPlanTemplateTemplatePipelineArray{ ExperimentPlanTemplateTemplatePipelineArgs{...} }
+type ExperimentPlanTemplateTemplatePipelineArrayInput interface {
+	pulumi.Input
+
+	ToExperimentPlanTemplateTemplatePipelineArrayOutput() ExperimentPlanTemplateTemplatePipelineArrayOutput
+	ToExperimentPlanTemplateTemplatePipelineArrayOutputWithContext(context.Context) ExperimentPlanTemplateTemplatePipelineArrayOutput
+}
+
+type ExperimentPlanTemplateTemplatePipelineArray []ExperimentPlanTemplateTemplatePipelineInput
+
+func (ExperimentPlanTemplateTemplatePipelineArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ExperimentPlanTemplateTemplatePipeline)(nil)).Elem()
+}
+
+func (i ExperimentPlanTemplateTemplatePipelineArray) ToExperimentPlanTemplateTemplatePipelineArrayOutput() ExperimentPlanTemplateTemplatePipelineArrayOutput {
+	return i.ToExperimentPlanTemplateTemplatePipelineArrayOutputWithContext(context.Background())
+}
+
+func (i ExperimentPlanTemplateTemplatePipelineArray) ToExperimentPlanTemplateTemplatePipelineArrayOutputWithContext(ctx context.Context) ExperimentPlanTemplateTemplatePipelineArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ExperimentPlanTemplateTemplatePipelineArrayOutput)
+}
+
+type ExperimentPlanTemplateTemplatePipelineOutput struct{ *pulumi.OutputState }
+
+func (ExperimentPlanTemplateTemplatePipelineOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ExperimentPlanTemplateTemplatePipeline)(nil)).Elem()
+}
+
+func (o ExperimentPlanTemplateTemplatePipelineOutput) ToExperimentPlanTemplateTemplatePipelineOutput() ExperimentPlanTemplateTemplatePipelineOutput {
+	return o
+}
+
+func (o ExperimentPlanTemplateTemplatePipelineOutput) ToExperimentPlanTemplateTemplatePipelineOutputWithContext(ctx context.Context) ExperimentPlanTemplateTemplatePipelineOutput {
+	return o
+}
+
+// Contains a series of parameters related to the environment. See `envParams` below.
+func (o ExperimentPlanTemplateTemplatePipelineOutput) EnvParams() ExperimentPlanTemplateTemplatePipelineEnvParamsOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipeline) ExperimentPlanTemplateTemplatePipelineEnvParams {
+		return v.EnvParams
+	}).(ExperimentPlanTemplateTemplatePipelineEnvParamsOutput)
+}
+
+// Indicates the sequence number of the pipeline node.
+func (o ExperimentPlanTemplateTemplatePipelineOutput) PipelineOrder() pulumi.IntOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipeline) int { return v.PipelineOrder }).(pulumi.IntOutput)
+}
+
+// The use of the template scenario. It can have the following optional parameters:
+// - baseline: benchmark evaluation
+func (o ExperimentPlanTemplateTemplatePipelineOutput) Scene() pulumi.StringOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipeline) string { return v.Scene }).(pulumi.StringOutput)
+}
+
+// Represents additional parameters for the run.
+func (o ExperimentPlanTemplateTemplatePipelineOutput) SettingParams() pulumi.StringMapOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipeline) map[string]string { return v.SettingParams }).(pulumi.StringMapOutput)
+}
+
+// Used to uniquely identify a specific payload.
+func (o ExperimentPlanTemplateTemplatePipelineOutput) WorkloadId() pulumi.IntOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipeline) int { return v.WorkloadId }).(pulumi.IntOutput)
+}
+
+// The name used to represent a specific payload.
+func (o ExperimentPlanTemplateTemplatePipelineOutput) WorkloadName() pulumi.StringOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipeline) string { return v.WorkloadName }).(pulumi.StringOutput)
+}
+
+type ExperimentPlanTemplateTemplatePipelineArrayOutput struct{ *pulumi.OutputState }
+
+func (ExperimentPlanTemplateTemplatePipelineArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ExperimentPlanTemplateTemplatePipeline)(nil)).Elem()
+}
+
+func (o ExperimentPlanTemplateTemplatePipelineArrayOutput) ToExperimentPlanTemplateTemplatePipelineArrayOutput() ExperimentPlanTemplateTemplatePipelineArrayOutput {
+	return o
+}
+
+func (o ExperimentPlanTemplateTemplatePipelineArrayOutput) ToExperimentPlanTemplateTemplatePipelineArrayOutputWithContext(ctx context.Context) ExperimentPlanTemplateTemplatePipelineArrayOutput {
+	return o
+}
+
+func (o ExperimentPlanTemplateTemplatePipelineArrayOutput) Index(i pulumi.IntInput) ExperimentPlanTemplateTemplatePipelineOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ExperimentPlanTemplateTemplatePipeline {
+		return vs[0].([]ExperimentPlanTemplateTemplatePipeline)[vs[1].(int)]
+	}).(ExperimentPlanTemplateTemplatePipelineOutput)
+}
+
+type ExperimentPlanTemplateTemplatePipelineEnvParams struct {
+	// Number of central processing units (CPUs) allocated. This parameter affects the processing power of the computation, especially in tasks that require a large amount of parallel processing.
+	CpuPerWorker int `pulumi:"cpuPerWorker"`
+	// The version of CUDA(Compute Unified Device Architecture) used. CUDA is a parallel computing platform and programming model provided by NVIDIA. A specific version may affect the available GPU functions and performance optimization.
+	CudaVersion *string `pulumi:"cudaVersion"`
+	// The version of the GPU driver used. Driver version may affect GPU performance and compatibility, so it is important to ensure that the correct version is used
+	GpuDriverVersion *string `pulumi:"gpuDriverVersion"`
+	// Number of graphics processing units (GPUs). GPUs are a key component in deep learning and large-scale data processing, so this parameter is very important for tasks that require graphics-accelerated computing.
+	GpuPerWorker int `pulumi:"gpuPerWorker"`
+	// The amount of memory available. Memory size has an important impact on the performance and stability of the program, especially when dealing with large data sets or high-dimensional data.
+	MemoryPerWorker int `pulumi:"memoryPerWorker"`
+	// The NVIDIA Collective Communications Library(NCCL) version used. NCCL is a library for multi-GPU and multi-node communication. This parameter is particularly important for optimizing data transmission in distributed computing.
+	NcclVersion *string `pulumi:"ncclVersion"`
+	// The version of the PyTorch framework used. PyTorch is a widely used deep learning library, and differences between versions may affect the performance and functional support of model training and inference.
+	PyTorchVersion *string `pulumi:"pyTorchVersion"`
+	// Shared memory GB allocation
+	ShareMemory int `pulumi:"shareMemory"`
+	// The total number of nodes. This parameter directly affects the parallelism and computing speed of the task, and a higher number of working nodes usually accelerates the completion of the task.
+	WorkerNum int `pulumi:"workerNum"`
+}
+
+// ExperimentPlanTemplateTemplatePipelineEnvParamsInput is an input type that accepts ExperimentPlanTemplateTemplatePipelineEnvParamsArgs and ExperimentPlanTemplateTemplatePipelineEnvParamsOutput values.
+// You can construct a concrete instance of `ExperimentPlanTemplateTemplatePipelineEnvParamsInput` via:
+//
+//	ExperimentPlanTemplateTemplatePipelineEnvParamsArgs{...}
+type ExperimentPlanTemplateTemplatePipelineEnvParamsInput interface {
+	pulumi.Input
+
+	ToExperimentPlanTemplateTemplatePipelineEnvParamsOutput() ExperimentPlanTemplateTemplatePipelineEnvParamsOutput
+	ToExperimentPlanTemplateTemplatePipelineEnvParamsOutputWithContext(context.Context) ExperimentPlanTemplateTemplatePipelineEnvParamsOutput
+}
+
+type ExperimentPlanTemplateTemplatePipelineEnvParamsArgs struct {
+	// Number of central processing units (CPUs) allocated. This parameter affects the processing power of the computation, especially in tasks that require a large amount of parallel processing.
+	CpuPerWorker pulumi.IntInput `pulumi:"cpuPerWorker"`
+	// The version of CUDA(Compute Unified Device Architecture) used. CUDA is a parallel computing platform and programming model provided by NVIDIA. A specific version may affect the available GPU functions and performance optimization.
+	CudaVersion pulumi.StringPtrInput `pulumi:"cudaVersion"`
+	// The version of the GPU driver used. Driver version may affect GPU performance and compatibility, so it is important to ensure that the correct version is used
+	GpuDriverVersion pulumi.StringPtrInput `pulumi:"gpuDriverVersion"`
+	// Number of graphics processing units (GPUs). GPUs are a key component in deep learning and large-scale data processing, so this parameter is very important for tasks that require graphics-accelerated computing.
+	GpuPerWorker pulumi.IntInput `pulumi:"gpuPerWorker"`
+	// The amount of memory available. Memory size has an important impact on the performance and stability of the program, especially when dealing with large data sets or high-dimensional data.
+	MemoryPerWorker pulumi.IntInput `pulumi:"memoryPerWorker"`
+	// The NVIDIA Collective Communications Library(NCCL) version used. NCCL is a library for multi-GPU and multi-node communication. This parameter is particularly important for optimizing data transmission in distributed computing.
+	NcclVersion pulumi.StringPtrInput `pulumi:"ncclVersion"`
+	// The version of the PyTorch framework used. PyTorch is a widely used deep learning library, and differences between versions may affect the performance and functional support of model training and inference.
+	PyTorchVersion pulumi.StringPtrInput `pulumi:"pyTorchVersion"`
+	// Shared memory GB allocation
+	ShareMemory pulumi.IntInput `pulumi:"shareMemory"`
+	// The total number of nodes. This parameter directly affects the parallelism and computing speed of the task, and a higher number of working nodes usually accelerates the completion of the task.
+	WorkerNum pulumi.IntInput `pulumi:"workerNum"`
+}
+
+func (ExperimentPlanTemplateTemplatePipelineEnvParamsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ExperimentPlanTemplateTemplatePipelineEnvParams)(nil)).Elem()
+}
+
+func (i ExperimentPlanTemplateTemplatePipelineEnvParamsArgs) ToExperimentPlanTemplateTemplatePipelineEnvParamsOutput() ExperimentPlanTemplateTemplatePipelineEnvParamsOutput {
+	return i.ToExperimentPlanTemplateTemplatePipelineEnvParamsOutputWithContext(context.Background())
+}
+
+func (i ExperimentPlanTemplateTemplatePipelineEnvParamsArgs) ToExperimentPlanTemplateTemplatePipelineEnvParamsOutputWithContext(ctx context.Context) ExperimentPlanTemplateTemplatePipelineEnvParamsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ExperimentPlanTemplateTemplatePipelineEnvParamsOutput)
+}
+
+type ExperimentPlanTemplateTemplatePipelineEnvParamsOutput struct{ *pulumi.OutputState }
+
+func (ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ExperimentPlanTemplateTemplatePipelineEnvParams)(nil)).Elem()
+}
+
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) ToExperimentPlanTemplateTemplatePipelineEnvParamsOutput() ExperimentPlanTemplateTemplatePipelineEnvParamsOutput {
+	return o
+}
+
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) ToExperimentPlanTemplateTemplatePipelineEnvParamsOutputWithContext(ctx context.Context) ExperimentPlanTemplateTemplatePipelineEnvParamsOutput {
+	return o
+}
+
+// Number of central processing units (CPUs) allocated. This parameter affects the processing power of the computation, especially in tasks that require a large amount of parallel processing.
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) CpuPerWorker() pulumi.IntOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) int { return v.CpuPerWorker }).(pulumi.IntOutput)
+}
+
+// The version of CUDA(Compute Unified Device Architecture) used. CUDA is a parallel computing platform and programming model provided by NVIDIA. A specific version may affect the available GPU functions and performance optimization.
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) CudaVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) *string { return v.CudaVersion }).(pulumi.StringPtrOutput)
+}
+
+// The version of the GPU driver used. Driver version may affect GPU performance and compatibility, so it is important to ensure that the correct version is used
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) GpuDriverVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) *string { return v.GpuDriverVersion }).(pulumi.StringPtrOutput)
+}
+
+// Number of graphics processing units (GPUs). GPUs are a key component in deep learning and large-scale data processing, so this parameter is very important for tasks that require graphics-accelerated computing.
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) GpuPerWorker() pulumi.IntOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) int { return v.GpuPerWorker }).(pulumi.IntOutput)
+}
+
+// The amount of memory available. Memory size has an important impact on the performance and stability of the program, especially when dealing with large data sets or high-dimensional data.
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) MemoryPerWorker() pulumi.IntOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) int { return v.MemoryPerWorker }).(pulumi.IntOutput)
+}
+
+// The NVIDIA Collective Communications Library(NCCL) version used. NCCL is a library for multi-GPU and multi-node communication. This parameter is particularly important for optimizing data transmission in distributed computing.
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) NcclVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) *string { return v.NcclVersion }).(pulumi.StringPtrOutput)
+}
+
+// The version of the PyTorch framework used. PyTorch is a widely used deep learning library, and differences between versions may affect the performance and functional support of model training and inference.
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) PyTorchVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) *string { return v.PyTorchVersion }).(pulumi.StringPtrOutput)
+}
+
+// Shared memory GB allocation
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) ShareMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) int { return v.ShareMemory }).(pulumi.IntOutput)
+}
+
+// The total number of nodes. This parameter directly affects the parallelism and computing speed of the task, and a higher number of working nodes usually accelerates the completion of the task.
+func (o ExperimentPlanTemplateTemplatePipelineEnvParamsOutput) WorkerNum() pulumi.IntOutput {
+	return o.ApplyT(func(v ExperimentPlanTemplateTemplatePipelineEnvParams) int { return v.WorkerNum }).(pulumi.IntOutput)
+}
+
 type NodeGroupIpAllocationPolicy struct {
 	// Specify the cluster subnet ID based on the bond name See `bondPolicy` below.
 	BondPolicy *NodeGroupIpAllocationPolicyBondPolicy `pulumi:"bondPolicy"`
@@ -3485,6 +3756,9 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNodeGroupArrayInput)(nil)).Elem(), ClusterNodeGroupArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNodeGroupNodeInput)(nil)).Elem(), ClusterNodeGroupNodeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNodeGroupNodeArrayInput)(nil)).Elem(), ClusterNodeGroupNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ExperimentPlanTemplateTemplatePipelineInput)(nil)).Elem(), ExperimentPlanTemplateTemplatePipelineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ExperimentPlanTemplateTemplatePipelineArrayInput)(nil)).Elem(), ExperimentPlanTemplateTemplatePipelineArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ExperimentPlanTemplateTemplatePipelineEnvParamsInput)(nil)).Elem(), ExperimentPlanTemplateTemplatePipelineEnvParamsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodeGroupIpAllocationPolicyInput)(nil)).Elem(), NodeGroupIpAllocationPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodeGroupIpAllocationPolicyArrayInput)(nil)).Elem(), NodeGroupIpAllocationPolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodeGroupIpAllocationPolicyBondPolicyInput)(nil)).Elem(), NodeGroupIpAllocationPolicyBondPolicyArgs{})
@@ -3535,6 +3809,9 @@ func init() {
 	pulumi.RegisterOutputType(ClusterNodeGroupArrayOutput{})
 	pulumi.RegisterOutputType(ClusterNodeGroupNodeOutput{})
 	pulumi.RegisterOutputType(ClusterNodeGroupNodeArrayOutput{})
+	pulumi.RegisterOutputType(ExperimentPlanTemplateTemplatePipelineOutput{})
+	pulumi.RegisterOutputType(ExperimentPlanTemplateTemplatePipelineArrayOutput{})
+	pulumi.RegisterOutputType(ExperimentPlanTemplateTemplatePipelineEnvParamsOutput{})
 	pulumi.RegisterOutputType(NodeGroupIpAllocationPolicyOutput{})
 	pulumi.RegisterOutputType(NodeGroupIpAllocationPolicyArrayOutput{})
 	pulumi.RegisterOutputType(NodeGroupIpAllocationPolicyBondPolicyOutput{})

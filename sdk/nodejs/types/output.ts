@@ -13449,6 +13449,7 @@ export namespace config {
          * Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to custom eflo endpoints.
          */
         eflo?: string;
+        efloCnp?: string;
         /**
          * Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to custom efloctrl endpoints.
          */
@@ -14298,11 +14299,11 @@ export namespace cs {
 
     export interface EdgeKubernetesCertificateAuthority {
         /**
-         * The path of client certificate, like `~/.kube/client-cert.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
          */
         clientCert: string;
         /**
-         * The path of client key, like `~/.kube/client-key.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
          */
         clientKey: string;
         /**
@@ -15798,11 +15799,11 @@ export namespace cs {
 
     export interface KubernetesCertificateAuthority {
         /**
-         * The path of client certificate, like `~/.kube/client-cert.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
          */
         clientCert: string;
         /**
-         * The path of client key, like `~/.kube/client-key.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
          */
         clientKey: string;
         /**
@@ -15963,11 +15964,11 @@ export namespace cs {
 
     export interface ManagedKubernetesCertificateAuthority {
         /**
-         * The path of client certificate, like `~/.kube/client-cert.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
          */
         clientCert: string;
         /**
-         * The path of client key, like `~/.kube/client-key.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
          */
         clientKey: string;
         /**
@@ -28245,6 +28246,73 @@ export namespace eflo {
         nodeId?: string;
         vpcId?: string;
         vswitchId?: string;
+    }
+
+    export interface ExperimentPlanTemplateTemplatePipeline {
+        /**
+         * Contains a series of parameters related to the environment. See `envParams` below.
+         */
+        envParams: outputs.eflo.ExperimentPlanTemplateTemplatePipelineEnvParams;
+        /**
+         * Indicates the sequence number of the pipeline node.
+         */
+        pipelineOrder: number;
+        /**
+         * The use of the template scenario. It can have the following optional parameters:
+         * - baseline: benchmark evaluation
+         */
+        scene: string;
+        /**
+         * Represents additional parameters for the run.
+         */
+        settingParams: {[key: string]: string};
+        /**
+         * Used to uniquely identify a specific payload.
+         */
+        workloadId: number;
+        /**
+         * The name used to represent a specific payload.
+         */
+        workloadName: string;
+    }
+
+    export interface ExperimentPlanTemplateTemplatePipelineEnvParams {
+        /**
+         * Number of central processing units (CPUs) allocated. This parameter affects the processing power of the computation, especially in tasks that require a large amount of parallel processing.
+         */
+        cpuPerWorker: number;
+        /**
+         * The version of CUDA(Compute Unified Device Architecture) used. CUDA is a parallel computing platform and programming model provided by NVIDIA. A specific version may affect the available GPU functions and performance optimization.
+         */
+        cudaVersion?: string;
+        /**
+         * The version of the GPU driver used. Driver version may affect GPU performance and compatibility, so it is important to ensure that the correct version is used
+         */
+        gpuDriverVersion?: string;
+        /**
+         * Number of graphics processing units (GPUs). GPUs are a key component in deep learning and large-scale data processing, so this parameter is very important for tasks that require graphics-accelerated computing.
+         */
+        gpuPerWorker: number;
+        /**
+         * The amount of memory available. Memory size has an important impact on the performance and stability of the program, especially when dealing with large data sets or high-dimensional data.
+         */
+        memoryPerWorker: number;
+        /**
+         * The NVIDIA Collective Communications Library(NCCL) version used. NCCL is a library for multi-GPU and multi-node communication. This parameter is particularly important for optimizing data transmission in distributed computing.
+         */
+        ncclVersion?: string;
+        /**
+         * The version of the PyTorch framework used. PyTorch is a widely used deep learning library, and differences between versions may affect the performance and functional support of model training and inference.
+         */
+        pyTorchVersion?: string;
+        /**
+         * Shared memory GB allocation
+         */
+        shareMemory: number;
+        /**
+         * The total number of nodes. This parameter directly affects the parallelism and computing speed of the task, and a higher number of working nodes usually accelerates the completion of the task.
+         */
+        workerNum: number;
     }
 
     export interface GetSubnetsSubnet {
@@ -53659,6 +53727,68 @@ export namespace sls {
          * When the resource directory is configured in the custom mode, the corresponding member account list
          */
         members?: string[];
+    }
+
+    export interface EtlConfiguration {
+        /**
+         * The beginning of the time range for transformation.
+         */
+        fromTime: number;
+        /**
+         * Data processing syntax type.
+         */
+        lang: string;
+        /**
+         * Destination Logstore Name.
+         */
+        logstore: string;
+        /**
+         * Advanced parameter configuration.
+         */
+        parameters?: {[key: string]: string};
+        /**
+         * The ARN role that authorizes writing to the target Logstore.
+         */
+        roleArn: string;
+        /**
+         * Processing script.
+         */
+        script: string;
+        /**
+         * Processing result output target list See `sink` below.
+         */
+        sinks: outputs.sls.EtlConfigurationSink[];
+        /**
+         * The end of the time range for transformation.
+         */
+        toTime: number;
+    }
+
+    export interface EtlConfigurationSink {
+        /**
+         * Write Result Set.
+         */
+        datasets: string[];
+        /**
+         * The endpoint of the region where the target Project is located.
+         */
+        endpoint: string;
+        /**
+         * Destination Logstore Name.
+         */
+        logstore: string;
+        /**
+         * Output Destination Name.
+         */
+        name: string;
+        /**
+         * Project Name.
+         */
+        project: string;
+        /**
+         * The ARN role that authorizes writing to the target Logstore.
+         */
+        roleArn: string;
     }
 
     export interface OssExportSinkConfiguration {

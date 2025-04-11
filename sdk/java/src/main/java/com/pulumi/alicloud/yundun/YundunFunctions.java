@@ -14,7 +14,6 @@ import com.pulumi.core.Output;
 import com.pulumi.core.TypeShape;
 import com.pulumi.deployment.Deployment;
 import com.pulumi.deployment.InvokeOptions;
-import com.pulumi.deployment.InvokeOutputOptions;
 import java.util.concurrent.CompletableFuture;
 
 public final class YundunFunctions {
@@ -33,9 +32,6 @@ public final class YundunFunctions {
     public static Output<GetBastionHostInstancesResult> getBastionHostInstances(GetBastionHostInstancesArgs args, InvokeOptions options) {
         return Deployment.getInstance().invoke("alicloud:yundun/getBastionHostInstances:getBastionHostInstances", TypeShape.of(GetBastionHostInstancesResult.class), args, Utilities.withVersion(options));
     }
-    public static Output<GetBastionHostInstancesResult> getBastionHostInstances(GetBastionHostInstancesArgs args, InvokeOutputOptions options) {
-        return Deployment.getInstance().invoke("alicloud:yundun/getBastionHostInstances:getBastionHostInstances", TypeShape.of(GetBastionHostInstancesResult.class), args, Utilities.withVersion(options));
-    }
     public static CompletableFuture<GetBastionHostInstancesResult> getBastionHostInstancesPlain(GetBastionHostInstancesPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("alicloud:yundun/getBastionHostInstances:getBastionHostInstances", TypeShape.of(GetBastionHostInstancesResult.class), args, Utilities.withVersion(options));
     }
@@ -52,9 +48,6 @@ public final class YundunFunctions {
         return getDBAuditInstancePlain(args, InvokeOptions.Empty);
     }
     public static Output<GetDBAuditInstanceResult> getDBAuditInstance(GetDBAuditInstanceArgs args, InvokeOptions options) {
-        return Deployment.getInstance().invoke("alicloud:yundun/getDBAuditInstance:getDBAuditInstance", TypeShape.of(GetDBAuditInstanceResult.class), args, Utilities.withVersion(options));
-    }
-    public static Output<GetDBAuditInstanceResult> getDBAuditInstance(GetDBAuditInstanceArgs args, InvokeOutputOptions options) {
         return Deployment.getInstance().invoke("alicloud:yundun/getDBAuditInstance:getDBAuditInstance", TypeShape.of(GetDBAuditInstanceResult.class), args, Utilities.withVersion(options));
     }
     public static CompletableFuture<GetDBAuditInstanceResult> getDBAuditInstancePlain(GetDBAuditInstancePlainArgs args, InvokeOptions options) {

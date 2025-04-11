@@ -27,13 +27,15 @@ class DdosCooInstanceArgs:
                  base_bandwidth: Optional[pulumi.Input[str]] = None,
                  edition_sale: Optional[pulumi.Input[str]] = None,
                  function_version: Optional[pulumi.Input[str]] = None,
+                 modify_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  normal_bandwidth: Optional[pulumi.Input[str]] = None,
                  normal_qps: Optional[pulumi.Input[str]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  product_plan: Optional[pulumi.Input[str]] = None,
                  product_type: Optional[pulumi.Input[str]] = None,
-                 service_bandwidth: Optional[pulumi.Input[str]] = None):
+                 service_bandwidth: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a DdosCooInstance resource.
         :param pulumi.Input[str] domain_count: Domain retransmission rule count of the instance. At least 50. Increase 5 per step, such as 55, 60, 65. Only support upgrade.
@@ -44,13 +46,15 @@ class DdosCooInstanceArgs:
         :param pulumi.Input[str] base_bandwidth: Base defend bandwidth of the instance. Valid values: `30`, `60`, `100`, `300`, `400`, `500`, `600`. The unit is Gbps. Only support upgrade. **NOTE:** `base_bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
         :param pulumi.Input[str] edition_sale: The mitigation plan of the instance. Default value: `coop`. Valid values:
         :param pulumi.Input[str] function_version: The function plan of the instance. Valid values:
+        :param pulumi.Input[str] modify_type: The type of modification. Valid values: `UPGRADE`, `DOWNGRADE`.
         :param pulumi.Input[str] name: Name of the instance. This name can have a string of `1` to `64` characters.
-        :param pulumi.Input[str] normal_bandwidth: The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`.
-        :param pulumi.Input[str] normal_qps: The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`.
+        :param pulumi.Input[str] normal_bandwidth: The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_bandwidth` can be modified.
+        :param pulumi.Input[str] normal_qps: The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_qps` can be modified.
         :param pulumi.Input[int] period: The duration that you will buy DdosCoo instance (in month). Valid values: [1~9], `12`, `24`, `36`. Default value: `1`. At present, the provider does not support modify `period`.
         :param pulumi.Input[str] product_plan: The mitigation plan of the instance. Valid values:
         :param pulumi.Input[str] product_type: The product type for purchasing DDOSCOO instances used to differ different account type. Default value: `ddoscoo`. Valid values:
         :param pulumi.Input[str] service_bandwidth: Business bandwidth of the instance. At leaset 100. Increased 100 per step, such as 100, 200, 300. The unit is Mbps. Only support upgrade. **NOTE:** `service_bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: A mapping of tags to assign to the resource.
         """
         pulumi.set(__self__, "domain_count", domain_count)
         pulumi.set(__self__, "port_count", port_count)
@@ -66,6 +70,8 @@ class DdosCooInstanceArgs:
             pulumi.set(__self__, "edition_sale", edition_sale)
         if function_version is not None:
             pulumi.set(__self__, "function_version", function_version)
+        if modify_type is not None:
+            pulumi.set(__self__, "modify_type", modify_type)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if normal_bandwidth is not None:
@@ -80,6 +86,8 @@ class DdosCooInstanceArgs:
             pulumi.set(__self__, "product_type", product_type)
         if service_bandwidth is not None:
             pulumi.set(__self__, "service_bandwidth", service_bandwidth)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="domainCount")
@@ -178,6 +186,18 @@ class DdosCooInstanceArgs:
         pulumi.set(self, "function_version", value)
 
     @property
+    @pulumi.getter(name="modifyType")
+    def modify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of modification. Valid values: `UPGRADE`, `DOWNGRADE`.
+        """
+        return pulumi.get(self, "modify_type")
+
+    @modify_type.setter
+    def modify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "modify_type", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -193,7 +213,7 @@ class DdosCooInstanceArgs:
     @pulumi.getter(name="normalBandwidth")
     def normal_bandwidth(self) -> Optional[pulumi.Input[str]]:
         """
-        The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`.
+        The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_bandwidth` can be modified.
         """
         return pulumi.get(self, "normal_bandwidth")
 
@@ -205,7 +225,7 @@ class DdosCooInstanceArgs:
     @pulumi.getter(name="normalQps")
     def normal_qps(self) -> Optional[pulumi.Input[str]]:
         """
-        The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`.
+        The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_qps` can be modified.
         """
         return pulumi.get(self, "normal_qps")
 
@@ -261,6 +281,18 @@ class DdosCooInstanceArgs:
     def service_bandwidth(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "service_bandwidth", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        A mapping of tags to assign to the resource.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _DdosCooInstanceState:
@@ -269,10 +301,12 @@ class _DdosCooInstanceState:
                  bandwidth: Optional[pulumi.Input[str]] = None,
                  bandwidth_mode: Optional[pulumi.Input[str]] = None,
                  base_bandwidth: Optional[pulumi.Input[str]] = None,
+                 create_time: Optional[pulumi.Input[int]] = None,
                  domain_count: Optional[pulumi.Input[str]] = None,
                  edition_sale: Optional[pulumi.Input[str]] = None,
                  function_version: Optional[pulumi.Input[str]] = None,
                  ip: Optional[pulumi.Input[str]] = None,
+                 modify_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  normal_bandwidth: Optional[pulumi.Input[str]] = None,
                  normal_qps: Optional[pulumi.Input[str]] = None,
@@ -280,25 +314,31 @@ class _DdosCooInstanceState:
                  port_count: Optional[pulumi.Input[str]] = None,
                  product_plan: Optional[pulumi.Input[str]] = None,
                  product_type: Optional[pulumi.Input[str]] = None,
-                 service_bandwidth: Optional[pulumi.Input[str]] = None):
+                 service_bandwidth: Optional[pulumi.Input[str]] = None,
+                 status: Optional[pulumi.Input[int]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering DdosCooInstance resources.
         :param pulumi.Input[str] address_type: The IP version of the IP address. Default value: `Ipv4`. Valid values: `Ipv4`, `Ipv6`. **NOTE:** `address_type` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
         :param pulumi.Input[str] bandwidth: Elastic defend bandwidth of the instance. This value must be larger than the base defend bandwidth. Valid values: `30`, `60`, `100`, `300`, `400`, `500`, `600`. The unit is Gbps. Only support upgrade. **NOTE:** `bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
         :param pulumi.Input[str] bandwidth_mode: The mitigation plan of the instance. Valid values:
         :param pulumi.Input[str] base_bandwidth: Base defend bandwidth of the instance. Valid values: `30`, `60`, `100`, `300`, `400`, `500`, `600`. The unit is Gbps. Only support upgrade. **NOTE:** `base_bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
+        :param pulumi.Input[int] create_time: (Available since v1.248.0) The time when the instance was created.
         :param pulumi.Input[str] domain_count: Domain retransmission rule count of the instance. At least 50. Increase 5 per step, such as 55, 60, 65. Only support upgrade.
         :param pulumi.Input[str] edition_sale: The mitigation plan of the instance. Default value: `coop`. Valid values:
         :param pulumi.Input[str] function_version: The function plan of the instance. Valid values:
-        :param pulumi.Input[str] ip: (Available since v1.212.0) The IP address of the instance.
+        :param pulumi.Input[str] ip: (Available since v1.212.0) The IP address of the Instance.
+        :param pulumi.Input[str] modify_type: The type of modification. Valid values: `UPGRADE`, `DOWNGRADE`.
         :param pulumi.Input[str] name: Name of the instance. This name can have a string of `1` to `64` characters.
-        :param pulumi.Input[str] normal_bandwidth: The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`.
-        :param pulumi.Input[str] normal_qps: The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`.
+        :param pulumi.Input[str] normal_bandwidth: The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_bandwidth` can be modified.
+        :param pulumi.Input[str] normal_qps: The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_qps` can be modified.
         :param pulumi.Input[int] period: The duration that you will buy DdosCoo instance (in month). Valid values: [1~9], `12`, `24`, `36`. Default value: `1`. At present, the provider does not support modify `period`.
         :param pulumi.Input[str] port_count: Port retransmission rule count of the instance. At least 50. Increase 5 per step, such as 55, 60, 65. Only support upgrade.
         :param pulumi.Input[str] product_plan: The mitigation plan of the instance. Valid values:
         :param pulumi.Input[str] product_type: The product type for purchasing DDOSCOO instances used to differ different account type. Default value: `ddoscoo`. Valid values:
         :param pulumi.Input[str] service_bandwidth: Business bandwidth of the instance. At leaset 100. Increased 100 per step, such as 100, 200, 300. The unit is Mbps. Only support upgrade. **NOTE:** `service_bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
+        :param pulumi.Input[int] status: (Available since v1.248.0) The status of the instance.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: A mapping of tags to assign to the resource.
         """
         if address_type is not None:
             pulumi.set(__self__, "address_type", address_type)
@@ -308,6 +348,8 @@ class _DdosCooInstanceState:
             pulumi.set(__self__, "bandwidth_mode", bandwidth_mode)
         if base_bandwidth is not None:
             pulumi.set(__self__, "base_bandwidth", base_bandwidth)
+        if create_time is not None:
+            pulumi.set(__self__, "create_time", create_time)
         if domain_count is not None:
             pulumi.set(__self__, "domain_count", domain_count)
         if edition_sale is not None:
@@ -316,6 +358,8 @@ class _DdosCooInstanceState:
             pulumi.set(__self__, "function_version", function_version)
         if ip is not None:
             pulumi.set(__self__, "ip", ip)
+        if modify_type is not None:
+            pulumi.set(__self__, "modify_type", modify_type)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if normal_bandwidth is not None:
@@ -332,6 +376,10 @@ class _DdosCooInstanceState:
             pulumi.set(__self__, "product_type", product_type)
         if service_bandwidth is not None:
             pulumi.set(__self__, "service_bandwidth", service_bandwidth)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="addressType")
@@ -382,6 +430,18 @@ class _DdosCooInstanceState:
         pulumi.set(self, "base_bandwidth", value)
 
     @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        (Available since v1.248.0) The time when the instance was created.
+        """
+        return pulumi.get(self, "create_time")
+
+    @create_time.setter
+    def create_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "create_time", value)
+
+    @property
     @pulumi.getter(name="domainCount")
     def domain_count(self) -> Optional[pulumi.Input[str]]:
         """
@@ -421,13 +481,25 @@ class _DdosCooInstanceState:
     @pulumi.getter
     def ip(self) -> Optional[pulumi.Input[str]]:
         """
-        (Available since v1.212.0) The IP address of the instance.
+        (Available since v1.212.0) The IP address of the Instance.
         """
         return pulumi.get(self, "ip")
 
     @ip.setter
     def ip(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "ip", value)
+
+    @property
+    @pulumi.getter(name="modifyType")
+    def modify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of modification. Valid values: `UPGRADE`, `DOWNGRADE`.
+        """
+        return pulumi.get(self, "modify_type")
+
+    @modify_type.setter
+    def modify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "modify_type", value)
 
     @property
     @pulumi.getter
@@ -445,7 +517,7 @@ class _DdosCooInstanceState:
     @pulumi.getter(name="normalBandwidth")
     def normal_bandwidth(self) -> Optional[pulumi.Input[str]]:
         """
-        The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`.
+        The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_bandwidth` can be modified.
         """
         return pulumi.get(self, "normal_bandwidth")
 
@@ -457,7 +529,7 @@ class _DdosCooInstanceState:
     @pulumi.getter(name="normalQps")
     def normal_qps(self) -> Optional[pulumi.Input[str]]:
         """
-        The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`.
+        The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_qps` can be modified.
         """
         return pulumi.get(self, "normal_qps")
 
@@ -525,6 +597,30 @@ class _DdosCooInstanceState:
     def service_bandwidth(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "service_bandwidth", value)
 
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[int]]:
+        """
+        (Available since v1.248.0) The status of the instance.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "status", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        A mapping of tags to assign to the resource.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
 
 warnings.warn("""alicloud.dns.DdosCooInstance has been deprecated in favor of alicloud.ddos.DdosCooInstance""", DeprecationWarning)
 
@@ -543,6 +639,7 @@ class DdosCooInstance(pulumi.CustomResource):
                  domain_count: Optional[pulumi.Input[str]] = None,
                  edition_sale: Optional[pulumi.Input[str]] = None,
                  function_version: Optional[pulumi.Input[str]] = None,
+                 modify_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  normal_bandwidth: Optional[pulumi.Input[str]] = None,
                  normal_qps: Optional[pulumi.Input[str]] = None,
@@ -551,6 +648,7 @@ class DdosCooInstance(pulumi.CustomResource):
                  product_plan: Optional[pulumi.Input[str]] = None,
                  product_type: Optional[pulumi.Input[str]] = None,
                  service_bandwidth: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Provides a BGP-line Anti-DDoS Pro(DdosCoo) Instance resource.
@@ -588,10 +686,10 @@ class DdosCooInstance(pulumi.CustomResource):
 
         ## Import
 
-        DdosCoo instance can be imported using the id, e.g.
+        DdosCoo Instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import alicloud:dns/ddosCooInstance:DdosCooInstance example ddoscoo-cn-123456
+        $ pulumi import alicloud:dns/ddosCooInstance:DdosCooInstance example <id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -603,14 +701,16 @@ class DdosCooInstance(pulumi.CustomResource):
         :param pulumi.Input[str] domain_count: Domain retransmission rule count of the instance. At least 50. Increase 5 per step, such as 55, 60, 65. Only support upgrade.
         :param pulumi.Input[str] edition_sale: The mitigation plan of the instance. Default value: `coop`. Valid values:
         :param pulumi.Input[str] function_version: The function plan of the instance. Valid values:
+        :param pulumi.Input[str] modify_type: The type of modification. Valid values: `UPGRADE`, `DOWNGRADE`.
         :param pulumi.Input[str] name: Name of the instance. This name can have a string of `1` to `64` characters.
-        :param pulumi.Input[str] normal_bandwidth: The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`.
-        :param pulumi.Input[str] normal_qps: The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`.
+        :param pulumi.Input[str] normal_bandwidth: The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_bandwidth` can be modified.
+        :param pulumi.Input[str] normal_qps: The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_qps` can be modified.
         :param pulumi.Input[int] period: The duration that you will buy DdosCoo instance (in month). Valid values: [1~9], `12`, `24`, `36`. Default value: `1`. At present, the provider does not support modify `period`.
         :param pulumi.Input[str] port_count: Port retransmission rule count of the instance. At least 50. Increase 5 per step, such as 55, 60, 65. Only support upgrade.
         :param pulumi.Input[str] product_plan: The mitigation plan of the instance. Valid values:
         :param pulumi.Input[str] product_type: The product type for purchasing DDOSCOO instances used to differ different account type. Default value: `ddoscoo`. Valid values:
         :param pulumi.Input[str] service_bandwidth: Business bandwidth of the instance. At leaset 100. Increased 100 per step, such as 100, 200, 300. The unit is Mbps. Only support upgrade. **NOTE:** `service_bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: A mapping of tags to assign to the resource.
         """
         ...
     @overload
@@ -654,10 +754,10 @@ class DdosCooInstance(pulumi.CustomResource):
 
         ## Import
 
-        DdosCoo instance can be imported using the id, e.g.
+        DdosCoo Instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import alicloud:dns/ddosCooInstance:DdosCooInstance example ddoscoo-cn-123456
+        $ pulumi import alicloud:dns/ddosCooInstance:DdosCooInstance example <id>
         ```
 
         :param str resource_name: The name of the resource.
@@ -682,6 +782,7 @@ class DdosCooInstance(pulumi.CustomResource):
                  domain_count: Optional[pulumi.Input[str]] = None,
                  edition_sale: Optional[pulumi.Input[str]] = None,
                  function_version: Optional[pulumi.Input[str]] = None,
+                 modify_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  normal_bandwidth: Optional[pulumi.Input[str]] = None,
                  normal_qps: Optional[pulumi.Input[str]] = None,
@@ -690,6 +791,7 @@ class DdosCooInstance(pulumi.CustomResource):
                  product_plan: Optional[pulumi.Input[str]] = None,
                  product_type: Optional[pulumi.Input[str]] = None,
                  service_bandwidth: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  __props__=None):
         pulumi.log.warn("""DdosCooInstance is deprecated: alicloud.dns.DdosCooInstance has been deprecated in favor of alicloud.ddos.DdosCooInstance""")
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -709,6 +811,7 @@ class DdosCooInstance(pulumi.CustomResource):
             __props__.__dict__["domain_count"] = domain_count
             __props__.__dict__["edition_sale"] = edition_sale
             __props__.__dict__["function_version"] = function_version
+            __props__.__dict__["modify_type"] = modify_type
             __props__.__dict__["name"] = name
             __props__.__dict__["normal_bandwidth"] = normal_bandwidth
             __props__.__dict__["normal_qps"] = normal_qps
@@ -719,7 +822,10 @@ class DdosCooInstance(pulumi.CustomResource):
             __props__.__dict__["product_plan"] = product_plan
             __props__.__dict__["product_type"] = product_type
             __props__.__dict__["service_bandwidth"] = service_bandwidth
+            __props__.__dict__["tags"] = tags
+            __props__.__dict__["create_time"] = None
             __props__.__dict__["ip"] = None
+            __props__.__dict__["status"] = None
         super(DdosCooInstance, __self__).__init__(
             'alicloud:dns/ddosCooInstance:DdosCooInstance',
             resource_name,
@@ -734,10 +840,12 @@ class DdosCooInstance(pulumi.CustomResource):
             bandwidth: Optional[pulumi.Input[str]] = None,
             bandwidth_mode: Optional[pulumi.Input[str]] = None,
             base_bandwidth: Optional[pulumi.Input[str]] = None,
+            create_time: Optional[pulumi.Input[int]] = None,
             domain_count: Optional[pulumi.Input[str]] = None,
             edition_sale: Optional[pulumi.Input[str]] = None,
             function_version: Optional[pulumi.Input[str]] = None,
             ip: Optional[pulumi.Input[str]] = None,
+            modify_type: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             normal_bandwidth: Optional[pulumi.Input[str]] = None,
             normal_qps: Optional[pulumi.Input[str]] = None,
@@ -745,7 +853,9 @@ class DdosCooInstance(pulumi.CustomResource):
             port_count: Optional[pulumi.Input[str]] = None,
             product_plan: Optional[pulumi.Input[str]] = None,
             product_type: Optional[pulumi.Input[str]] = None,
-            service_bandwidth: Optional[pulumi.Input[str]] = None) -> 'DdosCooInstance':
+            service_bandwidth: Optional[pulumi.Input[str]] = None,
+            status: Optional[pulumi.Input[int]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None) -> 'DdosCooInstance':
         """
         Get an existing DdosCooInstance resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -757,18 +867,22 @@ class DdosCooInstance(pulumi.CustomResource):
         :param pulumi.Input[str] bandwidth: Elastic defend bandwidth of the instance. This value must be larger than the base defend bandwidth. Valid values: `30`, `60`, `100`, `300`, `400`, `500`, `600`. The unit is Gbps. Only support upgrade. **NOTE:** `bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
         :param pulumi.Input[str] bandwidth_mode: The mitigation plan of the instance. Valid values:
         :param pulumi.Input[str] base_bandwidth: Base defend bandwidth of the instance. Valid values: `30`, `60`, `100`, `300`, `400`, `500`, `600`. The unit is Gbps. Only support upgrade. **NOTE:** `base_bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
+        :param pulumi.Input[int] create_time: (Available since v1.248.0) The time when the instance was created.
         :param pulumi.Input[str] domain_count: Domain retransmission rule count of the instance. At least 50. Increase 5 per step, such as 55, 60, 65. Only support upgrade.
         :param pulumi.Input[str] edition_sale: The mitigation plan of the instance. Default value: `coop`. Valid values:
         :param pulumi.Input[str] function_version: The function plan of the instance. Valid values:
-        :param pulumi.Input[str] ip: (Available since v1.212.0) The IP address of the instance.
+        :param pulumi.Input[str] ip: (Available since v1.212.0) The IP address of the Instance.
+        :param pulumi.Input[str] modify_type: The type of modification. Valid values: `UPGRADE`, `DOWNGRADE`.
         :param pulumi.Input[str] name: Name of the instance. This name can have a string of `1` to `64` characters.
-        :param pulumi.Input[str] normal_bandwidth: The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`.
-        :param pulumi.Input[str] normal_qps: The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`.
+        :param pulumi.Input[str] normal_bandwidth: The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_bandwidth` can be modified.
+        :param pulumi.Input[str] normal_qps: The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_qps` can be modified.
         :param pulumi.Input[int] period: The duration that you will buy DdosCoo instance (in month). Valid values: [1~9], `12`, `24`, `36`. Default value: `1`. At present, the provider does not support modify `period`.
         :param pulumi.Input[str] port_count: Port retransmission rule count of the instance. At least 50. Increase 5 per step, such as 55, 60, 65. Only support upgrade.
         :param pulumi.Input[str] product_plan: The mitigation plan of the instance. Valid values:
         :param pulumi.Input[str] product_type: The product type for purchasing DDOSCOO instances used to differ different account type. Default value: `ddoscoo`. Valid values:
         :param pulumi.Input[str] service_bandwidth: Business bandwidth of the instance. At leaset 100. Increased 100 per step, such as 100, 200, 300. The unit is Mbps. Only support upgrade. **NOTE:** `service_bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
+        :param pulumi.Input[int] status: (Available since v1.248.0) The status of the instance.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: A mapping of tags to assign to the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -778,10 +892,12 @@ class DdosCooInstance(pulumi.CustomResource):
         __props__.__dict__["bandwidth"] = bandwidth
         __props__.__dict__["bandwidth_mode"] = bandwidth_mode
         __props__.__dict__["base_bandwidth"] = base_bandwidth
+        __props__.__dict__["create_time"] = create_time
         __props__.__dict__["domain_count"] = domain_count
         __props__.__dict__["edition_sale"] = edition_sale
         __props__.__dict__["function_version"] = function_version
         __props__.__dict__["ip"] = ip
+        __props__.__dict__["modify_type"] = modify_type
         __props__.__dict__["name"] = name
         __props__.__dict__["normal_bandwidth"] = normal_bandwidth
         __props__.__dict__["normal_qps"] = normal_qps
@@ -790,6 +906,8 @@ class DdosCooInstance(pulumi.CustomResource):
         __props__.__dict__["product_plan"] = product_plan
         __props__.__dict__["product_type"] = product_type
         __props__.__dict__["service_bandwidth"] = service_bandwidth
+        __props__.__dict__["status"] = status
+        __props__.__dict__["tags"] = tags
         return DdosCooInstance(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -825,6 +943,14 @@ class DdosCooInstance(pulumi.CustomResource):
         return pulumi.get(self, "base_bandwidth")
 
     @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> pulumi.Output[int]:
+        """
+        (Available since v1.248.0) The time when the instance was created.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
     @pulumi.getter(name="domainCount")
     def domain_count(self) -> pulumi.Output[str]:
         """
@@ -852,9 +978,17 @@ class DdosCooInstance(pulumi.CustomResource):
     @pulumi.getter
     def ip(self) -> pulumi.Output[str]:
         """
-        (Available since v1.212.0) The IP address of the instance.
+        (Available since v1.212.0) The IP address of the Instance.
         """
         return pulumi.get(self, "ip")
+
+    @property
+    @pulumi.getter(name="modifyType")
+    def modify_type(self) -> pulumi.Output[Optional[str]]:
+        """
+        The type of modification. Valid values: `UPGRADE`, `DOWNGRADE`.
+        """
+        return pulumi.get(self, "modify_type")
 
     @property
     @pulumi.getter
@@ -868,7 +1002,7 @@ class DdosCooInstance(pulumi.CustomResource):
     @pulumi.getter(name="normalBandwidth")
     def normal_bandwidth(self) -> pulumi.Output[str]:
         """
-        The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`.
+        The clean bandwidth provided by the instance. **NOTE:** `normal_bandwidth` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_bandwidth` can be modified.
         """
         return pulumi.get(self, "normal_bandwidth")
 
@@ -876,7 +1010,7 @@ class DdosCooInstance(pulumi.CustomResource):
     @pulumi.getter(name="normalQps")
     def normal_qps(self) -> pulumi.Output[str]:
         """
-        The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`.
+        The clean QPS provided by the instance. **NOTE:** `normal_qps` is valid only when `product_type` is set to `ddosDip`. From version 1.248.0, `normal_qps` can be modified.
         """
         return pulumi.get(self, "normal_qps")
 
@@ -919,4 +1053,20 @@ class DdosCooInstance(pulumi.CustomResource):
         Business bandwidth of the instance. At leaset 100. Increased 100 per step, such as 100, 200, 300. The unit is Mbps. Only support upgrade. **NOTE:** `service_bandwidth` is valid only when `product_type` is set to `ddoscoo` or `ddoscoo_intl`.
         """
         return pulumi.get(self, "service_bandwidth")
+
+    @property
+    @pulumi.getter
+    def status(self) -> pulumi.Output[int]:
+        """
+        (Available since v1.248.0) The status of the instance.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, str]]]:
+        """
+        A mapping of tags to assign to the resource.
+        """
+        return pulumi.get(self, "tags")
 

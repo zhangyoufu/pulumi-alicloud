@@ -10,6 +10,11 @@ export type Cluster = import("./cluster").Cluster;
 export const Cluster: typeof import("./cluster").Cluster = null as any;
 utilities.lazyLoad(exports, ["Cluster"], () => require("./cluster"));
 
+export { ExperimentPlanTemplateArgs, ExperimentPlanTemplateState } from "./experimentPlanTemplate";
+export type ExperimentPlanTemplate = import("./experimentPlanTemplate").ExperimentPlanTemplate;
+export const ExperimentPlanTemplate: typeof import("./experimentPlanTemplate").ExperimentPlanTemplate = null as any;
+utilities.lazyLoad(exports, ["ExperimentPlanTemplate"], () => require("./experimentPlanTemplate"));
+
 export { GetSubnetsArgs, GetSubnetsResult, GetSubnetsOutputArgs } from "./getSubnets";
 export const getSubnets: typeof import("./getSubnets").getSubnets = null as any;
 export const getSubnetsOutput: typeof import("./getSubnets").getSubnetsOutput = null as any;
@@ -52,6 +57,8 @@ const _module = {
         switch (type) {
             case "alicloud:eflo/cluster:Cluster":
                 return new Cluster(name, <any>undefined, { urn })
+            case "alicloud:eflo/experimentPlanTemplate:ExperimentPlanTemplate":
+                return new ExperimentPlanTemplate(name, <any>undefined, { urn })
             case "alicloud:eflo/invocation:Invocation":
                 return new Invocation(name, <any>undefined, { urn })
             case "alicloud:eflo/node:Node":
@@ -68,6 +75,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("alicloud", "eflo/cluster", _module)
+pulumi.runtime.registerResourceModule("alicloud", "eflo/experimentPlanTemplate", _module)
 pulumi.runtime.registerResourceModule("alicloud", "eflo/invocation", _module)
 pulumi.runtime.registerResourceModule("alicloud", "eflo/node", _module)
 pulumi.runtime.registerResourceModule("alicloud", "eflo/nodeGroup", _module)

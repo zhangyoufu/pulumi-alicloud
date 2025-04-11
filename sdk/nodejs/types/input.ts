@@ -323,6 +323,7 @@ export interface ProviderEndpoint {
      * Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to custom eflo endpoints.
      */
     eflo?: pulumi.Input<string>;
+    efloCnp?: pulumi.Input<string>;
     /**
      * Use this to override the default endpoint URL constructed from the `region`. It's typically used to connect to custom efloctrl endpoints.
      */
@@ -4443,11 +4444,11 @@ export namespace cs {
 
     export interface EdgeKubernetesCertificateAuthority {
         /**
-         * The path of client certificate, like `~/.kube/client-cert.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
          */
         clientCert?: pulumi.Input<string>;
         /**
-         * The path of client key, like `~/.kube/client-key.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
          */
         clientKey?: pulumi.Input<string>;
         /**
@@ -4609,11 +4610,11 @@ export namespace cs {
 
     export interface KubernetesCertificateAuthority {
         /**
-         * The path of client certificate, like `~/.kube/client-cert.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
          */
         clientCert?: pulumi.Input<string>;
         /**
-         * The path of client key, like `~/.kube/client-key.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
          */
         clientKey?: pulumi.Input<string>;
         /**
@@ -4774,11 +4775,11 @@ export namespace cs {
 
     export interface ManagedKubernetesCertificateAuthority {
         /**
-         * The path of client certificate, like `~/.kube/client-cert.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
          */
         clientCert?: pulumi.Input<string>;
         /**
-         * The path of client key, like `~/.kube/client-key.pem`.
+         * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
          */
         clientKey?: pulumi.Input<string>;
         /**
@@ -8630,6 +8631,73 @@ export namespace eflo {
         nodeId?: pulumi.Input<string>;
         vpcId?: pulumi.Input<string>;
         vswitchId?: pulumi.Input<string>;
+    }
+
+    export interface ExperimentPlanTemplateTemplatePipeline {
+        /**
+         * Contains a series of parameters related to the environment. See `envParams` below.
+         */
+        envParams: pulumi.Input<inputs.eflo.ExperimentPlanTemplateTemplatePipelineEnvParams>;
+        /**
+         * Indicates the sequence number of the pipeline node.
+         */
+        pipelineOrder: pulumi.Input<number>;
+        /**
+         * The use of the template scenario. It can have the following optional parameters:
+         * - baseline: benchmark evaluation
+         */
+        scene: pulumi.Input<string>;
+        /**
+         * Represents additional parameters for the run.
+         */
+        settingParams?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+        /**
+         * Used to uniquely identify a specific payload.
+         */
+        workloadId: pulumi.Input<number>;
+        /**
+         * The name used to represent a specific payload.
+         */
+        workloadName: pulumi.Input<string>;
+    }
+
+    export interface ExperimentPlanTemplateTemplatePipelineEnvParams {
+        /**
+         * Number of central processing units (CPUs) allocated. This parameter affects the processing power of the computation, especially in tasks that require a large amount of parallel processing.
+         */
+        cpuPerWorker: pulumi.Input<number>;
+        /**
+         * The version of CUDA(Compute Unified Device Architecture) used. CUDA is a parallel computing platform and programming model provided by NVIDIA. A specific version may affect the available GPU functions and performance optimization.
+         */
+        cudaVersion?: pulumi.Input<string>;
+        /**
+         * The version of the GPU driver used. Driver version may affect GPU performance and compatibility, so it is important to ensure that the correct version is used
+         */
+        gpuDriverVersion?: pulumi.Input<string>;
+        /**
+         * Number of graphics processing units (GPUs). GPUs are a key component in deep learning and large-scale data processing, so this parameter is very important for tasks that require graphics-accelerated computing.
+         */
+        gpuPerWorker: pulumi.Input<number>;
+        /**
+         * The amount of memory available. Memory size has an important impact on the performance and stability of the program, especially when dealing with large data sets or high-dimensional data.
+         */
+        memoryPerWorker: pulumi.Input<number>;
+        /**
+         * The NVIDIA Collective Communications Library(NCCL) version used. NCCL is a library for multi-GPU and multi-node communication. This parameter is particularly important for optimizing data transmission in distributed computing.
+         */
+        ncclVersion?: pulumi.Input<string>;
+        /**
+         * The version of the PyTorch framework used. PyTorch is a widely used deep learning library, and differences between versions may affect the performance and functional support of model training and inference.
+         */
+        pyTorchVersion?: pulumi.Input<string>;
+        /**
+         * Shared memory GB allocation
+         */
+        shareMemory: pulumi.Input<number>;
+        /**
+         * The total number of nodes. This parameter directly affects the parallelism and computing speed of the task, and a higher number of working nodes usually accelerates the completion of the task.
+         */
+        workerNum: pulumi.Input<number>;
     }
 
     export interface NodeGroupIpAllocationPolicy {
@@ -17827,6 +17895,68 @@ export namespace sls {
          * When the resource directory is configured in the custom mode, the corresponding member account list
          */
         members?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface EtlConfiguration {
+        /**
+         * The beginning of the time range for transformation.
+         */
+        fromTime: pulumi.Input<number>;
+        /**
+         * Data processing syntax type.
+         */
+        lang: pulumi.Input<string>;
+        /**
+         * Destination Logstore Name.
+         */
+        logstore: pulumi.Input<string>;
+        /**
+         * Advanced parameter configuration.
+         */
+        parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+        /**
+         * The ARN role that authorizes writing to the target Logstore.
+         */
+        roleArn: pulumi.Input<string>;
+        /**
+         * Processing script.
+         */
+        script: pulumi.Input<string>;
+        /**
+         * Processing result output target list See `sink` below.
+         */
+        sinks: pulumi.Input<pulumi.Input<inputs.sls.EtlConfigurationSink>[]>;
+        /**
+         * The end of the time range for transformation.
+         */
+        toTime: pulumi.Input<number>;
+    }
+
+    export interface EtlConfigurationSink {
+        /**
+         * Write Result Set.
+         */
+        datasets: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The endpoint of the region where the target Project is located.
+         */
+        endpoint: pulumi.Input<string>;
+        /**
+         * Destination Logstore Name.
+         */
+        logstore: pulumi.Input<string>;
+        /**
+         * Output Destination Name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Project Name.
+         */
+        project: pulumi.Input<string>;
+        /**
+         * The ARN role that authorizes writing to the target Logstore.
+         */
+        roleArn: pulumi.Input<string>;
     }
 
     export interface OssExportSinkConfiguration {

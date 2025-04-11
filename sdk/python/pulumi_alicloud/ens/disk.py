@@ -26,21 +26,23 @@ class DiskArgs:
                  encrypted: Optional[pulumi.Input[bool]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  size: Optional[pulumi.Input[int]] = None,
-                 snapshot_id: Optional[pulumi.Input[str]] = None):
+                 snapshot_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Disk resource.
-        :param pulumi.Input[str] category: Types of disk instancesValues: cloud_efficiency (high-efficiency cloud disk),cloud_ssd (full Flash cloud disk),local_hdd (local HDD),local_ssd (local ssd).
-        :param pulumi.Input[str] ens_region_id: Ens node IDExample value: cn-chengdu-telecom.
-        :param pulumi.Input[str] payment_type: Billing type of the disk instanceValue: PayAsYouGo.
-        :param pulumi.Input[str] disk_name: Name of the disk instance.
-        :param pulumi.Input[bool] encrypted: Indicates whether the cloud disk is Encrypted. If Encrypted = true, the default service key is used when KMSKeyId is not entered. Value range:`true`, `false`(default).
-        :param pulumi.Input[str] kms_key_id: The ID of the KMS key used by the cloud disk. If Encrypted is set to true, the service default key is used when KMSKeyId is empty.
+        :param pulumi.Input[str] category: The category of the disk. Valid values: `cloud_efficiency` (high-efficiency cloud disk), `cloud_ssd` (full Flash cloud disk), `local_hdd` (local HDD), `local_ssd` (local ssd).
+        :param pulumi.Input[str] ens_region_id: The ID of the edge node.
+        :param pulumi.Input[str] payment_type: The billing method of the instance. Valid values: `PayAsYouGo`.
+        :param pulumi.Input[str] disk_name: The name of the disk.
+        :param pulumi.Input[bool] encrypted: Specifies whether to encrypt the new system disk. Valid values: `true`, `false`(default).
+        :param pulumi.Input[str] kms_key_id: The ID of the KMS key used by the cloud disk. If `encrypted` is set to `true`, the service default key is used when KMSKeyId is empty.
         :param pulumi.Input[int] size: The size of the disk instance. Unit: GiB.
         :param pulumi.Input[str] snapshot_id: The ID of the snapshot used to create the cloud disk.
                
                The SnapshotId and Size parameters have the following limitations:
-               - If the snapshot capacity corresponding to the **SnapshotId** parameter is greater than the specified **Size** parameter, the Size of the cloud disk created is the Size of the specified snapshot.
-               - If the snapshot capacity corresponding to the **SnapshotId** parameter is less than the set **Size** parameter value, the Size of the cloud disk created is the specified **Size** parameter value.
+               - If the snapshot capacity corresponding to the `snapshot_id` parameter is greater than the specified `size` parameter, the Size of the cloud disk created is the Size of the specified snapshot.
+               - If the snapshot capacity corresponding to the `snapshot_id` parameter is less than the set `size` parameter value, the Size of the cloud disk created is the specified `size` parameter value.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: The label to which the instance is bound.
         """
         pulumi.set(__self__, "category", category)
         pulumi.set(__self__, "ens_region_id", ens_region_id)
@@ -55,12 +57,14 @@ class DiskArgs:
             pulumi.set(__self__, "size", size)
         if snapshot_id is not None:
             pulumi.set(__self__, "snapshot_id", snapshot_id)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
     def category(self) -> pulumi.Input[str]:
         """
-        Types of disk instancesValues: cloud_efficiency (high-efficiency cloud disk),cloud_ssd (full Flash cloud disk),local_hdd (local HDD),local_ssd (local ssd).
+        The category of the disk. Valid values: `cloud_efficiency` (high-efficiency cloud disk), `cloud_ssd` (full Flash cloud disk), `local_hdd` (local HDD), `local_ssd` (local ssd).
         """
         return pulumi.get(self, "category")
 
@@ -72,7 +76,7 @@ class DiskArgs:
     @pulumi.getter(name="ensRegionId")
     def ens_region_id(self) -> pulumi.Input[str]:
         """
-        Ens node IDExample value: cn-chengdu-telecom.
+        The ID of the edge node.
         """
         return pulumi.get(self, "ens_region_id")
 
@@ -84,7 +88,7 @@ class DiskArgs:
     @pulumi.getter(name="paymentType")
     def payment_type(self) -> pulumi.Input[str]:
         """
-        Billing type of the disk instanceValue: PayAsYouGo.
+        The billing method of the instance. Valid values: `PayAsYouGo`.
         """
         return pulumi.get(self, "payment_type")
 
@@ -96,7 +100,7 @@ class DiskArgs:
     @pulumi.getter(name="diskName")
     def disk_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the disk instance.
+        The name of the disk.
         """
         return pulumi.get(self, "disk_name")
 
@@ -108,7 +112,7 @@ class DiskArgs:
     @pulumi.getter
     def encrypted(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the cloud disk is Encrypted. If Encrypted = true, the default service key is used when KMSKeyId is not entered. Value range:`true`, `false`(default).
+        Specifies whether to encrypt the new system disk. Valid values: `true`, `false`(default).
         """
         return pulumi.get(self, "encrypted")
 
@@ -120,7 +124,7 @@ class DiskArgs:
     @pulumi.getter(name="kmsKeyId")
     def kms_key_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of the KMS key used by the cloud disk. If Encrypted is set to true, the service default key is used when KMSKeyId is empty.
+        The ID of the KMS key used by the cloud disk. If `encrypted` is set to `true`, the service default key is used when KMSKeyId is empty.
         """
         return pulumi.get(self, "kms_key_id")
 
@@ -147,14 +151,26 @@ class DiskArgs:
         The ID of the snapshot used to create the cloud disk.
 
         The SnapshotId and Size parameters have the following limitations:
-        - If the snapshot capacity corresponding to the **SnapshotId** parameter is greater than the specified **Size** parameter, the Size of the cloud disk created is the Size of the specified snapshot.
-        - If the snapshot capacity corresponding to the **SnapshotId** parameter is less than the set **Size** parameter value, the Size of the cloud disk created is the specified **Size** parameter value.
+        - If the snapshot capacity corresponding to the `snapshot_id` parameter is greater than the specified `size` parameter, the Size of the cloud disk created is the Size of the specified snapshot.
+        - If the snapshot capacity corresponding to the `snapshot_id` parameter is less than the set `size` parameter value, the Size of the cloud disk created is the specified `size` parameter value.
         """
         return pulumi.get(self, "snapshot_id")
 
     @snapshot_id.setter
     def snapshot_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "snapshot_id", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        The label to which the instance is bound.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 @pulumi.input_type
@@ -169,23 +185,25 @@ class _DiskState:
                  payment_type: Optional[pulumi.Input[str]] = None,
                  size: Optional[pulumi.Input[int]] = None,
                  snapshot_id: Optional[pulumi.Input[str]] = None,
-                 status: Optional[pulumi.Input[str]] = None):
+                 status: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Disk resources.
-        :param pulumi.Input[str] category: Types of disk instancesValues: cloud_efficiency (high-efficiency cloud disk),cloud_ssd (full Flash cloud disk),local_hdd (local HDD),local_ssd (local ssd).
-        :param pulumi.Input[str] create_time: Disk instance creation time.
-        :param pulumi.Input[str] disk_name: Name of the disk instance.
-        :param pulumi.Input[bool] encrypted: Indicates whether the cloud disk is Encrypted. If Encrypted = true, the default service key is used when KMSKeyId is not entered. Value range:`true`, `false`(default).
-        :param pulumi.Input[str] ens_region_id: Ens node IDExample value: cn-chengdu-telecom.
-        :param pulumi.Input[str] kms_key_id: The ID of the KMS key used by the cloud disk. If Encrypted is set to true, the service default key is used when KMSKeyId is empty.
-        :param pulumi.Input[str] payment_type: Billing type of the disk instanceValue: PayAsYouGo.
+        :param pulumi.Input[str] category: The category of the disk. Valid values: `cloud_efficiency` (high-efficiency cloud disk), `cloud_ssd` (full Flash cloud disk), `local_hdd` (local HDD), `local_ssd` (local ssd).
+        :param pulumi.Input[str] create_time: The time when the disk was created.
+        :param pulumi.Input[str] disk_name: The name of the disk.
+        :param pulumi.Input[bool] encrypted: Specifies whether to encrypt the new system disk. Valid values: `true`, `false`(default).
+        :param pulumi.Input[str] ens_region_id: The ID of the edge node.
+        :param pulumi.Input[str] kms_key_id: The ID of the KMS key used by the cloud disk. If `encrypted` is set to `true`, the service default key is used when KMSKeyId is empty.
+        :param pulumi.Input[str] payment_type: The billing method of the instance. Valid values: `PayAsYouGo`.
         :param pulumi.Input[int] size: The size of the disk instance. Unit: GiB.
         :param pulumi.Input[str] snapshot_id: The ID of the snapshot used to create the cloud disk.
                
                The SnapshotId and Size parameters have the following limitations:
-               - If the snapshot capacity corresponding to the **SnapshotId** parameter is greater than the specified **Size** parameter, the Size of the cloud disk created is the Size of the specified snapshot.
-               - If the snapshot capacity corresponding to the **SnapshotId** parameter is less than the set **Size** parameter value, the Size of the cloud disk created is the specified **Size** parameter value.
-        :param pulumi.Input[str] status: Status of the disk instance:Value:In-use: In useAvailable: To be mountedAttaching: AttachingDetaching: uninstallingCreating: CreatingReIniting: Resetting.
+               - If the snapshot capacity corresponding to the `snapshot_id` parameter is greater than the specified `size` parameter, the Size of the cloud disk created is the Size of the specified snapshot.
+               - If the snapshot capacity corresponding to the `snapshot_id` parameter is less than the set `size` parameter value, the Size of the cloud disk created is the specified `size` parameter value.
+        :param pulumi.Input[str] status: The status of the disk.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: The label to which the instance is bound.
         """
         if category is not None:
             pulumi.set(__self__, "category", category)
@@ -207,12 +225,14 @@ class _DiskState:
             pulumi.set(__self__, "snapshot_id", snapshot_id)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter
     def category(self) -> Optional[pulumi.Input[str]]:
         """
-        Types of disk instancesValues: cloud_efficiency (high-efficiency cloud disk),cloud_ssd (full Flash cloud disk),local_hdd (local HDD),local_ssd (local ssd).
+        The category of the disk. Valid values: `cloud_efficiency` (high-efficiency cloud disk), `cloud_ssd` (full Flash cloud disk), `local_hdd` (local HDD), `local_ssd` (local ssd).
         """
         return pulumi.get(self, "category")
 
@@ -224,7 +244,7 @@ class _DiskState:
     @pulumi.getter(name="createTime")
     def create_time(self) -> Optional[pulumi.Input[str]]:
         """
-        Disk instance creation time.
+        The time when the disk was created.
         """
         return pulumi.get(self, "create_time")
 
@@ -236,7 +256,7 @@ class _DiskState:
     @pulumi.getter(name="diskName")
     def disk_name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of the disk instance.
+        The name of the disk.
         """
         return pulumi.get(self, "disk_name")
 
@@ -248,7 +268,7 @@ class _DiskState:
     @pulumi.getter
     def encrypted(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether the cloud disk is Encrypted. If Encrypted = true, the default service key is used when KMSKeyId is not entered. Value range:`true`, `false`(default).
+        Specifies whether to encrypt the new system disk. Valid values: `true`, `false`(default).
         """
         return pulumi.get(self, "encrypted")
 
@@ -260,7 +280,7 @@ class _DiskState:
     @pulumi.getter(name="ensRegionId")
     def ens_region_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Ens node IDExample value: cn-chengdu-telecom.
+        The ID of the edge node.
         """
         return pulumi.get(self, "ens_region_id")
 
@@ -272,7 +292,7 @@ class _DiskState:
     @pulumi.getter(name="kmsKeyId")
     def kms_key_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of the KMS key used by the cloud disk. If Encrypted is set to true, the service default key is used when KMSKeyId is empty.
+        The ID of the KMS key used by the cloud disk. If `encrypted` is set to `true`, the service default key is used when KMSKeyId is empty.
         """
         return pulumi.get(self, "kms_key_id")
 
@@ -284,7 +304,7 @@ class _DiskState:
     @pulumi.getter(name="paymentType")
     def payment_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Billing type of the disk instanceValue: PayAsYouGo.
+        The billing method of the instance. Valid values: `PayAsYouGo`.
         """
         return pulumi.get(self, "payment_type")
 
@@ -311,8 +331,8 @@ class _DiskState:
         The ID of the snapshot used to create the cloud disk.
 
         The SnapshotId and Size parameters have the following limitations:
-        - If the snapshot capacity corresponding to the **SnapshotId** parameter is greater than the specified **Size** parameter, the Size of the cloud disk created is the Size of the specified snapshot.
-        - If the snapshot capacity corresponding to the **SnapshotId** parameter is less than the set **Size** parameter value, the Size of the cloud disk created is the specified **Size** parameter value.
+        - If the snapshot capacity corresponding to the `snapshot_id` parameter is greater than the specified `size` parameter, the Size of the cloud disk created is the Size of the specified snapshot.
+        - If the snapshot capacity corresponding to the `snapshot_id` parameter is less than the set `size` parameter value, the Size of the cloud disk created is the specified `size` parameter value.
         """
         return pulumi.get(self, "snapshot_id")
 
@@ -324,13 +344,25 @@ class _DiskState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of the disk instance:Value:In-use: In useAvailable: To be mountedAttaching: AttachingDetaching: uninstallingCreating: CreatingReIniting: Resetting.
+        The status of the disk.
         """
         return pulumi.get(self, "status")
 
     @status.setter
     def status(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "status", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        The label to which the instance is bound.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
 
 
 class Disk(pulumi.CustomResource):
@@ -346,9 +378,12 @@ class Disk(pulumi.CustomResource):
                  payment_type: Optional[pulumi.Input[str]] = None,
                  size: Optional[pulumi.Input[int]] = None,
                  snapshot_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Provides a ENS Disk resource. The disk. When you use it for the first time, please contact the product classmates to add a resource whitelist.
+        Provides a ENS Disk resource.
+
+        The disk. When you use it for the first time, please contact the product classmates to add a resource whitelist.
 
         For information about ENS Disk and how to use it, see [What is Disk](https://www.alibabacloud.com/help/en/ens/developer-reference/api-ens-2017-11-10-createdisk).
 
@@ -383,18 +418,19 @@ class Disk(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] category: Types of disk instancesValues: cloud_efficiency (high-efficiency cloud disk),cloud_ssd (full Flash cloud disk),local_hdd (local HDD),local_ssd (local ssd).
-        :param pulumi.Input[str] disk_name: Name of the disk instance.
-        :param pulumi.Input[bool] encrypted: Indicates whether the cloud disk is Encrypted. If Encrypted = true, the default service key is used when KMSKeyId is not entered. Value range:`true`, `false`(default).
-        :param pulumi.Input[str] ens_region_id: Ens node IDExample value: cn-chengdu-telecom.
-        :param pulumi.Input[str] kms_key_id: The ID of the KMS key used by the cloud disk. If Encrypted is set to true, the service default key is used when KMSKeyId is empty.
-        :param pulumi.Input[str] payment_type: Billing type of the disk instanceValue: PayAsYouGo.
+        :param pulumi.Input[str] category: The category of the disk. Valid values: `cloud_efficiency` (high-efficiency cloud disk), `cloud_ssd` (full Flash cloud disk), `local_hdd` (local HDD), `local_ssd` (local ssd).
+        :param pulumi.Input[str] disk_name: The name of the disk.
+        :param pulumi.Input[bool] encrypted: Specifies whether to encrypt the new system disk. Valid values: `true`, `false`(default).
+        :param pulumi.Input[str] ens_region_id: The ID of the edge node.
+        :param pulumi.Input[str] kms_key_id: The ID of the KMS key used by the cloud disk. If `encrypted` is set to `true`, the service default key is used when KMSKeyId is empty.
+        :param pulumi.Input[str] payment_type: The billing method of the instance. Valid values: `PayAsYouGo`.
         :param pulumi.Input[int] size: The size of the disk instance. Unit: GiB.
         :param pulumi.Input[str] snapshot_id: The ID of the snapshot used to create the cloud disk.
                
                The SnapshotId and Size parameters have the following limitations:
-               - If the snapshot capacity corresponding to the **SnapshotId** parameter is greater than the specified **Size** parameter, the Size of the cloud disk created is the Size of the specified snapshot.
-               - If the snapshot capacity corresponding to the **SnapshotId** parameter is less than the set **Size** parameter value, the Size of the cloud disk created is the specified **Size** parameter value.
+               - If the snapshot capacity corresponding to the `snapshot_id` parameter is greater than the specified `size` parameter, the Size of the cloud disk created is the Size of the specified snapshot.
+               - If the snapshot capacity corresponding to the `snapshot_id` parameter is less than the set `size` parameter value, the Size of the cloud disk created is the specified `size` parameter value.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: The label to which the instance is bound.
         """
         ...
     @overload
@@ -403,7 +439,9 @@ class Disk(pulumi.CustomResource):
                  args: DiskArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a ENS Disk resource. The disk. When you use it for the first time, please contact the product classmates to add a resource whitelist.
+        Provides a ENS Disk resource.
+
+        The disk. When you use it for the first time, please contact the product classmates to add a resource whitelist.
 
         For information about ENS Disk and how to use it, see [What is Disk](https://www.alibabacloud.com/help/en/ens/developer-reference/api-ens-2017-11-10-createdisk).
 
@@ -459,6 +497,7 @@ class Disk(pulumi.CustomResource):
                  payment_type: Optional[pulumi.Input[str]] = None,
                  size: Optional[pulumi.Input[int]] = None,
                  snapshot_id: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -482,6 +521,7 @@ class Disk(pulumi.CustomResource):
             __props__.__dict__["payment_type"] = payment_type
             __props__.__dict__["size"] = size
             __props__.__dict__["snapshot_id"] = snapshot_id
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["create_time"] = None
             __props__.__dict__["status"] = None
         super(Disk, __self__).__init__(
@@ -503,7 +543,8 @@ class Disk(pulumi.CustomResource):
             payment_type: Optional[pulumi.Input[str]] = None,
             size: Optional[pulumi.Input[int]] = None,
             snapshot_id: Optional[pulumi.Input[str]] = None,
-            status: Optional[pulumi.Input[str]] = None) -> 'Disk':
+            status: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None) -> 'Disk':
         """
         Get an existing Disk resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -511,20 +552,21 @@ class Disk(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] category: Types of disk instancesValues: cloud_efficiency (high-efficiency cloud disk),cloud_ssd (full Flash cloud disk),local_hdd (local HDD),local_ssd (local ssd).
-        :param pulumi.Input[str] create_time: Disk instance creation time.
-        :param pulumi.Input[str] disk_name: Name of the disk instance.
-        :param pulumi.Input[bool] encrypted: Indicates whether the cloud disk is Encrypted. If Encrypted = true, the default service key is used when KMSKeyId is not entered. Value range:`true`, `false`(default).
-        :param pulumi.Input[str] ens_region_id: Ens node IDExample value: cn-chengdu-telecom.
-        :param pulumi.Input[str] kms_key_id: The ID of the KMS key used by the cloud disk. If Encrypted is set to true, the service default key is used when KMSKeyId is empty.
-        :param pulumi.Input[str] payment_type: Billing type of the disk instanceValue: PayAsYouGo.
+        :param pulumi.Input[str] category: The category of the disk. Valid values: `cloud_efficiency` (high-efficiency cloud disk), `cloud_ssd` (full Flash cloud disk), `local_hdd` (local HDD), `local_ssd` (local ssd).
+        :param pulumi.Input[str] create_time: The time when the disk was created.
+        :param pulumi.Input[str] disk_name: The name of the disk.
+        :param pulumi.Input[bool] encrypted: Specifies whether to encrypt the new system disk. Valid values: `true`, `false`(default).
+        :param pulumi.Input[str] ens_region_id: The ID of the edge node.
+        :param pulumi.Input[str] kms_key_id: The ID of the KMS key used by the cloud disk. If `encrypted` is set to `true`, the service default key is used when KMSKeyId is empty.
+        :param pulumi.Input[str] payment_type: The billing method of the instance. Valid values: `PayAsYouGo`.
         :param pulumi.Input[int] size: The size of the disk instance. Unit: GiB.
         :param pulumi.Input[str] snapshot_id: The ID of the snapshot used to create the cloud disk.
                
                The SnapshotId and Size parameters have the following limitations:
-               - If the snapshot capacity corresponding to the **SnapshotId** parameter is greater than the specified **Size** parameter, the Size of the cloud disk created is the Size of the specified snapshot.
-               - If the snapshot capacity corresponding to the **SnapshotId** parameter is less than the set **Size** parameter value, the Size of the cloud disk created is the specified **Size** parameter value.
-        :param pulumi.Input[str] status: Status of the disk instance:Value:In-use: In useAvailable: To be mountedAttaching: AttachingDetaching: uninstallingCreating: CreatingReIniting: Resetting.
+               - If the snapshot capacity corresponding to the `snapshot_id` parameter is greater than the specified `size` parameter, the Size of the cloud disk created is the Size of the specified snapshot.
+               - If the snapshot capacity corresponding to the `snapshot_id` parameter is less than the set `size` parameter value, the Size of the cloud disk created is the specified `size` parameter value.
+        :param pulumi.Input[str] status: The status of the disk.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] tags: The label to which the instance is bound.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -540,13 +582,14 @@ class Disk(pulumi.CustomResource):
         __props__.__dict__["size"] = size
         __props__.__dict__["snapshot_id"] = snapshot_id
         __props__.__dict__["status"] = status
+        __props__.__dict__["tags"] = tags
         return Disk(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter
     def category(self) -> pulumi.Output[str]:
         """
-        Types of disk instancesValues: cloud_efficiency (high-efficiency cloud disk),cloud_ssd (full Flash cloud disk),local_hdd (local HDD),local_ssd (local ssd).
+        The category of the disk. Valid values: `cloud_efficiency` (high-efficiency cloud disk), `cloud_ssd` (full Flash cloud disk), `local_hdd` (local HDD), `local_ssd` (local ssd).
         """
         return pulumi.get(self, "category")
 
@@ -554,7 +597,7 @@ class Disk(pulumi.CustomResource):
     @pulumi.getter(name="createTime")
     def create_time(self) -> pulumi.Output[str]:
         """
-        Disk instance creation time.
+        The time when the disk was created.
         """
         return pulumi.get(self, "create_time")
 
@@ -562,7 +605,7 @@ class Disk(pulumi.CustomResource):
     @pulumi.getter(name="diskName")
     def disk_name(self) -> pulumi.Output[Optional[str]]:
         """
-        Name of the disk instance.
+        The name of the disk.
         """
         return pulumi.get(self, "disk_name")
 
@@ -570,7 +613,7 @@ class Disk(pulumi.CustomResource):
     @pulumi.getter
     def encrypted(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether the cloud disk is Encrypted. If Encrypted = true, the default service key is used when KMSKeyId is not entered. Value range:`true`, `false`(default).
+        Specifies whether to encrypt the new system disk. Valid values: `true`, `false`(default).
         """
         return pulumi.get(self, "encrypted")
 
@@ -578,7 +621,7 @@ class Disk(pulumi.CustomResource):
     @pulumi.getter(name="ensRegionId")
     def ens_region_id(self) -> pulumi.Output[str]:
         """
-        Ens node IDExample value: cn-chengdu-telecom.
+        The ID of the edge node.
         """
         return pulumi.get(self, "ens_region_id")
 
@@ -586,7 +629,7 @@ class Disk(pulumi.CustomResource):
     @pulumi.getter(name="kmsKeyId")
     def kms_key_id(self) -> pulumi.Output[str]:
         """
-        The ID of the KMS key used by the cloud disk. If Encrypted is set to true, the service default key is used when KMSKeyId is empty.
+        The ID of the KMS key used by the cloud disk. If `encrypted` is set to `true`, the service default key is used when KMSKeyId is empty.
         """
         return pulumi.get(self, "kms_key_id")
 
@@ -594,7 +637,7 @@ class Disk(pulumi.CustomResource):
     @pulumi.getter(name="paymentType")
     def payment_type(self) -> pulumi.Output[str]:
         """
-        Billing type of the disk instanceValue: PayAsYouGo.
+        The billing method of the instance. Valid values: `PayAsYouGo`.
         """
         return pulumi.get(self, "payment_type")
 
@@ -613,8 +656,8 @@ class Disk(pulumi.CustomResource):
         The ID of the snapshot used to create the cloud disk.
 
         The SnapshotId and Size parameters have the following limitations:
-        - If the snapshot capacity corresponding to the **SnapshotId** parameter is greater than the specified **Size** parameter, the Size of the cloud disk created is the Size of the specified snapshot.
-        - If the snapshot capacity corresponding to the **SnapshotId** parameter is less than the set **Size** parameter value, the Size of the cloud disk created is the specified **Size** parameter value.
+        - If the snapshot capacity corresponding to the `snapshot_id` parameter is greater than the specified `size` parameter, the Size of the cloud disk created is the Size of the specified snapshot.
+        - If the snapshot capacity corresponding to the `snapshot_id` parameter is less than the set `size` parameter value, the Size of the cloud disk created is the specified `size` parameter value.
         """
         return pulumi.get(self, "snapshot_id")
 
@@ -622,7 +665,15 @@ class Disk(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Status of the disk instance:Value:In-use: In useAvailable: To be mountedAttaching: AttachingDetaching: uninstallingCreating: CreatingReIniting: Resetting.
+        The status of the disk.
         """
         return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, str]]]:
+        """
+        The label to which the instance is bound.
+        """
+        return pulumi.get(self, "tags")
 

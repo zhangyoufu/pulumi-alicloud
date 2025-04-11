@@ -313,8 +313,8 @@ class EdgeKubernetesCertificateAuthority(dict):
                  client_key: Optional[str] = None,
                  cluster_cert: Optional[str] = None):
         """
-        :param str client_cert: The path of client certificate, like `~/.kube/client-cert.pem`.
-        :param str client_key: The path of client key, like `~/.kube/client-key.pem`.
+        :param str client_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
+        :param str client_key: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         :param str cluster_cert: The base64 encoded cluster certificate data required to communicate with your cluster. Add this to the certificate-authority-data section of the kubeconfig file for your cluster.
         """
         if client_cert is not None:
@@ -328,7 +328,7 @@ class EdgeKubernetesCertificateAuthority(dict):
     @pulumi.getter(name="clientCert")
     def client_cert(self) -> Optional[str]:
         """
-        The path of client certificate, like `~/.kube/client-cert.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
         """
         return pulumi.get(self, "client_cert")
 
@@ -336,7 +336,7 @@ class EdgeKubernetesCertificateAuthority(dict):
     @pulumi.getter(name="clientKey")
     def client_key(self) -> Optional[str]:
         """
-        The path of client key, like `~/.kube/client-key.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         """
         return pulumi.get(self, "client_key")
 
@@ -856,8 +856,8 @@ class KubernetesCertificateAuthority(dict):
                  client_key: Optional[str] = None,
                  cluster_cert: Optional[str] = None):
         """
-        :param str client_cert: The path of client certificate, like `~/.kube/client-cert.pem`.
-        :param str client_key: The path of client key, like `~/.kube/client-key.pem`.
+        :param str client_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
+        :param str client_key: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         :param str cluster_cert: The base64 encoded cluster certificate data required to communicate with your cluster. Add this to the certificate-authority-data section of the kubeconfig file for your cluster.
         """
         if client_cert is not None:
@@ -871,7 +871,7 @@ class KubernetesCertificateAuthority(dict):
     @pulumi.getter(name="clientCert")
     def client_cert(self) -> Optional[str]:
         """
-        The path of client certificate, like `~/.kube/client-cert.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
         """
         return pulumi.get(self, "client_cert")
 
@@ -879,7 +879,7 @@ class KubernetesCertificateAuthority(dict):
     @pulumi.getter(name="clientKey")
     def client_key(self) -> Optional[str]:
         """
-        The path of client key, like `~/.kube/client-key.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         """
         return pulumi.get(self, "client_key")
 
@@ -1389,8 +1389,8 @@ class ManagedKubernetesCertificateAuthority(dict):
                  client_key: Optional[str] = None,
                  cluster_cert: Optional[str] = None):
         """
-        :param str client_cert: The path of client certificate, like `~/.kube/client-cert.pem`.
-        :param str client_key: The path of client key, like `~/.kube/client-key.pem`.
+        :param str client_cert: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
+        :param str client_key: From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         :param str cluster_cert: The base64 encoded cluster certificate data required to communicate with your cluster. Add this to the certificate-authority-data section of the kubeconfig file for your cluster.
         """
         if client_cert is not None:
@@ -1404,7 +1404,7 @@ class ManagedKubernetesCertificateAuthority(dict):
     @pulumi.getter(name="clientCert")
     def client_cert(self) -> Optional[str]:
         """
-        The path of client certificate, like `~/.kube/client-cert.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
         """
         return pulumi.get(self, "client_cert")
 
@@ -1412,7 +1412,7 @@ class ManagedKubernetesCertificateAuthority(dict):
     @pulumi.getter(name="clientKey")
     def client_key(self) -> Optional[str]:
         """
-        The path of client key, like `~/.kube/client-key.pem`.
+        From version 1.248.0, new DataSource `cs_get_cluster_credential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_key attribute content of new DataSource `cs_get_cluster_credential` to an appropriate path(like ~/.kube/client-key.pem) for replace it.
         """
         return pulumi.get(self, "client_key")
 
