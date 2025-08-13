@@ -75,6 +75,11 @@ export const getDispatchRules: typeof import("./getDispatchRules").getDispatchRu
 export const getDispatchRulesOutput: typeof import("./getDispatchRules").getDispatchRulesOutput = null as any;
 utilities.lazyLoad(exports, ["getDispatchRules","getDispatchRulesOutput"], () => require("./getDispatchRules"));
 
+export { GetEnvironmentsArgs, GetEnvironmentsResult, GetEnvironmentsOutputArgs } from "./getEnvironments";
+export const getEnvironments: typeof import("./getEnvironments").getEnvironments = null as any;
+export const getEnvironmentsOutput: typeof import("./getEnvironments").getEnvironmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getEnvironments","getEnvironmentsOutput"], () => require("./getEnvironments"));
+
 export { GetIntegrationExportersArgs, GetIntegrationExportersResult, GetIntegrationExportersOutputArgs } from "./getIntegrationExporters";
 export const getIntegrationExporters: typeof import("./getIntegrationExporters").getIntegrationExporters = null as any;
 export const getIntegrationExportersOutput: typeof import("./getIntegrationExporters").getIntegrationExportersOutput = null as any;

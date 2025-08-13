@@ -6204,6 +6204,229 @@ func (o GetDispatchRulesRuleNotifyTemplateArrayOutput) Index(i pulumi.IntInput) 
 	}).(GetDispatchRulesRuleNotifyTemplateOutput)
 }
 
+type GetEnvironmentsEnvironment struct {
+	// The ID of the resource bound to the environment instance.
+	BindResourceId string `pulumi:"bindResourceId"`
+	// The resource type.
+	BindResourceType string `pulumi:"bindResourceType"`
+	// The CIDR block that is bound to the VPC.
+	BindVpcCidr string `pulumi:"bindVpcCidr"`
+	// The ID of the environment instance.
+	EnvironmentId string `pulumi:"environmentId"`
+	// The name of the environment instance.
+	EnvironmentName string `pulumi:"environmentName"`
+	// The environment type. Valid values: `CS`, `ECS`, `Cloud`.
+	EnvironmentType string `pulumi:"environmentType"`
+	// The unique ID of the Grafana data source.
+	GrafanaDatasourceUid string `pulumi:"grafanaDatasourceUid"`
+	// The unique ID of the Grafana directory.
+	GrafanaFolderUid string `pulumi:"grafanaFolderUid"`
+	// The ID of the environment instance.
+	Id string `pulumi:"id"`
+	// Indicates whether agents or exporters are managed.
+	ManagedType string `pulumi:"managedType"`
+	// The ID of the Prometheus instance.
+	PrometheusInstanceId string `pulumi:"prometheusInstanceId"`
+	// The region ID.
+	RegionId string `pulumi:"regionId"`
+	// The ID of the resource group.
+	ResourceGroupId string `pulumi:"resourceGroupId"`
+	// A mapping of tags to assign to the resource.
+	Tags map[string]string `pulumi:"tags"`
+	// The user ID.
+	UserId string `pulumi:"userId"`
+}
+
+// GetEnvironmentsEnvironmentInput is an input type that accepts GetEnvironmentsEnvironmentArgs and GetEnvironmentsEnvironmentOutput values.
+// You can construct a concrete instance of `GetEnvironmentsEnvironmentInput` via:
+//
+//	GetEnvironmentsEnvironmentArgs{...}
+type GetEnvironmentsEnvironmentInput interface {
+	pulumi.Input
+
+	ToGetEnvironmentsEnvironmentOutput() GetEnvironmentsEnvironmentOutput
+	ToGetEnvironmentsEnvironmentOutputWithContext(context.Context) GetEnvironmentsEnvironmentOutput
+}
+
+type GetEnvironmentsEnvironmentArgs struct {
+	// The ID of the resource bound to the environment instance.
+	BindResourceId pulumi.StringInput `pulumi:"bindResourceId"`
+	// The resource type.
+	BindResourceType pulumi.StringInput `pulumi:"bindResourceType"`
+	// The CIDR block that is bound to the VPC.
+	BindVpcCidr pulumi.StringInput `pulumi:"bindVpcCidr"`
+	// The ID of the environment instance.
+	EnvironmentId pulumi.StringInput `pulumi:"environmentId"`
+	// The name of the environment instance.
+	EnvironmentName pulumi.StringInput `pulumi:"environmentName"`
+	// The environment type. Valid values: `CS`, `ECS`, `Cloud`.
+	EnvironmentType pulumi.StringInput `pulumi:"environmentType"`
+	// The unique ID of the Grafana data source.
+	GrafanaDatasourceUid pulumi.StringInput `pulumi:"grafanaDatasourceUid"`
+	// The unique ID of the Grafana directory.
+	GrafanaFolderUid pulumi.StringInput `pulumi:"grafanaFolderUid"`
+	// The ID of the environment instance.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Indicates whether agents or exporters are managed.
+	ManagedType pulumi.StringInput `pulumi:"managedType"`
+	// The ID of the Prometheus instance.
+	PrometheusInstanceId pulumi.StringInput `pulumi:"prometheusInstanceId"`
+	// The region ID.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// The ID of the resource group.
+	ResourceGroupId pulumi.StringInput `pulumi:"resourceGroupId"`
+	// A mapping of tags to assign to the resource.
+	Tags pulumi.StringMapInput `pulumi:"tags"`
+	// The user ID.
+	UserId pulumi.StringInput `pulumi:"userId"`
+}
+
+func (GetEnvironmentsEnvironmentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEnvironmentsEnvironment)(nil)).Elem()
+}
+
+func (i GetEnvironmentsEnvironmentArgs) ToGetEnvironmentsEnvironmentOutput() GetEnvironmentsEnvironmentOutput {
+	return i.ToGetEnvironmentsEnvironmentOutputWithContext(context.Background())
+}
+
+func (i GetEnvironmentsEnvironmentArgs) ToGetEnvironmentsEnvironmentOutputWithContext(ctx context.Context) GetEnvironmentsEnvironmentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEnvironmentsEnvironmentOutput)
+}
+
+// GetEnvironmentsEnvironmentArrayInput is an input type that accepts GetEnvironmentsEnvironmentArray and GetEnvironmentsEnvironmentArrayOutput values.
+// You can construct a concrete instance of `GetEnvironmentsEnvironmentArrayInput` via:
+//
+//	GetEnvironmentsEnvironmentArray{ GetEnvironmentsEnvironmentArgs{...} }
+type GetEnvironmentsEnvironmentArrayInput interface {
+	pulumi.Input
+
+	ToGetEnvironmentsEnvironmentArrayOutput() GetEnvironmentsEnvironmentArrayOutput
+	ToGetEnvironmentsEnvironmentArrayOutputWithContext(context.Context) GetEnvironmentsEnvironmentArrayOutput
+}
+
+type GetEnvironmentsEnvironmentArray []GetEnvironmentsEnvironmentInput
+
+func (GetEnvironmentsEnvironmentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEnvironmentsEnvironment)(nil)).Elem()
+}
+
+func (i GetEnvironmentsEnvironmentArray) ToGetEnvironmentsEnvironmentArrayOutput() GetEnvironmentsEnvironmentArrayOutput {
+	return i.ToGetEnvironmentsEnvironmentArrayOutputWithContext(context.Background())
+}
+
+func (i GetEnvironmentsEnvironmentArray) ToGetEnvironmentsEnvironmentArrayOutputWithContext(ctx context.Context) GetEnvironmentsEnvironmentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEnvironmentsEnvironmentArrayOutput)
+}
+
+type GetEnvironmentsEnvironmentOutput struct{ *pulumi.OutputState }
+
+func (GetEnvironmentsEnvironmentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEnvironmentsEnvironment)(nil)).Elem()
+}
+
+func (o GetEnvironmentsEnvironmentOutput) ToGetEnvironmentsEnvironmentOutput() GetEnvironmentsEnvironmentOutput {
+	return o
+}
+
+func (o GetEnvironmentsEnvironmentOutput) ToGetEnvironmentsEnvironmentOutputWithContext(ctx context.Context) GetEnvironmentsEnvironmentOutput {
+	return o
+}
+
+// The ID of the resource bound to the environment instance.
+func (o GetEnvironmentsEnvironmentOutput) BindResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.BindResourceId }).(pulumi.StringOutput)
+}
+
+// The resource type.
+func (o GetEnvironmentsEnvironmentOutput) BindResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.BindResourceType }).(pulumi.StringOutput)
+}
+
+// The CIDR block that is bound to the VPC.
+func (o GetEnvironmentsEnvironmentOutput) BindVpcCidr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.BindVpcCidr }).(pulumi.StringOutput)
+}
+
+// The ID of the environment instance.
+func (o GetEnvironmentsEnvironmentOutput) EnvironmentId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.EnvironmentId }).(pulumi.StringOutput)
+}
+
+// The name of the environment instance.
+func (o GetEnvironmentsEnvironmentOutput) EnvironmentName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.EnvironmentName }).(pulumi.StringOutput)
+}
+
+// The environment type. Valid values: `CS`, `ECS`, `Cloud`.
+func (o GetEnvironmentsEnvironmentOutput) EnvironmentType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.EnvironmentType }).(pulumi.StringOutput)
+}
+
+// The unique ID of the Grafana data source.
+func (o GetEnvironmentsEnvironmentOutput) GrafanaDatasourceUid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.GrafanaDatasourceUid }).(pulumi.StringOutput)
+}
+
+// The unique ID of the Grafana directory.
+func (o GetEnvironmentsEnvironmentOutput) GrafanaFolderUid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.GrafanaFolderUid }).(pulumi.StringOutput)
+}
+
+// The ID of the environment instance.
+func (o GetEnvironmentsEnvironmentOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Indicates whether agents or exporters are managed.
+func (o GetEnvironmentsEnvironmentOutput) ManagedType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.ManagedType }).(pulumi.StringOutput)
+}
+
+// The ID of the Prometheus instance.
+func (o GetEnvironmentsEnvironmentOutput) PrometheusInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.PrometheusInstanceId }).(pulumi.StringOutput)
+}
+
+// The region ID.
+func (o GetEnvironmentsEnvironmentOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// The ID of the resource group.
+func (o GetEnvironmentsEnvironmentOutput) ResourceGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.ResourceGroupId }).(pulumi.StringOutput)
+}
+
+// A mapping of tags to assign to the resource.
+func (o GetEnvironmentsEnvironmentOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) map[string]string { return v.Tags }).(pulumi.StringMapOutput)
+}
+
+// The user ID.
+func (o GetEnvironmentsEnvironmentOutput) UserId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvironment) string { return v.UserId }).(pulumi.StringOutput)
+}
+
+type GetEnvironmentsEnvironmentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEnvironmentsEnvironmentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEnvironmentsEnvironment)(nil)).Elem()
+}
+
+func (o GetEnvironmentsEnvironmentArrayOutput) ToGetEnvironmentsEnvironmentArrayOutput() GetEnvironmentsEnvironmentArrayOutput {
+	return o
+}
+
+func (o GetEnvironmentsEnvironmentArrayOutput) ToGetEnvironmentsEnvironmentArrayOutputWithContext(ctx context.Context) GetEnvironmentsEnvironmentArrayOutput {
+	return o
+}
+
+func (o GetEnvironmentsEnvironmentArrayOutput) Index(i pulumi.IntInput) GetEnvironmentsEnvironmentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEnvironmentsEnvironment {
+		return vs[0].([]GetEnvironmentsEnvironment)[vs[1].(int)]
+	}).(GetEnvironmentsEnvironmentOutput)
+}
+
 type GetIntegrationExportersIntegrationExporter struct {
 	// The ID of the Prometheus instance.
 	ClusterId string `pulumi:"clusterId"`
@@ -7663,6 +7886,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDispatchRulesRuleNotifyRuleNotifyObjectArrayInput)(nil)).Elem(), GetDispatchRulesRuleNotifyRuleNotifyObjectArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDispatchRulesRuleNotifyTemplateInput)(nil)).Elem(), GetDispatchRulesRuleNotifyTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDispatchRulesRuleNotifyTemplateArrayInput)(nil)).Elem(), GetDispatchRulesRuleNotifyTemplateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEnvironmentsEnvironmentInput)(nil)).Elem(), GetEnvironmentsEnvironmentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEnvironmentsEnvironmentArrayInput)(nil)).Elem(), GetEnvironmentsEnvironmentArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetIntegrationExportersIntegrationExporterInput)(nil)).Elem(), GetIntegrationExportersIntegrationExporterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetIntegrationExportersIntegrationExporterArrayInput)(nil)).Elem(), GetIntegrationExportersIntegrationExporterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPrometheisPrometheiInput)(nil)).Elem(), GetPrometheisPrometheiArgs{})
@@ -7749,6 +7974,8 @@ func init() {
 	pulumi.RegisterOutputType(GetDispatchRulesRuleNotifyRuleNotifyObjectArrayOutput{})
 	pulumi.RegisterOutputType(GetDispatchRulesRuleNotifyTemplateOutput{})
 	pulumi.RegisterOutputType(GetDispatchRulesRuleNotifyTemplateArrayOutput{})
+	pulumi.RegisterOutputType(GetEnvironmentsEnvironmentOutput{})
+	pulumi.RegisterOutputType(GetEnvironmentsEnvironmentArrayOutput{})
 	pulumi.RegisterOutputType(GetIntegrationExportersIntegrationExporterOutput{})
 	pulumi.RegisterOutputType(GetIntegrationExportersIntegrationExporterArrayOutput{})
 	pulumi.RegisterOutputType(GetPrometheisPrometheiOutput{})

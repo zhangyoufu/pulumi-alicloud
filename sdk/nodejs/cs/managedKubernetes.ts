@@ -88,6 +88,10 @@ export class ManagedKubernetes extends pulumi.CustomResource {
      */
     public readonly auditLogConfig!: pulumi.Output<outputs.cs.ManagedKubernetesAuditLogConfig>;
     /**
+     * Auto mode cluster configuration. See `autoMode` below.
+     */
+    public readonly autoMode!: pulumi.Output<outputs.cs.ManagedKubernetesAutoMode | undefined>;
+    /**
      * (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificateAuthority of new DataSource `alicloud.cs.getClusterCredential` to replace it.
      *
      * @deprecated Field 'certificate_authority' has been deprecated from provider version 1.248.0. Please use the attribute 'certificate_authority' of new DataSource 'alicloud_cs_cluster_credential' to replace it.
@@ -175,7 +179,7 @@ export class ManagedKubernetes extends pulumi.CustomResource {
      */
     public readonly loadBalancerSpec!: pulumi.Output<string>;
     /**
-     * The cluster maintenance window，effective only in the professional managed cluster. Managed node pool will use it. See `maintenanceWindow` below.
+     * The cluster maintenance window. Managed node pool will use it. See `maintenanceWindow` below.
      */
     public readonly maintenanceWindow!: pulumi.Output<outputs.cs.ManagedKubernetesMaintenanceWindow>;
     /**
@@ -196,7 +200,7 @@ export class ManagedKubernetes extends pulumi.CustomResource {
      */
     public readonly nodeCidrMask!: pulumi.Output<number | undefined>;
     /**
-     * The cluster automatic operation policy. See `operationPolicy` below.
+     * The cluster automatic operation policy, only works when `maintenanceWindow` is enabled. See `operationPolicy` below.
      */
     public readonly operationPolicy!: pulumi.Output<outputs.cs.ManagedKubernetesOperationPolicy>;
     /**
@@ -330,6 +334,7 @@ export class ManagedKubernetes extends pulumi.CustomResource {
             resourceInputs["addons"] = state ? state.addons : undefined;
             resourceInputs["apiAudiences"] = state ? state.apiAudiences : undefined;
             resourceInputs["auditLogConfig"] = state ? state.auditLogConfig : undefined;
+            resourceInputs["autoMode"] = state ? state.autoMode : undefined;
             resourceInputs["certificateAuthority"] = state ? state.certificateAuthority : undefined;
             resourceInputs["clientCert"] = state ? state.clientCert : undefined;
             resourceInputs["clientKey"] = state ? state.clientKey : undefined;
@@ -384,6 +389,7 @@ export class ManagedKubernetes extends pulumi.CustomResource {
             resourceInputs["addons"] = args ? args.addons : undefined;
             resourceInputs["apiAudiences"] = args ? args.apiAudiences : undefined;
             resourceInputs["auditLogConfig"] = args ? args.auditLogConfig : undefined;
+            resourceInputs["autoMode"] = args ? args.autoMode : undefined;
             resourceInputs["clientCert"] = args ? args.clientCert : undefined;
             resourceInputs["clientKey"] = args ? args.clientKey : undefined;
             resourceInputs["clusterCaCert"] = args ? args.clusterCaCert : undefined;
@@ -455,6 +461,10 @@ export interface ManagedKubernetesState {
      * Audit log configuration. See `auditLogConfig` below.
      */
     auditLogConfig?: pulumi.Input<inputs.cs.ManagedKubernetesAuditLogConfig>;
+    /**
+     * Auto mode cluster configuration. See `autoMode` below.
+     */
+    autoMode?: pulumi.Input<inputs.cs.ManagedKubernetesAutoMode>;
     /**
      * (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificateAuthority of new DataSource `alicloud.cs.getClusterCredential` to replace it.
      *
@@ -543,7 +553,7 @@ export interface ManagedKubernetesState {
      */
     loadBalancerSpec?: pulumi.Input<string>;
     /**
-     * The cluster maintenance window，effective only in the professional managed cluster. Managed node pool will use it. See `maintenanceWindow` below.
+     * The cluster maintenance window. Managed node pool will use it. See `maintenanceWindow` below.
      */
     maintenanceWindow?: pulumi.Input<inputs.cs.ManagedKubernetesMaintenanceWindow>;
     /**
@@ -564,7 +574,7 @@ export interface ManagedKubernetesState {
      */
     nodeCidrMask?: pulumi.Input<number>;
     /**
-     * The cluster automatic operation policy. See `operationPolicy` below.
+     * The cluster automatic operation policy, only works when `maintenanceWindow` is enabled. See `operationPolicy` below.
      */
     operationPolicy?: pulumi.Input<inputs.cs.ManagedKubernetesOperationPolicy>;
     /**
@@ -700,6 +710,10 @@ export interface ManagedKubernetesArgs {
      */
     auditLogConfig?: pulumi.Input<inputs.cs.ManagedKubernetesAuditLogConfig>;
     /**
+     * Auto mode cluster configuration. See `autoMode` below.
+     */
+    autoMode?: pulumi.Input<inputs.cs.ManagedKubernetesAutoMode>;
+    /**
      * From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
      *
      * @deprecated Field 'client_cert' has been deprecated from provider version 1.248.0. From version 1.248.0, new DataSource 'alicloud_cs_cluster_credential' is recommended to manage cluster's kubeconfig, you can also save the 'certificate_authority.client_cert' attribute content of new DataSource 'alicloud_cs_cluster_credential' to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
@@ -777,7 +791,7 @@ export interface ManagedKubernetesArgs {
      */
     loadBalancerSpec?: pulumi.Input<string>;
     /**
-     * The cluster maintenance window，effective only in the professional managed cluster. Managed node pool will use it. See `maintenanceWindow` below.
+     * The cluster maintenance window. Managed node pool will use it. See `maintenanceWindow` below.
      */
     maintenanceWindow?: pulumi.Input<inputs.cs.ManagedKubernetesMaintenanceWindow>;
     /**
@@ -794,7 +808,7 @@ export interface ManagedKubernetesArgs {
      */
     nodeCidrMask?: pulumi.Input<number>;
     /**
-     * The cluster automatic operation policy. See `operationPolicy` below.
+     * The cluster automatic operation policy, only works when `maintenanceWindow` is enabled. See `operationPolicy` below.
      */
     operationPolicy?: pulumi.Input<inputs.cs.ManagedKubernetesOperationPolicy>;
     /**

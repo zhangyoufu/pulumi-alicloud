@@ -82,7 +82,7 @@ namespace Pulumi.AliCloud.Kms
         public Output<int> LogStorage { get; private set; } = null!;
 
         /// <summary>
-        /// Payment type,valid values:
+        /// Payment type, valid values:
         /// - `Subscription`: Prepaid.
         /// - `PayAsYouGo`: Postpaid.
         /// </summary>
@@ -99,7 +99,7 @@ namespace Pulumi.AliCloud.Kms
         /// KMS Instance commodity type (software/hardware)
         /// </summary>
         [Output("productVersion")]
-        public Output<string?> ProductVersion { get; private set; } = null!;
+        public Output<string> ProductVersion { get; private set; } = null!;
 
         /// <summary>
         /// Automatic renewal period, in months. The attribute is valid when the attribute `payment_type` is `Subscription`.
@@ -111,7 +111,15 @@ namespace Pulumi.AliCloud.Kms
         /// Renewal options. Valid values: `AutoRenewal`, `ManualRenewal`. The attribute is valid when the attribute `payment_type` is `Subscription`.
         /// </summary>
         [Output("renewStatus")]
-        public Output<string?> RenewStatus { get; private set; } = null!;
+        public Output<string> RenewStatus { get; private set; } = null!;
+
+        /// <summary>
+        /// Automatic renewal period unit, valid value:
+        /// - `M`: Month.
+        /// - `Y`: Year.
+        /// </summary>
+        [Output("renewalPeriodUnit")]
+        public Output<string?> RenewalPeriodUnit { get; private set; } = null!;
 
         /// <summary>
         /// Maximum number of Secrets. The attribute is valid when the attribute `payment_type` is `Subscription`.
@@ -132,7 +140,7 @@ namespace Pulumi.AliCloud.Kms
         public Output<string> Status { get; private set; } = null!;
 
         /// <summary>
-        /// Instance VPC id
+        /// The ID of the virtual private cloud (VPC) that is associated with the KMS instance.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -244,7 +252,7 @@ namespace Pulumi.AliCloud.Kms
         public Input<int>? LogStorage { get; set; }
 
         /// <summary>
-        /// Payment type,valid values:
+        /// Payment type, valid values:
         /// - `Subscription`: Prepaid.
         /// - `PayAsYouGo`: Postpaid.
         /// </summary>
@@ -276,6 +284,14 @@ namespace Pulumi.AliCloud.Kms
         public Input<string>? RenewStatus { get; set; }
 
         /// <summary>
+        /// Automatic renewal period unit, valid value:
+        /// - `M`: Month.
+        /// - `Y`: Year.
+        /// </summary>
+        [Input("renewalPeriodUnit")]
+        public Input<string>? RenewalPeriodUnit { get; set; }
+
+        /// <summary>
         /// Maximum number of Secrets. The attribute is valid when the attribute `payment_type` is `Subscription`.
         /// </summary>
         [Input("secretNum")]
@@ -288,7 +304,7 @@ namespace Pulumi.AliCloud.Kms
         public Input<int>? Spec { get; set; }
 
         /// <summary>
-        /// Instance VPC id
+        /// The ID of the virtual private cloud (VPC) that is associated with the KMS instance.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
@@ -392,7 +408,7 @@ namespace Pulumi.AliCloud.Kms
         public Input<int>? LogStorage { get; set; }
 
         /// <summary>
-        /// Payment type,valid values:
+        /// Payment type, valid values:
         /// - `Subscription`: Prepaid.
         /// - `PayAsYouGo`: Postpaid.
         /// </summary>
@@ -424,6 +440,14 @@ namespace Pulumi.AliCloud.Kms
         public Input<string>? RenewStatus { get; set; }
 
         /// <summary>
+        /// Automatic renewal period unit, valid value:
+        /// - `M`: Month.
+        /// - `Y`: Year.
+        /// </summary>
+        [Input("renewalPeriodUnit")]
+        public Input<string>? RenewalPeriodUnit { get; set; }
+
+        /// <summary>
         /// Maximum number of Secrets. The attribute is valid when the attribute `payment_type` is `Subscription`.
         /// </summary>
         [Input("secretNum")]
@@ -442,7 +466,7 @@ namespace Pulumi.AliCloud.Kms
         public Input<string>? Status { get; set; }
 
         /// <summary>
-        /// Instance VPC id
+        /// The ID of the virtual private cloud (VPC) that is associated with the KMS instance.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

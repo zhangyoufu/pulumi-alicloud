@@ -20,6 +20,7 @@ from .get_alert_contact_groups import *
 from .get_alert_contacts import *
 from .get_alert_robots import *
 from .get_dispatch_rules import *
+from .get_environments import *
 from .get_integration_exporters import *
 from .get_prometheis import *
 from .get_prometheus import *

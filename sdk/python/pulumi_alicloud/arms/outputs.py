@@ -51,6 +51,7 @@ __all__ = [
     'GetDispatchRulesRuleNotifyRuleResult',
     'GetDispatchRulesRuleNotifyRuleNotifyObjectResult',
     'GetDispatchRulesRuleNotifyTemplateResult',
+    'GetEnvironmentsEnvironmentResult',
     'GetIntegrationExportersIntegrationExporterResult',
     'GetPrometheisPrometheiResult',
     'GetPrometheusAlertRulesRuleResult',
@@ -2999,6 +3000,178 @@ class GetDispatchRulesRuleNotifyTemplateResult(dict):
         The content of the TTS.
         """
         return pulumi.get(self, "tts_recover_content")
+
+
+@pulumi.output_type
+class GetEnvironmentsEnvironmentResult(dict):
+    def __init__(__self__, *,
+                 bind_resource_id: _builtins.str,
+                 bind_resource_type: _builtins.str,
+                 bind_vpc_cidr: _builtins.str,
+                 environment_id: _builtins.str,
+                 environment_name: _builtins.str,
+                 environment_type: _builtins.str,
+                 grafana_datasource_uid: _builtins.str,
+                 grafana_folder_uid: _builtins.str,
+                 id: _builtins.str,
+                 managed_type: _builtins.str,
+                 prometheus_instance_id: _builtins.str,
+                 region_id: _builtins.str,
+                 resource_group_id: _builtins.str,
+                 tags: Mapping[str, _builtins.str],
+                 user_id: _builtins.str):
+        """
+        :param _builtins.str bind_resource_id: The ID of the resource bound to the environment instance.
+        :param _builtins.str bind_resource_type: The resource type.
+        :param _builtins.str bind_vpc_cidr: The CIDR block that is bound to the VPC.
+        :param _builtins.str environment_id: The ID of the environment instance.
+        :param _builtins.str environment_name: The name of the environment instance.
+        :param _builtins.str environment_type: The environment type. Valid values: `CS`, `ECS`, `Cloud`.
+        :param _builtins.str grafana_datasource_uid: The unique ID of the Grafana data source.
+        :param _builtins.str grafana_folder_uid: The unique ID of the Grafana directory.
+        :param _builtins.str id: The ID of the environment instance.
+        :param _builtins.str managed_type: Indicates whether agents or exporters are managed.
+        :param _builtins.str prometheus_instance_id: The ID of the Prometheus instance.
+        :param _builtins.str region_id: The region ID.
+        :param _builtins.str resource_group_id: The ID of the resource group.
+        :param Mapping[str, _builtins.str] tags: A mapping of tags to assign to the resource.
+        :param _builtins.str user_id: The user ID.
+        """
+        pulumi.set(__self__, "bind_resource_id", bind_resource_id)
+        pulumi.set(__self__, "bind_resource_type", bind_resource_type)
+        pulumi.set(__self__, "bind_vpc_cidr", bind_vpc_cidr)
+        pulumi.set(__self__, "environment_id", environment_id)
+        pulumi.set(__self__, "environment_name", environment_name)
+        pulumi.set(__self__, "environment_type", environment_type)
+        pulumi.set(__self__, "grafana_datasource_uid", grafana_datasource_uid)
+        pulumi.set(__self__, "grafana_folder_uid", grafana_folder_uid)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "managed_type", managed_type)
+        pulumi.set(__self__, "prometheus_instance_id", prometheus_instance_id)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "resource_group_id", resource_group_id)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "user_id", user_id)
+
+    @_builtins.property
+    @pulumi.getter(name="bindResourceId")
+    def bind_resource_id(self) -> _builtins.str:
+        """
+        The ID of the resource bound to the environment instance.
+        """
+        return pulumi.get(self, "bind_resource_id")
+
+    @_builtins.property
+    @pulumi.getter(name="bindResourceType")
+    def bind_resource_type(self) -> _builtins.str:
+        """
+        The resource type.
+        """
+        return pulumi.get(self, "bind_resource_type")
+
+    @_builtins.property
+    @pulumi.getter(name="bindVpcCidr")
+    def bind_vpc_cidr(self) -> _builtins.str:
+        """
+        The CIDR block that is bound to the VPC.
+        """
+        return pulumi.get(self, "bind_vpc_cidr")
+
+    @_builtins.property
+    @pulumi.getter(name="environmentId")
+    def environment_id(self) -> _builtins.str:
+        """
+        The ID of the environment instance.
+        """
+        return pulumi.get(self, "environment_id")
+
+    @_builtins.property
+    @pulumi.getter(name="environmentName")
+    def environment_name(self) -> _builtins.str:
+        """
+        The name of the environment instance.
+        """
+        return pulumi.get(self, "environment_name")
+
+    @_builtins.property
+    @pulumi.getter(name="environmentType")
+    def environment_type(self) -> _builtins.str:
+        """
+        The environment type. Valid values: `CS`, `ECS`, `Cloud`.
+        """
+        return pulumi.get(self, "environment_type")
+
+    @_builtins.property
+    @pulumi.getter(name="grafanaDatasourceUid")
+    def grafana_datasource_uid(self) -> _builtins.str:
+        """
+        The unique ID of the Grafana data source.
+        """
+        return pulumi.get(self, "grafana_datasource_uid")
+
+    @_builtins.property
+    @pulumi.getter(name="grafanaFolderUid")
+    def grafana_folder_uid(self) -> _builtins.str:
+        """
+        The unique ID of the Grafana directory.
+        """
+        return pulumi.get(self, "grafana_folder_uid")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        The ID of the environment instance.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="managedType")
+    def managed_type(self) -> _builtins.str:
+        """
+        Indicates whether agents or exporters are managed.
+        """
+        return pulumi.get(self, "managed_type")
+
+    @_builtins.property
+    @pulumi.getter(name="prometheusInstanceId")
+    def prometheus_instance_id(self) -> _builtins.str:
+        """
+        The ID of the Prometheus instance.
+        """
+        return pulumi.get(self, "prometheus_instance_id")
+
+    @_builtins.property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> _builtins.str:
+        """
+        The region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+    @_builtins.property
+    @pulumi.getter(name="resourceGroupId")
+    def resource_group_id(self) -> _builtins.str:
+        """
+        The ID of the resource group.
+        """
+        return pulumi.get(self, "resource_group_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> Mapping[str, _builtins.str]:
+        """
+        A mapping of tags to assign to the resource.
+        """
+        return pulumi.get(self, "tags")
+
+    @_builtins.property
+    @pulumi.getter(name="userId")
+    def user_id(self) -> _builtins.str:
+        """
+        The user ID.
+        """
+        return pulumi.get(self, "user_id")
 
 
 @pulumi.output_type

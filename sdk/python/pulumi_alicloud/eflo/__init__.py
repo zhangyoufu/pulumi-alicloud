@@ -14,6 +14,7 @@ from .get_vpds import *
 from .invocation import *
 from .node import *
 from .node_group import *
+from .node_group_attachment import *
 from .resource import *
 from .subnet import *
 from .vpd import *

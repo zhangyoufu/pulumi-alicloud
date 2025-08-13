@@ -35,6 +35,7 @@ __all__ = [
     'KubernetesRuntime',
     'ManagedKubernetesAddon',
     'ManagedKubernetesAuditLogConfig',
+    'ManagedKubernetesAutoMode',
     'ManagedKubernetesCertificateAuthority',
     'ManagedKubernetesConnections',
     'ManagedKubernetesDeleteOption',
@@ -1409,6 +1410,25 @@ class ManagedKubernetesAuditLogConfig(dict):
         The SLS project to which the Logstore storing the cluster audit logs belongs.
         """
         return pulumi.get(self, "sls_project_name")
+
+
+@pulumi.output_type
+class ManagedKubernetesAutoMode(dict):
+    def __init__(__self__, *,
+                 enabled: Optional[_builtins.bool] = None):
+        """
+        :param _builtins.bool enabled: Whether to enable auto mode. Valid values: `true`, `false`. Only ACK managed Pro clusters support Auto Mode.
+        """
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> Optional[_builtins.bool]:
+        """
+        Whether to enable auto mode. Valid values: `true`, `false`. Only ACK managed Pro clusters support Auto Mode.
+        """
+        return pulumi.get(self, "enabled")
 
 
 @pulumi.output_type
