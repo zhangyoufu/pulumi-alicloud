@@ -8,6 +8,7 @@ import com.pulumi.alicloud.cs.ManagedKubernetesArgs;
 import com.pulumi.alicloud.cs.inputs.ManagedKubernetesState;
 import com.pulumi.alicloud.cs.outputs.ManagedKubernetesAddon;
 import com.pulumi.alicloud.cs.outputs.ManagedKubernetesAuditLogConfig;
+import com.pulumi.alicloud.cs.outputs.ManagedKubernetesAutoMode;
 import com.pulumi.alicloud.cs.outputs.ManagedKubernetesCertificateAuthority;
 import com.pulumi.alicloud.cs.outputs.ManagedKubernetesConnections;
 import com.pulumi.alicloud.cs.outputs.ManagedKubernetesDeleteOption;
@@ -111,6 +112,20 @@ public class ManagedKubernetes extends com.pulumi.resources.CustomResource {
      */
     public Output<ManagedKubernetesAuditLogConfig> auditLogConfig() {
         return this.auditLogConfig;
+    }
+    /**
+     * Auto mode cluster configuration. See `auto_mode` below.
+     * 
+     */
+    @Export(name="autoMode", refs={ManagedKubernetesAutoMode.class}, tree="[0]")
+    private Output</* @Nullable */ ManagedKubernetesAutoMode> autoMode;
+
+    /**
+     * @return Auto mode cluster configuration. See `auto_mode` below.
+     * 
+     */
+    public Output<Optional<ManagedKubernetesAutoMode>> autoMode() {
+        return Codegen.optional(this.autoMode);
     }
     /**
      * (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificate_authority of new DataSource `alicloud.cs.getClusterCredential` to replace it.
@@ -395,14 +410,14 @@ public class ManagedKubernetes extends com.pulumi.resources.CustomResource {
         return this.loadBalancerSpec;
     }
     /**
-     * The cluster maintenance window，effective only in the professional managed cluster. Managed node pool will use it. See `maintenance_window` below.
+     * The cluster maintenance window. Managed node pool will use it. See `maintenance_window` below.
      * 
      */
     @Export(name="maintenanceWindow", refs={ManagedKubernetesMaintenanceWindow.class}, tree="[0]")
     private Output<ManagedKubernetesMaintenanceWindow> maintenanceWindow;
 
     /**
-     * @return The cluster maintenance window，effective only in the professional managed cluster. Managed node pool will use it. See `maintenance_window` below.
+     * @return The cluster maintenance window. Managed node pool will use it. See `maintenance_window` below.
      * 
      */
     public Output<ManagedKubernetesMaintenanceWindow> maintenanceWindow() {
@@ -471,14 +486,14 @@ public class ManagedKubernetes extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.nodeCidrMask);
     }
     /**
-     * The cluster automatic operation policy. See `operation_policy` below.
+     * The cluster automatic operation policy, only works when `maintenance_window` is enabled. See `operation_policy` below.
      * 
      */
     @Export(name="operationPolicy", refs={ManagedKubernetesOperationPolicy.class}, tree="[0]")
     private Output<ManagedKubernetesOperationPolicy> operationPolicy;
 
     /**
-     * @return The cluster automatic operation policy. See `operation_policy` below.
+     * @return The cluster automatic operation policy, only works when `maintenance_window` is enabled. See `operation_policy` below.
      * 
      */
     public Output<ManagedKubernetesOperationPolicy> operationPolicy() {

@@ -174,14 +174,14 @@ public class SynchronizationJob extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.destinationEndpointDatabaseName);
     }
     /**
-     * The type of destination database. The default value is MYSQL. For the correspondence between supported target libraries and source libraries, see [Supported Databases](https://help.aliyun.com/document_detail/131497.htm). When the database type of the target instance is KAFKA or MONGODB, you also need to pass in some information in the reserved parameter `reserve`. For the configuration method, see the description of `reserve` parameters. Valid values: `ADS`, `ADB30`, `AS400`, `DATAHUB`, `DB2`, `GREENPLUM`, `KAFKA`, `MONGODB`, `MSSQL`, `MySQL`, `ORACLE`, `PolarDB`, `POLARDBX20`, `POLARDB_O`, `PostgreSQL`.
+     * The type of destination database. The default value is MYSQL. For the correspondence between supported target libraries and source libraries, see [Supported Databases](https://help.aliyun.com/document_detail/131497.htm). When the database type of the target instance is KAFKA or MONGODB, you also need to pass in some information in the reserved parameter `reserve`. For the configuration method, see the description of `reserve` parameters. Valid values: `ADS`, `ADB30`, `AS400`, `DATAHUB`, `DB2`, `GREENPLUM`, `KAFKA`, `MONGODB`, `MSSQL`, `MySQL`, `ORACLE`, `PolarDB`, `POLARDBX20`, `POLARDB_O`, `PostgreSQL`,`  POLARDB_PG `, `MARIADB`, `POLARDBX10`, `ODPS`, `Tablestore`, `ELK`, `REDIS`.
      * 
      */
     @Export(name="destinationEndpointEngineName", refs={String.class}, tree="[0]")
     private Output<String> destinationEndpointEngineName;
 
     /**
-     * @return The type of destination database. The default value is MYSQL. For the correspondence between supported target libraries and source libraries, see [Supported Databases](https://help.aliyun.com/document_detail/131497.htm). When the database type of the target instance is KAFKA or MONGODB, you also need to pass in some information in the reserved parameter `reserve`. For the configuration method, see the description of `reserve` parameters. Valid values: `ADS`, `ADB30`, `AS400`, `DATAHUB`, `DB2`, `GREENPLUM`, `KAFKA`, `MONGODB`, `MSSQL`, `MySQL`, `ORACLE`, `PolarDB`, `POLARDBX20`, `POLARDB_O`, `PostgreSQL`.
+     * @return The type of destination database. The default value is MYSQL. For the correspondence between supported target libraries and source libraries, see [Supported Databases](https://help.aliyun.com/document_detail/131497.htm). When the database type of the target instance is KAFKA or MONGODB, you also need to pass in some information in the reserved parameter `reserve`. For the configuration method, see the description of `reserve` parameters. Valid values: `ADS`, `ADB30`, `AS400`, `DATAHUB`, `DB2`, `GREENPLUM`, `KAFKA`, `MONGODB`, `MSSQL`, `MySQL`, `ORACLE`, `PolarDB`, `POLARDBX20`, `POLARDB_O`, `PostgreSQL`,`  POLARDB_PG `, `MARIADB`, `POLARDBX10`, `ODPS`, `Tablestore`, `ELK`, `REDIS`.
      * 
      */
     public Output<String> destinationEndpointEngineName() {
@@ -454,14 +454,14 @@ public class SynchronizationJob extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.sourceEndpointDatabaseName);
     }
     /**
-     * The type of source database. The default value is `MySQL`. For the correspondence between supported source libraries and target libraries, see [Supported Databases](https://help.aliyun.com/document_detail/131497.htm). When the database type of the source instance is `MONGODB`, you also need to pass in some information in the reserved parameter `Reserve`, for the configuration method, see the description of Reserve parameters. Valid values: `AS400`, `DB2`, `DMSPOLARDB`, `HBASE`, `MONGODB`, `MSSQL`, `MySQL`, `ORACLE`, `PolarDB`, `POLARDBX20`, `POLARDB_O`, `POSTGRESQL`, `TERADATA`.
+     * The type of source database. The default value is `MySQL`. For the correspondence between supported source libraries and target libraries, see [Supported Databases](https://help.aliyun.com/document_detail/131497.htm). When the database type of the source instance is `MONGODB`, you also need to pass in some information in the reserved parameter `Reserve`, for the configuration method, see the description of Reserve parameters. Valid values: `AS400`, `DB2`, `DMSPOLARDB`, `HBASE`, `MONGODB`, `MSSQL`, `MySQL`, `ORACLE`, `PolarDB`, `POLARDBX20`, `POLARDB_O`, `POSTGRESQL`, `TERADATA`, `POLARDB_PG`, `MARIADB`, `POLARDBX10`, `TiDB`, `REDIS`.
      * 
      */
     @Export(name="sourceEndpointEngineName", refs={String.class}, tree="[0]")
     private Output<String> sourceEndpointEngineName;
 
     /**
-     * @return The type of source database. The default value is `MySQL`. For the correspondence between supported source libraries and target libraries, see [Supported Databases](https://help.aliyun.com/document_detail/131497.htm). When the database type of the source instance is `MONGODB`, you also need to pass in some information in the reserved parameter `Reserve`, for the configuration method, see the description of Reserve parameters. Valid values: `AS400`, `DB2`, `DMSPOLARDB`, `HBASE`, `MONGODB`, `MSSQL`, `MySQL`, `ORACLE`, `PolarDB`, `POLARDBX20`, `POLARDB_O`, `POSTGRESQL`, `TERADATA`.
+     * @return The type of source database. The default value is `MySQL`. For the correspondence between supported source libraries and target libraries, see [Supported Databases](https://help.aliyun.com/document_detail/131497.htm). When the database type of the source instance is `MONGODB`, you also need to pass in some information in the reserved parameter `Reserve`, for the configuration method, see the description of Reserve parameters. Valid values: `AS400`, `DB2`, `DMSPOLARDB`, `HBASE`, `MONGODB`, `MSSQL`, `MySQL`, `ORACLE`, `PolarDB`, `POLARDBX20`, `POLARDB_O`, `POSTGRESQL`, `TERADATA`, `POLARDB_PG`, `MARIADB`, `POLARDBX10`, `TiDB`, `REDIS`.
      * 
      */
     public Output<String> sourceEndpointEngineName() {

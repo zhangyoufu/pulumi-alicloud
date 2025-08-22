@@ -59,6 +59,9 @@ namespace Pulumi.AliCloud.Amqp
     [AliCloudResourceType("alicloud:amqp/virtualHost:VirtualHost")]
     public partial class VirtualHost : global::Pulumi.CustomResource
     {
+        [Output("forceDelete")]
+        public Output<bool?> ForceDelete { get; private set; } = null!;
+
         /// <summary>
         /// InstanceId.
         /// </summary>
@@ -117,6 +120,9 @@ namespace Pulumi.AliCloud.Amqp
 
     public sealed class VirtualHostArgs : global::Pulumi.ResourceArgs
     {
+        [Input("forceDelete")]
+        public Input<bool>? ForceDelete { get; set; }
+
         /// <summary>
         /// InstanceId.
         /// </summary>
@@ -137,6 +143,9 @@ namespace Pulumi.AliCloud.Amqp
 
     public sealed class VirtualHostState : global::Pulumi.ResourceArgs
     {
+        [Input("forceDelete")]
+        public Input<bool>? ForceDelete { get; set; }
+
         /// <summary>
         /// InstanceId.
         /// </summary>

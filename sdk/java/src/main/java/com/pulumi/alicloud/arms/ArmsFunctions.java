@@ -4,6 +4,8 @@
 package com.pulumi.alicloud.arms;
 
 import com.pulumi.alicloud.Utilities;
+import com.pulumi.alicloud.arms.inputs.GetAddonReleasesArgs;
+import com.pulumi.alicloud.arms.inputs.GetAddonReleasesPlainArgs;
 import com.pulumi.alicloud.arms.inputs.GetAlertContactGroupsArgs;
 import com.pulumi.alicloud.arms.inputs.GetAlertContactGroupsPlainArgs;
 import com.pulumi.alicloud.arms.inputs.GetAlertContactsArgs;
@@ -12,6 +14,16 @@ import com.pulumi.alicloud.arms.inputs.GetAlertRobotsArgs;
 import com.pulumi.alicloud.arms.inputs.GetAlertRobotsPlainArgs;
 import com.pulumi.alicloud.arms.inputs.GetDispatchRulesArgs;
 import com.pulumi.alicloud.arms.inputs.GetDispatchRulesPlainArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvCustomJobsArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvCustomJobsPlainArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvFeaturesArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvFeaturesPlainArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvPodMonitorsArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvPodMonitorsPlainArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvServiceMonitorsArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvServiceMonitorsPlainArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvironmentsArgs;
+import com.pulumi.alicloud.arms.inputs.GetEnvironmentsPlainArgs;
 import com.pulumi.alicloud.arms.inputs.GetIntegrationExportersArgs;
 import com.pulumi.alicloud.arms.inputs.GetIntegrationExportersPlainArgs;
 import com.pulumi.alicloud.arms.inputs.GetPrometheisArgs;
@@ -24,10 +36,16 @@ import com.pulumi.alicloud.arms.inputs.GetPrometheusMonitoringsPlainArgs;
 import com.pulumi.alicloud.arms.inputs.GetPrometheusPlainArgs;
 import com.pulumi.alicloud.arms.inputs.GetRemoteWritesArgs;
 import com.pulumi.alicloud.arms.inputs.GetRemoteWritesPlainArgs;
+import com.pulumi.alicloud.arms.outputs.GetAddonReleasesResult;
 import com.pulumi.alicloud.arms.outputs.GetAlertContactGroupsResult;
 import com.pulumi.alicloud.arms.outputs.GetAlertContactsResult;
 import com.pulumi.alicloud.arms.outputs.GetAlertRobotsResult;
 import com.pulumi.alicloud.arms.outputs.GetDispatchRulesResult;
+import com.pulumi.alicloud.arms.outputs.GetEnvCustomJobsResult;
+import com.pulumi.alicloud.arms.outputs.GetEnvFeaturesResult;
+import com.pulumi.alicloud.arms.outputs.GetEnvPodMonitorsResult;
+import com.pulumi.alicloud.arms.outputs.GetEnvServiceMonitorsResult;
+import com.pulumi.alicloud.arms.outputs.GetEnvironmentsResult;
 import com.pulumi.alicloud.arms.outputs.GetIntegrationExportersResult;
 import com.pulumi.alicloud.arms.outputs.GetPrometheisResult;
 import com.pulumi.alicloud.arms.outputs.GetPrometheusAlertRulesResult;
@@ -42,6 +60,51 @@ import com.pulumi.deployment.InvokeOutputOptions;
 import java.util.concurrent.CompletableFuture;
 
 public final class ArmsFunctions {
+    /**
+     * This data source provides the ARMS Addon Releases of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetAddonReleasesResult> getAddonReleases(GetAddonReleasesArgs args) {
+        return getAddonReleases(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Addon Releases of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static CompletableFuture<GetAddonReleasesResult> getAddonReleasesPlain(GetAddonReleasesPlainArgs args) {
+        return getAddonReleasesPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Addon Releases of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetAddonReleasesResult> getAddonReleases(GetAddonReleasesArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getAddonReleases:getAddonReleases", TypeShape.of(GetAddonReleasesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Addon Releases of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetAddonReleasesResult> getAddonReleases(GetAddonReleasesArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getAddonReleases:getAddonReleases", TypeShape.of(GetAddonReleasesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Addon Releases of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static CompletableFuture<GetAddonReleasesResult> getAddonReleasesPlain(GetAddonReleasesPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("alicloud:arms/getAddonReleases:getAddonReleases", TypeShape.of(GetAddonReleasesResult.class), args, Utilities.withVersion(options));
+    }
     /**
      * This data source provides the Arms Alert Contact Groups of the current Alibaba Cloud user.
      * 
@@ -1840,6 +1903,1190 @@ public final class ArmsFunctions {
      */
     public static CompletableFuture<GetDispatchRulesResult> getDispatchRulesPlain(GetDispatchRulesPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("alicloud:arms/getDispatchRules:getDispatchRules", TypeShape.of(GetDispatchRulesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Custom Jobs of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.EnvCustomJob;
+     * import com.pulumi.alicloud.arms.EnvCustomJobArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvCustomJobsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         final var default = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(default_.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         var defaultEnvCustomJob = new EnvCustomJob("defaultEnvCustomJob", EnvCustomJobArgs.builder()
+     *             .status("run")
+     *             .environmentId(defaultEnvironment.id())
+     *             .envCustomJobName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .configYaml("""
+     * scrape_configs:
+     * - job_name: job-demo1
+     *   honor_timestamps: false
+     *   honor_labels: false
+     *   scrape_interval: 30s
+     *   scheme: http
+     *   metrics_path: /metric
+     *   static_configs:
+     *   - targets:
+     *     - 127.0.0.1:9090
+     *             """)
+     *             .aliyunLang("en")
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvCustomJobs(GetEnvCustomJobsArgs.builder()
+     *             .environmentId(defaultEnvCustomJob.environmentId())
+     *             .ids(defaultEnvCustomJob.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvCustomJobsId0", ids.applyValue(_ids -> _ids.jobs()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static Output<GetEnvCustomJobsResult> getEnvCustomJobs(GetEnvCustomJobsArgs args) {
+        return getEnvCustomJobs(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Env Custom Jobs of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.EnvCustomJob;
+     * import com.pulumi.alicloud.arms.EnvCustomJobArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvCustomJobsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         final var default = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(default_.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         var defaultEnvCustomJob = new EnvCustomJob("defaultEnvCustomJob", EnvCustomJobArgs.builder()
+     *             .status("run")
+     *             .environmentId(defaultEnvironment.id())
+     *             .envCustomJobName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .configYaml("""
+     * scrape_configs:
+     * - job_name: job-demo1
+     *   honor_timestamps: false
+     *   honor_labels: false
+     *   scrape_interval: 30s
+     *   scheme: http
+     *   metrics_path: /metric
+     *   static_configs:
+     *   - targets:
+     *     - 127.0.0.1:9090
+     *             """)
+     *             .aliyunLang("en")
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvCustomJobs(GetEnvCustomJobsArgs.builder()
+     *             .environmentId(defaultEnvCustomJob.environmentId())
+     *             .ids(defaultEnvCustomJob.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvCustomJobsId0", ids.applyValue(_ids -> _ids.jobs()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static CompletableFuture<GetEnvCustomJobsResult> getEnvCustomJobsPlain(GetEnvCustomJobsPlainArgs args) {
+        return getEnvCustomJobsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Env Custom Jobs of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.EnvCustomJob;
+     * import com.pulumi.alicloud.arms.EnvCustomJobArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvCustomJobsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         final var default = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(default_.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         var defaultEnvCustomJob = new EnvCustomJob("defaultEnvCustomJob", EnvCustomJobArgs.builder()
+     *             .status("run")
+     *             .environmentId(defaultEnvironment.id())
+     *             .envCustomJobName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .configYaml("""
+     * scrape_configs:
+     * - job_name: job-demo1
+     *   honor_timestamps: false
+     *   honor_labels: false
+     *   scrape_interval: 30s
+     *   scheme: http
+     *   metrics_path: /metric
+     *   static_configs:
+     *   - targets:
+     *     - 127.0.0.1:9090
+     *             """)
+     *             .aliyunLang("en")
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvCustomJobs(GetEnvCustomJobsArgs.builder()
+     *             .environmentId(defaultEnvCustomJob.environmentId())
+     *             .ids(defaultEnvCustomJob.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvCustomJobsId0", ids.applyValue(_ids -> _ids.jobs()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static Output<GetEnvCustomJobsResult> getEnvCustomJobs(GetEnvCustomJobsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvCustomJobs:getEnvCustomJobs", TypeShape.of(GetEnvCustomJobsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Custom Jobs of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.EnvCustomJob;
+     * import com.pulumi.alicloud.arms.EnvCustomJobArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvCustomJobsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         final var default = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(default_.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         var defaultEnvCustomJob = new EnvCustomJob("defaultEnvCustomJob", EnvCustomJobArgs.builder()
+     *             .status("run")
+     *             .environmentId(defaultEnvironment.id())
+     *             .envCustomJobName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .configYaml("""
+     * scrape_configs:
+     * - job_name: job-demo1
+     *   honor_timestamps: false
+     *   honor_labels: false
+     *   scrape_interval: 30s
+     *   scheme: http
+     *   metrics_path: /metric
+     *   static_configs:
+     *   - targets:
+     *     - 127.0.0.1:9090
+     *             """)
+     *             .aliyunLang("en")
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvCustomJobs(GetEnvCustomJobsArgs.builder()
+     *             .environmentId(defaultEnvCustomJob.environmentId())
+     *             .ids(defaultEnvCustomJob.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvCustomJobsId0", ids.applyValue(_ids -> _ids.jobs()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static Output<GetEnvCustomJobsResult> getEnvCustomJobs(GetEnvCustomJobsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvCustomJobs:getEnvCustomJobs", TypeShape.of(GetEnvCustomJobsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Custom Jobs of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.EnvCustomJob;
+     * import com.pulumi.alicloud.arms.EnvCustomJobArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvCustomJobsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         final var default = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(default_.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         var defaultEnvCustomJob = new EnvCustomJob("defaultEnvCustomJob", EnvCustomJobArgs.builder()
+     *             .status("run")
+     *             .environmentId(defaultEnvironment.id())
+     *             .envCustomJobName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .configYaml("""
+     * scrape_configs:
+     * - job_name: job-demo1
+     *   honor_timestamps: false
+     *   honor_labels: false
+     *   scrape_interval: 30s
+     *   scheme: http
+     *   metrics_path: /metric
+     *   static_configs:
+     *   - targets:
+     *     - 127.0.0.1:9090
+     *             """)
+     *             .aliyunLang("en")
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvCustomJobs(GetEnvCustomJobsArgs.builder()
+     *             .environmentId(defaultEnvCustomJob.environmentId())
+     *             .ids(defaultEnvCustomJob.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvCustomJobsId0", ids.applyValue(_ids -> _ids.jobs()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static CompletableFuture<GetEnvCustomJobsResult> getEnvCustomJobsPlain(GetEnvCustomJobsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("alicloud:arms/getEnvCustomJobs:getEnvCustomJobs", TypeShape.of(GetEnvCustomJobsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Features of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvFeaturesResult> getEnvFeatures(GetEnvFeaturesArgs args) {
+        return getEnvFeatures(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Env Features of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static CompletableFuture<GetEnvFeaturesResult> getEnvFeaturesPlain(GetEnvFeaturesPlainArgs args) {
+        return getEnvFeaturesPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Env Features of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvFeaturesResult> getEnvFeatures(GetEnvFeaturesArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvFeatures:getEnvFeatures", TypeShape.of(GetEnvFeaturesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Features of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvFeaturesResult> getEnvFeatures(GetEnvFeaturesArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvFeatures:getEnvFeatures", TypeShape.of(GetEnvFeaturesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Features of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static CompletableFuture<GetEnvFeaturesResult> getEnvFeaturesPlain(GetEnvFeaturesPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("alicloud:arms/getEnvFeatures:getEnvFeatures", TypeShape.of(GetEnvFeaturesResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Pod Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvPodMonitorsResult> getEnvPodMonitors(GetEnvPodMonitorsArgs args) {
+        return getEnvPodMonitors(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Env Pod Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static CompletableFuture<GetEnvPodMonitorsResult> getEnvPodMonitorsPlain(GetEnvPodMonitorsPlainArgs args) {
+        return getEnvPodMonitorsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Env Pod Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvPodMonitorsResult> getEnvPodMonitors(GetEnvPodMonitorsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvPodMonitors:getEnvPodMonitors", TypeShape.of(GetEnvPodMonitorsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Pod Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvPodMonitorsResult> getEnvPodMonitors(GetEnvPodMonitorsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvPodMonitors:getEnvPodMonitors", TypeShape.of(GetEnvPodMonitorsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Pod Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static CompletableFuture<GetEnvPodMonitorsResult> getEnvPodMonitorsPlain(GetEnvPodMonitorsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("alicloud:arms/getEnvPodMonitors:getEnvPodMonitors", TypeShape.of(GetEnvPodMonitorsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Service Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvServiceMonitorsResult> getEnvServiceMonitors(GetEnvServiceMonitorsArgs args) {
+        return getEnvServiceMonitors(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Env Service Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static CompletableFuture<GetEnvServiceMonitorsResult> getEnvServiceMonitorsPlain(GetEnvServiceMonitorsPlainArgs args) {
+        return getEnvServiceMonitorsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Env Service Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvServiceMonitorsResult> getEnvServiceMonitors(GetEnvServiceMonitorsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvServiceMonitors:getEnvServiceMonitors", TypeShape.of(GetEnvServiceMonitorsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Service Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static Output<GetEnvServiceMonitorsResult> getEnvServiceMonitors(GetEnvServiceMonitorsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvServiceMonitors:getEnvServiceMonitors", TypeShape.of(GetEnvServiceMonitorsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Env Service Monitors of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     */
+    public static CompletableFuture<GetEnvServiceMonitorsResult> getEnvServiceMonitorsPlain(GetEnvServiceMonitorsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("alicloud:arms/getEnvServiceMonitors:getEnvServiceMonitors", TypeShape.of(GetEnvServiceMonitorsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Environments of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * Basic Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.alicloud.resourcemanager.ResourcemanagerFunctions;
+     * import com.pulumi.alicloud.resourcemanager.inputs.GetResourceGroupsArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvironmentsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         final var default = ResourcemanagerFunctions.getResourceGroups(GetResourceGroupsArgs.builder()
+     *             .status("OK")
+     *             .build());
+     * 
+     *         final var defaultGetNetworks = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(defaultGetNetworks.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .resourceGroupId(default_.ids()[1])
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvironments(GetEnvironmentsArgs.builder()
+     *             .ids(defaultEnvironment.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvironmentsId0", ids.applyValue(_ids -> _ids.environments()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static Output<GetEnvironmentsResult> getEnvironments() {
+        return getEnvironments(GetEnvironmentsArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Environments of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * Basic Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.alicloud.resourcemanager.ResourcemanagerFunctions;
+     * import com.pulumi.alicloud.resourcemanager.inputs.GetResourceGroupsArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvironmentsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         final var default = ResourcemanagerFunctions.getResourceGroups(GetResourceGroupsArgs.builder()
+     *             .status("OK")
+     *             .build());
+     * 
+     *         final var defaultGetNetworks = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(defaultGetNetworks.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .resourceGroupId(default_.ids()[1])
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvironments(GetEnvironmentsArgs.builder()
+     *             .ids(defaultEnvironment.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvironmentsId0", ids.applyValue(_ids -> _ids.environments()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static CompletableFuture<GetEnvironmentsResult> getEnvironmentsPlain() {
+        return getEnvironmentsPlain(GetEnvironmentsPlainArgs.Empty, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Environments of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * Basic Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.alicloud.resourcemanager.ResourcemanagerFunctions;
+     * import com.pulumi.alicloud.resourcemanager.inputs.GetResourceGroupsArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvironmentsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         final var default = ResourcemanagerFunctions.getResourceGroups(GetResourceGroupsArgs.builder()
+     *             .status("OK")
+     *             .build());
+     * 
+     *         final var defaultGetNetworks = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(defaultGetNetworks.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .resourceGroupId(default_.ids()[1])
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvironments(GetEnvironmentsArgs.builder()
+     *             .ids(defaultEnvironment.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvironmentsId0", ids.applyValue(_ids -> _ids.environments()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static Output<GetEnvironmentsResult> getEnvironments(GetEnvironmentsArgs args) {
+        return getEnvironments(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Environments of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * Basic Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.alicloud.resourcemanager.ResourcemanagerFunctions;
+     * import com.pulumi.alicloud.resourcemanager.inputs.GetResourceGroupsArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvironmentsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         final var default = ResourcemanagerFunctions.getResourceGroups(GetResourceGroupsArgs.builder()
+     *             .status("OK")
+     *             .build());
+     * 
+     *         final var defaultGetNetworks = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(defaultGetNetworks.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .resourceGroupId(default_.ids()[1])
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvironments(GetEnvironmentsArgs.builder()
+     *             .ids(defaultEnvironment.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvironmentsId0", ids.applyValue(_ids -> _ids.environments()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static CompletableFuture<GetEnvironmentsResult> getEnvironmentsPlain(GetEnvironmentsPlainArgs args) {
+        return getEnvironmentsPlain(args, InvokeOptions.Empty);
+    }
+    /**
+     * This data source provides the ARMS Environments of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * Basic Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.alicloud.resourcemanager.ResourcemanagerFunctions;
+     * import com.pulumi.alicloud.resourcemanager.inputs.GetResourceGroupsArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvironmentsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         final var default = ResourcemanagerFunctions.getResourceGroups(GetResourceGroupsArgs.builder()
+     *             .status("OK")
+     *             .build());
+     * 
+     *         final var defaultGetNetworks = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(defaultGetNetworks.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .resourceGroupId(default_.ids()[1])
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvironments(GetEnvironmentsArgs.builder()
+     *             .ids(defaultEnvironment.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvironmentsId0", ids.applyValue(_ids -> _ids.environments()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static Output<GetEnvironmentsResult> getEnvironments(GetEnvironmentsArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvironments:getEnvironments", TypeShape.of(GetEnvironmentsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Environments of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * Basic Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.alicloud.resourcemanager.ResourcemanagerFunctions;
+     * import com.pulumi.alicloud.resourcemanager.inputs.GetResourceGroupsArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvironmentsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         final var default = ResourcemanagerFunctions.getResourceGroups(GetResourceGroupsArgs.builder()
+     *             .status("OK")
+     *             .build());
+     * 
+     *         final var defaultGetNetworks = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(defaultGetNetworks.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .resourceGroupId(default_.ids()[1])
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvironments(GetEnvironmentsArgs.builder()
+     *             .ids(defaultEnvironment.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvironmentsId0", ids.applyValue(_ids -> _ids.environments()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static Output<GetEnvironmentsResult> getEnvironments(GetEnvironmentsArgs args, InvokeOutputOptions options) {
+        return Deployment.getInstance().invoke("alicloud:arms/getEnvironments:getEnvironments", TypeShape.of(GetEnvironmentsResult.class), args, Utilities.withVersion(options));
+    }
+    /**
+     * This data source provides the ARMS Environments of the current Alibaba Cloud user.
+     * 
+     * &gt; **NOTE:** Available since v1.258.0.
+     * 
+     * ## Example Usage
+     * 
+     * Basic Usage
+     * 
+     * &lt;!--Start PulumiCodeChooser --&gt;
+     * <pre>
+     * {@code
+     * package generated_program;
+     * 
+     * import com.pulumi.Context;
+     * import com.pulumi.Pulumi;
+     * import com.pulumi.core.Output;
+     * import com.pulumi.alicloud.resourcemanager.ResourcemanagerFunctions;
+     * import com.pulumi.alicloud.resourcemanager.inputs.GetResourceGroupsArgs;
+     * import com.pulumi.alicloud.vpc.VpcFunctions;
+     * import com.pulumi.alicloud.vpc.inputs.GetNetworksArgs;
+     * import com.pulumi.random.integer;
+     * import com.pulumi.random.integerArgs;
+     * import com.pulumi.alicloud.arms.Environment;
+     * import com.pulumi.alicloud.arms.EnvironmentArgs;
+     * import com.pulumi.alicloud.arms.ArmsFunctions;
+     * import com.pulumi.alicloud.arms.inputs.GetEnvironmentsArgs;
+     * import java.util.List;
+     * import java.util.ArrayList;
+     * import java.util.Map;
+     * import java.io.File;
+     * import java.nio.file.Files;
+     * import java.nio.file.Paths;
+     * 
+     * public class App {
+     *     public static void main(String[] args) {
+     *         Pulumi.run(App::stack);
+     *     }
+     * 
+     *     public static void stack(Context ctx) {
+     *         final var config = ctx.config();
+     *         final var name = config.get("name").orElse("terraform-example");
+     *         final var default = ResourcemanagerFunctions.getResourceGroups(GetResourceGroupsArgs.builder()
+     *             .status("OK")
+     *             .build());
+     * 
+     *         final var defaultGetNetworks = VpcFunctions.getNetworks(GetNetworksArgs.builder()
+     *             .nameRegex("^default-NODELETING$")
+     *             .build());
+     * 
+     *         var defaultInteger = new Integer("defaultInteger", IntegerArgs.builder()
+     *             .min(10000)
+     *             .max(99999)
+     *             .build());
+     * 
+     *         var defaultEnvironment = new Environment("defaultEnvironment", EnvironmentArgs.builder()
+     *             .bindResourceId(defaultGetNetworks.ids()[0])
+     *             .environmentSubType("ECS")
+     *             .environmentType("ECS")
+     *             .environmentName(String.format("%s-%s", name,defaultInteger.result()))
+     *             .resourceGroupId(default_.ids()[1])
+     *             .tags(Map.ofEntries(
+     *                 Map.entry("Created", "TF"),
+     *                 Map.entry("For", "Environment")
+     *             ))
+     *             .build());
+     * 
+     *         final var ids = ArmsFunctions.getEnvironments(GetEnvironmentsArgs.builder()
+     *             .ids(defaultEnvironment.id())
+     *             .build());
+     * 
+     *         ctx.export("armsEnvironmentsId0", ids.applyValue(_ids -> _ids.environments()[0].id()));
+     *     }
+     * }
+     * }
+     * </pre>
+     * &lt;!--End PulumiCodeChooser --&gt;
+     * 
+     */
+    public static CompletableFuture<GetEnvironmentsResult> getEnvironmentsPlain(GetEnvironmentsPlainArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("alicloud:arms/getEnvironments:getEnvironments", TypeShape.of(GetEnvironmentsResult.class), args, Utilities.withVersion(options));
     }
     /**
      * This data source provides the Arms Integration Exporters of the current Alibaba Cloud user.

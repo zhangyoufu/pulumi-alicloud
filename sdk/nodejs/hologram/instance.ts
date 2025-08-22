@@ -96,6 +96,7 @@ export class Instance extends pulumi.CustomResource {
      * - Follower: Read-only slave instance.
      * - Warehouse: calculation group type.
      * - Shared: Shared.
+     * - Serverless: (Available since v1.259.0) Serverless.
      */
     public readonly instanceType!: pulumi.Output<string>;
     /**
@@ -113,6 +114,10 @@ export class Instance extends pulumi.CustomResource {
      * > **NOTE:**  Subscription instances (PrePaid) only supports Month. PayAsYouGo instances (PostPaid) only supports Hour. The Shared type is automatically set to Hour without specifying it.
      */
     public readonly pricingCycle!: pulumi.Output<string | undefined>;
+    /**
+     * (Available since v1.259.0) The region ID.
+     */
+    public /*out*/ readonly regionId!: pulumi.Output<string>;
     /**
      * The ID of the resource group.
      */
@@ -168,6 +173,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["leaderInstanceId"] = state ? state.leaderInstanceId : undefined;
             resourceInputs["paymentType"] = state ? state.paymentType : undefined;
             resourceInputs["pricingCycle"] = state ? state.pricingCycle : undefined;
+            resourceInputs["regionId"] = state ? state.regionId : undefined;
             resourceInputs["resourceGroupId"] = state ? state.resourceGroupId : undefined;
             resourceInputs["scaleType"] = state ? state.scaleType : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -207,6 +213,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["zoneId"] = args ? args.zoneId : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["regionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
@@ -270,6 +277,7 @@ export interface InstanceState {
      * - Follower: Read-only slave instance.
      * - Warehouse: calculation group type.
      * - Shared: Shared.
+     * - Serverless: (Available since v1.259.0) Serverless.
      */
     instanceType?: pulumi.Input<string>;
     /**
@@ -287,6 +295,10 @@ export interface InstanceState {
      * > **NOTE:**  Subscription instances (PrePaid) only supports Month. PayAsYouGo instances (PostPaid) only supports Hour. The Shared type is automatically set to Hour without specifying it.
      */
     pricingCycle?: pulumi.Input<string>;
+    /**
+     * (Available since v1.259.0) The region ID.
+     */
+    regionId?: pulumi.Input<string>;
     /**
      * The ID of the resource group.
      */
@@ -370,6 +382,7 @@ export interface InstanceArgs {
      * - Follower: Read-only slave instance.
      * - Warehouse: calculation group type.
      * - Shared: Shared.
+     * - Serverless: (Available since v1.259.0) Serverless.
      */
     instanceType: pulumi.Input<string>;
     /**

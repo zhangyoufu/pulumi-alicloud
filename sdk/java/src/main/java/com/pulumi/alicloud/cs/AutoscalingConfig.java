@@ -13,6 +13,7 @@ import com.pulumi.core.internal.Codegen;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
@@ -26,6 +27,8 @@ import javax.annotation.Nullable;
  * &gt; **NOTE:** From version 1.164.0, support for selecting the policy for selecting which node pool to scale by parameter `expander`.
  * 
  * &gt; **NOTE:** From version 1.237.0, support for selecting the type of autoscaler by parameter `scaler_type`.
+ * 
+ * &gt; **NOTE:** From version 1.256.0, support for setting the priority of scaling groups by parameter `priorities`.
  * 
  */
 @ResourceType(type="alicloud:cs/autoscalingConfig:AutoscalingConfig")
@@ -45,14 +48,14 @@ public class AutoscalingConfig extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.clusterId);
     }
     /**
-     * The cool down duration. Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
+     * Specify the time interval between detecting a scale-in requirement (when the threshold is reached) and actually executing the scale-in operation (reducing the number of Pods). Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
      * 
      */
     @Export(name="coolDownDuration", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> coolDownDuration;
 
     /**
-     * @return The cool down duration. Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
+     * @return Specify the time interval between detecting a scale-in requirement (when the threshold is reached) and actually executing the scale-in operation (reducing the number of Pods). Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
      * 
      */
     public Output<Optional<String>> coolDownDuration() {
@@ -73,14 +76,14 @@ public class AutoscalingConfig extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.daemonsetEvictionForNodes);
     }
     /**
-     * The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
+     * The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For scaler type `goatscaler`, only the `least-waste` expander is currently supported. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
      * 
      */
     @Export(name="expander", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> expander;
 
     /**
-     * @return The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
+     * @return The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For scaler type `goatscaler`, only the `least-waste` expander is currently supported. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
      * 
      */
     public Output<Optional<String>> expander() {
@@ -129,6 +132,20 @@ public class AutoscalingConfig extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.minReplicaCount);
     }
     /**
+     * Priority settings for autoscaling node pool scaling groups. This parameter only takes effect when `expander` is set to `priority`. Only supports scaler type `cluster-autoscaler`. Uses key-value pairs where the key is the priority value, and the value is a comma-separated list of scaling group IDs. High numerical values indicate higher priority.
+     * 
+     */
+    @Export(name="priorities", refs={Map.class,String.class}, tree="[0,1,1]")
+    private Output</* @Nullable */ Map<String,String>> priorities;
+
+    /**
+     * @return Priority settings for autoscaling node pool scaling groups. This parameter only takes effect when `expander` is set to `priority`. Only supports scaler type `cluster-autoscaler`. Uses key-value pairs where the key is the priority value, and the value is a comma-separated list of scaling group IDs. High numerical values indicate higher priority.
+     * 
+     */
+    public Output<Optional<Map<String,String>>> priorities() {
+        return Codegen.optional(this.priorities);
+    }
+    /**
      * Should CA delete the K8s node object when recycle node has scaled down successfully. Default is `false`.
      * 
      */
@@ -171,14 +188,14 @@ public class AutoscalingConfig extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.scaleUpFromZero);
     }
     /**
-     * The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`.
+     * The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`. When switching from `cluster-autoscaler` to `goatscaler`, all configuration parameters will be automatically migrated.
      * 
      */
     @Export(name="scalerType", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> scalerType;
 
     /**
-     * @return The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`.
+     * @return The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`. When switching from `cluster-autoscaler` to `goatscaler`, all configuration parameters will be automatically migrated.
      * 
      */
     public Output<Optional<String>> scalerType() {
@@ -227,28 +244,28 @@ public class AutoscalingConfig extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.skipNodesWithSystemPods);
     }
     /**
-     * The unneeded duration. Default is `10m`.
+     * Specify the time interval during which autoscaler does not perform scale-in operations after the most recent scale-out completion. Nodes added through scale-out can only be considered for scale-in after the period has elapsed. Default is `10m`.
      * 
      */
     @Export(name="unneededDuration", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> unneededDuration;
 
     /**
-     * @return The unneeded duration. Default is `10m`.
+     * @return Specify the time interval during which autoscaler does not perform scale-in operations after the most recent scale-out completion. Nodes added through scale-out can only be considered for scale-in after the period has elapsed. Default is `10m`.
      * 
      */
     public Output<Optional<String>> unneededDuration() {
         return Codegen.optional(this.unneededDuration);
     }
     /**
-     * The scale-in threshold. Default is `0.5`.
+     * The scale-in a threshold. Default is `0.5`.
      * 
      */
     @Export(name="utilizationThreshold", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> utilizationThreshold;
 
     /**
-     * @return The scale-in threshold. Default is `0.5`.
+     * @return The scale-in a threshold. Default is `0.5`.
      * 
      */
     public Output<Optional<String>> utilizationThreshold() {
