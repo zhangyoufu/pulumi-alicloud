@@ -2593,6 +2593,8 @@ func docEditRules(defaults []tfbridge.DocsEdit) []tfbridge.DocsEdit {
 		// TODO: remove when https://github.com/pulumi/pulumi/issues/13886 is resolved.
 		skipExamplesSectionForResourceOnly("fc_service.html.markdown"),
 		skipExamplesSection("fcv2_function.html.markdown"),
+		// TODO: remove when https://github.com/pulumi/pulumi-converter-terraform/issues/363 is resolved.
+		skipExamplesSection("message_service_event_rule.html.markdown"),
 	)
 }
 
