@@ -152,6 +152,20 @@ public class V3FunctionVersion extends com.pulumi.resources.CustomResource {
     public Output<String> lastModifiedTime() {
         return this.lastModifiedTime;
     }
+    /**
+     * Function Version
+     * 
+     */
+    @Export(name="versionId", refs={String.class}, tree="[0]")
+    private Output<String> versionId;
+
+    /**
+     * @return Function Version
+     * 
+     */
+    public Output<String> versionId() {
+        return this.versionId;
+    }
 
     /**
      *
@@ -192,6 +206,7 @@ public class V3FunctionVersion extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

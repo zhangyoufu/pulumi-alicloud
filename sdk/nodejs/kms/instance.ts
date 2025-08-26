@@ -86,7 +86,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly logStorage!: pulumi.Output<number>;
     /**
-     * Payment type,valid values:
+     * Payment type, valid values:
      * - `Subscription`: Prepaid.
      * - `PayAsYouGo`: Postpaid.
      */
@@ -98,7 +98,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * KMS Instance commodity type (software/hardware)
      */
-    public readonly productVersion!: pulumi.Output<string | undefined>;
+    public readonly productVersion!: pulumi.Output<string>;
     /**
      * Automatic renewal period, in months. The attribute is valid when the attribute `paymentType` is `Subscription`.
      */
@@ -106,7 +106,13 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Renewal options. Valid values: `AutoRenewal`, `ManualRenewal`. The attribute is valid when the attribute `paymentType` is `Subscription`.
      */
-    public readonly renewStatus!: pulumi.Output<string | undefined>;
+    public readonly renewStatus!: pulumi.Output<string>;
+    /**
+     * Automatic renewal period unit, valid value:
+     * - `M`: Month.
+     * - `Y`: Year.
+     */
+    public readonly renewalPeriodUnit!: pulumi.Output<string | undefined>;
     /**
      * Maximum number of Secrets. The attribute is valid when the attribute `paymentType` is `Subscription`.
      */
@@ -120,7 +126,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
-     * Instance VPC id
+     * The ID of the virtual private cloud (VPC) that is associated with the KMS instance.
      */
     public readonly vpcId!: pulumi.Output<string>;
     /**
@@ -163,6 +169,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["productVersion"] = state ? state.productVersion : undefined;
             resourceInputs["renewPeriod"] = state ? state.renewPeriod : undefined;
             resourceInputs["renewStatus"] = state ? state.renewStatus : undefined;
+            resourceInputs["renewalPeriodUnit"] = state ? state.renewalPeriodUnit : undefined;
             resourceInputs["secretNum"] = state ? state.secretNum : undefined;
             resourceInputs["spec"] = state ? state.spec : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -192,6 +199,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["productVersion"] = args ? args.productVersion : undefined;
             resourceInputs["renewPeriod"] = args ? args.renewPeriod : undefined;
             resourceInputs["renewStatus"] = args ? args.renewStatus : undefined;
+            resourceInputs["renewalPeriodUnit"] = args ? args.renewalPeriodUnit : undefined;
             resourceInputs["secretNum"] = args ? args.secretNum : undefined;
             resourceInputs["spec"] = args ? args.spec : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
@@ -249,7 +257,7 @@ export interface InstanceState {
      */
     logStorage?: pulumi.Input<number>;
     /**
-     * Payment type,valid values:
+     * Payment type, valid values:
      * - `Subscription`: Prepaid.
      * - `PayAsYouGo`: Postpaid.
      */
@@ -271,6 +279,12 @@ export interface InstanceState {
      */
     renewStatus?: pulumi.Input<string>;
     /**
+     * Automatic renewal period unit, valid value:
+     * - `M`: Month.
+     * - `Y`: Year.
+     */
+    renewalPeriodUnit?: pulumi.Input<string>;
+    /**
      * Maximum number of Secrets. The attribute is valid when the attribute `paymentType` is `Subscription`.
      */
     secretNum?: pulumi.Input<number>;
@@ -283,7 +297,7 @@ export interface InstanceState {
      */
     status?: pulumi.Input<string>;
     /**
-     * Instance VPC id
+     * The ID of the virtual private cloud (VPC) that is associated with the KMS instance.
      */
     vpcId?: pulumi.Input<string>;
     /**
@@ -329,7 +343,7 @@ export interface InstanceArgs {
      */
     logStorage?: pulumi.Input<number>;
     /**
-     * Payment type,valid values:
+     * Payment type, valid values:
      * - `Subscription`: Prepaid.
      * - `PayAsYouGo`: Postpaid.
      */
@@ -351,6 +365,12 @@ export interface InstanceArgs {
      */
     renewStatus?: pulumi.Input<string>;
     /**
+     * Automatic renewal period unit, valid value:
+     * - `M`: Month.
+     * - `Y`: Year.
+     */
+    renewalPeriodUnit?: pulumi.Input<string>;
+    /**
      * Maximum number of Secrets. The attribute is valid when the attribute `paymentType` is `Subscription`.
      */
     secretNum?: pulumi.Input<number>;
@@ -359,7 +379,7 @@ export interface InstanceArgs {
      */
     spec?: pulumi.Input<number>;
     /**
-     * Instance VPC id
+     * The ID of the virtual private cloud (VPC) that is associated with the KMS instance.
      */
     vpcId: pulumi.Input<string>;
     /**

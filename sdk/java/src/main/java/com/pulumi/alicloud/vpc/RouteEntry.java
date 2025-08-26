@@ -110,7 +110,7 @@ import javax.annotation.Nullable;
  *             .instanceName(name)
  *             .build());
  * 
- *         var foo = new RouteEntry("foo", RouteEntryArgs.builder()
+ *         var defaultRouteEntry = new RouteEntry("defaultRouteEntry", RouteEntryArgs.builder()
  *             .routeTableId(defaultNetwork.routeTableId())
  *             .destinationCidrblock("172.11.1.1/32")
  *             .nexthopType("Instance")
@@ -129,6 +129,8 @@ import javax.annotation.Nullable;
  * to create a VPC, several VSwitches and add several route entries one-click.
  * 
  * ## Import
+ * 
+ * Route Entry can be imported using the id, e.g.
  * 
  * ```sh
  * $ pulumi import alicloud:vpc/routeEntry:RouteEntry example &lt;route_table_id&gt;:&lt;router_id&gt;:&lt;destination_cidrblock&gt;:&lt;nexthop_type&gt;:&lt;nexthop_id&gt;
@@ -303,6 +305,7 @@ public class RouteEntry extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

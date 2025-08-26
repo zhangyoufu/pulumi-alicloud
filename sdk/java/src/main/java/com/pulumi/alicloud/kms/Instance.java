@@ -162,7 +162,7 @@ public class Instance extends com.pulumi.resources.CustomResource {
         return this.logStorage;
     }
     /**
-     * Payment type,valid values:
+     * Payment type, valid values:
      * - `Subscription`: Prepaid.
      * - `PayAsYouGo`: Postpaid.
      * 
@@ -171,7 +171,7 @@ public class Instance extends com.pulumi.resources.CustomResource {
     private Output<String> paymentType;
 
     /**
-     * @return Payment type,valid values:
+     * @return Payment type, valid values:
      * - `Subscription`: Prepaid.
      * - `PayAsYouGo`: Postpaid.
      * 
@@ -198,14 +198,14 @@ public class Instance extends com.pulumi.resources.CustomResource {
      * 
      */
     @Export(name="productVersion", refs={String.class}, tree="[0]")
-    private Output</* @Nullable */ String> productVersion;
+    private Output<String> productVersion;
 
     /**
      * @return KMS Instance commodity type (software/hardware)
      * 
      */
-    public Output<Optional<String>> productVersion() {
-        return Codegen.optional(this.productVersion);
+    public Output<String> productVersion() {
+        return this.productVersion;
     }
     /**
      * Automatic renewal period, in months. The attribute is valid when the attribute `payment_type` is `Subscription`.
@@ -226,14 +226,32 @@ public class Instance extends com.pulumi.resources.CustomResource {
      * 
      */
     @Export(name="renewStatus", refs={String.class}, tree="[0]")
-    private Output</* @Nullable */ String> renewStatus;
+    private Output<String> renewStatus;
 
     /**
      * @return Renewal options. Valid values: `AutoRenewal`, `ManualRenewal`. The attribute is valid when the attribute `payment_type` is `Subscription`.
      * 
      */
-    public Output<Optional<String>> renewStatus() {
-        return Codegen.optional(this.renewStatus);
+    public Output<String> renewStatus() {
+        return this.renewStatus;
+    }
+    /**
+     * Automatic renewal period unit, valid value:
+     * - `M`: Month.
+     * - `Y`: Year.
+     * 
+     */
+    @Export(name="renewalPeriodUnit", refs={String.class}, tree="[0]")
+    private Output</* @Nullable */ String> renewalPeriodUnit;
+
+    /**
+     * @return Automatic renewal period unit, valid value:
+     * - `M`: Month.
+     * - `Y`: Year.
+     * 
+     */
+    public Output<Optional<String>> renewalPeriodUnit() {
+        return Codegen.optional(this.renewalPeriodUnit);
     }
     /**
      * Maximum number of Secrets. The attribute is valid when the attribute `payment_type` is `Subscription`.
@@ -278,14 +296,14 @@ public class Instance extends com.pulumi.resources.CustomResource {
         return this.status;
     }
     /**
-     * Instance VPC id
+     * The ID of the virtual private cloud (VPC) that is associated with the KMS instance.
      * 
      */
     @Export(name="vpcId", refs={String.class}, tree="[0]")
     private Output<String> vpcId;
 
     /**
-     * @return Instance VPC id
+     * @return The ID of the virtual private cloud (VPC) that is associated with the KMS instance.
      * 
      */
     public Output<String> vpcId() {
@@ -373,6 +391,7 @@ public class Instance extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

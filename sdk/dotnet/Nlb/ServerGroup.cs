@@ -156,9 +156,10 @@ namespace Pulumi.AliCloud.Nlb
         /// The scheduling algorithm. Valid values:
         /// 
         /// - **Wrr:** The weighted round-robin algorithm is used. Backend servers with higher weights receive more requests than backend servers with lower weights. This is the default value.
-        /// - **rr:** The round-robin algorithm is used. Requests are forwarded to backend servers in sequence.
-        /// - **sch:** Source IP hashing is used. Requests from the same source IP address are forwarded to the same backend server.
-        /// - **tch:** Four-element hashing is used. It specifies consistent hashing that is based on four factors: source IP address, destination IP address, source port, and destination port. Requests that contain the same information based on the four factors are forwarded to the same backend server.
+        /// - **Rr:** The round-robin algorithm is used. Requests are forwarded to backend servers in sequence.
+        /// - **Sch:** Source IP hashing is used. Requests from the same source IP address are forwarded to the same backend server.
+        /// - **Tch:** Four-element hashing is used. It specifies consistent hashing that is based on four factors: source IP address, destination IP address, source port, and destination port. Requests that contain the same information based on the four factors are forwarded to the same backend server.
+        /// - `Qch`: QUIC ID hashing. Requests that contain the same QUIC ID are forwarded to the same backend server.
         /// </summary>
         [Output("scheduler")]
         public Output<string> Scheduler { get; private set; } = null!;
@@ -225,6 +226,7 @@ namespace Pulumi.AliCloud.Nlb
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -311,9 +313,10 @@ namespace Pulumi.AliCloud.Nlb
         /// The scheduling algorithm. Valid values:
         /// 
         /// - **Wrr:** The weighted round-robin algorithm is used. Backend servers with higher weights receive more requests than backend servers with lower weights. This is the default value.
-        /// - **rr:** The round-robin algorithm is used. Requests are forwarded to backend servers in sequence.
-        /// - **sch:** Source IP hashing is used. Requests from the same source IP address are forwarded to the same backend server.
-        /// - **tch:** Four-element hashing is used. It specifies consistent hashing that is based on four factors: source IP address, destination IP address, source port, and destination port. Requests that contain the same information based on the four factors are forwarded to the same backend server.
+        /// - **Rr:** The round-robin algorithm is used. Requests are forwarded to backend servers in sequence.
+        /// - **Sch:** Source IP hashing is used. Requests from the same source IP address are forwarded to the same backend server.
+        /// - **Tch:** Four-element hashing is used. It specifies consistent hashing that is based on four factors: source IP address, destination IP address, source port, and destination port. Requests that contain the same information based on the four factors are forwarded to the same backend server.
+        /// - `Qch`: QUIC ID hashing. Requests that contain the same QUIC ID are forwarded to the same backend server.
         /// </summary>
         [Input("scheduler")]
         public Input<string>? Scheduler { get; set; }
@@ -434,9 +437,10 @@ namespace Pulumi.AliCloud.Nlb
         /// The scheduling algorithm. Valid values:
         /// 
         /// - **Wrr:** The weighted round-robin algorithm is used. Backend servers with higher weights receive more requests than backend servers with lower weights. This is the default value.
-        /// - **rr:** The round-robin algorithm is used. Requests are forwarded to backend servers in sequence.
-        /// - **sch:** Source IP hashing is used. Requests from the same source IP address are forwarded to the same backend server.
-        /// - **tch:** Four-element hashing is used. It specifies consistent hashing that is based on four factors: source IP address, destination IP address, source port, and destination port. Requests that contain the same information based on the four factors are forwarded to the same backend server.
+        /// - **Rr:** The round-robin algorithm is used. Requests are forwarded to backend servers in sequence.
+        /// - **Sch:** Source IP hashing is used. Requests from the same source IP address are forwarded to the same backend server.
+        /// - **Tch:** Four-element hashing is used. It specifies consistent hashing that is based on four factors: source IP address, destination IP address, source port, and destination port. Requests that contain the same information based on the four factors are forwarded to the same backend server.
+        /// - `Qch`: QUIC ID hashing. Requests that contain the same QUIC ID are forwarded to the same backend server.
         /// </summary>
         [Input("scheduler")]
         public Input<string>? Scheduler { get; set; }

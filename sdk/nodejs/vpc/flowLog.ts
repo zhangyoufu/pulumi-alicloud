@@ -50,7 +50,7 @@ export class FlowLog extends pulumi.CustomResource {
     }
 
     /**
-     * Data aggregation interval
+     * The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
      */
     public readonly aggregationInterval!: pulumi.Output<string>;
     /**
@@ -78,15 +78,15 @@ export class FlowLog extends pulumi.CustomResource {
      */
     public readonly ipVersion!: pulumi.Output<string>;
     /**
-     * The name of the logstore.
+     * The Logstore that stores the captured traffic data.
      */
     public readonly logStoreName!: pulumi.Output<string>;
     /**
-     * The name of the project.
+     * The project that manages the captured traffic data.
      */
     public readonly projectName!: pulumi.Output<string>;
     /**
-     * (Available since v1.243.0) The region ID.
+     * The region ID.
      */
     public /*out*/ readonly regionId!: pulumi.Output<string>;
     /**
@@ -201,7 +201,7 @@ export class FlowLog extends pulumi.CustomResource {
  */
 export interface FlowLogState {
     /**
-     * Data aggregation interval
+     * The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
      */
     aggregationInterval?: pulumi.Input<string>;
     /**
@@ -229,15 +229,15 @@ export interface FlowLogState {
      */
     ipVersion?: pulumi.Input<string>;
     /**
-     * The name of the logstore.
+     * The Logstore that stores the captured traffic data.
      */
     logStoreName?: pulumi.Input<string>;
     /**
-     * The name of the project.
+     * The project that manages the captured traffic data.
      */
     projectName?: pulumi.Input<string>;
     /**
-     * (Available since v1.243.0) The region ID.
+     * The region ID.
      */
     regionId?: pulumi.Input<string>;
     /**
@@ -283,7 +283,7 @@ export interface FlowLogState {
  */
 export interface FlowLogArgs {
     /**
-     * Data aggregation interval
+     * The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
      */
     aggregationInterval?: pulumi.Input<string>;
     /**
@@ -299,11 +299,11 @@ export interface FlowLogArgs {
      */
     ipVersion?: pulumi.Input<string>;
     /**
-     * The name of the logstore.
+     * The Logstore that stores the captured traffic data.
      */
     logStoreName: pulumi.Input<string>;
     /**
-     * The name of the project.
+     * The project that manages the captured traffic data.
      */
     projectName: pulumi.Input<string>;
     /**
