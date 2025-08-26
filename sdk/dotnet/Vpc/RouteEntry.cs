@@ -87,7 +87,7 @@ namespace Pulumi.AliCloud.Vpc
     ///         InstanceName = name,
     ///     });
     /// 
-    ///     var foo = new AliCloud.Vpc.RouteEntry("foo", new()
+    ///     var defaultRouteEntry = new AliCloud.Vpc.RouteEntry("default", new()
     ///     {
     ///         RouteTableId = defaultNetwork.RouteTableId,
     ///         DestinationCidrblock = "172.11.1.1/32",
@@ -104,6 +104,8 @@ namespace Pulumi.AliCloud.Vpc
     /// to create a VPC, several VSwitches and add several route entries one-click.
     /// 
     /// ## Import
+    /// 
+    /// Route Entry can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import alicloud:vpc/routeEntry:RouteEntry example &lt;route_table_id&gt;:&lt;router_id&gt;:&lt;destination_cidrblock&gt;:&lt;nexthop_type&gt;:&lt;nexthop_id&gt;
@@ -189,6 +191,7 @@ namespace Pulumi.AliCloud.Vpc
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

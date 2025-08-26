@@ -239,6 +239,20 @@ public class CommonBandwithPackage extends com.pulumi.resources.CustomResource {
         return this.ratio;
     }
     /**
+     * The pagination token that is used in the next request to retrieve a new page of results.
+     * 
+     */
+    @Export(name="regionId", refs={String.class}, tree="[0]")
+    private Output<String> regionId;
+
+    /**
+     * @return The pagination token that is used in the next request to retrieve a new page of results.
+     * 
+     */
+    public Output<String> regionId() {
+        return this.regionId;
+    }
+    /**
      * The ID of the resource group to which you want to move the resource.
      * 
      * &gt; **NOTE:**   You can use resource groups to facilitate resource grouping and permission management for an Alibaba Cloud. For more information, see [What is resource management?](https://www.alibabacloud.com/help/en/doc-detail/94475.html)
@@ -356,6 +370,7 @@ public class CommonBandwithPackage extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

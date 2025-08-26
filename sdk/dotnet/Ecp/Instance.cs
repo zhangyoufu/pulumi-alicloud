@@ -222,6 +222,7 @@ namespace Pulumi.AliCloud.Ecp
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 AdditionalSecretOutputs =
                 {
                     "vncPassword",

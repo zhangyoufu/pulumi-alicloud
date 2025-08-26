@@ -71,7 +71,7 @@ namespace Pulumi.AliCloud.Nas
         public Output<string> AccessGroupType { get; private set; } = null!;
 
         /// <summary>
-        /// Creation time.
+        /// (Available since v1.218.0) Creation time.
         /// </summary>
         [Output("createTime")]
         public Output<string> CreateTime { get; private set; } = null!;
@@ -92,13 +92,19 @@ namespace Pulumi.AliCloud.Nas
         public Output<string?> FileSystemType { get; private set; } = null!;
 
         /// <summary>
-        /// . Field 'name' has been deprecated from provider version 1.218.0. New field 'access_group_name' instead.
+        /// Field 'name' has been deprecated from provider version 1.218.0. New field 'access_group_name' instead.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// . Field 'type' has been deprecated from provider version 1.218.0. New field 'access_group_type' instead.
+        /// (Available since v1.256.0) The region ID.
+        /// </summary>
+        [Output("regionId")]
+        public Output<string> RegionId { get; private set; } = null!;
+
+        /// <summary>
+        /// Field 'type' has been deprecated from provider version 1.218.0. New field 'access_group_type' instead.
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -126,6 +132,7 @@ namespace Pulumi.AliCloud.Nas
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -177,13 +184,13 @@ namespace Pulumi.AliCloud.Nas
         public Input<string>? FileSystemType { get; set; }
 
         /// <summary>
-        /// . Field 'name' has been deprecated from provider version 1.218.0. New field 'access_group_name' instead.
+        /// Field 'name' has been deprecated from provider version 1.218.0. New field 'access_group_name' instead.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// . Field 'type' has been deprecated from provider version 1.218.0. New field 'access_group_type' instead.
+        /// Field 'type' has been deprecated from provider version 1.218.0. New field 'access_group_type' instead.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
@@ -209,7 +216,7 @@ namespace Pulumi.AliCloud.Nas
         public Input<string>? AccessGroupType { get; set; }
 
         /// <summary>
-        /// Creation time.
+        /// (Available since v1.218.0) Creation time.
         /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
@@ -230,13 +237,19 @@ namespace Pulumi.AliCloud.Nas
         public Input<string>? FileSystemType { get; set; }
 
         /// <summary>
-        /// . Field 'name' has been deprecated from provider version 1.218.0. New field 'access_group_name' instead.
+        /// Field 'name' has been deprecated from provider version 1.218.0. New field 'access_group_name' instead.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// . Field 'type' has been deprecated from provider version 1.218.0. New field 'access_group_type' instead.
+        /// (Available since v1.256.0) The region ID.
+        /// </summary>
+        [Input("regionId")]
+        public Input<string>? RegionId { get; set; }
+
+        /// <summary>
+        /// Field 'type' has been deprecated from provider version 1.218.0. New field 'access_group_type' instead.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

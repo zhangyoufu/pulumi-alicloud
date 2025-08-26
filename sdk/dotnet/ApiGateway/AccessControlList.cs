@@ -101,6 +101,7 @@ namespace Pulumi.AliCloud.ApiGateway
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 AdditionalSecretOutputs =
                 {
                     "aclEntrys",

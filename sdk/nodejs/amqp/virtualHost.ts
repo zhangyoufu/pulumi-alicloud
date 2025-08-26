@@ -70,6 +70,7 @@ export class VirtualHost extends pulumi.CustomResource {
         return obj['__pulumiType'] === VirtualHost.__pulumiType;
     }
 
+    public readonly forceDelete!: pulumi.Output<boolean | undefined>;
     /**
      * InstanceId.
      */
@@ -92,6 +93,7 @@ export class VirtualHost extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as VirtualHostState | undefined;
+            resourceInputs["forceDelete"] = state ? state.forceDelete : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["virtualHostName"] = state ? state.virtualHostName : undefined;
         } else {
@@ -102,6 +104,7 @@ export class VirtualHost extends pulumi.CustomResource {
             if ((!args || args.virtualHostName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'virtualHostName'");
             }
+            resourceInputs["forceDelete"] = args ? args.forceDelete : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["virtualHostName"] = args ? args.virtualHostName : undefined;
         }
@@ -114,6 +117,7 @@ export class VirtualHost extends pulumi.CustomResource {
  * Input properties used for looking up and filtering VirtualHost resources.
  */
 export interface VirtualHostState {
+    forceDelete?: pulumi.Input<boolean>;
     /**
      * InstanceId.
      */
@@ -128,6 +132,7 @@ export interface VirtualHostState {
  * The set of arguments for constructing a VirtualHost resource.
  */
 export interface VirtualHostArgs {
+    forceDelete?: pulumi.Input<boolean>;
     /**
      * InstanceId.
      */

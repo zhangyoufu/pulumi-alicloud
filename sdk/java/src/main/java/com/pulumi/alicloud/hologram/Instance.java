@@ -185,6 +185,7 @@ public class Instance extends com.pulumi.resources.CustomResource {
      * - Follower: Read-only slave instance.
      * - Warehouse: calculation group type.
      * - Shared: Shared.
+     * - Serverless: (Available since v1.259.0) Serverless.
      * 
      */
     @Export(name="instanceType", refs={String.class}, tree="[0]")
@@ -196,6 +197,7 @@ public class Instance extends com.pulumi.resources.CustomResource {
      * - Follower: Read-only slave instance.
      * - Warehouse: calculation group type.
      * - Shared: Shared.
+     * - Serverless: (Available since v1.259.0) Serverless.
      * 
      */
     public Output<String> instanceType() {
@@ -248,6 +250,20 @@ public class Instance extends com.pulumi.resources.CustomResource {
      */
     public Output<Optional<String>> pricingCycle() {
         return Codegen.optional(this.pricingCycle);
+    }
+    /**
+     * (Available since v1.259.0) The region ID.
+     * 
+     */
+    @Export(name="regionId", refs={String.class}, tree="[0]")
+    private Output<String> regionId;
+
+    /**
+     * @return (Available since v1.259.0) The region ID.
+     * 
+     */
+    public Output<String> regionId() {
+        return this.regionId;
     }
     /**
      * The ID of the resource group.
@@ -381,6 +397,7 @@ public class Instance extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

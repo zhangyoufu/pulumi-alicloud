@@ -72,6 +72,12 @@ namespace Pulumi.AliCloud.CS
         public Output<Outputs.ManagedKubernetesAuditLogConfig> AuditLogConfig { get; private set; } = null!;
 
         /// <summary>
+        /// Auto mode cluster configuration. See `auto_mode` below.
+        /// </summary>
+        [Output("autoMode")]
+        public Output<Outputs.ManagedKubernetesAutoMode?> AutoMode { get; private set; } = null!;
+
+        /// <summary>
         /// (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificate_authority of new DataSource `alicloud.cs.getClusterCredential` to replace it.
         /// </summary>
         [Output("certificateAuthority")]
@@ -185,7 +191,7 @@ namespace Pulumi.AliCloud.CS
         public Output<string> LoadBalancerSpec { get; private set; } = null!;
 
         /// <summary>
-        /// The cluster maintenance window，effective only in the professional managed cluster. Managed node pool will use it. See `maintenance_window` below.
+        /// The cluster maintenance window. Managed node pool will use it. See `maintenance_window` below.
         /// </summary>
         [Output("maintenanceWindow")]
         public Output<Outputs.ManagedKubernetesMaintenanceWindow> MaintenanceWindow { get; private set; } = null!;
@@ -218,7 +224,7 @@ namespace Pulumi.AliCloud.CS
         public Output<int?> NodeCidrMask { get; private set; } = null!;
 
         /// <summary>
-        /// The cluster automatic operation policy. See `operation_policy` below.
+        /// The cluster automatic operation policy, only works when `maintenance_window` is enabled. See `operation_policy` below.
         /// </summary>
         [Output("operationPolicy")]
         public Output<Outputs.ManagedKubernetesOperationPolicy> OperationPolicy { get; private set; } = null!;
@@ -406,6 +412,7 @@ namespace Pulumi.AliCloud.CS
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -458,6 +465,12 @@ namespace Pulumi.AliCloud.CS
         /// </summary>
         [Input("auditLogConfig")]
         public Input<Inputs.ManagedKubernetesAuditLogConfigArgs>? AuditLogConfig { get; set; }
+
+        /// <summary>
+        /// Auto mode cluster configuration. See `auto_mode` below.
+        /// </summary>
+        [Input("autoMode")]
+        public Input<Inputs.ManagedKubernetesAutoModeArgs>? AutoMode { get; set; }
 
         /// <summary>
         /// From version 1.248.0, new DataSource `alicloud.cs.getClusterCredential` is recommended to manage cluster's kubeconfig, you can also save the certificate_authority.client_cert attribute content of new DataSource `alicloud.cs.getClusterCredential` to an appropriate path(like ~/.kube/client-cert.pem) for replace it.
@@ -573,7 +586,7 @@ namespace Pulumi.AliCloud.CS
         public Input<string>? LoadBalancerSpec { get; set; }
 
         /// <summary>
-        /// The cluster maintenance window，effective only in the professional managed cluster. Managed node pool will use it. See `maintenance_window` below.
+        /// The cluster maintenance window. Managed node pool will use it. See `maintenance_window` below.
         /// </summary>
         [Input("maintenanceWindow")]
         public Input<Inputs.ManagedKubernetesMaintenanceWindowArgs>? MaintenanceWindow { get; set; }
@@ -600,7 +613,7 @@ namespace Pulumi.AliCloud.CS
         public Input<int>? NodeCidrMask { get; set; }
 
         /// <summary>
-        /// The cluster automatic operation policy. See `operation_policy` below.
+        /// The cluster automatic operation policy, only works when `maintenance_window` is enabled. See `operation_policy` below.
         /// </summary>
         [Input("operationPolicy")]
         public Input<Inputs.ManagedKubernetesOperationPolicyArgs>? OperationPolicy { get; set; }
@@ -804,6 +817,12 @@ namespace Pulumi.AliCloud.CS
         public Input<Inputs.ManagedKubernetesAuditLogConfigGetArgs>? AuditLogConfig { get; set; }
 
         /// <summary>
+        /// Auto mode cluster configuration. See `auto_mode` below.
+        /// </summary>
+        [Input("autoMode")]
+        public Input<Inputs.ManagedKubernetesAutoModeGetArgs>? AutoMode { get; set; }
+
+        /// <summary>
         /// (Map, Deprecated from v1.248.0) Nested attribute containing certificate authority data for your cluster. Please use the attribute certificate_authority of new DataSource `alicloud.cs.getClusterCredential` to replace it.
         /// </summary>
         [Input("certificateAuthority")]
@@ -929,7 +948,7 @@ namespace Pulumi.AliCloud.CS
         public Input<string>? LoadBalancerSpec { get; set; }
 
         /// <summary>
-        /// The cluster maintenance window，effective only in the professional managed cluster. Managed node pool will use it. See `maintenance_window` below.
+        /// The cluster maintenance window. Managed node pool will use it. See `maintenance_window` below.
         /// </summary>
         [Input("maintenanceWindow")]
         public Input<Inputs.ManagedKubernetesMaintenanceWindowGetArgs>? MaintenanceWindow { get; set; }
@@ -962,7 +981,7 @@ namespace Pulumi.AliCloud.CS
         public Input<int>? NodeCidrMask { get; set; }
 
         /// <summary>
-        /// The cluster automatic operation policy. See `operation_policy` below.
+        /// The cluster automatic operation policy, only works when `maintenance_window` is enabled. See `operation_policy` below.
         /// </summary>
         [Input("operationPolicy")]
         public Input<Inputs.ManagedKubernetesOperationPolicyGetArgs>? OperationPolicy { get; set; }

@@ -20,7 +20,8 @@ __all__ = ['VirtualHostArgs', 'VirtualHost']
 class VirtualHostArgs:
     def __init__(__self__, *,
                  instance_id: pulumi.Input[_builtins.str],
-                 virtual_host_name: pulumi.Input[_builtins.str]):
+                 virtual_host_name: pulumi.Input[_builtins.str],
+                 force_delete: Optional[pulumi.Input[_builtins.bool]] = None):
         """
         The set of arguments for constructing a VirtualHost resource.
         :param pulumi.Input[_builtins.str] instance_id: InstanceId.
@@ -28,6 +29,8 @@ class VirtualHostArgs:
         """
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "virtual_host_name", virtual_host_name)
+        if force_delete is not None:
+            pulumi.set(__self__, "force_delete", force_delete)
 
     @_builtins.property
     @pulumi.getter(name="instanceId")
@@ -53,10 +56,20 @@ class VirtualHostArgs:
     def virtual_host_name(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "virtual_host_name", value)
 
+    @_builtins.property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        return pulumi.get(self, "force_delete")
+
+    @force_delete.setter
+    def force_delete(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "force_delete", value)
+
 
 @pulumi.input_type
 class _VirtualHostState:
     def __init__(__self__, *,
+                 force_delete: Optional[pulumi.Input[_builtins.bool]] = None,
                  instance_id: Optional[pulumi.Input[_builtins.str]] = None,
                  virtual_host_name: Optional[pulumi.Input[_builtins.str]] = None):
         """
@@ -64,10 +77,21 @@ class _VirtualHostState:
         :param pulumi.Input[_builtins.str] instance_id: InstanceId.
         :param pulumi.Input[_builtins.str] virtual_host_name: VirtualHostName.
         """
+        if force_delete is not None:
+            pulumi.set(__self__, "force_delete", force_delete)
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
         if virtual_host_name is not None:
             pulumi.set(__self__, "virtual_host_name", virtual_host_name)
+
+    @_builtins.property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        return pulumi.get(self, "force_delete")
+
+    @force_delete.setter
+    def force_delete(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "force_delete", value)
 
     @_builtins.property
     @pulumi.getter(name="instanceId")
@@ -100,6 +124,7 @@ class VirtualHost(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 force_delete: Optional[pulumi.Input[_builtins.bool]] = None,
                  instance_id: Optional[pulumi.Input[_builtins.str]] = None,
                  virtual_host_name: Optional[pulumi.Input[_builtins.str]] = None,
                  __props__=None):
@@ -201,6 +226,7 @@ class VirtualHost(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 force_delete: Optional[pulumi.Input[_builtins.bool]] = None,
                  instance_id: Optional[pulumi.Input[_builtins.str]] = None,
                  virtual_host_name: Optional[pulumi.Input[_builtins.str]] = None,
                  __props__=None):
@@ -212,6 +238,7 @@ class VirtualHost(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = VirtualHostArgs.__new__(VirtualHostArgs)
 
+            __props__.__dict__["force_delete"] = force_delete
             if instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_id'")
             __props__.__dict__["instance_id"] = instance_id
@@ -228,6 +255,7 @@ class VirtualHost(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            force_delete: Optional[pulumi.Input[_builtins.bool]] = None,
             instance_id: Optional[pulumi.Input[_builtins.str]] = None,
             virtual_host_name: Optional[pulumi.Input[_builtins.str]] = None) -> 'VirtualHost':
         """
@@ -244,9 +272,15 @@ class VirtualHost(pulumi.CustomResource):
 
         __props__ = _VirtualHostState.__new__(_VirtualHostState)
 
+        __props__.__dict__["force_delete"] = force_delete
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["virtual_host_name"] = virtual_host_name
         return VirtualHost(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> pulumi.Output[Optional[_builtins.bool]]:
+        return pulumi.get(self, "force_delete")
 
     @_builtins.property
     @pulumi.getter(name="instanceId")

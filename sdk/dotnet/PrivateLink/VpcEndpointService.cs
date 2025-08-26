@@ -90,7 +90,7 @@ namespace Pulumi.AliCloud.PrivateLink
         public Output<string> Payer { get; private set; } = null!;
 
         /// <summary>
-        /// (Available since v1.235.0) The ID of the region to which the endpoint service belongs.
+        /// The ID of the region to which the endpoint service belongs.
         /// </summary>
         [Output("regionId")]
         public Output<string> RegionId { get; private set; } = null!;
@@ -120,7 +120,7 @@ namespace Pulumi.AliCloud.PrivateLink
         public Output<string> ServiceDomain { get; private set; } = null!;
 
         /// <summary>
-        /// Service resource type, value:
+        /// The service resource type. Value:
         /// </summary>
         [Output("serviceResourceType")]
         public Output<string> ServiceResourceType { get; private set; } = null!;
@@ -178,6 +178,7 @@ namespace Pulumi.AliCloud.PrivateLink
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -246,7 +247,7 @@ namespace Pulumi.AliCloud.PrivateLink
         public Input<string>? ServiceDescription { get; set; }
 
         /// <summary>
-        /// Service resource type, value:
+        /// The service resource type. Value:
         /// </summary>
         [Input("serviceResourceType")]
         public Input<string>? ServiceResourceType { get; set; }
@@ -322,7 +323,7 @@ namespace Pulumi.AliCloud.PrivateLink
         public Input<string>? Payer { get; set; }
 
         /// <summary>
-        /// (Available since v1.235.0) The ID of the region to which the endpoint service belongs.
+        /// The ID of the region to which the endpoint service belongs.
         /// </summary>
         [Input("regionId")]
         public Input<string>? RegionId { get; set; }
@@ -352,7 +353,7 @@ namespace Pulumi.AliCloud.PrivateLink
         public Input<string>? ServiceDomain { get; set; }
 
         /// <summary>
-        /// Service resource type, value:
+        /// The service resource type. Value:
         /// </summary>
         [Input("serviceResourceType")]
         public Input<string>? ServiceResourceType { get; set; }

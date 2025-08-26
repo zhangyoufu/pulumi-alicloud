@@ -53,6 +53,8 @@ __all__ = [
     'ManagedKubernetesAddonArgsDict',
     'ManagedKubernetesAuditLogConfigArgs',
     'ManagedKubernetesAuditLogConfigArgsDict',
+    'ManagedKubernetesAutoModeArgs',
+    'ManagedKubernetesAutoModeArgsDict',
     'ManagedKubernetesCertificateAuthorityArgs',
     'ManagedKubernetesCertificateAuthorityArgsDict',
     'ManagedKubernetesConnectionsArgs',
@@ -1901,6 +1903,38 @@ class ManagedKubernetesAuditLogConfigArgs:
     @sls_project_name.setter
     def sls_project_name(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "sls_project_name", value)
+
+
+if not MYPY:
+    class ManagedKubernetesAutoModeArgsDict(TypedDict):
+        enabled: NotRequired[pulumi.Input[_builtins.bool]]
+        """
+        Whether to enable auto mode. Valid values: `true`, `false`. Only ACK managed Pro clusters support Auto Mode.
+        """
+elif False:
+    ManagedKubernetesAutoModeArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ManagedKubernetesAutoModeArgs:
+    def __init__(__self__, *,
+                 enabled: Optional[pulumi.Input[_builtins.bool]] = None):
+        """
+        :param pulumi.Input[_builtins.bool] enabled: Whether to enable auto mode. Valid values: `true`, `false`. Only ACK managed Pro clusters support Auto Mode.
+        """
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[_builtins.bool]]:
+        """
+        Whether to enable auto mode. Valid values: `true`, `false`. Only ACK managed Pro clusters support Auto Mode.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[_builtins.bool]]):
+        pulumi.set(self, "enabled", value)
 
 
 if not MYPY:

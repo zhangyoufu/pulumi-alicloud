@@ -167,6 +167,7 @@ namespace Pulumi.AliCloud.BastionHost
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 AdditionalSecretOutputs =
                 {
                     "passPhrase",

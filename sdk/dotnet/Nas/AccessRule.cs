@@ -100,6 +100,12 @@ namespace Pulumi.AliCloud.Nas
         public Output<int?> Priority { get; private set; } = null!;
 
         /// <summary>
+        /// (Available since v1.256.0) The region ID.
+        /// </summary>
+        [Output("regionId")]
+        public Output<string> RegionId { get; private set; } = null!;
+
+        /// <summary>
         /// RWAccess.
         /// </summary>
         [Output("rwAccessType")]
@@ -140,6 +146,7 @@ namespace Pulumi.AliCloud.Nas
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -242,6 +249,12 @@ namespace Pulumi.AliCloud.Nas
         /// </summary>
         [Input("priority")]
         public Input<int>? Priority { get; set; }
+
+        /// <summary>
+        /// (Available since v1.256.0) The region ID.
+        /// </summary>
+        [Input("regionId")]
+        public Input<string>? RegionId { get; set; }
 
         /// <summary>
         /// RWAccess.
