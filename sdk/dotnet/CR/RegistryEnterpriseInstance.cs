@@ -214,6 +214,7 @@ namespace Pulumi.AliCloud.CR
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 AdditionalSecretOutputs =
                 {
                     "password",

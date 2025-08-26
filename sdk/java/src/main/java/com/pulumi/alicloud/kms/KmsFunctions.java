@@ -42,7 +42,7 @@ public final class KmsFunctions {
     /**
      * This data source provides a list of KMS aliases in an Alibaba Cloud account according to the specified filters.
      * 
-     * &gt; **NOTE:** Available in v1.79.0+.
+     * &gt; **NOTE:** Available since v1.79.0.
      * 
      * ## Example Usage
      * 
@@ -72,10 +72,10 @@ public final class KmsFunctions {
      *         // Declare the data source
      *         final var kmsAliases = KmsFunctions.getAliases(GetAliasesArgs.builder()
      *             .ids("d89e8a53-b708-41aa-8c67-6873axxx")
-     *             .nameRegex("alias/tf-testKmsAlias_123")
+     *             .nameRegex("alias/tf-example")
      *             .build());
      * 
-     *         ctx.export("firstKeyId", kmsKeysDs.keys()[0].id());
+     *         ctx.export("firstKeyId", kmsAliases.aliases()[0].id());
      *     }
      * }
      * }
@@ -89,7 +89,7 @@ public final class KmsFunctions {
     /**
      * This data source provides a list of KMS aliases in an Alibaba Cloud account according to the specified filters.
      * 
-     * &gt; **NOTE:** Available in v1.79.0+.
+     * &gt; **NOTE:** Available since v1.79.0.
      * 
      * ## Example Usage
      * 
@@ -119,10 +119,10 @@ public final class KmsFunctions {
      *         // Declare the data source
      *         final var kmsAliases = KmsFunctions.getAliases(GetAliasesArgs.builder()
      *             .ids("d89e8a53-b708-41aa-8c67-6873axxx")
-     *             .nameRegex("alias/tf-testKmsAlias_123")
+     *             .nameRegex("alias/tf-example")
      *             .build());
      * 
-     *         ctx.export("firstKeyId", kmsKeysDs.keys()[0].id());
+     *         ctx.export("firstKeyId", kmsAliases.aliases()[0].id());
      *     }
      * }
      * }
@@ -136,7 +136,7 @@ public final class KmsFunctions {
     /**
      * This data source provides a list of KMS aliases in an Alibaba Cloud account according to the specified filters.
      * 
-     * &gt; **NOTE:** Available in v1.79.0+.
+     * &gt; **NOTE:** Available since v1.79.0.
      * 
      * ## Example Usage
      * 
@@ -166,10 +166,10 @@ public final class KmsFunctions {
      *         // Declare the data source
      *         final var kmsAliases = KmsFunctions.getAliases(GetAliasesArgs.builder()
      *             .ids("d89e8a53-b708-41aa-8c67-6873axxx")
-     *             .nameRegex("alias/tf-testKmsAlias_123")
+     *             .nameRegex("alias/tf-example")
      *             .build());
      * 
-     *         ctx.export("firstKeyId", kmsKeysDs.keys()[0].id());
+     *         ctx.export("firstKeyId", kmsAliases.aliases()[0].id());
      *     }
      * }
      * }
@@ -183,7 +183,7 @@ public final class KmsFunctions {
     /**
      * This data source provides a list of KMS aliases in an Alibaba Cloud account according to the specified filters.
      * 
-     * &gt; **NOTE:** Available in v1.79.0+.
+     * &gt; **NOTE:** Available since v1.79.0.
      * 
      * ## Example Usage
      * 
@@ -213,10 +213,10 @@ public final class KmsFunctions {
      *         // Declare the data source
      *         final var kmsAliases = KmsFunctions.getAliases(GetAliasesArgs.builder()
      *             .ids("d89e8a53-b708-41aa-8c67-6873axxx")
-     *             .nameRegex("alias/tf-testKmsAlias_123")
+     *             .nameRegex("alias/tf-example")
      *             .build());
      * 
-     *         ctx.export("firstKeyId", kmsKeysDs.keys()[0].id());
+     *         ctx.export("firstKeyId", kmsAliases.aliases()[0].id());
      *     }
      * }
      * }
@@ -230,7 +230,7 @@ public final class KmsFunctions {
     /**
      * This data source provides a list of KMS aliases in an Alibaba Cloud account according to the specified filters.
      * 
-     * &gt; **NOTE:** Available in v1.79.0+.
+     * &gt; **NOTE:** Available since v1.79.0.
      * 
      * ## Example Usage
      * 
@@ -260,10 +260,10 @@ public final class KmsFunctions {
      *         // Declare the data source
      *         final var kmsAliases = KmsFunctions.getAliases(GetAliasesArgs.builder()
      *             .ids("d89e8a53-b708-41aa-8c67-6873axxx")
-     *             .nameRegex("alias/tf-testKmsAlias_123")
+     *             .nameRegex("alias/tf-example")
      *             .build());
      * 
-     *         ctx.export("firstKeyId", kmsKeysDs.keys()[0].id());
+     *         ctx.export("firstKeyId", kmsAliases.aliases()[0].id());
      *     }
      * }
      * }
@@ -277,7 +277,7 @@ public final class KmsFunctions {
     /**
      * This data source provides a list of KMS aliases in an Alibaba Cloud account according to the specified filters.
      * 
-     * &gt; **NOTE:** Available in v1.79.0+.
+     * &gt; **NOTE:** Available since v1.79.0.
      * 
      * ## Example Usage
      * 
@@ -307,10 +307,10 @@ public final class KmsFunctions {
      *         // Declare the data source
      *         final var kmsAliases = KmsFunctions.getAliases(GetAliasesArgs.builder()
      *             .ids("d89e8a53-b708-41aa-8c67-6873axxx")
-     *             .nameRegex("alias/tf-testKmsAlias_123")
+     *             .nameRegex("alias/tf-example")
      *             .build());
      * 
-     *         ctx.export("firstKeyId", kmsKeysDs.keys()[0].id());
+     *         ctx.export("firstKeyId", kmsAliases.aliases()[0].id());
      *     }
      * }
      * }
@@ -324,7 +324,7 @@ public final class KmsFunctions {
     /**
      * This data source provides a list of KMS aliases in an Alibaba Cloud account according to the specified filters.
      * 
-     * &gt; **NOTE:** Available in v1.79.0+.
+     * &gt; **NOTE:** Available since v1.79.0.
      * 
      * ## Example Usage
      * 
@@ -354,10 +354,10 @@ public final class KmsFunctions {
      *         // Declare the data source
      *         final var kmsAliases = KmsFunctions.getAliases(GetAliasesArgs.builder()
      *             .ids("d89e8a53-b708-41aa-8c67-6873axxx")
-     *             .nameRegex("alias/tf-testKmsAlias_123")
+     *             .nameRegex("alias/tf-example")
      *             .build());
      * 
-     *         ctx.export("firstKeyId", kmsKeysDs.keys()[0].id());
+     *         ctx.export("firstKeyId", kmsAliases.aliases()[0].id());
      *     }
      * }
      * }

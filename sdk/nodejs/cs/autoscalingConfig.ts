@@ -14,6 +14,8 @@ import * as utilities from "../utilities";
  * > **NOTE:** From version 1.164.0, support for selecting the policy for selecting which node pool to scale by parameter `expander`.
  *
  * > **NOTE:** From version 1.237.0, support for selecting the type of autoscaler by parameter `scalerType`.
+ *
+ * > **NOTE:** From version 1.256.0, support for setting the priority of scaling groups by parameter `priorities`.
  */
 export class AutoscalingConfig extends pulumi.CustomResource {
     /**
@@ -48,7 +50,7 @@ export class AutoscalingConfig extends pulumi.CustomResource {
      */
     public readonly clusterId!: pulumi.Output<string | undefined>;
     /**
-     * The cool down duration. Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
+     * Specify the time interval between detecting a scale-in requirement (when the threshold is reached) and actually executing the scale-in operation (reducing the number of Pods). Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
      */
     public readonly coolDownDuration!: pulumi.Output<string | undefined>;
     /**
@@ -56,7 +58,7 @@ export class AutoscalingConfig extends pulumi.CustomResource {
      */
     public readonly daemonsetEvictionForNodes!: pulumi.Output<boolean | undefined>;
     /**
-     * The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
+     * The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For scaler type `goatscaler`, only the `least-waste` expander is currently supported. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
      */
     public readonly expander!: pulumi.Output<string | undefined>;
     /**
@@ -72,6 +74,10 @@ export class AutoscalingConfig extends pulumi.CustomResource {
      */
     public readonly minReplicaCount!: pulumi.Output<number | undefined>;
     /**
+     * Priority settings for autoscaling node pool scaling groups. This parameter only takes effect when `expander` is set to `priority`. Only supports scaler type `cluster-autoscaler`. Uses key-value pairs where the key is the priority value, and the value is a comma-separated list of scaling group IDs. High numerical values indicate higher priority.
+     */
+    public readonly priorities!: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
      * Should CA delete the K8s node object when recycle node has scaled down successfully. Default is `false`.
      */
     public readonly recycleNodeDeletionEnabled!: pulumi.Output<boolean | undefined>;
@@ -84,7 +90,7 @@ export class AutoscalingConfig extends pulumi.CustomResource {
      */
     public readonly scaleUpFromZero!: pulumi.Output<boolean | undefined>;
     /**
-     * The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`.
+     * The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`. When switching from `cluster-autoscaler` to `goatscaler`, all configuration parameters will be automatically migrated.
      */
     public readonly scalerType!: pulumi.Output<string | undefined>;
     /**
@@ -100,11 +106,11 @@ export class AutoscalingConfig extends pulumi.CustomResource {
      */
     public readonly skipNodesWithSystemPods!: pulumi.Output<boolean | undefined>;
     /**
-     * The unneeded duration. Default is `10m`.
+     * Specify the time interval during which autoscaler does not perform scale-in operations after the most recent scale-out completion. Nodes added through scale-out can only be considered for scale-in after the period has elapsed. Default is `10m`.
      */
     public readonly unneededDuration!: pulumi.Output<string | undefined>;
     /**
-     * The scale-in threshold. Default is `0.5`.
+     * The scale-in a threshold. Default is `0.5`.
      */
     public readonly utilizationThreshold!: pulumi.Output<string | undefined>;
 
@@ -128,6 +134,7 @@ export class AutoscalingConfig extends pulumi.CustomResource {
             resourceInputs["gpuUtilizationThreshold"] = state ? state.gpuUtilizationThreshold : undefined;
             resourceInputs["maxGracefulTerminationSec"] = state ? state.maxGracefulTerminationSec : undefined;
             resourceInputs["minReplicaCount"] = state ? state.minReplicaCount : undefined;
+            resourceInputs["priorities"] = state ? state.priorities : undefined;
             resourceInputs["recycleNodeDeletionEnabled"] = state ? state.recycleNodeDeletionEnabled : undefined;
             resourceInputs["scaleDownEnabled"] = state ? state.scaleDownEnabled : undefined;
             resourceInputs["scaleUpFromZero"] = state ? state.scaleUpFromZero : undefined;
@@ -146,6 +153,7 @@ export class AutoscalingConfig extends pulumi.CustomResource {
             resourceInputs["gpuUtilizationThreshold"] = args ? args.gpuUtilizationThreshold : undefined;
             resourceInputs["maxGracefulTerminationSec"] = args ? args.maxGracefulTerminationSec : undefined;
             resourceInputs["minReplicaCount"] = args ? args.minReplicaCount : undefined;
+            resourceInputs["priorities"] = args ? args.priorities : undefined;
             resourceInputs["recycleNodeDeletionEnabled"] = args ? args.recycleNodeDeletionEnabled : undefined;
             resourceInputs["scaleDownEnabled"] = args ? args.scaleDownEnabled : undefined;
             resourceInputs["scaleUpFromZero"] = args ? args.scaleUpFromZero : undefined;
@@ -170,7 +178,7 @@ export interface AutoscalingConfigState {
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * The cool down duration. Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
+     * Specify the time interval between detecting a scale-in requirement (when the threshold is reached) and actually executing the scale-in operation (reducing the number of Pods). Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
      */
     coolDownDuration?: pulumi.Input<string>;
     /**
@@ -178,7 +186,7 @@ export interface AutoscalingConfigState {
      */
     daemonsetEvictionForNodes?: pulumi.Input<boolean>;
     /**
-     * The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
+     * The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For scaler type `goatscaler`, only the `least-waste` expander is currently supported. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
      */
     expander?: pulumi.Input<string>;
     /**
@@ -194,6 +202,10 @@ export interface AutoscalingConfigState {
      */
     minReplicaCount?: pulumi.Input<number>;
     /**
+     * Priority settings for autoscaling node pool scaling groups. This parameter only takes effect when `expander` is set to `priority`. Only supports scaler type `cluster-autoscaler`. Uses key-value pairs where the key is the priority value, and the value is a comma-separated list of scaling group IDs. High numerical values indicate higher priority.
+     */
+    priorities?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
      * Should CA delete the K8s node object when recycle node has scaled down successfully. Default is `false`.
      */
     recycleNodeDeletionEnabled?: pulumi.Input<boolean>;
@@ -206,7 +218,7 @@ export interface AutoscalingConfigState {
      */
     scaleUpFromZero?: pulumi.Input<boolean>;
     /**
-     * The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`.
+     * The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`. When switching from `cluster-autoscaler` to `goatscaler`, all configuration parameters will be automatically migrated.
      */
     scalerType?: pulumi.Input<string>;
     /**
@@ -222,11 +234,11 @@ export interface AutoscalingConfigState {
      */
     skipNodesWithSystemPods?: pulumi.Input<boolean>;
     /**
-     * The unneeded duration. Default is `10m`.
+     * Specify the time interval during which autoscaler does not perform scale-in operations after the most recent scale-out completion. Nodes added through scale-out can only be considered for scale-in after the period has elapsed. Default is `10m`.
      */
     unneededDuration?: pulumi.Input<string>;
     /**
-     * The scale-in threshold. Default is `0.5`.
+     * The scale-in a threshold. Default is `0.5`.
      */
     utilizationThreshold?: pulumi.Input<string>;
 }
@@ -240,7 +252,7 @@ export interface AutoscalingConfigArgs {
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * The cool down duration. Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
+     * Specify the time interval between detecting a scale-in requirement (when the threshold is reached) and actually executing the scale-in operation (reducing the number of Pods). Default is `10m`. If the delay (cooldown) value is set too long, there could be complaints that the Horizontal Pod Autoscaler is not responsive to workload changes. However, if the delay value is set too short, the scale of the replicas set may keep thrashing as usual.
      */
     coolDownDuration?: pulumi.Input<string>;
     /**
@@ -248,7 +260,7 @@ export interface AutoscalingConfigArgs {
      */
     daemonsetEvictionForNodes?: pulumi.Input<boolean>;
     /**
-     * The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
+     * The policy for selecting which node pool to scale. Valid values: `least-waste`, `random`, `priority`. For scaler type `goatscaler`, only the `least-waste` expander is currently supported. For more information on these policies, see [Configure auto scaling](https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/auto-scaling-of-nodes#section-3bg-2ko-inl)
      */
     expander?: pulumi.Input<string>;
     /**
@@ -264,6 +276,10 @@ export interface AutoscalingConfigArgs {
      */
     minReplicaCount?: pulumi.Input<number>;
     /**
+     * Priority settings for autoscaling node pool scaling groups. This parameter only takes effect when `expander` is set to `priority`. Only supports scaler type `cluster-autoscaler`. Uses key-value pairs where the key is the priority value, and the value is a comma-separated list of scaling group IDs. High numerical values indicate higher priority.
+     */
+    priorities?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
      * Should CA delete the K8s node object when recycle node has scaled down successfully. Default is `false`.
      */
     recycleNodeDeletionEnabled?: pulumi.Input<boolean>;
@@ -276,7 +292,7 @@ export interface AutoscalingConfigArgs {
      */
     scaleUpFromZero?: pulumi.Input<boolean>;
     /**
-     * The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`.
+     * The type of autoscaler. Valid values: `cluster-autoscaler`, `goatscaler`. For cluster version 1.22 and below, we only support `cluster-autoscaler`. When switching from `cluster-autoscaler` to `goatscaler`, all configuration parameters will be automatically migrated.
      */
     scalerType?: pulumi.Input<string>;
     /**
@@ -292,11 +308,11 @@ export interface AutoscalingConfigArgs {
      */
     skipNodesWithSystemPods?: pulumi.Input<boolean>;
     /**
-     * The unneeded duration. Default is `10m`.
+     * Specify the time interval during which autoscaler does not perform scale-in operations after the most recent scale-out completion. Nodes added through scale-out can only be considered for scale-in after the period has elapsed. Default is `10m`.
      */
     unneededDuration?: pulumi.Input<string>;
     /**
-     * The scale-in threshold. Default is `0.5`.
+     * The scale-in a threshold. Default is `0.5`.
      */
     utilizationThreshold?: pulumi.Input<string>;
 }

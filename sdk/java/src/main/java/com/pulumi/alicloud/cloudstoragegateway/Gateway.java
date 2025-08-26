@@ -171,17 +171,9 @@ public class Gateway extends com.pulumi.resources.CustomResource {
     public Output<String> location() {
         return this.location;
     }
-    /**
-     * The Payment type of gateway. Valid values: `PayAsYouGo`, `Subscription`. **NOTE:** From version 1.233.0, `payment_type` can be set to `Subscription`.
-     * 
-     */
     @Export(name="paymentType", refs={String.class}, tree="[0]")
     private Output</* @Nullable */ String> paymentType;
 
-    /**
-     * @return The Payment type of gateway. Valid values: `PayAsYouGo`, `Subscription`. **NOTE:** From version 1.233.0, `payment_type` can be set to `Subscription`.
-     * 
-     */
     public Output<Optional<String>> paymentType() {
         return Codegen.optional(this.paymentType);
     }
@@ -337,6 +329,7 @@ public class Gateway extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

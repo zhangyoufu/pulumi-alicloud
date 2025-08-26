@@ -368,6 +368,20 @@ public class Instance extends com.pulumi.resources.CustomResource {
         return this.engineVersion;
     }
     /**
+     * The list of Global Security Group Ids.
+     * 
+     */
+    @Export(name="globalSecurityGroupLists", refs={List.class,String.class}, tree="[0,1]")
+    private Output</* @Nullable */ List<String>> globalSecurityGroupLists;
+
+    /**
+     * @return The list of Global Security Group Ids.
+     * 
+     */
+    public Output<Optional<List<String>>> globalSecurityGroupLists() {
+        return Codegen.optional(this.globalSecurityGroupLists);
+    }
+    /**
      * Configure the zone where the hidden node is located to deploy multiple zones. **NOTE:** This parameter value cannot be the same as `zone_id` and `secondary_zone_id` parameter values. From version 1.253.0, `hidden_zone_id` can be modified.
      * 
      */
@@ -889,6 +903,7 @@ public class Instance extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .additionalSecretOutputs(List.of(
                 "accountPassword"
             ))

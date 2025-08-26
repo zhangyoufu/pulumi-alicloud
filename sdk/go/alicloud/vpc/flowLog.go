@@ -30,7 +30,7 @@ import (
 type FlowLog struct {
 	pulumi.CustomResourceState
 
-	// Data aggregation interval
+	// The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
 	AggregationInterval pulumi.StringOutput `pulumi:"aggregationInterval"`
 	// Business status
 	BusinessStatus pulumi.StringOutput `pulumi:"businessStatus"`
@@ -44,11 +44,11 @@ type FlowLog struct {
 	FlowLogName pulumi.StringPtrOutput `pulumi:"flowLogName"`
 	// The IP address type of the collected traffic.
 	IpVersion pulumi.StringOutput `pulumi:"ipVersion"`
-	// The name of the logstore.
+	// The Logstore that stores the captured traffic data.
 	LogStoreName pulumi.StringOutput `pulumi:"logStoreName"`
-	// The name of the project.
+	// The project that manages the captured traffic data.
 	ProjectName pulumi.StringOutput `pulumi:"projectName"`
-	// (Available since v1.243.0) The region ID.
+	// The region ID.
 	RegionId pulumi.StringOutput `pulumi:"regionId"`
 	// The ID of the resource group.
 	ResourceGroupId pulumi.StringOutput `pulumi:"resourceGroupId"`
@@ -119,7 +119,7 @@ func GetFlowLog(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering FlowLog resources.
 type flowLogState struct {
-	// Data aggregation interval
+	// The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
 	AggregationInterval *string `pulumi:"aggregationInterval"`
 	// Business status
 	BusinessStatus *string `pulumi:"businessStatus"`
@@ -133,11 +133,11 @@ type flowLogState struct {
 	FlowLogName *string `pulumi:"flowLogName"`
 	// The IP address type of the collected traffic.
 	IpVersion *string `pulumi:"ipVersion"`
-	// The name of the logstore.
+	// The Logstore that stores the captured traffic data.
 	LogStoreName *string `pulumi:"logStoreName"`
-	// The name of the project.
+	// The project that manages the captured traffic data.
 	ProjectName *string `pulumi:"projectName"`
-	// (Available since v1.243.0) The region ID.
+	// The region ID.
 	RegionId *string `pulumi:"regionId"`
 	// The ID of the resource group.
 	ResourceGroupId *string `pulumi:"resourceGroupId"`
@@ -164,7 +164,7 @@ type flowLogState struct {
 }
 
 type FlowLogState struct {
-	// Data aggregation interval
+	// The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
 	AggregationInterval pulumi.StringPtrInput
 	// Business status
 	BusinessStatus pulumi.StringPtrInput
@@ -178,11 +178,11 @@ type FlowLogState struct {
 	FlowLogName pulumi.StringPtrInput
 	// The IP address type of the collected traffic.
 	IpVersion pulumi.StringPtrInput
-	// The name of the logstore.
+	// The Logstore that stores the captured traffic data.
 	LogStoreName pulumi.StringPtrInput
-	// The name of the project.
+	// The project that manages the captured traffic data.
 	ProjectName pulumi.StringPtrInput
-	// (Available since v1.243.0) The region ID.
+	// The region ID.
 	RegionId pulumi.StringPtrInput
 	// The ID of the resource group.
 	ResourceGroupId pulumi.StringPtrInput
@@ -213,7 +213,7 @@ func (FlowLogState) ElementType() reflect.Type {
 }
 
 type flowLogArgs struct {
-	// Data aggregation interval
+	// The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
 	AggregationInterval *string `pulumi:"aggregationInterval"`
 	// The Description of the VPC Flow Log.
 	Description *string `pulumi:"description"`
@@ -221,9 +221,9 @@ type flowLogArgs struct {
 	FlowLogName *string `pulumi:"flowLogName"`
 	// The IP address type of the collected traffic.
 	IpVersion *string `pulumi:"ipVersion"`
-	// The name of the logstore.
+	// The Logstore that stores the captured traffic data.
 	LogStoreName string `pulumi:"logStoreName"`
-	// The name of the project.
+	// The project that manages the captured traffic data.
 	ProjectName string `pulumi:"projectName"`
 	// The ID of the resource group.
 	ResourceGroupId *string `pulumi:"resourceGroupId"`
@@ -251,7 +251,7 @@ type flowLogArgs struct {
 
 // The set of arguments for constructing a FlowLog resource.
 type FlowLogArgs struct {
-	// Data aggregation interval
+	// The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
 	AggregationInterval pulumi.StringPtrInput
 	// The Description of the VPC Flow Log.
 	Description pulumi.StringPtrInput
@@ -259,9 +259,9 @@ type FlowLogArgs struct {
 	FlowLogName pulumi.StringPtrInput
 	// The IP address type of the collected traffic.
 	IpVersion pulumi.StringPtrInput
-	// The name of the logstore.
+	// The Logstore that stores the captured traffic data.
 	LogStoreName pulumi.StringInput
-	// The name of the project.
+	// The project that manages the captured traffic data.
 	ProjectName pulumi.StringInput
 	// The ID of the resource group.
 	ResourceGroupId pulumi.StringPtrInput
@@ -374,7 +374,7 @@ func (o FlowLogOutput) ToFlowLogOutputWithContext(ctx context.Context) FlowLogOu
 	return o
 }
 
-// Data aggregation interval
+// The sampling interval of the flow log. Unit: seconds. Valid values: 1, 5, and 10 (default).
 func (o FlowLogOutput) AggregationInterval() pulumi.StringOutput {
 	return o.ApplyT(func(v *FlowLog) pulumi.StringOutput { return v.AggregationInterval }).(pulumi.StringOutput)
 }
@@ -409,17 +409,17 @@ func (o FlowLogOutput) IpVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *FlowLog) pulumi.StringOutput { return v.IpVersion }).(pulumi.StringOutput)
 }
 
-// The name of the logstore.
+// The Logstore that stores the captured traffic data.
 func (o FlowLogOutput) LogStoreName() pulumi.StringOutput {
 	return o.ApplyT(func(v *FlowLog) pulumi.StringOutput { return v.LogStoreName }).(pulumi.StringOutput)
 }
 
-// The name of the project.
+// The project that manages the captured traffic data.
 func (o FlowLogOutput) ProjectName() pulumi.StringOutput {
 	return o.ApplyT(func(v *FlowLog) pulumi.StringOutput { return v.ProjectName }).(pulumi.StringOutput)
 }
 
-// (Available since v1.243.0) The region ID.
+// The region ID.
 func (o FlowLogOutput) RegionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *FlowLog) pulumi.StringOutput { return v.RegionId }).(pulumi.StringOutput)
 }

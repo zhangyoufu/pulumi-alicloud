@@ -164,6 +164,20 @@ public class AccessRule extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.priority);
     }
     /**
+     * (Available since v1.256.0) The region ID.
+     * 
+     */
+    @Export(name="regionId", refs={String.class}, tree="[0]")
+    private Output<String> regionId;
+
+    /**
+     * @return (Available since v1.256.0) The region ID.
+     * 
+     */
+    public Output<String> regionId() {
+        return this.regionId;
+    }
+    /**
      * RWAccess.
      * 
      */
@@ -245,6 +259,7 @@ public class AccessRule extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

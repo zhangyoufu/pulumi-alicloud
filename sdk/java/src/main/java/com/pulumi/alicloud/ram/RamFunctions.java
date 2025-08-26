@@ -1361,7 +1361,7 @@ public final class RamFunctions {
     /**
      * This data source Generates a RAM policy document of the current Alibaba Cloud user.
      * 
-     * &gt; **NOTE:** Available since v1.184.0+.
+     * &gt; **NOTE:** Available since v1.184.0.
      * 
      * ## Example Usage
      * 
@@ -1667,7 +1667,7 @@ public final class RamFunctions {
     /**
      * This data source Generates a RAM policy document of the current Alibaba Cloud user.
      * 
-     * &gt; **NOTE:** Available since v1.184.0+.
+     * &gt; **NOTE:** Available since v1.184.0.
      * 
      * ## Example Usage
      * 
@@ -1973,7 +1973,7 @@ public final class RamFunctions {
     /**
      * This data source Generates a RAM policy document of the current Alibaba Cloud user.
      * 
-     * &gt; **NOTE:** Available since v1.184.0+.
+     * &gt; **NOTE:** Available since v1.184.0.
      * 
      * ## Example Usage
      * 
@@ -2279,7 +2279,7 @@ public final class RamFunctions {
     /**
      * This data source Generates a RAM policy document of the current Alibaba Cloud user.
      * 
-     * &gt; **NOTE:** Available since v1.184.0+.
+     * &gt; **NOTE:** Available since v1.184.0.
      * 
      * ## Example Usage
      * 
@@ -2585,7 +2585,7 @@ public final class RamFunctions {
     /**
      * This data source Generates a RAM policy document of the current Alibaba Cloud user.
      * 
-     * &gt; **NOTE:** Available since v1.184.0+.
+     * &gt; **NOTE:** Available since v1.184.0.
      * 
      * ## Example Usage
      * 
@@ -2891,7 +2891,7 @@ public final class RamFunctions {
     /**
      * This data source Generates a RAM policy document of the current Alibaba Cloud user.
      * 
-     * &gt; **NOTE:** Available since v1.184.0+.
+     * &gt; **NOTE:** Available since v1.184.0.
      * 
      * ## Example Usage
      * 
@@ -3197,7 +3197,7 @@ public final class RamFunctions {
     /**
      * This data source Generates a RAM policy document of the current Alibaba Cloud user.
      * 
-     * &gt; **NOTE:** Available since v1.184.0+.
+     * &gt; **NOTE:** Available since v1.184.0.
      * 
      * ## Example Usage
      * 
