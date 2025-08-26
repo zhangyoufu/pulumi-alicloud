@@ -2525,6 +2525,7 @@ func Provider() tfbridge.ProviderInfo {
 			"alicloud_cms_monitor_group_instances",
 			"alicloud_dataworks_service",
 		},
+		PluginDownloadURL: "github://api.github.com/zhangyoufu/pulumi-alicloud",
 		JavaScript: &tfbridge.JavaScriptInfo{
 			DevDependencies: map[string]string{
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
