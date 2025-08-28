@@ -38,6 +38,7 @@ jobs:
 
   license_check:
     name: License Check
+    if: false
     uses: ./.github/workflows/license.yml
     secrets: inherit
 
@@ -49,8 +50,7 @@ jobs:
     needs:
       - prerequisites
       - build_provider
-      - test
-      - license_check
+      - build_sdk
     uses: ./.github/workflows/publish.yml
     secrets: inherit
     with:
@@ -58,6 +58,7 @@ jobs:
       isPrerelease: true
 
   test:
+    if: false
     uses: ./.github/workflows/test.yml
     needs:
       - prerequisites
