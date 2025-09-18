@@ -121,6 +121,7 @@ namespace Pulumi.AliCloud.CloudControl
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 AdditionalSecretOutputs =
                 {
                     "desireAttributes",

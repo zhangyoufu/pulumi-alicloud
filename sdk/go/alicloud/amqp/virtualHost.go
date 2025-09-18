@@ -90,6 +90,7 @@ import (
 type VirtualHost struct {
 	pulumi.CustomResourceState
 
+	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// InstanceId.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// VirtualHostName.
@@ -132,6 +133,7 @@ func GetVirtualHost(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering VirtualHost resources.
 type virtualHostState struct {
+	ForceDelete *bool `pulumi:"forceDelete"`
 	// InstanceId.
 	InstanceId *string `pulumi:"instanceId"`
 	// VirtualHostName.
@@ -139,6 +141,7 @@ type virtualHostState struct {
 }
 
 type VirtualHostState struct {
+	ForceDelete pulumi.BoolPtrInput
 	// InstanceId.
 	InstanceId pulumi.StringPtrInput
 	// VirtualHostName.
@@ -150,6 +153,7 @@ func (VirtualHostState) ElementType() reflect.Type {
 }
 
 type virtualHostArgs struct {
+	ForceDelete *bool `pulumi:"forceDelete"`
 	// InstanceId.
 	InstanceId string `pulumi:"instanceId"`
 	// VirtualHostName.
@@ -158,6 +162,7 @@ type virtualHostArgs struct {
 
 // The set of arguments for constructing a VirtualHost resource.
 type VirtualHostArgs struct {
+	ForceDelete pulumi.BoolPtrInput
 	// InstanceId.
 	InstanceId pulumi.StringInput
 	// VirtualHostName.
@@ -249,6 +254,10 @@ func (o VirtualHostOutput) ToVirtualHostOutput() VirtualHostOutput {
 
 func (o VirtualHostOutput) ToVirtualHostOutputWithContext(ctx context.Context) VirtualHostOutput {
 	return o
+}
+
+func (o VirtualHostOutput) ForceDelete() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *VirtualHost) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
 
 // InstanceId.

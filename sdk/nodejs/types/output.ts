@@ -47126,6 +47126,7 @@ export namespace pvtz {
          * The Id of the vpc.
          */
         vpcId: string;
+        vpcType?: string;
     }
 
     export interface ZoneUserInfo {

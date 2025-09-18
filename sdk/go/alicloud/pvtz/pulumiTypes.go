@@ -353,7 +353,8 @@ type ZoneAttachmentVpc struct {
 	// The region of the vpc. If not set, the current region will instead of.
 	RegionId *string `pulumi:"regionId"`
 	// The Id of the vpc.
-	VpcId string `pulumi:"vpcId"`
+	VpcId   string  `pulumi:"vpcId"`
+	VpcType *string `pulumi:"vpcType"`
 }
 
 // ZoneAttachmentVpcInput is an input type that accepts ZoneAttachmentVpcArgs and ZoneAttachmentVpcOutput values.
@@ -371,7 +372,8 @@ type ZoneAttachmentVpcArgs struct {
 	// The region of the vpc. If not set, the current region will instead of.
 	RegionId pulumi.StringPtrInput `pulumi:"regionId"`
 	// The Id of the vpc.
-	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	VpcId   pulumi.StringInput    `pulumi:"vpcId"`
+	VpcType pulumi.StringPtrInput `pulumi:"vpcType"`
 }
 
 func (ZoneAttachmentVpcArgs) ElementType() reflect.Type {
@@ -433,6 +435,10 @@ func (o ZoneAttachmentVpcOutput) RegionId() pulumi.StringPtrOutput {
 // The Id of the vpc.
 func (o ZoneAttachmentVpcOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneAttachmentVpc) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+func (o ZoneAttachmentVpcOutput) VpcType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ZoneAttachmentVpc) *string { return v.VpcType }).(pulumi.StringPtrOutput)
 }
 
 type ZoneAttachmentVpcArrayOutput struct{ *pulumi.OutputState }

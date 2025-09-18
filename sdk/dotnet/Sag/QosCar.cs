@@ -146,6 +146,7 @@ namespace Pulumi.AliCloud.Sag
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 Aliases =
                 {
                     new global::Pulumi.Alias { Type = "alicloud:rocketmq/qosCar:QosCar" },
