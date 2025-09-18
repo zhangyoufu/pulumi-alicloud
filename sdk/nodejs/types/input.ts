@@ -15910,6 +15910,7 @@ export namespace pvtz {
          * The Id of the vpc.
          */
         vpcId: pulumi.Input<string>;
+        vpcType?: pulumi.Input<string>;
     }
 
     export interface ZoneUserInfo {

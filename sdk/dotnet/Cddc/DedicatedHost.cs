@@ -137,6 +137,7 @@ namespace Pulumi.AliCloud.Cddc
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 AdditionalSecretOutputs =
                 {
                     "osPassword",

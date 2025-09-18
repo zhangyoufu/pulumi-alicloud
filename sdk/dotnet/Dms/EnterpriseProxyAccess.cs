@@ -150,6 +150,7 @@ namespace Pulumi.AliCloud.Dms
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 AdditionalSecretOutputs =
                 {
                     "accessSecret",
