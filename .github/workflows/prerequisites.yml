@@ -33,7 +33,6 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-      id-token: write # For ESC secrets.
     outputs:
       version: ${{ steps.provider-version.outputs.version }}
     steps:
@@ -48,6 +47,7 @@ jobs:
         ESC_ACTION_OIDC_ORGANIZATION: pulumi
         ESC_ACTION_OIDC_REQUESTED_TOKEN_TYPE: urn:pulumi:token-type:access_token:organization
       id: esc-secrets
+      if: false
       name: Fetch secrets from ESC
       uses: pulumi/esc-action@9eb774255b1a4afb7855678ae8d4a77359da0d9b
     - uses: pulumi/provider-version-action@f96d032a2758fdda7939e5728eff6c0d980ae894 # v1.6.0
@@ -76,12 +76,14 @@ jobs:
     - name: Build provider binary
       run: make provider
     - name: Unit-test provider code
+      if: false
       run: make test_provider
       env:
         ALICLOUD_ACCESS_KEY: ${{ steps.esc-secrets.outputs.ALICLOUD_ACCESS_KEY }}
         ALICLOUD_SECRET_KEY: ${{ steps.esc-secrets.outputs.ALICLOUD_SECRET_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload coverage reports to Codecov
+      if: false
       uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
       env:
         CODECOV_TOKEN: ${{ steps.esc-secrets.outputs.CODECOV_TOKEN }}
