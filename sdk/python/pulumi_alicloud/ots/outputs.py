@@ -107,6 +107,8 @@ class SearchIndexSchemaFieldSchema(dict):
             suggest = "field_name"
         elif key == "fieldType":
             suggest = "field_type"
+        elif key == "dateFormats":
+            suggest = "date_formats"
         elif key == "enableSortAndAgg":
             suggest = "enable_sort_and_agg"
         elif key == "isArray":
@@ -127,6 +129,7 @@ class SearchIndexSchemaFieldSchema(dict):
                  field_name: _builtins.str,
                  field_type: _builtins.str,
                  analyzer: Optional[_builtins.str] = None,
+                 date_formats: Optional[Sequence[_builtins.str]] = None,
                  enable_sort_and_agg: Optional[_builtins.bool] = None,
                  index: Optional[_builtins.bool] = None,
                  is_array: Optional[_builtins.bool] = None,
@@ -144,6 +147,8 @@ class SearchIndexSchemaFieldSchema(dict):
         pulumi.set(__self__, "field_type", field_type)
         if analyzer is not None:
             pulumi.set(__self__, "analyzer", analyzer)
+        if date_formats is not None:
+            pulumi.set(__self__, "date_formats", date_formats)
         if enable_sort_and_agg is not None:
             pulumi.set(__self__, "enable_sort_and_agg", enable_sort_and_agg)
         if index is not None:
@@ -176,6 +181,11 @@ class SearchIndexSchemaFieldSchema(dict):
         Specifies the type of the analyzer that you want to use. If fieldType is set to Text, you can configure this parameter. Otherwise, the default analyzer type single-word tokenization is used.
         """
         return pulumi.get(self, "analyzer")
+
+    @_builtins.property
+    @pulumi.getter(name="dateFormats")
+    def date_formats(self) -> Optional[Sequence[_builtins.str]]:
+        return pulumi.get(self, "date_formats")
 
     @_builtins.property
     @pulumi.getter(name="enableSortAndAgg")

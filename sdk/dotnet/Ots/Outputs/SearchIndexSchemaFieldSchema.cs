@@ -17,6 +17,7 @@ namespace Pulumi.AliCloud.Ots.Outputs
         /// Specifies the type of the analyzer that you want to use. If fieldType is set to Text, you can configure this parameter. Otherwise, the default analyzer type single-word tokenization is used.
         /// </summary>
         public readonly string? Analyzer;
+        public readonly ImmutableArray<string> DateFormats;
         /// <summary>
         /// Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enable_sort_and_agg is set to true.
         /// </summary>
@@ -46,6 +47,8 @@ namespace Pulumi.AliCloud.Ots.Outputs
         private SearchIndexSchemaFieldSchema(
             string? analyzer,
 
+            ImmutableArray<string> dateFormats,
+
             bool? enableSortAndAgg,
 
             string fieldName,
@@ -59,6 +62,7 @@ namespace Pulumi.AliCloud.Ots.Outputs
             bool? store)
         {
             Analyzer = analyzer;
+            DateFormats = dateFormats;
             EnableSortAndAgg = enableSortAndAgg;
             FieldName = fieldName;
             FieldType = fieldType;

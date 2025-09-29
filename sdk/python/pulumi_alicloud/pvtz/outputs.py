@@ -191,6 +191,8 @@ class ZoneAttachmentVpc(dict):
             suggest = "vpc_id"
         elif key == "regionId":
             suggest = "region_id"
+        elif key == "vpcType":
+            suggest = "vpc_type"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in ZoneAttachmentVpc. Access the value via the '{suggest}' property getter instead.")
@@ -205,7 +207,8 @@ class ZoneAttachmentVpc(dict):
 
     def __init__(__self__, *,
                  vpc_id: _builtins.str,
-                 region_id: Optional[_builtins.str] = None):
+                 region_id: Optional[_builtins.str] = None,
+                 vpc_type: Optional[_builtins.str] = None):
         """
         :param _builtins.str vpc_id: The Id of the vpc.
         :param _builtins.str region_id: The region of the vpc. If not set, the current region will instead of.
@@ -213,6 +216,8 @@ class ZoneAttachmentVpc(dict):
         pulumi.set(__self__, "vpc_id", vpc_id)
         if region_id is not None:
             pulumi.set(__self__, "region_id", region_id)
+        if vpc_type is not None:
+            pulumi.set(__self__, "vpc_type", vpc_type)
 
     @_builtins.property
     @pulumi.getter(name="vpcId")
@@ -229,6 +234,11 @@ class ZoneAttachmentVpc(dict):
         The region of the vpc. If not set, the current region will instead of.
         """
         return pulumi.get(self, "region_id")
+
+    @_builtins.property
+    @pulumi.getter(name="vpcType")
+    def vpc_type(self) -> Optional[_builtins.str]:
+        return pulumi.get(self, "vpc_type")
 
 
 @pulumi.output_type

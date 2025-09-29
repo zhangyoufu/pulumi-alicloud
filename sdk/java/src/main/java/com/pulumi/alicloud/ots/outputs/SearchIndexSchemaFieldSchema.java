@@ -7,6 +7,7 @@ import com.pulumi.core.annotations.CustomType;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -18,6 +19,7 @@ public final class SearchIndexSchemaFieldSchema {
      * 
      */
     private @Nullable String analyzer;
+    private @Nullable List<String> dateFormats;
     /**
      * @return Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enable_sort_and_agg is set to true.
      * 
@@ -56,6 +58,9 @@ public final class SearchIndexSchemaFieldSchema {
      */
     public Optional<String> analyzer() {
         return Optional.ofNullable(this.analyzer);
+    }
+    public List<String> dateFormats() {
+        return this.dateFormats == null ? List.of() : this.dateFormats;
     }
     /**
      * @return Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enable_sort_and_agg is set to true.
@@ -110,6 +115,7 @@ public final class SearchIndexSchemaFieldSchema {
     @CustomType.Builder
     public static final class Builder {
         private @Nullable String analyzer;
+        private @Nullable List<String> dateFormats;
         private @Nullable Boolean enableSortAndAgg;
         private String fieldName;
         private String fieldType;
@@ -120,6 +126,7 @@ public final class SearchIndexSchemaFieldSchema {
         public Builder(SearchIndexSchemaFieldSchema defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.analyzer = defaults.analyzer;
+    	      this.dateFormats = defaults.dateFormats;
     	      this.enableSortAndAgg = defaults.enableSortAndAgg;
     	      this.fieldName = defaults.fieldName;
     	      this.fieldType = defaults.fieldType;
@@ -133,6 +140,15 @@ public final class SearchIndexSchemaFieldSchema {
 
             this.analyzer = analyzer;
             return this;
+        }
+        @CustomType.Setter
+        public Builder dateFormats(@Nullable List<String> dateFormats) {
+
+            this.dateFormats = dateFormats;
+            return this;
+        }
+        public Builder dateFormats(String... dateFormats) {
+            return dateFormats(List.of(dateFormats));
         }
         @CustomType.Setter
         public Builder enableSortAndAgg(@Nullable Boolean enableSortAndAgg) {
@@ -177,6 +193,7 @@ public final class SearchIndexSchemaFieldSchema {
         public SearchIndexSchemaFieldSchema build() {
             final var _resultValue = new SearchIndexSchemaFieldSchema();
             _resultValue.analyzer = analyzer;
+            _resultValue.dateFormats = dateFormats;
             _resultValue.enableSortAndAgg = enableSortAndAgg;
             _resultValue.fieldName = fieldName;
             _resultValue.fieldType = fieldType;

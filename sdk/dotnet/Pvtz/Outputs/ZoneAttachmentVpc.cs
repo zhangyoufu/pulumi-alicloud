@@ -21,15 +21,19 @@ namespace Pulumi.AliCloud.Pvtz.Outputs
         /// The Id of the vpc.
         /// </summary>
         public readonly string VpcId;
+        public readonly string? VpcType;
 
         [OutputConstructor]
         private ZoneAttachmentVpc(
             string? regionId,
 
-            string vpcId)
+            string vpcId,
+
+            string? vpcType)
         {
             RegionId = regionId;
             VpcId = vpcId;
+            VpcType = vpcType;
         }
     }
 }

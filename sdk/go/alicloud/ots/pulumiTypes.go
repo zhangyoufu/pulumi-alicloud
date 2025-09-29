@@ -130,7 +130,8 @@ func (o SearchIndexSchemaArrayOutput) Index(i pulumi.IntInput) SearchIndexSchema
 
 type SearchIndexSchemaFieldSchema struct {
 	// Specifies the type of the analyzer that you want to use. If fieldType is set to Text, you can configure this parameter. Otherwise, the default analyzer type single-word tokenization is used.
-	Analyzer *string `pulumi:"analyzer"`
+	Analyzer    *string  `pulumi:"analyzer"`
+	DateFormats []string `pulumi:"dateFormats"`
 	// Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enableSortAndAgg is set to true.
 	EnableSortAndAgg *bool `pulumi:"enableSortAndAgg"`
 	// The name of the field that is used to sort data. only required if sorterType is FieldSort.
@@ -158,7 +159,8 @@ type SearchIndexSchemaFieldSchemaInput interface {
 
 type SearchIndexSchemaFieldSchemaArgs struct {
 	// Specifies the type of the analyzer that you want to use. If fieldType is set to Text, you can configure this parameter. Otherwise, the default analyzer type single-word tokenization is used.
-	Analyzer pulumi.StringPtrInput `pulumi:"analyzer"`
+	Analyzer    pulumi.StringPtrInput   `pulumi:"analyzer"`
+	DateFormats pulumi.StringArrayInput `pulumi:"dateFormats"`
 	// Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enableSortAndAgg is set to true.
 	EnableSortAndAgg pulumi.BoolPtrInput `pulumi:"enableSortAndAgg"`
 	// The name of the field that is used to sort data. only required if sorterType is FieldSort.
@@ -227,6 +229,10 @@ func (o SearchIndexSchemaFieldSchemaOutput) ToSearchIndexSchemaFieldSchemaOutput
 // Specifies the type of the analyzer that you want to use. If fieldType is set to Text, you can configure this parameter. Otherwise, the default analyzer type single-word tokenization is used.
 func (o SearchIndexSchemaFieldSchemaOutput) Analyzer() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SearchIndexSchemaFieldSchema) *string { return v.Analyzer }).(pulumi.StringPtrOutput)
+}
+
+func (o SearchIndexSchemaFieldSchemaOutput) DateFormats() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SearchIndexSchemaFieldSchema) []string { return v.DateFormats }).(pulumi.StringArrayOutput)
 }
 
 // Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enableSortAndAgg is set to true.

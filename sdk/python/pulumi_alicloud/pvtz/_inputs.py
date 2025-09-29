@@ -228,6 +228,7 @@ if not MYPY:
         """
         The region of the vpc. If not set, the current region will instead of.
         """
+        vpc_type: NotRequired[pulumi.Input[_builtins.str]]
 elif False:
     ZoneAttachmentVpcArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -235,7 +236,8 @@ elif False:
 class ZoneAttachmentVpcArgs:
     def __init__(__self__, *,
                  vpc_id: pulumi.Input[_builtins.str],
-                 region_id: Optional[pulumi.Input[_builtins.str]] = None):
+                 region_id: Optional[pulumi.Input[_builtins.str]] = None,
+                 vpc_type: Optional[pulumi.Input[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] vpc_id: The Id of the vpc.
         :param pulumi.Input[_builtins.str] region_id: The region of the vpc. If not set, the current region will instead of.
@@ -243,6 +245,8 @@ class ZoneAttachmentVpcArgs:
         pulumi.set(__self__, "vpc_id", vpc_id)
         if region_id is not None:
             pulumi.set(__self__, "region_id", region_id)
+        if vpc_type is not None:
+            pulumi.set(__self__, "vpc_type", vpc_type)
 
     @_builtins.property
     @pulumi.getter(name="vpcId")
@@ -267,6 +271,15 @@ class ZoneAttachmentVpcArgs:
     @region_id.setter
     def region_id(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "region_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="vpcType")
+    def vpc_type(self) -> Optional[pulumi.Input[_builtins.str]]:
+        return pulumi.get(self, "vpc_type")
+
+    @vpc_type.setter
+    def vpc_type(self, value: Optional[pulumi.Input[_builtins.str]]):
+        pulumi.set(self, "vpc_type", value)
 
 
 if not MYPY:

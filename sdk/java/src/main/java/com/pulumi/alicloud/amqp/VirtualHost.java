@@ -10,7 +10,9 @@ import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Export;
 import com.pulumi.core.annotations.ResourceType;
 import com.pulumi.core.internal.Codegen;
+import java.lang.Boolean;
 import java.lang.String;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
@@ -93,6 +95,12 @@ import javax.annotation.Nullable;
  */
 @ResourceType(type="alicloud:amqp/virtualHost:VirtualHost")
 public class VirtualHost extends com.pulumi.resources.CustomResource {
+    @Export(name="forceDelete", refs={Boolean.class}, tree="[0]")
+    private Output</* @Nullable */ Boolean> forceDelete;
+
+    public Output<Optional<Boolean>> forceDelete() {
+        return Codegen.optional(this.forceDelete);
+    }
     /**
      * InstanceId.
      * 
@@ -161,6 +169,7 @@ public class VirtualHost extends com.pulumi.resources.CustomResource {
     private static com.pulumi.resources.CustomResourceOptions makeResourceOptions(@Nullable com.pulumi.resources.CustomResourceOptions options, @Nullable Output<java.lang.String> id) {
         var defaultOptions = com.pulumi.resources.CustomResourceOptions.builder()
             .version(Utilities.getVersion())
+            .pluginDownloadURL("github://api.github.com/zhangyoufu/pulumi-alicloud")
             .build();
         return com.pulumi.resources.CustomResourceOptions.merge(defaultOptions, options, id);
     }

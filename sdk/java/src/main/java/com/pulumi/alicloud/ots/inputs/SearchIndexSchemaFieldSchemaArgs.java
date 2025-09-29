@@ -8,6 +8,7 @@ import com.pulumi.core.annotations.Import;
 import com.pulumi.exceptions.MissingRequiredPropertyException;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -30,6 +31,13 @@ public final class SearchIndexSchemaFieldSchemaArgs extends com.pulumi.resources
      */
     public Optional<Output<String>> analyzer() {
         return Optional.ofNullable(this.analyzer);
+    }
+
+    @Import(name="dateFormats")
+    private @Nullable Output<List<String>> dateFormats;
+
+    public Optional<Output<List<String>>> dateFormats() {
+        return Optional.ofNullable(this.dateFormats);
     }
 
     /**
@@ -126,6 +134,7 @@ public final class SearchIndexSchemaFieldSchemaArgs extends com.pulumi.resources
 
     private SearchIndexSchemaFieldSchemaArgs(SearchIndexSchemaFieldSchemaArgs $) {
         this.analyzer = $.analyzer;
+        this.dateFormats = $.dateFormats;
         this.enableSortAndAgg = $.enableSortAndAgg;
         this.fieldName = $.fieldName;
         this.fieldType = $.fieldType;
@@ -171,6 +180,19 @@ public final class SearchIndexSchemaFieldSchemaArgs extends com.pulumi.resources
          */
         public Builder analyzer(String analyzer) {
             return analyzer(Output.of(analyzer));
+        }
+
+        public Builder dateFormats(@Nullable Output<List<String>> dateFormats) {
+            $.dateFormats = dateFormats;
+            return this;
+        }
+
+        public Builder dateFormats(List<String> dateFormats) {
+            return dateFormats(Output.of(dateFormats));
+        }
+
+        public Builder dateFormats(String... dateFormats) {
+            return dateFormats(List.of(dateFormats));
         }
 
         /**

@@ -301,6 +301,7 @@ namespace Pulumi.AliCloud.SelectDB
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/zhangyoufu/pulumi-alicloud",
                 AdditionalSecretOutputs =
                 {
                     "adminPass",

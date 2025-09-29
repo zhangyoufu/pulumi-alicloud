@@ -46191,6 +46191,7 @@ export namespace ots {
          * Specifies the type of the analyzer that you want to use. If fieldType is set to Text, you can configure this parameter. Otherwise, the default analyzer type single-word tokenization is used.
          */
         analyzer?: string;
+        dateFormats?: string[];
         /**
          * Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enableSortAndAgg is set to true.
          */
@@ -47289,6 +47290,7 @@ export namespace pvtz {
          * The Id of the vpc.
          */
         vpcId: string;
+        vpcType?: string;
     }
 
     export interface ZoneUserInfo {

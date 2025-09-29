@@ -24,6 +24,9 @@ namespace Pulumi.AliCloud.Pvtz.Inputs
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
 
+        [Input("vpcType")]
+        public Input<string>? VpcType { get; set; }
+
         public ZoneAttachmentVpcArgs()
         {
         }

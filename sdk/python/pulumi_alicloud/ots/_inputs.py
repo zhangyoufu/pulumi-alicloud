@@ -120,6 +120,7 @@ if not MYPY:
         """
         Specifies the type of the analyzer that you want to use. If fieldType is set to Text, you can configure this parameter. Otherwise, the default analyzer type single-word tokenization is used.
         """
+        date_formats: NotRequired[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]
         enable_sort_and_agg: NotRequired[pulumi.Input[_builtins.bool]]
         """
         Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enable_sort_and_agg is set to true.
@@ -145,6 +146,7 @@ class SearchIndexSchemaFieldSchemaArgs:
                  field_name: pulumi.Input[_builtins.str],
                  field_type: pulumi.Input[_builtins.str],
                  analyzer: Optional[pulumi.Input[_builtins.str]] = None,
+                 date_formats: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  enable_sort_and_agg: Optional[pulumi.Input[_builtins.bool]] = None,
                  index: Optional[pulumi.Input[_builtins.bool]] = None,
                  is_array: Optional[pulumi.Input[_builtins.bool]] = None,
@@ -162,6 +164,8 @@ class SearchIndexSchemaFieldSchemaArgs:
         pulumi.set(__self__, "field_type", field_type)
         if analyzer is not None:
             pulumi.set(__self__, "analyzer", analyzer)
+        if date_formats is not None:
+            pulumi.set(__self__, "date_formats", date_formats)
         if enable_sort_and_agg is not None:
             pulumi.set(__self__, "enable_sort_and_agg", enable_sort_and_agg)
         if index is not None:
@@ -206,6 +210,15 @@ class SearchIndexSchemaFieldSchemaArgs:
     @analyzer.setter
     def analyzer(self, value: Optional[pulumi.Input[_builtins.str]]):
         pulumi.set(self, "analyzer", value)
+
+    @_builtins.property
+    @pulumi.getter(name="dateFormats")
+    def date_formats(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]:
+        return pulumi.get(self, "date_formats")
+
+    @date_formats.setter
+    def date_formats(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "date_formats", value)
 
     @_builtins.property
     @pulumi.getter(name="enableSortAndAgg")

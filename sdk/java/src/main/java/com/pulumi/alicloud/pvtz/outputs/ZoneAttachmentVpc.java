@@ -22,6 +22,7 @@ public final class ZoneAttachmentVpc {
      * 
      */
     private String vpcId;
+    private @Nullable String vpcType;
 
     private ZoneAttachmentVpc() {}
     /**
@@ -38,6 +39,9 @@ public final class ZoneAttachmentVpc {
     public String vpcId() {
         return this.vpcId;
     }
+    public Optional<String> vpcType() {
+        return Optional.ofNullable(this.vpcType);
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -50,11 +54,13 @@ public final class ZoneAttachmentVpc {
     public static final class Builder {
         private @Nullable String regionId;
         private String vpcId;
+        private @Nullable String vpcType;
         public Builder() {}
         public Builder(ZoneAttachmentVpc defaults) {
     	      Objects.requireNonNull(defaults);
     	      this.regionId = defaults.regionId;
     	      this.vpcId = defaults.vpcId;
+    	      this.vpcType = defaults.vpcType;
         }
 
         @CustomType.Setter
@@ -71,10 +77,17 @@ public final class ZoneAttachmentVpc {
             this.vpcId = vpcId;
             return this;
         }
+        @CustomType.Setter
+        public Builder vpcType(@Nullable String vpcType) {
+
+            this.vpcType = vpcType;
+            return this;
+        }
         public ZoneAttachmentVpc build() {
             final var _resultValue = new ZoneAttachmentVpc();
             _resultValue.regionId = regionId;
             _resultValue.vpcId = vpcId;
+            _resultValue.vpcType = vpcType;
             return _resultValue;
         }
     }

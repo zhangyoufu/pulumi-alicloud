@@ -46,11 +46,19 @@ public final class ZoneAttachmentVpcArgs extends com.pulumi.resources.ResourceAr
         return this.vpcId;
     }
 
+    @Import(name="vpcType")
+    private @Nullable Output<String> vpcType;
+
+    public Optional<Output<String>> vpcType() {
+        return Optional.ofNullable(this.vpcType);
+    }
+
     private ZoneAttachmentVpcArgs() {}
 
     private ZoneAttachmentVpcArgs(ZoneAttachmentVpcArgs $) {
         this.regionId = $.regionId;
         this.vpcId = $.vpcId;
+        this.vpcType = $.vpcType;
     }
 
     public static Builder builder() {
@@ -111,6 +119,15 @@ public final class ZoneAttachmentVpcArgs extends com.pulumi.resources.ResourceAr
          */
         public Builder vpcId(String vpcId) {
             return vpcId(Output.of(vpcId));
+        }
+
+        public Builder vpcType(@Nullable Output<String> vpcType) {
+            $.vpcType = vpcType;
+            return this;
+        }
+
+        public Builder vpcType(String vpcType) {
+            return vpcType(Output.of(vpcType));
         }
 
         public ZoneAttachmentVpcArgs build() {

@@ -18,6 +18,14 @@ namespace Pulumi.AliCloud.Ots.Inputs
         [Input("analyzer")]
         public Input<string>? Analyzer { get; set; }
 
+        [Input("dateFormats")]
+        private InputList<string>? _dateFormats;
+        public InputList<string> DateFormats
+        {
+            get => _dateFormats ?? (_dateFormats = new InputList<string>());
+            set => _dateFormats = value;
+        }
+
         /// <summary>
         /// Specifies whether to enable sorting and aggregation. Type: Boolean. Sorting can be enabled only for fields for which enable_sort_and_agg is set to true.
         /// </summary>

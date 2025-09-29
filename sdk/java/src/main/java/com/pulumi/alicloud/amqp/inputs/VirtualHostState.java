@@ -5,6 +5,7 @@ package com.pulumi.alicloud.amqp.inputs;
 
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
+import java.lang.Boolean;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
@@ -14,6 +15,13 @@ import javax.annotation.Nullable;
 public final class VirtualHostState extends com.pulumi.resources.ResourceArgs {
 
     public static final VirtualHostState Empty = new VirtualHostState();
+
+    @Import(name="forceDelete")
+    private @Nullable Output<Boolean> forceDelete;
+
+    public Optional<Output<Boolean>> forceDelete() {
+        return Optional.ofNullable(this.forceDelete);
+    }
 
     /**
      * InstanceId.
@@ -48,6 +56,7 @@ public final class VirtualHostState extends com.pulumi.resources.ResourceArgs {
     private VirtualHostState() {}
 
     private VirtualHostState(VirtualHostState $) {
+        this.forceDelete = $.forceDelete;
         this.instanceId = $.instanceId;
         this.virtualHostName = $.virtualHostName;
     }
@@ -68,6 +77,15 @@ public final class VirtualHostState extends com.pulumi.resources.ResourceArgs {
 
         public Builder(VirtualHostState defaults) {
             $ = new VirtualHostState(Objects.requireNonNull(defaults));
+        }
+
+        public Builder forceDelete(@Nullable Output<Boolean> forceDelete) {
+            $.forceDelete = forceDelete;
+            return this;
+        }
+
+        public Builder forceDelete(Boolean forceDelete) {
+            return forceDelete(Output.of(forceDelete));
         }
 
         /**

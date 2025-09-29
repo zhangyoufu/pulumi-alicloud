@@ -7573,7 +7573,14 @@
                         "elem": {
                             "fields": {
                                 "field_schema": {
-                                    "maxItemsOne": false
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "date_formats": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
                                 },
                                 "index_setting": {
                                     "maxItemsOne": false,
