@@ -306,3 +306,5 @@ require (
 )
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20250530111747-935112552988
+
+replace github.com/aliyun/terraform-provider-alicloud => github.com/zhangyoufu/terraform-provider-alicloud v1.260.1-20250929-1
